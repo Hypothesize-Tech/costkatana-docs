@@ -228,7 +228,7 @@ Congratulations! You now have Cost Katana tracking your AI usage with intelligen
 
 - 📖 **Check our [Troubleshooting Guide](../guides/troubleshooting.md)**
 - 💬 **Join our [Discord Community](https://discord.gg/costkatana)**
-- 📧 **Email us**: support@costkatana.com
+- 📧 **Email us**: abdul@hypothesize.tech
 - 🐛 **Report bugs**: [GitHub Issues](https://github.com/cost-katana/issues)
 
 ---

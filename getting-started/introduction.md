@@ -140,7 +140,7 @@ Ready to optimize your AI costs? Let's get you set up in minutes:
 
 - 📖 **Browse our guides**: Comprehensive documentation for every feature
 - 💬 **Join our Discord**: Get help from the community and our team
-- 📧 **Contact support**: support@costkatana.com for direct assistance
+- 📧 **Contact support**: abdul@hypothesize.tech for direct assistance
 
 ---
 

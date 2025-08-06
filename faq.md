@@ -217,7 +217,7 @@ Yes! You can:
 Multiple support channels:
 - **📖 Documentation**: Comprehensive guides and tutorials
 - **💬 Discord**: Real-time community support
-- **📧 Email**: support@costkatana.com
+- **📧 Email**: abdul@hypothesize.tech
 - **🎥 Video calls**: For Enterprise customers
 - **📱 In-app chat**: Direct support from the dashboard
 
@@ -269,7 +269,7 @@ Can't find what you're looking for? We're here to help!
 
 ### Quick Help
 - 💬 **Live Chat**: Available in your dashboard
-- 📧 **Email**: support@costkatana.com
+- 📧 **Email**: abdul@hypothesize.tech
 - 📞 **Schedule a call**: [calendly.com/costkatana](https://calendly.com/costkatana)
 
 ### Resources
