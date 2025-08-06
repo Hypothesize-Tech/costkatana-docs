@@ -92,4 +92,4 @@ Common questions and answers about Cost Katana.
 
 ---
 
-*Last updated: January 2024*# docs
+*Last updated: August 2025*# docs
