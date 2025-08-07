@@ -35,6 +35,30 @@
       }
     },
     {
+      "src": "/(.*\\.svg)",
+      "headers": {
+        "Content-Type": "image/svg+xml"
+      }
+    },
+    {
+      "src": "/(.*\\.png)",
+      "headers": {
+        "Content-Type": "image/png"
+      }
+    },
+    {
+      "src": "/(.*\\.jpg|.*\\.jpeg)",
+      "headers": {
+        "Content-Type": "image/jpeg"
+      }
+    },
+    {
+      "src": "/(.*\\.md)",
+      "headers": {
+        "Content-Type": "text/markdown"
+      }
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
