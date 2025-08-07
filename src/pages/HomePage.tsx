@@ -4,9 +4,8 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import {
     Zap, TrendingUp, Shield, Code, Cloud, Brain,
-    ArrowRight, CheckCircle, Star, Users, Globe,
-    BarChart3, Cpu, Database, Terminal, Package,
-    Github, BookOpen, MessageCircle
+    ArrowRight, BarChart3, Cpu, Database, Terminal, Package,
+    Github, BookOpen
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {

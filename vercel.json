@@ -1,15 +1,12 @@
 {
   "version": 2,
-  "builds": [
+  "buildCommand": "npm run build:ci",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "rewrites": [
     {
-      "src": "dist/**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [

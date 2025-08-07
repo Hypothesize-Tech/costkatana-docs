@@ -899,7 +899,7 @@ COPY . .
 
 # Run cost analysis during build
 ARG COST_KATANA_API_KEY
-ENV COST_KATANA_API_KEY=\$COST_KATANA_API_KEY
+ENV COST_KATANA_API_KEY=$COST_KATANA_API_KEY
 
 RUN cost-katana analytics --export build-cost-report.json
 
@@ -1139,8 +1139,8 @@ print(f'Token reduction: {optimized.tokens_saved}')
 # Check budget status
 budget = ck.budget.get_status('my-project')
 
-print(f'Budget usage: \{budget.usage_percentage\}%')
-print(f'Remaining: $\{budget.remaining\}')
+print(f'Budget usage: {budget.usage_percentage}%')
+print(f'Remaining: $' + str(budget.remaining))
 
 # Set budget alerts
 ck.budget.set_alert(
@@ -1314,7 +1314,7 @@ for dataset in datasets:
 
 # Check total cost
 budget = ck.budget.get_status('data-analysis-notebook')
-print(f'Total cost for analysis: $\{budget.current_spend\}')
+print(f'Total cost for analysis: $' + str(budget.current_spend))
 \`\`\`
 
 ### Pandas Integration
@@ -1536,8 +1536,8 @@ def monitor_costs():
     while True:
         analytics = ck.analytics.get_current()
         
-        print(f'Current hourly spend: $\{analytics.hourly_spend\}')
-        print(f'Requests this hour: \{analytics.request_count\}')
+        print(f'Current hourly spend: $' + str(analytics.hourly_spend))
+        print(f'Requests this hour: {analytics.request_count}')
         
         if analytics.hourly_spend > 10:
             print('⚠️ High spending detected!')

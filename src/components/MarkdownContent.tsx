@@ -20,7 +20,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             setCopiedCode(code);
             toast.success('Code copied to clipboard!');
             setTimeout(() => setCopiedCode(null), 2000);
-        } catch (err) {
+        } catch {
             toast.error('Failed to copy code');
         }
     };

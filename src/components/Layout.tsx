@@ -33,7 +33,6 @@ import {
     Cpu
 } from 'lucide-react';
 import SearchModal from './SearchModal';
-import MobileMenu from './MobileMenu';
 
 interface LayoutProps {
     children: React.ReactNode;
