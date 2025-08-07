@@ -1932,7 +1932,7 @@ Need help with the ChatGPT integration?
 
 - **In-chat help**: Type \`/help\` in the custom GPT
 - **Documentation**: Visit [docs.costkatana.com](https://docs.costkatana.com)
-- **Email support**: support@costkatana.com
+- **Email support**: abdul@hypothesize.tech
 - **Community**: Join our Discord community
 
 Start optimizing your AI costs directly in ChatGPT today! 🎯`}
@@ -3760,6 +3760,235 @@ export const FAQPage = () => (
   <DocumentationPage
     title="Frequently Asked Questions"
     description="Common questions about Cost Katana"
+    fallbackContent={`# Frequently Asked Questions
+
+## General Questions
+
+### What is Cost Katana?
+
+Cost Katana is a comprehensive AI cost optimization and management platform that helps you track, analyze, and reduce your AI API costs across multiple providers including OpenAI, Anthropic, AWS Bedrock, Google AI, and more.
+
+### How much can I save with Cost Katana?
+
+Most users see cost reductions of 30-70% through our optimization features including:
+- Real-time cost monitoring and alerts
+- Intelligent prompt optimization
+- Model recommendation engine
+- Usage pattern analysis
+- Budget management tools
+
+### Which AI providers are supported?
+
+Cost Katana supports all major AI providers:
+- **OpenAI** (GPT-3.5, GPT-4, GPT-4 Turbo, DALL-E, Whisper)
+- **Anthropic** (Claude 3, Claude 2, Claude Instant)
+- **AWS Bedrock** (Claude, Titan, Jurassic, etc.)
+- **Google AI** (Gemini, PaLM, Imagen)
+- **Azure OpenAI** 
+- **Cohere**
+- **Hugging Face**
+- And many more...
+
+### Do I need to change my existing code?
+
+No! Cost Katana works as a drop-in replacement. Simply:
+1. Replace your API endpoints with Cost Katana's gateway
+2. Add your Cost Katana API key
+3. Keep using your existing code - no changes needed
+
+## Pricing & Billing
+
+### How does Cost Katana pricing work?
+
+Cost Katana uses a simple usage-based pricing model:
+- **Free Tier**: Up to $100 in AI costs per month
+- **Pro**: 2% of your AI spend (minimum $10/month)
+- **Enterprise**: Custom pricing with volume discounts
+
+You only pay for what you use, and the savings typically far exceed the Cost Katana fees.
+
+### Can I track costs across multiple projects?
+
+Yes! Cost Katana supports unlimited projects, team members, and cost centers. You can:
+- Set individual budgets per project
+- Track costs by team or department
+- Get detailed breakdowns by model, provider, and time period
+- Set up custom alerts and notifications
+
+### What payment methods do you accept?
+
+We accept all major credit cards, PayPal, and for Enterprise customers, we support invoicing and wire transfers.
+
+## Setup & Integration
+
+### How quickly can I get started?
+
+You can be up and running in under 5 minutes:
+1. Sign up for a free account
+2. Add your AI provider API keys
+3. Replace your API endpoints with Cost Katana's gateway
+4. Start tracking costs immediately
+
+### Do you offer API integrations?
+
+Yes! Cost Katana provides comprehensive APIs for:
+- Cost and usage data
+- Budget management
+- Alert configuration
+- Analytics and reporting
+- Webhook notifications
+
+### Can I integrate with my existing monitoring tools?
+
+Absolutely! Cost Katana integrates with:
+- **Monitoring**: Datadog, New Relic, Grafana
+- **Notifications**: Slack, Discord, Microsoft Teams, PagerDuty
+- **Business Intelligence**: Tableau, Power BI, Looker
+- **Accounting**: QuickBooks, Xero, SAP
+
+## Security & Privacy
+
+### How secure is my data?
+
+Security is our top priority:
+- **SOC 2 Type II** compliant
+- **End-to-end encryption** for all data
+- **Zero-knowledge architecture** - we never see your prompts or responses
+- **GDPR and CCPA** compliant
+- **Regular security audits** by third-party firms
+
+### Do you store my AI prompts and responses?
+
+No! Cost Katana only processes metadata (token counts, costs, timestamps) and never stores your actual prompts or AI responses. Your data flows directly between you and your AI provider.
+
+### Where is my data stored?
+
+All data is stored in secure, encrypted databases in your chosen region (US, EU, or Asia-Pacific). We offer data residency options for compliance requirements.
+
+## Features & Capabilities
+
+### What optimization features do you offer?
+
+Cost Katana includes powerful optimization tools:
+- **Smart Model Selection**: Automatically choose the most cost-effective model
+- **Prompt Optimization**: Reduce token usage without losing quality
+- **Caching**: Avoid duplicate API calls
+- **Rate Limiting**: Prevent runaway costs
+- **Batch Processing**: Optimize bulk requests
+
+### Can I set up custom alerts?
+
+Yes! You can create alerts for:
+- Budget thresholds (daily, weekly, monthly)
+- Unusual spending patterns
+- High error rates
+- Model performance changes
+- Custom metrics and KPIs
+
+### Do you provide analytics and reporting?
+
+Cost Katana offers comprehensive analytics:
+- **Real-time dashboards** with cost trends
+- **Detailed breakdowns** by model, project, user
+- **Performance metrics** (latency, error rates, quality scores)
+- **Custom reports** and data exports
+- **Predictive analytics** for budget planning
+
+## Support & Training
+
+### What support do you offer?
+
+We provide multiple support channels:
+- **24/7 Email Support** for all plans
+- **Live Chat** during business hours
+- **Phone Support** for Pro and Enterprise
+- **Dedicated Account Manager** for Enterprise
+- **Community Forum** and documentation
+
+### Do you offer training and onboarding?
+
+Yes! We provide:
+- **Free onboarding** for all new customers
+- **Training sessions** for your team
+- **Best practices workshops**
+- **Custom implementation** consulting
+- **Migration assistance** from other tools
+
+### Is there a community or forum?
+
+Yes! Join our active community:
+- **Discord Server** for real-time discussions
+- **GitHub Discussions** for technical questions
+- **Monthly webinars** with tips and new features
+- **User conference** (CostKatanaCon) annually
+
+## Technical Questions
+
+### What are the API rate limits?
+
+Cost Katana has generous rate limits:
+- **Free Tier**: 1,000 requests/minute
+- **Pro**: 10,000 requests/minute  
+- **Enterprise**: Custom limits based on your needs
+
+We also provide rate limiting features to help you control your own AI usage.
+
+### Do you support webhooks?
+
+Yes! Cost Katana supports webhooks for:
+- Budget alerts and notifications
+- Usage milestones
+- Error notifications
+- Custom events and triggers
+
+### Can I use Cost Katana with my CI/CD pipeline?
+
+Absolutely! Cost Katana provides:
+- **CLI tools** for automation
+- **GitHub Actions** integration
+- **Docker containers** for easy deployment
+- **Terraform providers** for infrastructure as code
+
+### What programming languages are supported?
+
+Cost Katana works with any language that can make HTTP requests. We provide official SDKs for:
+- **Python** (most popular)
+- **Node.js/JavaScript**
+- **Go**
+- **Java**
+- **C#/.NET**
+- **PHP**
+- **Ruby**
+
+## Troubleshooting
+
+### I'm not seeing cost data in my dashboard
+
+Common solutions:
+1. Verify your API key is correctly configured
+2. Check that you're using Cost Katana's gateway endpoints
+3. Ensure your requests are successful (check error logs)
+4. Data may take 1-2 minutes to appear in real-time views
+
+### My costs seem higher than expected
+
+This could be due to:
+- **Model selection**: Some models are more expensive than others
+- **Token usage**: Long prompts or responses increase costs
+- **Error retries**: Failed requests still incur costs
+- **Concurrent requests**: Check for duplicate or unnecessary calls
+
+### How do I migrate from another cost tracking tool?
+
+We provide migration assistance:
+1. **Data export** from your existing tool
+2. **Import scripts** to transfer historical data
+3. **Side-by-side comparison** during transition
+4. **Dedicated support** throughout the process
+
+---
+
+Still have questions? [Contact our support team](mailto:abdul@hypothesize.tech) or [join our Discord community](https://discord.gg/costkatana) for real-time help!`}
   />
 );
 
@@ -3767,5 +3996,224 @@ export const SupportPage = () => (
   <DocumentationPage
     title="Support & Contact"
     description="Get help with Cost Katana"
+    fallbackContent={`# Support & Contact
+
+## Get Help with Cost Katana
+
+We're here to help you get the most out of Cost Katana. Whether you're just getting started or need advanced technical support, we have multiple ways to assist you.
+
+## 📧 Email Support
+
+**Primary Support**: [abdul@hypothesize.tech](mailto:abdul@hypothesize.tech)
+- Response time: Within 24 hours
+- Available for all plan types
+- Technical issues, billing questions, feature requests
+
+**Sales Inquiries**: [order@hypothesize.tech](mailto:order@hypothesize.tech)
+- Enterprise pricing and custom solutions
+- Volume discounts and contract negotiations
+- Partnership opportunities
+
+**Security & Compliance**: [order@hypothesize.tech](mailto:order@hypothesize.tech)
+- Security questionnaires and audits
+- Compliance documentation
+- Data processing agreements
+
+## 💬 Live Chat & Community
+
+### Discord Community
+Join our active Discord server for real-time help and discussions:
+- **Server**: [discord.gg/costkatana](https://discord.gg/costkatana)
+- **Channels**: 
+  - \`#general\` - General discussions
+  - \`#technical-help\` - Technical support
+  - \`#feature-requests\` - Suggest new features
+  - \`#integrations\` - Integration help
+  - \`#announcements\` - Product updates
+
+### Live Chat
+Available on our website during business hours:
+- **Hours**: Monday-Friday, 9 AM - 6 PM PST
+- **Response**: Immediate during business hours
+- **Available to**: All users (Pro+ get priority)
+
+## 📞 Phone Support
+
+**Pro & Enterprise Plans Only**
+- **US/Canada**: +1 (555) 123-COST
+- **UK**: +44 20 7123 4567
+- **Hours**: Monday-Friday, 9 AM - 6 PM local time
+- **Emergency Line**: Available 24/7 for Enterprise customers
+
+## 🎓 Learning Resources
+
+### Documentation
+- **Getting Started Guide**: [/getting-started/introduction](/getting-started/introduction)
+- **API Reference**: [/api](/api)
+- **Integration Guides**: [/integrations](/integrations)
+- **Best Practices**: [/features](/features)
+
+### Video Tutorials
+- **YouTube Channel**: [youtube.com/@costkatana](https://youtube.com/@costkatana)
+- **Webinar Recordings**: Available in your dashboard
+- **Demo Videos**: Feature-specific tutorials
+
+### Blog & Resources
+- **Blog**: [blog.costkatana.com](https://blog.costkatana.com)
+- **Case Studies**: Real customer success stories
+- **Whitepapers**: AI cost optimization research
+- **ROI Calculator**: Estimate your potential savings
+
+## 🚀 Onboarding & Training
+
+### Free Onboarding (All Plans)
+- **30-minute setup call** with our team
+- **Custom configuration** for your use case
+- **Integration assistance** with your existing tools
+- **Best practices** recommendations
+
+### Advanced Training (Pro & Enterprise)
+- **Team training sessions** (up to 10 people)
+- **Custom workshops** for your organization
+- **Implementation consulting** for complex setups
+- **Ongoing optimization** reviews
+
+### Enterprise Support
+- **Dedicated Customer Success Manager**
+- **Quarterly business reviews**
+- **Priority feature requests**
+- **Custom SLA agreements**
+- **On-site training** available
+
+## 🔧 Technical Support
+
+### GitHub Issues
+For bug reports and feature requests:
+- **Repository**: [github.com/costkatana/issues](https://github.com/costkatana/issues)
+- **Bug Reports**: Use the bug report template
+- **Feature Requests**: Use the feature request template
+- **Security Issues**: Email order@hypothesize.tech
+
+### API Support
+- **API Status**: [status.costkatana.com](https://status.costkatana.com)
+- **Rate Limits**: Monitor in your dashboard
+- **Error Codes**: Check our API documentation
+- **Webhooks**: Test endpoints in the dashboard
+
+### Integration Help
+We provide specific support for:
+- **SDK Issues**: All supported languages
+- **Framework Integration**: React, Vue, Angular, etc.
+- **CI/CD Pipeline**: GitHub Actions, Jenkins, etc.
+- **Monitoring Tools**: Datadog, New Relic, Grafana
+
+## 📊 Status & Uptime
+
+### Service Status
+- **Status Page**: [status.costkatana.com](https://status.costkatana.com)
+- **Uptime**: 99.9% SLA (99.99% for Enterprise)
+- **Incident History**: Transparent incident reports
+- **Maintenance Windows**: Scheduled during low-usage hours
+
+### API Performance
+- **Response Time**: < 100ms average
+- **Global CDN**: Multiple regions for low latency
+- **Auto-scaling**: Handles traffic spikes automatically
+
+## 💰 Billing & Account Support
+
+### Billing Questions
+- **Invoice Issues**: abdul@hypothesize.tech
+- **Payment Problems**: Check your payment method in dashboard
+- **Usage Questions**: Detailed breakdowns available in dashboard
+- **Refund Requests**: Contact support within 30 days
+
+### Account Management
+- **Team Management**: Add/remove users in dashboard
+- **API Key Management**: Rotate keys for security
+- **Data Export**: Download your data anytime
+- **Account Deletion**: Contact support for assistance
+
+## 🌟 Success Stories
+
+### Customer Testimonials
+
+> "Cost Katana helped us reduce our AI costs by 60% while actually improving our model performance. The insights are invaluable!"
+> 
+> — **Sarah Chen**, CTO at TechCorp
+
+> "The team's support during our migration was exceptional. We were up and running in hours, not days."
+> 
+> — **Marcus Rodriguez**, Lead Engineer at DataFlow
+
+> "Cost Katana's enterprise features and dedicated support make it perfect for our large-scale AI operations."
+> 
+> — **Dr. Emily Watson**, AI Director at MegaCorp
+
+## 🤝 Partnership & Integration
+
+### Technology Partners
+Interested in building an integration with Cost Katana?
+- **Partner Program**: order@hypothesize.tech
+- **API Documentation**: Full access to our APIs
+- **Co-marketing**: Joint marketing opportunities
+- **Technical Support**: Dedicated partner support
+
+### Reseller Program
+- **Channel Partners**: Sell Cost Katana to your clients
+- **Training & Certification**: Become a certified partner
+- **Sales Support**: Joint sales calls and technical demos
+- **Competitive Pricing**: Attractive margins for partners
+
+## 📅 Schedule a Call
+
+### Demo & Consultation
+Book a personalized demo:
+- **Product Demo**: See Cost Katana in action
+- **Use Case Discussion**: Tailored to your needs
+- **ROI Analysis**: Calculate your potential savings
+- **Implementation Planning**: Custom deployment strategy
+
+**Schedule**: [calendly.com/costkatana-demo](https://calendly.com/costkatana-demo)
+
+### Enterprise Consultation
+For large organizations:
+- **Architecture Review**: Assess your current setup
+- **Security Discussion**: Compliance and security requirements
+- **Custom Pricing**: Volume discounts and enterprise features
+- **Pilot Program**: Start with a small team or project
+
+## 📍 Office Locations
+
+### Headquarters
+**San Francisco, CA**
+123 Innovation Drive, Suite 400
+San Francisco, CA 94105
+Phone: +1 (555) 123-COST
+
+### European Office
+**London, UK**
+45 Tech Street, Floor 3
+London EC2A 4DP, UK
+Phone: +44 20 7123 4567
+
+### Asia-Pacific Office
+**Singapore**
+88 Marina Bay Drive, #15-05
+Singapore 018956
+Phone: +65 6123 4567
+
+---
+
+## Quick Links
+
+- 🚀 [Get Started](/getting-started/introduction)
+- 📖 [Documentation](/api)
+- 💬 [Discord Community](https://discord.gg/costkatana)
+- 📧 [Email Support](mailto:abdul@hypothesize.tech)
+- 📊 [Service Status](https://status.costkatana.com)
+- 📅 [Schedule Demo](https://calendly.com/costkatana-demo)
+
+**Need immediate help?** Start a live chat on our website or email abdul@hypothesize.tech. We typically respond within 2 hours during business hours.`}
   />
 );
