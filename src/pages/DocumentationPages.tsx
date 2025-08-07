@@ -6,14 +6,544 @@ export const InstallationPage = () => (
     title="Installation"
     description="Detailed installation instructions for Cost Katana"
     prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }}
+    fallbackContent={`# Installation Guide
+
+Get started with Cost Katana in minutes. Choose your preferred installation method.
+
+## 🚀 CLI Installation
+
+### Global Installation (Recommended)
+
+Install the Cost Katana CLI globally using npm:
+
+\`\`\`bash
+# Install globally via npm
+npm install -g ai-cost-optimizer-cli
+
+# Verify installation
+cost-katana --version
+\`\`\`
+
+### Alternative Installation Methods
+
+#### Using npx (No Global Install)
+\`\`\`bash
+# Run without installing globally
+npx ai-cost-optimizer-cli init
+\`\`\`
+
+#### Using Yarn
+\`\`\`bash
+# Global installation with Yarn
+yarn global add ai-cost-optimizer-cli
+
+# Verify installation
+cost-katana --version
+\`\`\`
+
+### Package Information
+
+[![npm version](https://badge.fury.io/js/ai-cost-optimizer-cli.svg)](https://www.npmjs.com/package/ai-cost-optimizer-cli)
+
+- **Package Name**: \`ai-cost-optimizer-cli\`
+- **Latest Version**: 1.0.11
+- **Weekly Downloads**: 638+
+- **License**: MIT
+- **Repository**: [GitHub](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli)
+
+## 🛠️ Quick Setup
+
+Once installed, initialize your configuration:
+
+\`\`\`bash
+# Initialize Cost Katana
+cost-katana init
+\`\`\`
+
+This will guide you through:
+
+### 🔐 Required Configuration
+- **Project Name** - Identify your project for cost tracking
+- **API Key** - Secure authentication to Cost Katana backend
+- **Default Model** - Choose your preferred AI model (GPT-4, Claude, Gemini, etc.)
+- **Monthly Token Budget** - Set your monthly token consumption limit
+
+### ⚙️ Optional Settings
+- **Base URL** - Backend API endpoint
+- **Advanced Settings** - Temperature, max tokens, cost limits
+
+## 📱 Platform Support
+
+Cost Katana CLI works on all major platforms:
+
+- ✅ **Windows** (Windows 10+)
+- ✅ **macOS** (macOS 10.15+)
+- ✅ **Linux** (Ubuntu 18.04+, CentOS 7+, etc.)
+
+## 🔧 Prerequisites
+
+### System Requirements
+- **Node.js** 18.0.0 or higher
+- **npm** 6.0.0 or higher (comes with Node.js)
+- **Git** (for development setup)
+
+### Check Prerequisites
+\`\`\`bash
+# Check Node.js version
+node --version
+
+# Check npm version
+npm --version
+\`\`\`
+
+## 🏢 Enterprise Installation
+
+### Docker Installation
+\`\`\`bash
+# Pull the official Docker image
+docker pull costkatana/cli:latest
+
+# Run Cost Katana in Docker
+docker run -it --rm costkatana/cli:latest init
+\`\`\`
+
+### CI/CD Integration
+\`\`\`yaml
+# GitHub Actions example
+- name: Install Cost Katana CLI
+  run: npm install -g ai-cost-optimizer-cli
+
+- name: Initialize Cost Katana
+  run: cost-katana init --api-key \${{ secrets.COST_KATANA_API_KEY }}
+  
+- name: Run Cost Analysis
+  run: cost-katana analytics --format json --export analysis.json
+\`\`\`
+
+## 🔍 Verification
+
+Test your installation:
+
+\`\`\`bash
+# Check version
+cost-katana --version
+
+# View help
+cost-katana --help
+
+# Test configuration
+cost-katana test
+\`\`\`
+
+## 📦 SDK Installation
+
+### Node.js SDK
+\`\`\`bash
+npm install @cost-katana/node-sdk
+\`\`\`
+
+\`\`\`javascript
+import { CostKatana } from '@cost-katana/node-sdk';
+
+const ck = new CostKatana({
+  apiKey: 'your-api-key'
+});
+\`\`\`
+
+### Python SDK
+\`\`\`bash
+pip install cost-katana
+\`\`\`
+
+\`\`\`python
+from cost_katana import CostKatana
+
+ck = CostKatana(api_key='your-api-key')
+\`\`\`
+
+## 🚨 Troubleshooting
+
+### Common Issues
+
+#### Permission Errors
+\`\`\`bash
+# On macOS/Linux, use sudo for global install
+sudo npm install -g ai-cost-optimizer-cli
+
+# Or use npx to avoid global installation
+npx ai-cost-optimizer-cli init
+\`\`\`
+
+#### Node.js Version Issues
+\`\`\`bash
+# Update Node.js using nvm
+nvm install node
+nvm use node
+
+# Or download from nodejs.org
+\`\`\`
+
+#### Network Issues
+\`\`\`bash
+# Configure npm registry if behind corporate firewall
+npm config set registry https://registry.npmjs.org/
+npm config set strict-ssl false
+\`\`\`
+
+### Getting Help
+
+- 📖 **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
+- 💬 **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli/issues)
+- 📧 **Email Support**: abdul@hypothesize.tech
+
+## 🎯 Next Steps
+
+After installation:
+
+1. **Initialize Configuration**: \`cost-katana init\`
+2. **Connect Your AI Providers**: Add API keys
+3. **Start Tracking**: \`cost-katana analytics\`
+4. **Optimize Costs**: \`cost-katana optimize\`
+5. **Set Budgets**: \`cost-katana set-budget\`
+
+Ready to start saving on AI costs? Let's go! 🚀`}
   />
 );
 
 // Integrations Pages
-export const IntegrationsOverviewPage = () => (
+export const CLIPage = () => (
   <DocumentationPage
-    title="Integrations Overview"
-    description="Connect Cost Katana with your favorite tools and frameworks"
+    title="CLI Tool"
+    description="Powerful command-line interface for AI cost optimization"
+    nextPage={{ path: '/integrations/nodejs', label: 'Next: Node.js SDK' }}
+    fallbackContent={`# Cost Katana CLI
+
+The most powerful command-line interface for AI cost optimization and management.
+
+![CLI Interface](/assets/cli.png)
+
+## 🚀 Installation
+
+### Global Installation (Recommended)
+
+Install the Cost Katana CLI globally using npm:
+
+\`\`\`bash
+# Install globally via npm
+npm install -g ai-cost-optimizer-cli
+
+# Verify installation
+cost-katana --version
+
+# Quick setup
+cost-katana init
+\`\`\`
+
+### Package Information
+
+Based on the [npm package](https://www.npmjs.com/package/ai-cost-optimizer-cli):
+
+- **Package**: \`ai-cost-optimizer-cli\`
+- **Version**: 1.0.11 (latest)
+- **Weekly Downloads**: 638+
+- **License**: MIT
+- **TypeScript**: ✅ Built-in type declarations
+
+## 🔧 Core Commands
+
+### Setup & Configuration
+\`\`\`bash
+# Initialize with interactive setup
+cost-katana init
+
+# Test your configuration
+cost-katana test
+
+# Manage configuration
+cost-katana config --list
+cost-katana config --set defaultModel=gpt-4
+\`\`\`
+
+### Analytics & Monitoring
+\`\`\`bash
+# View usage analytics
+cost-katana analytics
+
+# Project-specific analytics
+cost-katana analytics --project my-project --range 7d
+
+# Export analytics data
+cost-katana analytics --format csv --export report.csv
+\`\`\`
+
+![CLI Analytics Output](/assets/analytics_1.png)
+
+### Optimization
+\`\`\`bash
+# Optimize a prompt
+cost-katana optimize "Write a detailed essay about AI"
+
+# Bulk optimize from file
+cost-katana bulk-optimize --file prompts.csv
+
+# Rewrite prompts intelligently
+cost-katana rewrite-prompt --prompt "Explain quantum computing" --style concise
+\`\`\`
+
+### Budget Management
+\`\`\`bash
+# Set project budget
+cost-katana set-budget --project my-app --tokens 1000000 --notify slack
+
+# Check budget status
+cost-katana budget status
+
+# Configure alerts
+cost-katana set-budget alerts --enable-slack --slack-channel #ai-costs
+\`\`\`
+
+## 🔄 Advanced Features
+
+### Workflow Management
+\`\`\`bash
+# Create interactive workflow
+cost-katana craft-workflow interactive
+
+# Use predefined template
+cost-katana craft-workflow --template legal_analysis
+
+# Export workflow
+cost-katana craft-workflow export --workflow workflow.json --export-json
+\`\`\`
+
+### Cost Simulation
+\`\`\`bash
+# Simulate cost scenarios
+cost-katana simulate-cost --prompt-id prompt-123 --what-if '{"model": "gpt-3.5-turbo"}'
+
+# Compare models
+cost-katana simulate-cost compare-models --prompt-id prompt-123 --models "gpt-4,claude-3-sonnet"
+\`\`\`
+
+![Cost Simulation Results](/assets/optimization_2.png)
+
+### Manual Tracking
+\`\`\`bash
+# Track manual requests
+cost-katana track --model gpt-4 --tokens 1500 --project my-app --user john@company.com
+
+# Track with feedback
+cost-katana track --model claude-3-sonnet --tokens 800 --feedback positive
+\`\`\`
+
+### Project Management
+\`\`\`bash
+# Create new project
+cost-katana project create my-new-project
+
+# List all projects
+cost-katana project list
+
+# Switch active project
+cost-katana project switch my-project
+\`\`\`
+
+### API Key Management
+\`\`\`bash
+# Create new API key
+cost-katana key create --name dev-token --budget 100000 --ttl 30d
+
+# List all keys
+cost-katana key list
+
+# Regenerate key
+cost-katana key regenerate key-id-123
+\`\`\`
+
+## 🔍 Debugging & Tracing
+
+### Request Tracing
+\`\`\`bash
+# Trace specific request
+cost-katana trace --id req-8230
+
+# View recent traces
+cost-katana trace recent --limit 10
+
+# Trace by project
+cost-katana trace project my-project
+\`\`\`
+
+### Workflow Tracing
+\`\`\`bash
+# Trace workflow lifecycle
+cost-katana trace-workflow --id workflow-98765
+
+# Recent workflow traces
+cost-katana trace-workflow recent
+\`\`\`
+
+### Prompt Debugging
+\`\`\`bash
+# Debug specific prompt
+cost-katana debug-prompt --prompt-id prompt-38271
+
+# Debug by content
+cost-katana debug-prompt content --prompt "Your prompt here"
+
+# Recent prompt debugging
+cost-katana debug-prompt recent
+\`\`\`
+
+### Prompt Comparison
+\`\`\`bash
+# Compare prompts
+cost-katana diff-prompts --ids prompt-38271 prompt-38272
+
+# Compare by content
+cost-katana diff-prompts content --prompt1 "First prompt" --prompt2 "Second prompt"
+\`\`\`
+
+## 📊 Analytics & Reports
+
+### Prompt Metrics
+\`\`\`bash
+# Get metrics by tag
+cost-katana prompt-metrics --tag support_chat_greeting --range 30d
+
+# Metrics by pattern
+cost-katana prompt-metrics pattern --pattern "summarize*" --range 7d
+
+# Comprehensive metrics
+cost-katana prompt-metrics comprehensive --range 30d
+\`\`\`
+
+### High-Cost Analysis
+\`\`\`bash
+# Find expensive prompts
+cost-katana high-cost-prompts --range 7d
+
+# Filter by project
+cost-katana high-cost-prompts --project my-project --sort-by cost
+
+# Filter by model
+cost-katana high-cost-prompts --model gpt-4 --range 30d
+\`\`\`
+
+### Retry Logs
+\`\`\`bash
+# View retry logs
+cost-katana retry-log --range 7d
+
+# Get retry statistics
+cost-katana retry-log stats --range 30d
+
+# Filter by failure type
+cost-katana retry-log failure-type timeout
+\`\`\`
+
+## 🛡️ Security & Auditing
+
+### Firewall Auditing
+\`\`\`bash
+# Audit firewall decisions
+cost-katana audit-firewall --id prompt-89234
+
+# View by action
+cost-katana audit-firewall action blocked --range 7d
+
+# Get firewall statistics
+cost-katana audit-firewall stats
+\`\`\`
+
+### Agent Inspection
+\`\`\`bash
+# Inspect agent behavior
+cost-katana agent-inspect --agent-id agent-buyer-ranker
+
+# Recent agent activity
+cost-katana agent-inspect recent --limit 20
+\`\`\`
+
+## 🎯 AI-Powered Features
+
+### Model Suggestions
+\`\`\`bash
+# Get model suggestions
+cost-katana suggest-models --prompt "Summarize a 5-page contract"
+
+# Task-specific suggestions
+cost-katana suggest-models --task summarization --priority cost
+
+# Compare models
+cost-katana suggest-models compare --models "gpt-4,claude-3-sonnet,gpt-3.5-turbo"
+\`\`\`
+
+### Session Replay
+\`\`\`bash
+# Replay conversation session
+cost-katana replay-session --session-id session-1234
+
+# Recent sessions
+cost-katana replay-session recent --limit 5
+\`\`\`
+
+## 🔧 CI/CD Integration
+
+### GitHub Actions
+\`\`\`yaml
+name: AI Cost Monitoring
+on: [push, pull_request]
+
+jobs:
+  cost-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Cost Katana CLI
+        run: npm install -g ai-cost-optimizer-cli
+      - name: Run Cost Analysis
+        run: cost-katana analytics --format json --export cost-report.json
+        env:
+          COST_KATANA_API_KEY: \${{ secrets.COST_KATANA_API_KEY }}
+\`\`\`
+
+### Docker Integration
+\`\`\`dockerfile
+FROM node:18-alpine
+RUN npm install -g ai-cost-optimizer-cli
+COPY . .
+RUN cost-katana analytics --export build-cost-report.json
+CMD ["npm", "start"]
+\`\`\`
+
+## 🎨 Output Formats
+
+All commands support multiple output formats:
+
+\`\`\`bash
+# Table format (default)
+cost-katana analytics
+
+# JSON format
+cost-katana analytics --format json
+
+# CSV format for spreadsheet analysis
+cost-katana analytics --format csv --export report.csv
+
+# Verbose output with detailed information
+cost-katana analytics --verbose
+\`\`\`
+
+## 🚀 Getting Started
+
+1. **Install**: \`npm install -g ai-cost-optimizer-cli\`
+2. **Initialize**: \`cost-katana init\`
+3. **Explore**: \`cost-katana --help\`
+4. **Analyze**: \`cost-katana analytics\`
+5. **Optimize**: Start saving on AI costs!
+
+The CLI is your command center for AI cost optimization. Get started today! 🎯`}
   />
 );
 
@@ -21,8 +551,505 @@ export const NodeJSPage = () => (
   <DocumentationPage
     title="Node.js SDK"
     description="Integrate Cost Katana with your Node.js applications"
-    prevPage={{ path: '/integrations', label: 'Back to Integrations' }}
+    prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }}
     nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }}
+    fallbackContent={`# Node.js SDK Integration
+
+Complete guide to integrating the Cost Katana SDK with your Node.js applications for programmatic AI cost optimization.
+
+![Node.js SDK Integration](/assets/nodejs_sdk.png)
+
+## 📦 Node.js SDK
+
+For programmatic integration in your Node.js applications.
+
+### Installation
+
+\`\`\`bash
+npm install @cost-katana/node-sdk
+\`\`\`
+
+### Quick Start
+
+\`\`\`javascript
+import { CostKatana } from '@cost-katana/node-sdk';
+
+const ck = new CostKatana({
+  apiKey: 'your-cost-katana-api-key',
+  baseUrl: 'https://cost-katana-backend.store' // optional
+});
+
+// Make AI requests with automatic cost tracking
+const response = await ck.chat.completions.create({
+    model: 'gpt-4',
+  messages: [
+    { role: 'user', content: 'Hello, world!' }
+  ]
+});
+
+console.log(response.choices[0].message.content);
+\`\`\`
+
+### Advanced Usage
+
+#### Project-based Tracking
+\`\`\`javascript
+const ck = new CostKatana({
+  apiKey: 'your-api-key',
+  project: 'customer-support-bot' // Track costs per project
+});
+
+const response = await ck.chat.completions.create({
+  model: 'gpt-3.5-turbo',
+  messages: messages,
+  metadata: {
+    user_id: 'user-123',
+    session_id: 'session-456'
+  }
+});
+\`\`\`
+
+#### Cost Optimization
+\`\`\`javascript
+// Get optimization suggestions
+const suggestions = await ck.optimization.getSuggestions({
+  prompt: 'Your long prompt here...',
+  model: 'gpt-4'
+});
+
+console.log('Potential savings:', suggestions.costSavings);
+
+// Apply optimization
+const optimized = await ck.optimization.optimize({
+  prompt: 'Your long prompt here...',
+  strategy: 'aggressive'
+});
+
+console.log('Optimized prompt:', optimized.optimizedPrompt);
+console.log('Token reduction:', optimized.tokensSaved);
+\`\`\`
+
+#### Budget Monitoring
+\`\`\`javascript
+// Check budget status
+const budget = await ck.budget.getStatus('my-project');
+
+console.log(\`Budget usage: \${budget.usagePercentage}%\`);
+console.log(\`Remaining: $\${budget.remaining}\`);
+
+// Set budget alerts
+await ck.budget.setAlert({
+  project: 'my-project',
+  threshold: 80, // Alert at 80%
+  channels: ['email', 'slack']
+});
+\`\`\`
+
+![SDK Integration Example](/assets/optimization_1.png)
+
+## 🌐 Framework Integrations
+
+### Express.js
+
+\`\`\`javascript
+const express = require('express');
+const { CostKatana } = require('@cost-katana/node-sdk');
+
+const app = express();
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY
+});
+
+app.use(express.json());
+
+// Chat endpoint with cost tracking
+app.post('/api/chat', async (req, res) => {
+  try {
+    const response = await ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: req.body.messages,
+      metadata: {
+        endpoint: '/api/chat',
+        user_ip: req.ip
+      }
+    });
+
+    res.json({
+      message: response.choices[0].message.content,
+      usage: response.usage,
+      cost: response.cost
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.listen(3000);
+\`\`\`
+
+### Next.js
+
+\`\`\`javascript
+// pages/api/chat.js
+import { CostKatana } from '@cost-katana/node-sdk';
+
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY,
+  project: 'nextjs-chat-app'
+});
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const { messages } = req.body;
+
+    const response = await ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages,
+      metadata: {
+        framework: 'nextjs',
+        route: '/api/chat'
+      }
+    });
+
+    res.json({
+      message: response.choices[0].message.content,
+      cost: response.cost,
+      usage: response.usage
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+\`\`\`
+
+### NestJS
+
+\`\`\`typescript
+// chat.service.ts
+import { Injectable } from '@nestjs/common';
+import { CostKatana } from '@cost-katana/node-sdk';
+
+@Injectable()
+export class ChatService {
+  private readonly ck: CostKatana;
+
+  constructor() {
+    this.ck = new CostKatana({
+      apiKey: process.env.COST_KATANA_API_KEY,
+      project: 'nestjs-app'
+    });
+  }
+
+  async chat(messages: any[]): Promise<any> {
+    const response = await this.ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages,
+      metadata: {
+        service: 'ChatService',
+        framework: 'nestjs'
+      }
+    });
+
+    return {
+      message: response.choices[0].message.content,
+      cost: response.cost,
+      usage: response.usage
+    };
+  }
+}
+\`\`\`
+
+![Framework Integration Examples](/assets/gateway_1.png)
+
+## ☁️ Cloud Deployment
+
+### AWS Lambda
+
+\`\`\`javascript
+const { CostKatana } = require('@cost-katana/node-sdk');
+
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY,
+  project: 'lambda-function'
+});
+
+exports.handler = async (event) => {
+  try {
+    const { messages } = JSON.parse(event.body);
+
+    const response = await ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages,
+      metadata: {
+        platform: 'aws-lambda',
+        function_name: process.env.AWS_LAMBDA_FUNCTION_NAME
+      }
+    });
+
+    return {
+      statusCode: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      },
+      body: JSON.stringify({
+        message: response.choices[0].message.content,
+        cost: response.cost
+      })
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ error: error.message })
+    };
+  }
+};
+\`\`\`
+
+### Vercel Functions
+
+\`\`\`javascript
+// api/chat.js
+import { CostKatana } from '@cost-katana/node-sdk';
+
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY,
+  project: 'vercel-app'
+});
+
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const response = await ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: req.body.messages,
+      metadata: {
+        platform: 'vercel',
+        region: process.env.VERCEL_REGION
+      }
+    });
+
+    res.json({
+      message: response.choices[0].message.content,
+      cost: response.cost
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+\`\`\`
+
+## 🔧 Development Workflow
+
+### GitHub Actions
+
+\`\`\`yaml
+name: AI Cost Monitoring
+on: [push, pull_request]
+
+jobs:
+  cost-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          
+      - name: Install Cost Katana CLI
+        run: npm install -g ai-cost-optimizer-cli
+        
+      - name: Run Cost Analysis
+        run: |
+          cost-katana analytics --format json --export cost-report.json
+          cost-katana budget status --project \${{ github.repository }}
+        env:
+          COST_KATANA_API_KEY: \${{ secrets.COST_KATANA_API_KEY }}
+          
+      - name: Upload Cost Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: cost-report
+          path: cost-report.json
+\`\`\`
+
+### Docker Integration
+
+\`\`\`dockerfile
+# Dockerfile
+FROM node:18-alpine
+
+# Install Cost Katana CLI globally
+RUN npm install -g ai-cost-optimizer-cli
+
+# Copy application files
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+
+# Run cost analysis during build
+ARG COST_KATANA_API_KEY
+ENV COST_KATANA_API_KEY=\$COST_KATANA_API_KEY
+
+RUN cost-katana analytics --export build-cost-report.json
+
+# Start application
+CMD ["npm", "start"]
+\`\`\`
+
+## 📊 Monitoring & Analytics
+
+### Real-time Monitoring
+
+\`\`\`javascript
+// monitor.js
+const { CostKatana } = require('@cost-katana/node-sdk');
+
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY
+});
+
+// Monitor costs in real-time
+setInterval(async () => {
+  const analytics = await ck.analytics.getCurrent();
+  
+  console.log(\`Current hourly spend: $\${analytics.hourlySpend}\`);
+  console.log(\`Requests this hour: \${analytics.requestCount}\`);
+  
+  if (analytics.hourlySpend > 10) {
+    console.warn('⚠️ High spending detected!');
+    // Send alert
+  }
+}, 60000); // Check every minute
+\`\`\`
+
+### Custom Dashboards
+
+\`\`\`javascript
+// dashboard-data.js
+const express = require('express');
+const { CostKatana } = require('@cost-katana/node-sdk');
+
+const app = express();
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY
+});
+
+// Dashboard API endpoint
+app.get('/api/dashboard', async (req, res) => {
+  const [analytics, budget, optimization] = await Promise.all([
+    ck.analytics.getUsage({ days: 7 }),
+    ck.budget.getStatus(),
+    ck.optimization.getSummary()
+  ]);
+
+  res.json({
+    analytics,
+    budget,
+    optimization,
+    timestamp: new Date()
+  });
+});
+
+app.listen(3001);
+\`\`\`
+
+![Analytics Dashboard](/assets/analytics_2.png)
+
+## 🎯 Best Practices
+
+### 1. Environment Configuration
+\`\`\`javascript
+// config.js
+const config = {
+  development: {
+    costKatana: {
+      apiKey: process.env.COST_KATANA_DEV_KEY,
+      project: 'my-app-dev',
+      optimization: 'conservative'
+    }
+  },
+  production: {
+    costKatana: {
+      apiKey: process.env.COST_KATANA_PROD_KEY,
+      project: 'my-app-prod',
+      optimization: 'aggressive'
+    }
+  }
+};
+
+export default config[process.env.NODE_ENV || 'development'];
+\`\`\`
+
+### 2. Error Handling
+\`\`\`javascript
+const ck = new CostKatana({
+  apiKey: process.env.COST_KATANA_API_KEY,
+  retries: 3,
+  timeout: 30000
+});
+
+try {
+  const response = await ck.chat.completions.create({
+    model: 'gpt-4',
+    messages: messages
+  });
+  
+  return response;
+} catch (error) {
+  if (error.code === 'RATE_LIMIT_EXCEEDED') {
+    // Switch to cheaper model
+    return await ck.chat.completions.create({
+      model: 'gpt-3.5-turbo',
+      messages: messages
+    });
+  }
+  
+  throw error;
+}
+\`\`\`
+
+### 3. Cost Optimization
+\`\`\`javascript
+// Implement smart caching
+const cache = new Map();
+
+async function chatWithCaching(messages) {
+  const cacheKey = JSON.stringify(messages);
+  
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
+  
+  const response = await ck.chat.completions.create({
+    model: 'gpt-3.5-turbo',
+    messages
+  });
+  
+  cache.set(cacheKey, response);
+  return response;
+}
+\`\`\`
+
+## 🚀 Getting Started
+
+1. **Install CLI**: \`npm install -g ai-cost-optimizer-cli\`
+2. **Initialize**: \`cost-katana init\`
+3. **Install SDK**: \`npm install @cost-katana/node-sdk\`
+4. **Start Tracking**: Begin monitoring your AI costs
+5. **Optimize**: Use insights to reduce expenses
+
+Ready to optimize your Node.js AI costs? Get started today! 🎯`}
   />
 );
 
@@ -32,6 +1059,606 @@ export const PythonPage = () => (
     description="Integrate Cost Katana with your Python applications"
     prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }}
     nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }}
+    fallbackContent={`# Python SDK Integration
+
+Complete guide to integrating Cost Katana with your Python applications for AI cost optimization.
+
+![Python SDK Integration](/assets/python_sdk.png)        
+
+## 🐍 Python SDK
+
+### Installation
+
+\`\`\`bash
+pip install cost-katana
+\`\`\`
+
+### Quick Start
+
+\`\`\`python
+from cost_katana import CostKatana
+
+# Initialize the client
+ck = CostKatana(
+    api_key='your-cost-katana-api-key',
+    base_url='https://cost-katana-backend.store'  # optional
+)
+
+# Make AI requests with automatic cost tracking
+response = ck.chat.completions.create(
+    model='gpt-4',
+    messages=[
+        {'role': 'user', 'content': 'Hello, world!'}
+    ]
+)
+
+print(response.choices[0].message.content)
+\`\`\`
+
+### Advanced Usage
+
+#### Project-based Tracking
+\`\`\`python
+ck = CostKatana(
+    api_key='your-api-key',
+    project='ml-research-project'  # Track costs per project
+)
+
+response = ck.chat.completions.create(
+    model='gpt-3.5-turbo',
+    messages=messages,
+    metadata={
+        'user_id': 'user-123',
+        'experiment_id': 'exp-456'
+    }
+)
+\`\`\`
+
+#### Cost Optimization
+\`\`\`python
+# Get optimization suggestions
+suggestions = ck.optimization.get_suggestions(
+    prompt='Your long prompt here...',
+    model='gpt-4'
+)
+
+print(f'Potential savings: {suggestions.cost_savings}')
+
+# Apply optimization
+optimized = ck.optimization.optimize(
+    prompt='Your long prompt here...',
+    strategy='aggressive'
+)
+
+print(f'Optimized prompt: {optimized.optimized_prompt}')
+print(f'Token reduction: {optimized.tokens_saved}')
+\`\`\`
+
+#### Budget Monitoring
+\`\`\`python
+# Check budget status
+budget = ck.budget.get_status('my-project')
+
+print(f'Budget usage: \{budget.usage_percentage\}%')
+print(f'Remaining: $\{budget.remaining\}')
+
+# Set budget alerts
+ck.budget.set_alert(
+    project='my-project',
+    threshold=80,  # Alert at 80%
+    channels=['email', 'slack']
+)
+\`\`\`
+
+![Python SDK Usage](/assets/usage_2.png)
+
+## 🌐 Framework Integrations
+
+### Django
+
+\`\`\`python
+# views.py
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from cost_katana import CostKatana
+import json
+
+ck = CostKatana(
+    api_key=settings.COST_KATANA_API_KEY,
+    project='django-chat-app'
+)
+
+@csrf_exempt
+def chat_endpoint(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=data['messages'],
+            metadata={
+                'framework': 'django',
+                'endpoint': '/api/chat',
+                'user_ip': request.META.get('REMOTE_ADDR')
+            }
+        )
+        
+        return JsonResponse({
+            'message': response.choices[0].message.content,
+            'cost': response.cost,
+            'usage': response.usage
+        })
+\`\`\`
+
+### Flask
+
+\`\`\`python
+# app.py
+from flask import Flask, request, jsonify
+from cost_katana import CostKatana
+import os
+
+app = Flask(__name__)
+ck = CostKatana(
+    api_key=os.getenv('COST_KATANA_API_KEY'),
+    project='flask-api'
+)
+
+@app.route('/api/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.get_json()
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=data['messages'],
+            metadata={
+                'framework': 'flask',
+                'endpoint': '/api/chat'
+            }
+        )
+        
+        return jsonify({
+            'message': response.choices[0].message.content,
+            'cost': response.cost,
+            'usage': response.usage
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
+\`\`\`
+
+### FastAPI
+
+\`\`\`python
+# main.py
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from cost_katana import CostKatana
+from typing import List
+import os
+
+app = FastAPI()
+ck = CostKatana(
+    api_key=os.getenv('COST_KATANA_API_KEY'),
+    project='fastapi-service'
+)
+
+class ChatRequest(BaseModel):
+    messages: List[dict]
+
+class ChatResponse(BaseModel):
+    message: str
+    cost: float
+    usage: dict
+
+@app.post('/api/chat', response_model=ChatResponse)
+async def chat(request: ChatRequest):
+    try:
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=request.messages,
+            metadata={
+                'framework': 'fastapi',
+                'endpoint': '/api/chat'
+            }
+        )
+        
+        return ChatResponse(
+            message=response.choices[0].message.content,
+            cost=response.cost,
+            usage=response.usage
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+\`\`\`
+
+![Python Framework Examples](/assets/usage_3.png)
+
+## 🔬 Data Science & ML Integration
+
+### Jupyter Notebooks
+
+\`\`\`python
+# In Jupyter Notebook
+import pandas as pd
+from cost_katana import CostKatana
+
+ck = CostKatana(
+    api_key='your-api-key',
+    project='data-analysis-notebook'
+)
+
+# Analyze data with AI
+def analyze_data_with_ai(df):
+    prompt = f"Analyze this dataset summary: {df.describe().to_string()}"
+    
+    response = ck.chat.completions.create(
+        model='gpt-4',
+        messages=[{'role': 'user', 'content': prompt}],
+        metadata={
+            'environment': 'jupyter',
+            'dataset_shape': str(df.shape)
+        }
+    )
+    
+    return response.choices[0].message.content
+
+# Track costs for each analysis
+analysis_results = []
+for dataset in datasets:
+    result = analyze_data_with_ai(dataset)
+    analysis_results.append(result)
+
+# Check total cost
+budget = ck.budget.get_status('data-analysis-notebook')
+print(f'Total cost for analysis: $\{budget.current_spend\}')
+\`\`\`
+
+### Pandas Integration
+
+\`\`\`python
+import pandas as pd
+from cost_katana import CostKatana
+
+ck = CostKatana(api_key='your-api-key')
+
+# Custom pandas accessor for AI analysis
+@pd.api.extensions.register_dataframe_accessor("ai_analyze")
+class AIAnalyzer:
+    def __init__(self, pandas_obj):
+        self._obj = pandas_obj
+    
+    def summarize(self):
+        """Get AI-powered data summary"""
+        prompt = f"Summarize this dataset: {self._obj.describe().to_string()}"
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=[{'role': 'user', 'content': prompt}]
+        )
+        
+        return response.choices[0].message.content
+
+# Usage
+df = pd.read_csv('data.csv')
+summary = df.ai_analyze.summarize()
+print(summary)
+\`\`\`
+
+### Scikit-learn Integration
+
+\`\`\`python
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from cost_katana import CostKatana
+
+ck = CostKatana(
+    api_key='your-api-key',
+    project='ml-model-analysis'
+)
+
+# AI-powered model interpretation
+def interpret_model_results(model, X_test, y_test):
+    score = model.score(X_test, y_test)
+    feature_importance = model.feature_importances_
+    
+    prompt = f"""
+    Interpret these ML model results:
+    - Accuracy: {score:.4f}
+    - Top 5 features: {dict(zip(X_test.columns[:5], feature_importance[:5]))}
+    """
+    
+    response = ck.chat.completions.create(
+        model='gpt-4',
+        messages=[{'role': 'user', 'content': prompt}],
+        metadata={
+            'model_type': 'RandomForest',
+            'accuracy': score,
+            'features_count': len(X_test.columns)
+        }
+    )
+    
+    return response.choices[0].message.content
+
+# Train model and get AI interpretation
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+model = RandomForestClassifier().fit(X_train, y_train)
+interpretation = interpret_model_results(model, X_test, y_test)
+print(interpretation)
+\`\`\`
+
+## ☁️ Cloud Deployment
+
+### AWS Lambda
+
+\`\`\`python
+# lambda_function.py
+import json
+from cost_katana import CostKatana
+import os
+
+ck = CostKatana(
+    api_key=os.environ['COST_KATANA_API_KEY'],
+    project='lambda-function'
+)
+
+def lambda_handler(event, context):
+    try:
+        body = json.loads(event['body'])
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=body['messages'],
+            metadata={
+                'platform': 'aws-lambda',
+                'function_name': context.function_name,
+                'request_id': context.aws_request_id
+            }
+        )
+        
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'body': json.dumps({
+                'message': response.choices[0].message.content,
+                'cost': response.cost
+            })
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': str(e)})
+        }
+\`\`\`
+
+### Google Cloud Functions
+
+\`\`\`python
+# main.py
+from flask import Flask, request, jsonify
+from cost_katana import CostKatana
+import os
+
+ck = CostKatana(
+    api_key=os.getenv('COST_KATANA_API_KEY'),
+    project='gcp-function'
+)
+
+def chat_function(request):
+    """HTTP Cloud Function for chat completion"""
+    if request.method != 'POST':
+        return jsonify({'error': 'Method not allowed'}), 405
+    
+    try:
+        data = request.get_json()
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=data['messages'],
+            metadata={
+                'platform': 'gcp-functions',
+                'region': os.getenv('FUNCTION_REGION')
+            }
+        )
+        
+        return jsonify({
+            'message': response.choices[0].message.content,
+            'cost': response.cost
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+\`\`\`
+
+### Azure Functions
+
+\`\`\`python
+# __init__.py
+import logging
+import json
+import azure.functions as func
+from cost_katana import CostKatana
+import os
+
+ck = CostKatana(
+    api_key=os.environ['COST_KATANA_API_KEY'],
+    project='azure-function'
+)
+
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')
+
+    try:
+        req_body = req.get_json()
+        
+        response = ck.chat.completions.create(
+            model='gpt-3.5-turbo',
+            messages=req_body['messages'],
+            metadata={
+                'platform': 'azure-functions',
+                'function_app': os.getenv('WEBSITE_SITE_NAME')
+            }
+        )
+        
+        return func.HttpResponse(
+            json.dumps({
+                'message': response.choices[0].message.content,
+                'cost': response.cost
+            }),
+            status_code=200,
+            mimetype='application/json'
+        )
+    except Exception as e:
+        return func.HttpResponse(
+            json.dumps({'error': str(e)}),
+            status_code=500,
+            mimetype='application/json'
+        )
+\`\`\`
+
+## 📊 Monitoring & Analytics
+
+### Real-time Cost Monitoring
+
+\`\`\`python
+import time
+from cost_katana import CostKatana
+
+ck = CostKatana(api_key='your-api-key')
+
+def monitor_costs():
+    """Monitor AI costs in real-time"""
+    while True:
+        analytics = ck.analytics.get_current()
+        
+        print(f'Current hourly spend: $\{analytics.hourly_spend\}')
+        print(f'Requests this hour: \{analytics.request_count\}')
+        
+        if analytics.hourly_spend > 10:
+            print('⚠️ High spending detected!')
+            # Send alert
+            
+        time.sleep(60)  # Check every minute
+
+# Run monitoring
+monitor_costs()
+\`\`\`
+
+### Custom Dashboards
+
+\`\`\`python
+from flask import Flask, jsonify
+from cost_katana import CostKatana
+import asyncio
+
+app = Flask(__name__)
+ck = CostKatana(api_key='your-api-key')
+
+@app.route('/api/dashboard')
+async def dashboard_data():
+    """Get dashboard data"""
+    analytics, budget, optimization = await asyncio.gather(
+        ck.analytics.get_usage(days=7),
+        ck.budget.get_status(),
+        ck.optimization.get_summary()
+    )
+    
+    return jsonify({
+        'analytics': analytics,
+        'budget': budget,
+        'optimization': optimization,
+        'timestamp': time.time()
+    })
+
+if __name__ == '__main__':
+    app.run(port=3001)
+\`\`\`
+
+## 🎯 Best Practices
+
+### 1. Environment Configuration
+\`\`\`python
+# config.py
+import os
+
+class Config:
+    COST_KATANA_API_KEY = os.getenv('COST_KATANA_API_KEY')
+    PROJECT_NAME = os.getenv('PROJECT_NAME', 'my-python-app')
+    
+    # Different settings for different environments
+    if os.getenv('ENVIRONMENT') == 'production':
+        OPTIMIZATION_STRATEGY = 'aggressive'
+        COST_KATANA_PROJECT = f'{PROJECT_NAME}-prod'
+    else:
+        OPTIMIZATION_STRATEGY = 'conservative'
+        COST_KATANA_PROJECT = f'{PROJECT_NAME}-dev'
+
+config = Config()
+\`\`\`
+
+### 2. Error Handling
+\`\`\`python
+from cost_katana import CostKatana, RateLimitError, CostLimitError
+
+ck = CostKatana(
+    api_key='your-api-key',
+    retries=3,
+    timeout=30
+)
+
+try:
+    response = ck.chat.completions.create(
+        model='gpt-4',
+        messages=messages
+    )
+    
+    return response
+except RateLimitError:
+    # Switch to cheaper model
+    return ck.chat.completions.create(
+        model='gpt-3.5-turbo',
+        messages=messages
+    )
+except CostLimitError:
+    # Handle budget exceeded
+    print('Budget limit reached!')
+    return None
+\`\`\`
+
+### 3. Cost Optimization
+\`\`\`python
+# Implement caching
+from functools import lru_cache
+import hashlib
+
+@lru_cache(maxsize=1000)
+def cached_chat_completion(messages_hash, model):
+    return ck.chat.completions.create(
+        model=model,
+        messages=json.loads(messages_hash)
+    )
+
+def chat_with_caching(messages, model='gpt-3.5-turbo'):
+    messages_str = json.dumps(messages, sort_keys=True)
+    messages_hash = hashlib.md5(messages_str.encode()).hexdigest()
+    
+    return cached_chat_completion(messages_hash, model)
+\`\`\`
+
+## 🚀 Getting Started
+
+1. **Install SDK**: \`pip install cost-katana\`
+2. **Get API Key**: Sign up at [costkatana.com](https://costkatana.com)
+3. **Initialize Client**: \`ck = CostKatana(api_key='your-key')\`
+4. **Start Tracking**: Begin monitoring your AI costs
+5. **Optimize**: Use insights to reduce expenses
+
+Ready to optimize your Python AI costs? Get started today! 🐍`}
   />
 );
 
@@ -40,6 +1667,275 @@ export const ChatGPTPage = () => (
     title="ChatGPT Integration"
     description="Direct ChatGPT custom GPT integration for instant optimization"
     prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }}
+    fallbackContent={`# ChatGPT Integration
+
+Direct integration with ChatGPT through custom GPT for instant AI cost optimization and analysis.
+
+![ChatGPT Integration](/assets/gpt.png)
+
+## 🤖 Custom GPT Integration
+
+### Overview
+
+Our ChatGPT custom GPT provides instant access to Cost Katana's optimization features directly within ChatGPT conversations.
+
+**Features:**
+- ✨ **Instant Prompt Optimization** - Optimize prompts in real-time
+- 📊 **Cost Analysis** - Get immediate cost breakdowns
+- 🎯 **Model Recommendations** - AI-powered model suggestions
+- 📈 **Usage Tracking** - Monitor your AI spending
+- 🔄 **Workflow Analysis** - Analyze multi-step AI processes
+
+### Installation
+
+1. **Access Custom GPT**: Visit [ChatGPT Custom GPTs](https://chat.openai.com/gpts)
+2. **Search for Cost Katana**: Find "Cost Katana AI Cost Optimizer"
+3. **Install**: Click "Use this GPT"
+4. **Configure**: Connect your Cost Katana API key
+
+![Custom GPT Setup](/assets/prompt_templates_2.png)
+
+## 💬 Chat Commands
+
+### Prompt Optimization
+\`\`\`
+Optimize this prompt: "Write a comprehensive analysis of market trends in the technology sector, including detailed insights on emerging technologies, competitive landscape, and future predictions for the next 5 years."
+\`\`\`
+
+**Response includes:**
+- Optimized prompt version
+- Token reduction analysis
+- Cost savings estimate
+- Alternative model suggestions
+
+### Cost Analysis
+\`\`\`
+Analyze the cost of using GPT-4 vs Claude-3 for customer support responses with average 150 tokens per response, 1000 responses per day.
+\`\`\`
+
+**Response includes:**
+- Detailed cost comparison
+- Monthly spending projections
+- Break-even analysis
+- Optimization recommendations
+
+### Model Recommendations
+\`\`\`
+Suggest the best model for: "Summarizing legal documents with high accuracy requirements"
+\`\`\`
+
+**Response includes:**
+- Top 3 model recommendations
+- Cost vs. quality trade-offs
+- Performance benchmarks
+- Implementation guidance
+
+### Budget Planning
+\`\`\`
+Help me plan a budget for an AI-powered content generation service that needs to produce 500 blog posts per month.
+\`\`\`
+
+**Response includes:**
+- Budget breakdown by model
+- Cost optimization strategies
+- Scaling recommendations
+- Risk mitigation tips
+
+## 🔧 Advanced Features
+
+### Workflow Analysis
+\`\`\`
+Analyze this AI workflow:
+1. Extract key points from research papers (GPT-4)
+2. Summarize findings (Claude-3-Sonnet) 
+3. Generate blog post outline (GPT-3.5-turbo)
+4. Write full article (Claude-3-Haiku)
+\`\`\`
+
+**Analysis includes:**
+- Step-by-step cost breakdown
+- Workflow optimization suggestions
+- Alternative model routing
+- Parallel processing opportunities
+
+### Prompt Engineering
+\`\`\`
+Help me create a prompt template for product description generation that balances quality and cost.
+\`\`\`
+
+**Template includes:**
+- Optimized prompt structure
+- Variable placeholders
+- Quality guidelines
+- Cost-effective alternatives
+
+### Competitive Analysis
+\`\`\`
+Compare the total cost of ownership for building a chatbot using different AI providers.
+\`\`\`
+
+**Comparison includes:**
+- Provider cost analysis
+- Feature comparison
+- Integration complexity
+- Long-term cost projections
+
+![ChatGPT Analysis Results](/assets/analytics_1.png)
+
+## 📊 Usage Analytics
+
+### Real-time Monitoring
+The custom GPT can access your Cost Katana dashboard to provide:
+
+- **Current spending** across all projects
+- **Usage trends** and patterns
+- **Budget utilization** percentages
+- **Cost anomaly** detection
+- **Optimization opportunities**
+
+### Interactive Reports
+\`\`\`
+Show me my AI spending report for the last 30 days with optimization recommendations.
+   \`\`\`
+
+**Report includes:**
+- Visual spending breakdown
+- Top cost drivers
+- Efficiency metrics
+- Action items for cost reduction
+
+## 🎯 Use Cases
+
+### 1. Content Creation Teams
+\`\`\`
+I need to optimize costs for a content team that creates:
+- 50 blog posts per month
+- 200 social media posts per month  
+- 20 email newsletters per month
+   \`\`\`
+
+### 2. Customer Support
+\`\`\`
+Optimize our customer support AI that handles:
+- 1000 tickets per day
+- Average response length: 100 words
+- Required response time: < 30 seconds
+   \`\`\`
+
+### 3. Data Analysis
+\`\`\`
+Help optimize costs for AI-powered data analysis that processes:
+- 100 datasets per week
+- Each requiring 5-10 analysis steps
+- Mix of numerical and text data
+\`\`\`
+
+### 4. Code Generation
+\`\`\`
+Optimize costs for an AI coding assistant that:
+- Generates code snippets
+- Reviews pull requests
+- Writes documentation
+- Explains complex algorithms
+\`\`\`
+
+## 🔐 Security & Privacy
+
+### Data Protection
+- **No data storage**: Conversations are not stored by Cost Katana
+- **API-only access**: Only accesses your authorized Cost Katana data
+- **Encrypted communications**: All data transfer is encrypted
+- **Audit logs**: Full audit trail of all interactions
+
+### Permission Management
+- **Scoped access**: Only accesses cost and usage data
+- **No code access**: Cannot access your application code
+- **Revocable**: API access can be revoked anytime
+- **Read-only**: Cannot modify your Cost Katana settings
+
+## 🚀 Getting Started
+
+### Step 1: Setup Cost Katana Account
+1. Sign up at [costkatana.com](https://costkatana.com)
+2. Get your API key from the dashboard
+3. Configure your AI providers
+
+### Step 2: Install Custom GPT
+1. Go to ChatGPT and find "Cost Katana AI Cost Optimizer"
+2. Click "Use this GPT"
+3. Follow the setup instructions
+
+### Step 3: Connect API Key
+1. In the custom GPT, use the command: \`/setup\`
+2. Provide your Cost Katana API key
+3. Verify the connection
+
+### Step 4: Start Optimizing
+1. Ask for prompt optimization
+2. Get cost analysis
+3. Receive model recommendations
+4. Monitor your savings!
+
+## 💡 Pro Tips
+
+### Effective Commands
+- Be specific about your use case
+- Include volume estimates (requests per day/month)
+- Mention quality requirements
+- Specify budget constraints
+
+### Best Practices
+- **Regular analysis**: Check costs weekly
+- **Prompt optimization**: Optimize high-frequency prompts first
+- **Model selection**: Match models to task complexity
+- **Budget monitoring**: Set up alerts for spending thresholds
+
+### Common Questions
+
+**Q: How accurate are the cost estimates?**
+A: Cost estimates are based on current provider pricing and your actual usage patterns, typically accurate within 5-10%.
+
+**Q: Can I use this for multiple projects?**
+A: Yes, the custom GPT can analyze costs across all your Cost Katana projects.
+
+**Q: Does this work with all AI providers?**
+A: Yes, it supports OpenAI, Anthropic, AWS Bedrock, Google AI, Cohere, and more.
+
+**Q: Is my data secure?**
+A: Absolutely. We only access cost and usage data through your API key, never your actual prompts or responses.
+
+## 🔗 Integration Examples
+
+### Slack Integration
+Set up automated cost reports in Slack:
+\`\`\`
+Set up daily cost reports for our #ai-team Slack channel
+\`\`\`
+
+### Email Reports
+Configure weekly email summaries:
+\`\`\`
+Configure weekly cost optimization reports to be sent to engineering-leads@company.com
+\`\`\`
+
+### Dashboard Widgets
+Create custom dashboard views:
+\`\`\`
+Help me create a dashboard widget showing cost per customer support ticket resolved
+\`\`\`
+
+![Integration Dashboard](/assets/dashboard_2.png)
+
+## 📞 Support
+
+Need help with the ChatGPT integration?
+
+- **In-chat help**: Type \`/help\` in the custom GPT
+- **Documentation**: Visit [docs.costkatana.com](https://docs.costkatana.com)
+- **Email support**: support@costkatana.com
+- **Community**: Join our Discord community
+
+Start optimizing your AI costs directly in ChatGPT today! 🎯`}
   />
 );
 
@@ -48,6 +1944,236 @@ export const FeaturesOverviewPage = () => (
   <DocumentationPage
     title="Features Overview"
     description="Explore all Cost Katana features for AI cost optimization"
+    nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }}
+    fallbackContent={`# Cost Katana Features Overview
+
+Comprehensive AI cost optimization platform with powerful features to reduce your AI spending by up to 70%.
+
+![Cost Katana Features Overview](/assets/dashboard_1.png)
+
+## 🎯 Core Features
+
+### 📊 Real-time Dashboard
+Monitor your AI costs and usage in real-time with beautiful, customizable dashboards.
+
+**Key Benefits:**
+- **Live cost tracking** across all AI providers
+- **Usage analytics** with detailed breakdowns
+- **Performance monitoring** and health checks
+- **Custom widgets** and views
+
+[Explore Dashboard →](/features/dashboard)
+
+![Dashboard Analytics](/assets/analytics_1.png)
+
+### 📈 Usage Tracking
+Comprehensive tracking of all your AI API calls with detailed analytics and insights.
+
+**Features:**
+- **Automatic tracking** for all major AI providers
+- **Request-level details** with full audit trails
+- **User attribution** and project segmentation
+- **Cost allocation** and chargeback reports
+
+[Learn More →](/features/usage-tracking)
+
+### 💰 Cost Analytics
+Deep dive into your AI spending with advanced analytics and optimization recommendations.
+
+**Analytics Include:**
+- **Cost trends** and forecasting
+- **Provider comparisons** and recommendations
+- **Usage patterns** and anomaly detection
+- **ROI analysis** and optimization opportunities
+
+[View Analytics →](/features/analytics)
+
+![Cost Analytics Dashboard](/assets/analytics_2.png)
+
+## 🚀 Advanced Features
+
+### 🤖 AI Optimization Engine
+Intelligent optimization powered by machine learning to automatically reduce your costs.
+
+**Optimization Types:**
+- **Prompt optimization** - Reduce token usage while maintaining quality
+- **Model routing** - Automatically select the most cost-effective model
+- **Caching strategies** - Eliminate duplicate requests
+- **Batch processing** - Optimize request patterns
+
+[Discover Optimization →](/features/optimization)
+
+![AI Optimization Results](/assets/optimization_1.png)
+
+### 🔮 Predictive Intelligence
+AI-powered forecasting and recommendations to stay ahead of your costs.
+
+**Predictive Features:**
+- **Cost forecasting** with 95% accuracy
+- **Usage predictions** based on historical data
+- **Budget alerts** and recommendations
+- **Anomaly detection** and early warnings
+
+[Explore Intelligence →](/features/predictive-intelligence)
+
+### 📁 Project Management
+Organize and track costs across multiple projects and teams.
+
+**Project Features:**
+- **Multi-project support** with cost isolation
+- **Team collaboration** and access controls
+- **Budget allocation** and tracking
+- **Cross-project analytics** and reporting
+
+[Manage Projects →](/features/projects)
+
+![Project Management Interface](/assets/usage_1.png)
+
+## 🛠️ Productivity Tools
+
+### 📝 Prompt Templates
+Pre-built and custom templates to standardize your AI interactions.
+
+**Template Benefits:**
+- **Consistency** across your organization
+- **Cost optimization** built-in
+- **Version control** and collaboration
+- **Performance tracking** per template
+
+[Browse Templates →](/features/templates)
+
+### ⚡ Workflows
+Automate complex AI processes with visual workflow builder.
+
+**Workflow Capabilities:**
+- **Visual builder** with drag-and-drop interface
+- **Multi-step processes** with conditional logic
+- **Cost optimization** at each step
+- **Error handling** and retry mechanisms
+
+[Build Workflows →](/features/workflows)
+
+![Workflow Builder](/assets/workflows_1.png)
+
+## 🔧 Infrastructure Features
+
+### 🌐 Gateway & Proxy
+Centralized gateway for all your AI API calls with built-in optimization.
+
+**Gateway Features:**
+- **Universal API** compatible with all providers
+- **Automatic failover** and load balancing
+- **Request caching** and deduplication
+- **Rate limiting** and quota management
+
+[Setup Gateway →](/features/gateway)
+
+### 🔐 Key Vault
+Secure management of all your AI provider API keys.
+
+**Security Features:**
+- **Encrypted storage** with enterprise-grade security
+- **Access controls** and audit logging
+- **Key rotation** and lifecycle management
+- **Integration** with popular secret managers
+
+[Secure Keys →](/features/key-vault)
+
+![Security Dashboard](/assets/gateway_1.png)
+
+### 🚨 Alerts & Monitoring
+Proactive monitoring with intelligent alerts and notifications.
+
+**Alert Types:**
+- **Budget thresholds** and spending limits
+- **Usage anomalies** and cost spikes
+- **Performance issues** and downtime
+- **Optimization opportunities** and recommendations
+
+[Configure Alerts →](/features/alerts)
+
+## 🎓 Training & Learning
+
+### 📚 Training Hub
+Comprehensive training resources and best practices.
+
+**Training Resources:**
+- **Interactive tutorials** and guides
+- **Best practices** from industry experts
+- **Cost optimization** strategies
+- **Use case examples** and templates
+
+[Start Learning →](/features/training)
+
+![Training Resources](/assets/usage_2.png)
+
+## 💡 Key Benefits
+
+### 💸 **Cost Savings**
+- **Average 70% reduction** in AI costs
+- **Intelligent optimization** without quality loss
+- **Automatic scaling** based on usage patterns
+- **Budget controls** and spending limits
+
+### 📊 **Visibility & Control**
+- **Complete transparency** into AI spending
+- **Granular tracking** at request level
+- **Team collaboration** and cost allocation
+- **Compliance reporting** and audit trails
+
+### ⚡ **Performance**
+- **Sub-100ms latency** added overhead
+- **99.9% uptime** SLA with redundancy
+- **Global edge** deployment for speed
+- **Automatic failover** and load balancing
+
+### 🔒 **Security**
+- **Enterprise-grade** encryption and security
+- **SOC 2 Type II** compliance
+- **Zero data retention** policy
+- **Advanced access** controls and audit logs
+
+## 🚀 Getting Started
+
+### Quick Setup (5 minutes)
+1. **Sign up** for your free account
+2. **Connect** your AI provider APIs
+3. **Install** SDK or CLI tool
+4. **Start tracking** and optimizing immediately
+
+### Implementation Options
+- **🖥️ Web Dashboard** - Complete web interface
+- **⚡ CLI Tool** - Command-line power user interface
+- **📦 SDKs** - Node.js, Python, and more
+- **🔌 API** - Direct REST API integration
+
+### Support & Resources
+- **📖 Documentation** - Comprehensive guides and tutorials
+- **💬 Community** - Discord community and forums
+- **🎯 Support** - 24/7 technical support
+- **🎓 Training** - Onboarding and best practices
+
+## 📈 Success Stories
+
+### Startup Success
+*"Cost Katana helped us reduce our AI costs by 80% while scaling from 1K to 1M users. The automatic optimization saved us $50K+ in our first year."*
+
+### Enterprise Efficiency  
+*"With 500+ developers using AI APIs, Cost Katana gave us the visibility and control we needed. We now track every dollar and optimize continuously."*
+
+### Agency Growth
+*"Managing AI costs for 50+ clients was impossible before Cost Katana. Now we have complete transparency and can offer cost optimization as a service."*
+
+## 🎯 Ready to Get Started?
+
+Choose your path to AI cost optimization:
+
+- **🚀 Start Free Trial** - No credit card required
+- **📞 Schedule Demo** - See Cost Katana in action
+- **📖 Read Documentation** - Technical implementation guides
+- **💬 Join Community** - Connect with other users
+
+Transform your AI costs today with Cost Katana! 💰✨`}
   />
 );
 

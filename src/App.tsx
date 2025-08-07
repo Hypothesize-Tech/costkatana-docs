@@ -14,7 +14,7 @@ const QuickStartPage = lazy(() => import('./pages/getting-started/QuickStartPage
 // Import documentation pages with real content
 import {
   InstallationPage,
-  IntegrationsOverviewPage,
+  CLIPage,
   NodeJSPage,
   PythonPage,
   ChatGPTPage,
@@ -79,7 +79,7 @@ const App: React.FC = () => {
                 <Route path="/getting-started/installation" element={<InstallationPage />} />
 
                 {/* Integrations */}
-                <Route path="/integrations" element={<IntegrationsOverviewPage />} />
+                <Route path="/integrations/cli" element={<CLIPage />} />
                 <Route path="/integrations/nodejs" element={<NodeJSPage />} />
                 <Route path="/integrations/python" element={<PythonPage />} />
                 <Route path="/integrations/chatgpt" element={<ChatGPTPage />} />

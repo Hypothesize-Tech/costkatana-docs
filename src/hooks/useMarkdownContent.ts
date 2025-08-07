@@ -32,7 +32,7 @@ const contentMap: { [key: string]: string } = {
 };
 
 export function useMarkdownContent(path: string, fallbackContent?: string): MarkdownContent {
-  const [content, setContent] = useState<string>(fallbackContent || '');
+  const [content, setContent] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,15 +41,17 @@ export function useMarkdownContent(path: string, fallbackContent?: string): Mark
       setLoading(true);
       setError(null);
 
+      // If we have fallback content, use it immediately and don't try to load from files
+      if (fallbackContent) {
+        setContent(fallbackContent);
+        setLoading(false);
+        return;
+      }
+
       const markdownPath = contentMap[path];
       
       if (!markdownPath) {
-        // If no mapped file, use fallback content
-        if (fallbackContent) {
-          setContent(fallbackContent);
-        } else {
-          setError('Documentation file not found');
-        }
+        setError('Documentation file not found');
         setLoading(false);
         return;
       }
@@ -62,20 +64,11 @@ export function useMarkdownContent(path: string, fallbackContent?: string): Mark
           const text = await response.text();
           setContent(text);
         } else {
-          // If file doesn't exist, use fallback
-          if (fallbackContent) {
-            setContent(fallbackContent);
-          } else {
-            setError('Documentation is being prepared');
-          }
+          setError('Documentation is being prepared');
         }
       } catch (err) {
         console.error(`Error loading markdown from ${markdownPath}:`, err);
-        if (fallbackContent) {
-          setContent(fallbackContent);
-        } else {
-          setError('Failed to load documentation');
-        }
+        setError('Failed to load documentation');
       } finally {
         setLoading(false);
       }
