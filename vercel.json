@@ -29,18 +29,6 @@
       }
     },
     {
-      "src": "/(.*\\.ts)",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
-      "src": "/(.*\\.tsx)",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
       "src": "/(.*\\.css)",
       "headers": {
         "Content-Type": "text/css"
