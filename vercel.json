@@ -2,65 +2,8 @@
   "version": 2,
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "build"
-      }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "src": "/(.*\\.js)",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
-      "src": "/(.*\\.mjs)",
-      "headers": {
-        "Content-Type": "application/javascript"
-      }
-    },
-    {
-      "src": "/(.*\\.css)",
-      "headers": {
-        "Content-Type": "text/css"
-      }
-    },
-    {
-      "src": "/(.*\\.svg)",
-      "headers": {
-        "Content-Type": "image/svg+xml"
-      }
-    },
-    {
-      "src": "/(.*\\.png)",
-      "headers": {
-        "Content-Type": "image/png"
-      }
-    },
-    {
-      "src": "/(.*\\.jpg|.*\\.jpeg)",
-      "headers": {
-        "Content-Type": "image/jpeg"
-      }
-    },
-    {
-      "src": "/(.*\\.md)",
-      "headers": {
-        "Content-Type": "text/markdown"
-      }
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "**/*",
+      "use": "@vercel/static"
     }
   ],
   "headers": [
