@@ -1,0 +1,357 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-gray-200;
+  }
+  
+  body {
+    @apply bg-white text-gray-900 transition-colors duration-300;
+  }
+  
+  body.dark {
+    @apply bg-dark-bg text-dark-text;
+  }
+  
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-gray-600 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-gray-500;
+  }
+}
+
+@layer components {
+  .gradient-bg {
+    @apply bg-gradient-to-br from-primary-600 via-primary-500 to-blue-600;
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  .glass-effect {
+    @apply backdrop-blur-lg bg-white/80 dark:bg-dark-card/80 border border-gray-200 dark:border-dark-border;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent;
+  }
+  
+  .btn-primary {
+    @apply px-6 py-3 bg-primary-600 text-white rounded-lg font-medium transition-all duration-300 hover:bg-primary-700 hover:shadow-lg active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply px-6 py-3 bg-gray-100 dark:bg-dark-card text-gray-900 dark:text-white rounded-lg font-medium transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:shadow-lg active:scale-95;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-dark-card rounded-xl shadow-sm border border-gray-200 dark:border-dark-border transition-all duration-300;
+  }
+  
+  .code-block {
+    @apply bg-gray-900 dark:bg-black text-gray-100 rounded-lg p-4 overflow-x-auto font-mono text-sm;
+  }
+  
+  /* Sidebar link styles */
+  .sidebar-link {
+    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+  }
+  
+  .sidebar-link:hover {
+    @apply bg-gray-100 dark:bg-gray-800 text-primary-600 dark:text-primary-400;
+  }
+  
+  .sidebar-link.active {
+    @apply bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 border-l-4 border-primary-600;
+  }
+  
+  /* Documentation content styles */
+  .doc-content h1 {
+    @apply text-4xl font-bold mb-6 text-gray-900 dark:text-white;
+  }
+  
+  .doc-content h2 {
+    @apply text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2;
+  }
+  
+  .doc-content h3 {
+    @apply text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100;
+  }
+  
+  .doc-content h4 {
+    @apply text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200;
+  }
+  
+  .doc-content p {
+    @apply mb-4 leading-relaxed text-gray-600 dark:text-gray-300;
+  }
+  
+  .doc-content a {
+    @apply text-primary-600 dark:text-primary-400 hover:underline;
+  }
+  
+  .doc-content ul {
+    @apply list-disc list-inside mb-4 space-y-2;
+  }
+  
+  .doc-content ol {
+    @apply list-decimal list-inside mb-4 space-y-2;
+  }
+  
+  .doc-content li {
+    @apply text-gray-600 dark:text-gray-300;
+  }
+  
+  .doc-content blockquote {
+    @apply border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg;
+  }
+  
+  .doc-content code:not(pre code) {
+    @apply bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-2 py-1 rounded text-sm font-mono;
+  }
+  
+  .doc-content pre {
+    @apply bg-gray-900 dark:bg-black text-gray-100 rounded-lg p-4 my-4 overflow-x-auto;
+  }
+  
+  .doc-content table {
+    @apply w-full border-collapse my-4;
+  }
+  
+  .doc-content th {
+    @apply bg-gray-50 dark:bg-gray-800 text-left p-3 font-semibold border border-gray-200 dark:border-gray-700;
+  }
+  
+  .doc-content td {
+    @apply p-3 border border-gray-200 dark:border-gray-700;
+  }
+  
+  .doc-content tr:hover {
+    @apply bg-gray-50 dark:bg-gray-800/50;
+  }
+}
+
+@layer utilities {
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+  }
+  
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Syntax highlighting theme */
+.hljs {
+  @apply bg-gray-900 dark:bg-black !important;
+}
+
+/* Code highlighting styles */
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+
+code.hljs {
+  padding: 3px 5px;
+}
+
+.hljs {
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta .hljs-string {
+  color: #98c379;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-built_in,
+.hljs-title.class_,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+
+/* Loading animation */
+.loading-dots {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 20px;
+}
+
+.loading-dots div {
+  position: absolute;
+  top: 8px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: currentColor;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loading-dots div:nth-child(1) {
+  left: 8px;
+  animation: loading-dots1 0.6s infinite;
+}
+
+.loading-dots div:nth-child(2) {
+  left: 32px;
+  animation: loading-dots2 0.6s infinite;
+}
+
+.loading-dots div:nth-child(3) {
+  left: 56px;
+  animation: loading-dots2 0.6s infinite;
+}
+
+@keyframes loading-dots1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes loading-dots2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+
+/* Custom animations */
+.fade-in {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

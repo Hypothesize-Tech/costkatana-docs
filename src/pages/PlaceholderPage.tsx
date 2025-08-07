@@ -1,0 +1,79 @@
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import { motion } from 'framer-motion';
+import { FileText, Construction } from 'lucide-react';
+
+interface PlaceholderPageProps {
+    title: string;
+    description?: string;
+}
+
+const PlaceholderPage: React.FC<PlaceholderPageProps> = ({ title, description }) => {
+    return (
+        <>
+            <Helmet>
+                <title>{title} - Cost Katana Documentation</title>
+                {description && <meta name="description" content={description} />}
+            </Helmet>
+
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="max-w-4xl mx-auto"
+            >
+                <div className="card p-12 text-center">
+                    <div className="flex justify-center mb-6">
+                        <div className="w-20 h-20 bg-primary-100 dark:bg-primary-900/20 rounded-full flex items-center justify-center">
+                            <Construction className="text-primary-600 dark:text-primary-400" size={40} />
+                        </div>
+                    </div>
+
+                    <h1 className="text-3xl font-bold mb-4">{title}</h1>
+                    {description && (
+                        <p className="text-gray-600 dark:text-gray-400 mb-6">{description}</p>
+                    )}
+
+                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 max-w-md mx-auto">
+                        <FileText className="text-gray-400 mb-3 mx-auto" size={24} />
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                            This documentation page is coming soon. We're working hard to bring you comprehensive documentation for all features.
+                        </p>
+                    </div>
+                </div>
+            </motion.div>
+        </>
+    );
+};
+
+// Create specific placeholder pages
+export const InstallationPage = () => <PlaceholderPage title="Installation" description="Detailed installation instructions" />;
+export const IntegrationsOverviewPage = () => <PlaceholderPage title="Integrations Overview" description="Connect Cost Katana with your tools" />;
+export const NodeJSPage = () => <PlaceholderPage title="Node.js SDK" description="Integrate Cost Katana with Node.js" />;
+export const PythonPage = () => <PlaceholderPage title="Python SDK" description="Integrate Cost Katana with Python" />;
+export const ChatGPTPage = () => <PlaceholderPage title="ChatGPT Integration" description="Direct ChatGPT integration" />;
+export const FeaturesOverviewPage = () => <PlaceholderPage title="Features Overview" description="Explore all Cost Katana features" />;
+export const DashboardPage = () => <PlaceholderPage title="Dashboard" description="Real-time monitoring dashboard" />;
+export const UsageTrackingPage = () => <PlaceholderPage title="Usage Tracking" description="Track AI usage across providers" />;
+export const CostAnalyticsPage = () => <PlaceholderPage title="Cost Analytics" description="Advanced cost analysis" />;
+export const OptimizationPage = () => <PlaceholderPage title="AI Optimization" description="Intelligent cost reduction" />;
+export const PredictiveIntelligencePage = () => <PlaceholderPage title="Predictive Intelligence" description="AI-powered forecasting" />;
+export const ProjectsPage = () => <PlaceholderPage title="Projects" description="Organize and track projects" />;
+export const TemplatesPage = () => <PlaceholderPage title="Prompt Templates" description="Reusable optimized prompts" />;
+export const WorkflowsPage = () => <PlaceholderPage title="Workflows" description="Multi-step operation monitoring" />;
+export const GatewayPage = () => <PlaceholderPage title="Gateway & Proxy" description="Unified API gateway" />;
+export const KeyVaultPage = () => <PlaceholderPage title="Key Vault" description="Secure API key management" />;
+export const AlertsPage = () => <PlaceholderPage title="Alerts" description="Proactive monitoring alerts" />;
+export const TrainingPage = () => <PlaceholderPage title="Training" description="Cost-effective model training" />;
+export const APIOverviewPage = () => <PlaceholderPage title="API Overview" description="Complete API documentation" />;
+export const AuthenticationPage = () => <PlaceholderPage title="Authentication" description="JWT and API key auth" />;
+export const UsageAPIPage = () => <PlaceholderPage title="Usage API" description="Track AI usage via API" />;
+export const AnalyticsAPIPage = () => <PlaceholderPage title="Analytics API" description="Retrieve analytics data" />;
+export const ProjectsAPIPage = () => <PlaceholderPage title="Projects API" description="Manage projects via API" />;
+export const OptimizationAPIPage = () => <PlaceholderPage title="Optimization API" description="Access optimization features" />;
+export const WebhooksPage = () => <PlaceholderPage title="Webhooks" description="Real-time event notifications" />;
+export const RateLimitsPage = () => <PlaceholderPage title="Rate Limits" description="API usage limits" />;
+export const FAQPage = () => <PlaceholderPage title="FAQ" description="Frequently asked questions" />;
+export const SupportPage = () => <PlaceholderPage title="Support" description="Get help and support" />;
+
+export default PlaceholderPage;
