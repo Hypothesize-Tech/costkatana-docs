@@ -15,16 +15,10 @@ By the end of this guide, you'll have:
 
 ## Step 1: Create Your Account
 
-### Option A: Magic Link Signup (Recommended)
-The fastest way to get started with zero friction:
+### Option A: Traditional Signup (Recommended)
+The most robust and secure way to get started:
 
-1. **Visit the signup page**: [costkatana.com/signup](https://costkatana.com/signup)
-2. **Enter your email**: We'll send you a magic link
-3. **Click the link**: Instant account creation with AI profile setup
-4. **Complete your profile**: Tell us about your AI usage for personalized recommendations
-
-### Option B: Traditional Signup
-1. Go to [costkatana.com/register](https://costkatana.com/register)
+1. **Go to the signup page**: [costkatana.com/register](https://costkatana.com/register)
 2. Fill in your details:
    \`\`\`
    Email: your-email@example.com
@@ -32,6 +26,14 @@ The fastest way to get started with zero friction:
    Use Case: [Coding/Content Creation/Business/Research]
    \`\`\`
 3. Verify your email and log in
+
+### Option B: Magic Link Signup (Optional)
+A fast, passwordless way to get started:
+
+1. **Visit the magic link page**: [costkatana.com/signup](https://costkatana.com/signup)
+2. **Enter your email**: We'll send you a magic link
+3. **Click the link**: Instant account creation with AI profile setup
+4. **Complete your profile**: Tell us about your AI usage for personalized recommendations
 
 ---
 
@@ -57,7 +59,7 @@ Once logged in, you'll need an API key to start tracking usage:
 ### Option 1: ChatGPT Custom GPT (Easiest)
 Perfect for ChatGPT Plus users - get instant AI-powered optimization tips:
 
-1. **Visit our Custom GPT**: [chat.openai.com/g/g-xxx](https://chat.openai.com/g/g-xxx)
+1. **Visit our Custom GPT**: [chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o](https://chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o)
 2. **Click "Start Chat"**
 3. **Enter your API key** when prompted
 4. **Start chatting** - usage is automatically tracked with AI insights!
