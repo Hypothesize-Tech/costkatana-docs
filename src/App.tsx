@@ -5,6 +5,7 @@ import { Toaster } from 'react-hot-toast';
 import Layout from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorBoundary from './components/ErrorBoundary';
+import NotFoundPage from './pages/NotFoundPage';
 
 // Lazy load pages for better performance
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -113,8 +114,11 @@ const App: React.FC = () => {
                 <Route path="/faq" element={<FAQPage />} />
                 <Route path="/support" element={<SupportPage />} />
 
+                {/* 404 Page */}
+                <Route path="/404" element={<NotFoundPage />} />
+
                 {/* Catch all */}
-                <Route path="*" element={<Navigate to="/" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
               </Routes>
             </Suspense>
           </Layout>
