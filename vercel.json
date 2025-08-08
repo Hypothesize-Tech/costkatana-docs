@@ -131,9 +131,5 @@
     }
   ],
   "cleanUrls": true,
-  "trailingSlash": false,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html", "status": 200 }
-  ]
+  "trailingSlash": false
 }
