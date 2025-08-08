@@ -3,10 +3,73 @@
   "buildCommand": "npm run build:ci",
   "outputDirectory": "dist",
   "installCommand": "npm install",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/assets/(.*)\\.js$",
+      "headers": {
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.mjs$",
+      "headers": {
+        "Content-Type": "application/javascript; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.css$",
+      "headers": {
+        "Content-Type": "text/css; charset=utf-8",
+        "Cache-Control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.json$",
+      "headers": {
+        "Content-Type": "application/json; charset=utf-8"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.svg$",
+      "headers": {
+        "Content-Type": "image/svg+xml; charset=utf-8"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.png$",
+      "headers": {
+        "Content-Type": "image/png"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.jpg$",
+      "headers": {
+        "Content-Type": "image/jpeg"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.jpeg$",
+      "headers": {
+        "Content-Type": "image/jpeg"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.gif$",
+      "headers": {
+        "Content-Type": "image/gif"
+      }
+    },
+    {
+      "src": "/assets/(.*)\\.webp$",
+      "headers": {
+        "Content-Type": "image/webp"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "headers": [
@@ -28,108 +91,6 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.js$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.mjs$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.css$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/css; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.json$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "application/json; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.svg$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/svg+xml; charset=utf-8"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.png$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/png"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.jpg$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/jpeg"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.jpeg$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/jpeg"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.gif$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/gif"
-        }
-      ]
-    },
-    {
-      "source": "/assets/(.*)\\.webp$",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "image/webp"
         }
       ]
     }
