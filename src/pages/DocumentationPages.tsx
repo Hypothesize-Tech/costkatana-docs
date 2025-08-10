@@ -114,7 +114,7 @@ docker run -it --rm costkatana/cli:latest init
   run: npm install -g ai-cost-optimizer-cli
 
 - name: Initialize Cost Katana
-  run: cost-katana init --api-key \${{ secrets.COST_KATANA_API_KEY }}
+  run: cost-katana init --api-key \${{ secrets.API_KEY }}
   
 - name: Run Cost Analysis
   run: cost-katana analytics --format json --export analysis.json
@@ -505,7 +505,7 @@ jobs:
       - name: Run Cost Analysis
         run: cost-katana analytics --format json --export cost-report.json
         env:
-          COST_KATANA_API_KEY: \${{ secrets.COST_KATANA_API_KEY }}
+          API_KEY: \${{ secrets.API_KEY }}
 \`\`\`
 
 ### Docker Integration
@@ -657,7 +657,7 @@ const { CostKatana } = require('@cost-katana/node-sdk');
 
 const app = express();
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY
+  apiKey: process.env.API_KEY
 });
 
 app.use(express.json());
@@ -694,7 +694,7 @@ app.listen(3000);
 import { CostKatana } from '@cost-katana/node-sdk';
 
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY,
+  apiKey: process.env.API_KEY,
   project: 'nextjs-chat-app'
 });
 
@@ -739,7 +739,7 @@ export class ChatService {
 
   constructor() {
     this.ck = new CostKatana({
-      apiKey: process.env.COST_KATANA_API_KEY,
+      apiKey: process.env.API_KEY,
       project: 'nestjs-app'
     });
   }
@@ -773,7 +773,7 @@ export class ChatService {
 const { CostKatana } = require('@cost-katana/node-sdk');
 
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY,
+  apiKey: process.env.API_KEY,
   project: 'lambda-function'
 });
 
@@ -817,7 +817,7 @@ exports.handler = async (event) => {
 import { CostKatana } from '@cost-katana/node-sdk';
 
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY,
+  apiKey: process.env.API_KEY,
   project: 'vercel-app'
 });
 
@@ -873,7 +873,7 @@ jobs:
           cost-katana analytics --format json --export cost-report.json
           cost-katana budget status --project \${{ github.repository }}
         env:
-          COST_KATANA_API_KEY: \${{ secrets.COST_KATANA_API_KEY }}
+          API_KEY: \${{ secrets.API_KEY }}
           
       - name: Upload Cost Report
         uses: actions/upload-artifact@v3
@@ -898,8 +898,8 @@ RUN npm install
 COPY . .
 
 # Run cost analysis during build
-ARG COST_KATANA_API_KEY
-ENV COST_KATANA_API_KEY=$COST_KATANA_API_KEY
+ARG API_KEY
+ENV API_KEY=$API_KEY
 
 RUN cost-katana analytics --export build-cost-report.json
 
@@ -916,7 +916,7 @@ CMD ["npm", "start"]
 const { CostKatana } = require('@cost-katana/node-sdk');
 
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY
+  apiKey: process.env.API_KEY
 });
 
 // Monitor costs in real-time
@@ -942,7 +942,7 @@ const { CostKatana } = require('@cost-katana/node-sdk');
 
 const app = express();
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY
+  apiKey: process.env.API_KEY
 });
 
 // Dashboard API endpoint
@@ -994,7 +994,7 @@ export default config[process.env.NODE_ENV || 'development'];
 ### 2. Error Handling
 \`\`\`javascript
 const ck = new CostKatana({
-  apiKey: process.env.COST_KATANA_API_KEY,
+  apiKey: process.env.API_KEY,
   retries: 3,
   timeout: 30000
 });
@@ -1164,7 +1164,7 @@ from cost_katana import CostKatana
 import json
 
 ck = CostKatana(
-    api_key=settings.COST_KATANA_API_KEY,
+    api_key=settings.API_KEY,
     project='django-chat-app'
 )
 
@@ -1200,7 +1200,7 @@ import os
 
 app = Flask(__name__)
 ck = CostKatana(
-    api_key=os.getenv('COST_KATANA_API_KEY'),
+    api_key=os.getenv('API_KEY'),
     project='flask-api'
 )
 
@@ -1242,7 +1242,7 @@ import os
 
 app = FastAPI()
 ck = CostKatana(
-    api_key=os.getenv('COST_KATANA_API_KEY'),
+    api_key=os.getenv('API_KEY'),
     project='fastapi-service'
 )
 
@@ -1401,7 +1401,7 @@ from cost_katana import CostKatana
 import os
 
 ck = CostKatana(
-    api_key=os.environ['COST_KATANA_API_KEY'],
+    api_key=os.environ['API_KEY'],
     project='lambda-function'
 )
 
@@ -1446,7 +1446,7 @@ from cost_katana import CostKatana
 import os
 
 ck = CostKatana(
-    api_key=os.getenv('COST_KATANA_API_KEY'),
+    api_key=os.getenv('API_KEY'),
     project='gcp-function'
 )
 
@@ -1486,7 +1486,7 @@ from cost_katana import CostKatana
 import os
 
 ck = CostKatana(
-    api_key=os.environ['COST_KATANA_API_KEY'],
+    api_key=os.environ['API_KEY'],
     project='azure-function'
 )
 
@@ -1587,7 +1587,7 @@ if __name__ == '__main__':
 import os
 
 class Config:
-    COST_KATANA_API_KEY = os.getenv('COST_KATANA_API_KEY')
+    API_KEY = os.getenv('API_KEY')
     PROJECT_NAME = os.getenv('PROJECT_NAME', 'my-python-app')
     
     # Different settings for different environments
@@ -3702,12 +3702,416 @@ await ck.security.addWhitelist({
   />
 );
 
+// Tracing Feature Page
+export const TracingPage = () => (
+  <DocumentationPage
+    title="Distributed Tracing"
+    description="Enterprise-grade distributed tracing for AI operations"
+    prevPage={{ path: '/features/training', label: 'Previous: Training & Fine-tuning' }}
+    nextPage={{ path: '/api', label: 'Next: API Reference' }}
+    fallbackContent={`# Distributed Tracing
+
+Cost Katana provides enterprise-grade distributed tracing for all your AI operations. Track every LLM call, tool execution, and API request with automatic parent-child relationships, latency metrics, and cost attribution.
+
+![Sessions Overview](/assets/sessions_1.png)
+
+## Features
+
+### 🌳 Hierarchical Traces
+- **Automatic Span Relationships**: Parent-child trace relationships
+- **Trace Trees**: Visualize complex workflows
+- **Session Grouping**: Group related operations
+- **Depth Tracking**: Understand call stack depth
+
+### ⚡ Zero-Code Instrumentation
+- **Express Middleware**: One line to add tracing
+- **Auto-instrumentation**: Automatic for all requests
+- **Context Propagation**: Seamless trace context flow
+- **Session Management**: Automatic session creation
+
+### 💰 Cost Attribution
+- **Per-Span Costs**: Track cost at every level
+- **Token Counting**: Input/output token metrics
+- **Model Attribution**: Cost by model and provider
+- **Budget Tracking**: Real-time budget monitoring
+
+### 📊 Visual Timeline
+- **Interactive Visualization**: Drag, zoom, filter
+- **Gantt Charts**: See parallel operations
+- **Latency Analysis**: Identify bottlenecks
+- **Critical Path**: Find optimization opportunities
+
+### 🔒 PII Redaction
+- **Automatic Sanitization**: Server-side redaction
+- **Configurable Rules**: Custom sensitive keys
+- **Compliance Ready**: GDPR/CCPA compliant
+- **Audit Trails**: Track redaction events
+
+## Getting Started
+
+### 1. Add Middleware
+
+\`\`\`javascript
+import { LocalTraceService, createTraceMiddleware } from 'ai-cost-tracker/trace';
+
+// Create trace service
+const traceService = new LocalTraceService({
+  storageMode: 'file',
+  storageDir: './traces'
+});
+
+// Add to Express app
+app.use(createTraceMiddleware({
+  startSpan: traceService.startSpan.bind(traceService),
+  endSpan: traceService.endSpan.bind(traceService)
+}));
+\`\`\`
+
+### 2. Use Tracked Providers
+
+\`\`\`javascript
+import { TrackedOpenAI } from 'ai-cost-tracker/trace';
+
+const ai = new TrackedOpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  traceContext: req.traceContext,
+  startSpan: traceService.startSpan.bind(traceService),
+  endSpan: traceService.endSpan.bind(traceService)
+});
+
+// All calls are automatically traced!
+const response = await ai.makeRequest({
+  model: 'gpt-4',
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+\`\`\`
+
+### 3. View Traces
+
+Navigate to the Sessions page in your Cost Katana dashboard to:
+- View all sessions with filters
+- Explore trace trees
+- Analyze timelines
+- Export trace data
+
+## Trace Data Model
+
+### Session
+\`\`\`typescript
+{
+  sessionId: string;
+  userId?: string;
+  label?: string;
+  status: 'active' | 'completed' | 'error';
+  totalSpans: number;
+  totalCostUSD: number;
+  totalInputTokens: number;
+  totalOutputTokens: number;
+  startedAt: Date;
+  endedAt?: Date;
+}
+\`\`\`
+
+### Trace (Span)
+\`\`\`typescript
+{
+  traceId: string;
+  sessionId: string;
+  parentId?: string;
+  name: string;
+  type: 'http' | 'llm' | 'tool' | 'retrieval' | 'custom';
+  status: 'pending' | 'ok' | 'error';
+  model?: string;
+  tokens?: { input: number; output: number };
+  costUSD?: number;
+  startedAt: Date;
+  endedAt?: Date;
+  duration?: number;
+  depth: number;
+}
+\`\`\`
+
+## Custom Spans
+
+Track any operation with custom spans:
+
+\`\`\`javascript
+// Start a custom span
+const span = await traceService.startSpan({
+  sessionId: req.traceContext.sessionId,
+  parentId: req.traceContext.traceId,
+  name: 'database-query',
+  type: 'tool',
+  metadata: { query: 'SELECT * FROM users' }
+});
+
+// Your custom logic
+const result = await db.query('...');
+
+// End the span with metrics
+await traceService.endSpan(span.traceId, {
+  status: 'ok',
+  metadata: { rowCount: result.rows.length }
+});
+\`\`\`
+
+## Storage Options
+
+### Local Development
+\`\`\`javascript
+const traceService = new LocalTraceService({
+  storageMode: 'memory',
+  maxSessions: 1000,
+  autoSave: true
+});
+\`\`\`
+
+### Production (Cloud)
+\`\`\`javascript
+import { TraceClient } from 'ai-cost-tracker/trace';
+
+const traceService = new TraceClient({
+  apiKey: process.env.API_KEY,
+  projectId: process.env.PROJECT_ID
+});
+\`\`\`
+
+## Best Practices
+
+1. **Use Session IDs**: Pass \`x-session-id\` header to group related requests
+2. **Add Metadata**: Include relevant context in spans
+3. **Handle Errors**: Always end spans even on error
+4. **Monitor Performance**: Use trace data to identify bottlenecks
+5. **Set Budgets**: Monitor totalCostUSD to stay within budget
+6. **Clean Up**: Call \`destroy()\` on LocalTraceService when shutting down
+
+## Advanced Features
+
+### Sampling
+Control trace sampling for high-volume applications:
+
+\`\`\`javascript
+const traceService = new LocalTraceService({
+  samplingRate: 0.1, // Sample 10% of requests
+  alwaysSample: ['error', 'slow'] // Always trace errors and slow requests
+});
+\`\`\`
+
+### Export & Import
+Export traces for analysis or migration:
+
+\`\`\`javascript
+// Export traces
+const traces = await traceService.export({
+  format: 'opentelemetry',
+  sessionId: 'session_123'
+});
+
+// Import traces
+await traceService.import(traces);
+\`\`\`
+
+### Alerting
+Set up alerts for trace anomalies:
+
+\`\`\`javascript
+traceService.addAlert({
+  condition: 'latency > 5000',
+  action: 'notify',
+  channel: 'slack'
+});
+\`\`\`
+
+## Performance Impact
+
+Tracing adds minimal overhead:
+- **Latency**: < 1ms per span
+- **Memory**: ~1KB per span
+- **Storage**: ~2KB per span (compressed)
+- **Network**: Batched async uploads
+
+## Troubleshooting
+
+### Missing Traces
+- Verify middleware is added before routes
+- Check traceContext is passed to providers
+- Ensure service is started before requests
+
+### High Memory Usage
+- Reduce maxSessions in LocalTraceService
+- Enable autoSave for file persistence
+- Use sampling for high-volume apps
+
+### PII Concerns
+- Configure redactKeys for custom fields
+- Use redactedContent in UI
+- Enable audit logging for compliance`}
+  />
+);
+
 export const UsageAPIPage = () => (
   <DocumentationPage
     title="Usage API"
     description="Track AI usage programmatically"
     prevPage={{ path: '/api/authentication', label: 'Previous: Authentication' }}
     nextPage={{ path: '/api/analytics', label: 'Next: Analytics API' }}
+    fallbackContent={`# Usage API
+
+The Usage API allows you to track and manage AI API usage across all providers programmatically.
+
+## Endpoints
+
+### Track Usage
+
+\`POST /api/v1/usage/track\`
+
+Track a single AI API call:
+
+\`\`\`json
+{
+  "provider": "openai",
+  "model": "gpt-4",
+  "promptTokens": 150,
+  "completionTokens": 50,
+  "totalTokens": 200,
+  "cost": 0.012,
+  "projectId": "proj_123",
+  "metadata": {
+    "requestId": "req_456",
+    "userId": "user_789"
+  }
+}
+\`\`\`
+
+### Get Usage Statistics
+
+\`GET /api/v1/usage/stats\`
+
+Query parameters:
+- \`startDate\`: ISO 8601 date string
+- \`endDate\`: ISO 8601 date string
+- \`projectId\`: Filter by project
+- \`provider\`: Filter by provider
+- \`model\`: Filter by model
+- \`groupBy\`: day | week | month
+
+Response:
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "totalCost": 1234.56,
+    "totalTokens": 5000000,
+    "totalRequests": 10000,
+    "breakdown": [
+      {
+        "date": "2025-01-01",
+        "cost": 123.45,
+        "tokens": 500000,
+        "requests": 1000
+      }
+    ]
+  }
+}
+\`\`\`
+
+### Get Usage by Project
+
+\`GET /api/v1/usage/projects/:projectId\`
+
+Get detailed usage for a specific project.
+
+### Get Usage by Model
+
+\`GET /api/v1/usage/models\`
+
+Get usage breakdown by model:
+
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "models": [
+      {
+        "model": "gpt-4",
+        "provider": "openai",
+        "totalCost": 500.00,
+        "totalTokens": 2000000,
+        "totalRequests": 5000,
+        "avgCostPerRequest": 0.10
+      }
+    ]
+  }
+}
+\`\`\`
+
+## SDK Examples
+
+### JavaScript/TypeScript
+
+\`\`\`typescript
+import { CostKatanaClient } from '@costkatana/sdk';
+
+const client = new CostKatanaClient({
+  apiKey: process.env.COSTKATANA_API_KEY
+});
+
+// Track usage
+await client.usage.track({
+  provider: 'openai',
+  model: 'gpt-4',
+  promptTokens: 150,
+  completionTokens: 50,
+  cost: 0.012
+});
+
+// Get statistics
+const stats = await client.usage.getStats({
+  startDate: '2025-01-01',
+  endDate: '2025-01-31',
+  groupBy: 'day'
+});
+\`\`\`
+
+### Python
+
+\`\`\`python
+from costkatana import CostKatanaClient
+
+client = CostKatanaClient(api_key='your_api_key')
+
+# Track usage
+client.usage.track(
+    provider='openai',
+    model='gpt-4',
+    prompt_tokens=150,
+    completion_tokens=50,
+    cost=0.012
+)
+
+# Get statistics
+stats = client.usage.get_stats(
+    start_date='2025-01-01',
+    end_date='2025-01-31',
+    group_by='day'
+)
+\`\`\`
+
+## Rate Limits
+
+- **Track Usage**: 1000 requests per minute
+- **Get Statistics**: 100 requests per minute
+- **Bulk Operations**: 10 requests per minute
+
+## Error Codes
+
+| Code | Description |
+|------|-------------|
+| 400 | Invalid request parameters |
+| 401 | Invalid or missing API key |
+| 403 | Insufficient permissions |
+| 429 | Rate limit exceeded |
+| 500 | Internal server error |`}
   />
 );
 
@@ -3717,6 +4121,129 @@ export const AnalyticsAPIPage = () => (
     description="Retrieve analytics data via API"
     prevPage={{ path: '/api/usage', label: 'Previous: Usage API' }}
     nextPage={{ path: '/api/projects', label: 'Next: Projects API' }}
+    fallbackContent={`# Analytics API
+
+Access comprehensive analytics data for AI usage, costs, and performance metrics.
+
+## Endpoints
+
+### Get Analytics Summary
+
+\`GET /api/v1/analytics/summary\`
+
+Get high-level analytics summary:
+
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "totalCost": 12345.67,
+    "totalRequests": 100000,
+    "totalTokens": 50000000,
+    "avgResponseTime": 250,
+    "errorRate": 0.02,
+    "topModels": [
+      {
+        "model": "gpt-4",
+        "usage": 45.5,
+        "cost": 5000.00
+      }
+    ],
+    "costTrend": {
+      "daily": 2.5,
+      "weekly": 15.3,
+      "monthly": 8.7
+    }
+  }
+}
+\`\`\`
+
+### Get Cost Breakdown
+
+\`GET /api/v1/analytics/costs\`
+
+Query parameters:
+- \`startDate\`: Start date (ISO 8601)
+- \`endDate\`: End date (ISO 8601)
+- \`groupBy\`: provider | model | project | user
+- \`interval\`: hour | day | week | month
+
+### Get Performance Metrics
+
+\`GET /api/v1/analytics/performance\`
+
+Returns latency, success rates, and error analysis:
+
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "avgLatency": 250,
+    "p50Latency": 200,
+    "p95Latency": 500,
+    "p99Latency": 1000,
+    "successRate": 98.5,
+    "errorBreakdown": {
+      "rateLimit": 0.5,
+      "timeout": 0.8,
+      "invalidRequest": 0.2
+    }
+  }
+}
+\`\`\`
+
+### Get Optimization Insights
+
+\`GET /api/v1/analytics/insights\`
+
+AI-powered optimization recommendations:
+
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "potentialSavings": 2500.00,
+    "recommendations": [
+      {
+        "type": "model_switch",
+        "description": "Switch GPT-4 to Claude-3-haiku for simple tasks",
+        "estimatedSavings": 1000.00,
+        "impact": "low"
+      }
+    ]
+  }
+}
+\`\`\`
+
+## SDK Examples
+
+### JavaScript/TypeScript
+
+\`\`\`typescript
+const analytics = await client.analytics.getSummary({
+  dateRange: 'last_30_days'
+});
+
+const costs = await client.analytics.getCosts({
+  startDate: '2025-01-01',
+  endDate: '2025-01-31',
+  groupBy: 'model'
+});
+\`\`\`
+
+### Python
+
+\`\`\`python
+analytics = client.analytics.get_summary(
+    date_range='last_30_days'
+)
+
+costs = client.analytics.get_costs(
+    start_date='2025-01-01',
+    end_date='2025-01-31',
+    group_by='model'
+)
+\`\`\``}
   />
 );
 
@@ -3726,6 +4253,125 @@ export const ProjectsAPIPage = () => (
     description="Manage projects programmatically"
     prevPage={{ path: '/api/analytics', label: 'Previous: Analytics API' }}
     nextPage={{ path: '/api/optimization', label: 'Next: Optimization API' }}
+    fallbackContent={`# Projects API
+
+Create and manage projects for organizing AI usage and costs.
+
+## Endpoints
+
+### List Projects
+
+\`GET /api/v1/projects\`
+
+Returns all projects for the authenticated user.
+
+### Create Project
+
+\`POST /api/v1/projects\`
+
+Create a new project:
+
+\`\`\`json
+{
+  "name": "Production API",
+  "description": "Main production AI endpoints",
+  "budget": {
+    "monthly": 5000.00,
+    "alerts": [80, 90, 100]
+  },
+  "tags": ["production", "critical"],
+  "settings": {
+    "defaultModel": "gpt-4",
+    "maxTokens": 2000,
+    "rateLimit": 100
+  }
+}
+\`\`\`
+
+### Get Project Details
+
+\`GET /api/v1/projects/:projectId\`
+
+Returns detailed information about a specific project.
+
+### Update Project
+
+\`PUT /api/v1/projects/:projectId\`
+
+Update project settings, budget, or metadata.
+
+### Delete Project
+
+\`DELETE /api/v1/projects/:projectId\`
+
+Delete a project (requires confirmation).
+
+### Get Project Usage
+
+\`GET /api/v1/projects/:projectId/usage\`
+
+Get usage statistics for a specific project.
+
+### Get Project Members
+
+\`GET /api/v1/projects/:projectId/members\`
+
+List all members with access to the project.
+
+### Add Project Member
+
+\`POST /api/v1/projects/:projectId/members\`
+
+Add a team member to the project:
+
+\`\`\`json
+{
+  "email": "user@example.com",
+  "role": "viewer",
+  "permissions": ["read", "analyze"]
+}
+\`\`\`
+
+## SDK Examples
+
+### JavaScript/TypeScript
+
+\`\`\`typescript
+// Create project
+const project = await client.projects.create({
+  name: 'Production API',
+  budget: { monthly: 5000 }
+});
+
+// Get usage
+const usage = await client.projects.getUsage(project.id);
+
+// Add member
+await client.projects.addMember(project.id, {
+  email: 'team@example.com',
+  role: 'editor'
+});
+\`\`\`
+
+### Python
+
+\`\`\`python
+# Create project
+project = client.projects.create(
+    name='Production API',
+    budget={'monthly': 5000}
+)
+
+# Get usage
+usage = client.projects.get_usage(project.id)
+
+# Add member
+client.projects.add_member(
+    project.id,
+    email='team@example.com',
+    role='editor'
+)
+\`\`\``}
   />
 );
 
@@ -3735,6 +4381,129 @@ export const OptimizationAPIPage = () => (
     description="Access AI optimization features via API"
     prevPage={{ path: '/api/projects', label: 'Previous: Projects API' }}
     nextPage={{ path: '/api/webhooks', label: 'Next: Webhooks' }}
+    fallbackContent={`# Optimization API
+
+Programmatically access Cost Katana's AI optimization features.
+
+## Endpoints
+
+### Optimize Prompt
+
+\`POST /api/v1/optimization/prompt\`
+
+Optimize a prompt for reduced token usage:
+
+\`\`\`json
+{
+  "prompt": "Your original prompt here",
+  "model": "gpt-4",
+  "optimizationGoal": "cost",
+  "preserveIntent": true
+}
+\`\`\`
+
+Response:
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    "originalTokens": 150,
+    "optimizedTokens": 75,
+    "savingsPercent": 50,
+    "optimizedPrompt": "Optimized version of prompt",
+    "quality_score": 0.95
+  }
+}
+\`\`\`
+
+### Get Model Recommendations
+
+\`POST /api/v1/optimization/recommend-model\`
+
+Get the best model for your use case:
+
+\`\`\`json
+{
+  "task": "text_generation",
+  "requirements": {
+    "maxLatency": 1000,
+    "minQuality": 0.8,
+    "budget": 0.10
+  },
+  "prompt": "Sample prompt"
+}
+\`\`\`
+
+### Batch Optimization
+
+\`POST /api/v1/optimization/batch\`
+
+Optimize multiple prompts at once:
+
+\`\`\`json
+{
+  "prompts": [
+    "First prompt",
+    "Second prompt"
+  ],
+  "model": "gpt-4",
+  "strategy": "aggressive"
+}
+\`\`\`
+
+### Get Optimization History
+
+\`GET /api/v1/optimization/history\`
+
+View past optimizations and their results.
+
+## Optimization Strategies
+
+- **Conservative**: Minimal changes, preserve exact meaning
+- **Balanced**: Moderate optimization, maintain intent
+- **Aggressive**: Maximum reduction, core meaning only
+
+## SDK Examples
+
+### JavaScript/TypeScript
+
+\`\`\`typescript
+// Optimize prompt
+const result = await client.optimization.optimizePrompt({
+  prompt: 'Your detailed prompt here',
+  model: 'gpt-4',
+  goal: 'cost'
+});
+
+// Get recommendations
+const recommendation = await client.optimization.recommendModel({
+  task: 'summarization',
+  requirements: {
+    maxLatency: 500,
+    budget: 0.05
+  }
+});
+\`\`\`
+
+### Python
+
+\`\`\`python
+# Optimize prompt
+result = client.optimization.optimize_prompt(
+    prompt='Your detailed prompt here',
+    model='gpt-4',
+    goal='cost'
+)
+
+# Get recommendations
+recommendation = client.optimization.recommend_model(
+    task='summarization',
+    requirements={
+        'max_latency': 500,
+        'budget': 0.05
+    }
+)
+\`\`\``}
   />
 );
 
@@ -3744,6 +4513,107 @@ export const WebhooksPage = () => (
     description="Real-time event notifications"
     prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }}
     nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }}
+    fallbackContent={`# Webhooks
+
+Receive real-time notifications for important events.
+
+## Available Events
+
+### Cost Events
+- \`cost.threshold_reached\`: Budget threshold reached
+- \`cost.daily_limit_exceeded\`: Daily spending limit exceeded
+- \`cost.anomaly_detected\`: Unusual spending pattern detected
+
+### Usage Events
+- \`usage.high_volume\`: High request volume detected
+- \`usage.rate_limit_approaching\`: Approaching rate limits
+- \`usage.error_spike\`: Error rate spike detected
+
+### System Events
+- \`system.api_key_expiring\`: API key expiring soon
+- \`system.integration_error\`: Integration error detected
+- \`system.maintenance_scheduled\`: Maintenance notification
+
+## Webhook Configuration
+
+### Create Webhook
+
+\`POST /api/v1/webhooks\`
+
+\`\`\`json
+{
+  "url": "https://your-app.com/webhook",
+  "events": ["cost.threshold_reached", "usage.error_spike"],
+  "secret": "your_webhook_secret",
+  "active": true
+}
+\`\`\`
+
+### Webhook Payload
+
+All webhooks send POST requests with this structure:
+
+\`\`\`json
+{
+  "event": "cost.threshold_reached",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "data": {
+    "projectId": "proj_123",
+    "threshold": 1000.00,
+    "currentSpend": 1050.00,
+    "period": "monthly"
+  },
+  "metadata": {
+    "webhookId": "wh_456",
+    "attempt": 1
+  }
+}
+\`\`\`
+
+## Webhook Security
+
+### Signature Verification
+
+Verify webhook authenticity using HMAC-SHA256:
+
+\`\`\`javascript
+const crypto = require('crypto');
+
+function verifyWebhook(payload, signature, secret) {
+  const hash = crypto
+    .createHmac('sha256', secret)
+    .update(payload)
+    .digest('hex');
+  
+  return hash === signature;
+}
+\`\`\`
+
+### Retry Policy
+
+- Failed webhooks are retried up to 3 times
+- Exponential backoff: 1min, 5min, 15min
+- Webhooks disabled after 10 consecutive failures
+
+## Managing Webhooks
+
+### List Webhooks
+
+\`GET /api/v1/webhooks\`
+
+### Update Webhook
+
+\`PUT /api/v1/webhooks/:webhookId\`
+
+### Delete Webhook
+
+\`DELETE /api/v1/webhooks/:webhookId\`
+
+### Test Webhook
+
+\`POST /api/v1/webhooks/:webhookId/test\`
+
+Send a test event to verify configuration.`}
   />
 );
 
@@ -3752,6 +4622,125 @@ export const RateLimitsPage = () => (
     title="Rate Limits"
     description="API usage limits and quotas"
     prevPage={{ path: '/api/webhooks', label: 'Previous: Webhooks' }}
+    fallbackContent={`# Rate Limits
+
+Understanding and managing API rate limits for optimal performance.
+
+## Rate Limit Tiers
+
+### Free Tier
+- **Requests**: 100 per minute
+- **Tracking**: 1,000 events per hour
+- **Analytics**: 10 queries per minute
+- **Burst**: 200 requests
+
+### Pro Tier
+- **Requests**: 1,000 per minute
+- **Tracking**: 10,000 events per hour
+- **Analytics**: 100 queries per minute
+- **Burst**: 2,000 requests
+
+### Enterprise Tier
+- **Requests**: 10,000 per minute
+- **Tracking**: Unlimited
+- **Analytics**: 1,000 queries per minute
+- **Burst**: Custom limits
+
+## Rate Limit Headers
+
+All API responses include rate limit information:
+
+\`\`\`
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 950
+X-RateLimit-Reset: 1642075200
+X-RateLimit-Retry-After: 60
+\`\`\`
+
+## Handling Rate Limits
+
+### 429 Response
+
+When rate limited, you'll receive:
+
+\`\`\`json
+{
+  "error": "rate_limit_exceeded",
+  "message": "Too many requests",
+  "retryAfter": 60,
+  "limit": 1000,
+  "window": "1m"
+}
+\`\`\`
+
+### Best Practices
+
+1. **Implement Exponential Backoff**
+\`\`\`javascript
+async function makeRequestWithRetry(fn, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    try {
+      return await fn();
+    } catch (error) {
+      if (error.status === 429) {
+        const delay = Math.pow(2, i) * 1000;
+        await sleep(delay);
+      } else {
+        throw error;
+      }
+    }
+  }
+}
+\`\`\`
+
+2. **Use Batch Operations**
+- Combine multiple operations into single requests
+- Use bulk endpoints when available
+- Queue and batch updates
+
+3. **Cache Responses**
+- Cache analytics data for 5 minutes
+- Store project information locally
+- Use ETags for conditional requests
+
+## Increasing Limits
+
+### Temporary Increases
+Contact support for temporary limit increases for:
+- Data migrations
+- Special events
+- Load testing
+
+### Permanent Increases
+Upgrade your plan or contact enterprise sales for custom limits.
+
+## Rate Limit Exemptions
+
+Some endpoints are exempt from rate limiting:
+- \`GET /api/v1/health\`
+- \`GET /api/v1/status\`
+- \`POST /api/v1/auth/refresh\`
+
+## Monitoring Usage
+
+Track your API usage in real-time:
+
+\`GET /api/v1/usage/rate-limits\`
+
+\`\`\`json
+{
+  "current": {
+    "requests": 450,
+    "limit": 1000,
+    "remaining": 550,
+    "resetAt": "2025-01-15T10:35:00Z"
+  },
+  "daily": {
+    "requests": 15000,
+    "limit": 100000
+  }
+}
+\`\`\``}
   />
 );
 

@@ -32,6 +32,7 @@ import {
   KeyVaultPage,
   AlertsPage,
   TrainingPage,
+  TracingPage,
   APIOverviewPage,
   AuthenticationPage,
   UsageAPIPage,
@@ -99,6 +100,7 @@ const App: React.FC = () => {
                 <Route path="/features/key-vault" element={<KeyVaultPage />} />
                 <Route path="/features/alerts" element={<AlertsPage />} />
                 <Route path="/features/training" element={<TrainingPage />} />
+                <Route path="/features/tracing" element={<TracingPage />} />
 
                 {/* API Reference */}
                 <Route path="/api" element={<APIOverviewPage />} />
