@@ -3963,7 +3963,7 @@ The Usage API allows you to track and manage AI API usage across all providers p
 
 ### Track Usage
 
-\`POST /api/v1/usage/track\`
+\`POST /api/usage/track\`
 
 Track a single AI API call:
 
@@ -3983,9 +3983,15 @@ Track a single AI API call:
 }
 \`\`\`
 
+### Track SDK Usage
+
+\`POST /api/usage/track-sdk\`
+
+Track usage from SDK integrations with additional metadata.
+
 ### Get Usage Statistics
 
-\`GET /api/v1/usage/stats\`
+\`GET /api/usage/stats\`
 
 Query parameters:
 - \`startDate\`: ISO 8601 date string
@@ -3993,7 +3999,7 @@ Query parameters:
 - \`projectId\`: Filter by project
 - \`provider\`: Filter by provider
 - \`model\`: Filter by model
-- \`groupBy\`: day | week | month
+- \`period\`: day | week | month
 
 Response:
 \`\`\`json
@@ -4017,33 +4023,37 @@ Response:
 
 ### Get Usage by Project
 
-\`GET /api/v1/usage/projects/:projectId\`
+\`GET /api/usage/project/:projectId\`
 
 Get detailed usage for a specific project.
 
-### Get Usage by Model
+### Get Real-time Usage
 
-\`GET /api/v1/usage/models\`
+\`GET /api/usage/realtime/summary\`
 
-Get usage breakdown by model:
+Get real-time usage summary.
 
-\`\`\`json
-{
-  "success": true,
-  "data": {
-    "models": [
-      {
-        "model": "gpt-4",
-        "provider": "openai",
-        "totalCost": 500.00,
-        "totalTokens": 2000000,
-        "totalRequests": 5000,
-        "avgCostPerRequest": 0.10
-      }
-    ]
-  }
-}
-\`\`\`
+\`GET /api/usage/realtime/requests\`
+
+Get real-time request data.
+
+### Get Usage Analytics
+
+\`GET /api/usage/analytics\`
+
+Get comprehensive usage analytics with AI insights.
+
+### Export Usage Data
+
+\`GET /api/usage/export\`
+
+Export usage data in various formats:
+
+Query parameters:
+- \`format\`: csv | json | excel
+- \`startDate\`: Start date
+- \`endDate\`: End date
+- \`projectId\`: Optional project filter
 
 ## SDK Examples
 
@@ -4127,11 +4137,21 @@ Access comprehensive analytics data for AI usage, costs, and performance metrics
 
 ## Endpoints
 
-### Get Analytics Summary
+### Get Analytics Data
 
-\`GET /api/v1/analytics/summary\`
+\`GET /api/analytics\`
 
-Get high-level analytics summary:
+Query parameters:
+- \`startDate\`: Start date (ISO 8601)
+- \`endDate\`: End date (ISO 8601)
+- \`groupBy\`: provider | model | project | user
+- \`period\`: hour | day | week | month | year
+
+### Get Dashboard Data
+
+\`GET /api/analytics/dashboard\`
+
+Get comprehensive dashboard analytics:
 
 \`\`\`json
 {
@@ -4158,43 +4178,21 @@ Get high-level analytics summary:
 }
 \`\`\`
 
-### Get Cost Breakdown
+### Get Project Analytics
 
-\`GET /api/v1/analytics/costs\`
+\`GET /api/analytics/projects/:projectId\`
 
-Query parameters:
-- \`startDate\`: Start date (ISO 8601)
-- \`endDate\`: End date (ISO 8601)
-- \`groupBy\`: provider | model | project | user
-- \`interval\`: hour | day | week | month
+Get analytics for a specific project.
 
-### Get Performance Metrics
+### Compare Projects
 
-\`GET /api/v1/analytics/performance\`
+\`GET /api/analytics/projects/compare\`
 
-Returns latency, success rates, and error analysis:
+Compare analytics across multiple projects.
 
-\`\`\`json
-{
-  "success": true,
-  "data": {
-    "avgLatency": 250,
-    "p50Latency": 200,
-    "p95Latency": 500,
-    "p99Latency": 1000,
-    "successRate": 98.5,
-    "errorBreakdown": {
-      "rateLimit": 0.5,
-      "timeout": 0.8,
-      "invalidRequest": 0.2
-    }
-  }
-}
-\`\`\`
+### Get Insights
 
-### Get Optimization Insights
-
-\`GET /api/v1/analytics/insights\`
+\`GET /api/analytics/insights\`
 
 AI-powered optimization recommendations:
 
@@ -4214,6 +4212,29 @@ AI-powered optimization recommendations:
   }
 }
 \`\`\`
+
+### Get Feedback Analytics
+
+\`GET /api/analytics/feedback\`
+
+Get Return on AI Spend (ROAS) analytics.
+
+### Get Recent Usage
+
+\`GET /api/analytics/recent-usage\`
+
+Get recent usage patterns and trends.
+
+### Export Analytics
+
+\`GET /api/analytics/export\`
+
+Export analytics data:
+
+Query parameters:
+- \`format\`: csv | json | excel
+- \`startDate\`: Start date
+- \`endDate\`: End date
 
 ## SDK Examples
 
@@ -4261,13 +4282,13 @@ Create and manage projects for organizing AI usage and costs.
 
 ### List Projects
 
-\`GET /api/v1/projects\`
+\`GET /api/projects\`
 
 Returns all projects for the authenticated user.
 
 ### Create Project
 
-\`POST /api/v1/projects\`
+\`POST /api/projects\`
 
 Create a new project:
 
@@ -4276,8 +4297,9 @@ Create a new project:
   "name": "Production API",
   "description": "Main production AI endpoints",
   "budget": {
-    "monthly": 5000.00,
-    "alerts": [80, 90, 100]
+    "amount": 5000.00,
+    "period": "monthly",
+    "currency": "USD"
   },
   "tags": ["production", "critical"],
   "settings": {
@@ -4290,37 +4312,43 @@ Create a new project:
 
 ### Get Project Details
 
-\`GET /api/v1/projects/:projectId\`
+\`GET /api/projects/:projectId\`
 
 Returns detailed information about a specific project.
 
 ### Update Project
 
-\`PUT /api/v1/projects/:projectId\`
+\`PUT /api/projects/:projectId\`
 
 Update project settings, budget, or metadata.
 
 ### Delete Project
 
-\`DELETE /api/v1/projects/:projectId\`
+\`DELETE /api/projects/:projectId\`
 
-Delete a project (requires confirmation).
+Delete a project (requires admin permissions).
 
-### Get Project Usage
+### Get Project Analytics
 
-\`GET /api/v1/projects/:projectId/usage\`
+\`GET /api/projects/:projectId/analytics\`
 
-Get usage statistics for a specific project.
+Get analytics for a specific project.
 
-### Get Project Members
+### Get Cost Allocation
 
-\`GET /api/v1/projects/:projectId/members\`
+\`GET /api/projects/:projectId/cost-allocation\`
 
-List all members with access to the project.
+Get cost allocation breakdown.
+
+### Export Project Data
+
+\`GET /api/projects/:projectId/export\`
+
+Export project data in various formats.
 
 ### Add Project Member
 
-\`POST /api/v1/projects/:projectId/members\`
+\`POST /api/projects/:projectId/members\`
 
 Add a team member to the project:
 
@@ -4387,9 +4415,15 @@ Programmatically access Cost Katana's AI optimization features.
 
 ## Endpoints
 
+### Get Optimization Suggestions
+
+\`GET /api/optimizations\`
+
+Get AI-powered optimization suggestions based on your usage patterns.
+
 ### Optimize Prompt
 
-\`POST /api/v1/optimization/prompt\`
+\`POST /api/optimizations/prompt\`
 
 Optimize a prompt for reduced token usage:
 
@@ -4416,9 +4450,39 @@ Response:
 }
 \`\`\`
 
+### Batch Optimization
+
+\`POST /api/optimizations/batch\`
+
+Optimize multiple prompts at once.
+
+### Get Optimization Opportunities
+
+\`GET /api/optimizations/opportunities\`
+
+Analyze and identify optimization opportunities in your usage patterns.
+
+### Get Optimization History
+
+\`GET /api/optimizations/history/:promptHash\`
+
+Get optimization history for a specific prompt.
+
+### Apply Optimization
+
+\`POST /api/optimizations/:id/apply\`
+
+Apply a suggested optimization.
+
+### Revert Optimization
+
+\`POST /api/optimizations/:id/revert\`
+
+Revert an applied optimization.
+
 ### Get Model Recommendations
 
-\`POST /api/v1/optimization/recommend-model\`
+\`GET /api/optimizations/config\`
 
 Get the best model for your use case:
 
@@ -4513,9 +4577,90 @@ export const WebhooksPage = () => (
     description="Real-time event notifications"
     prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }}
     nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }}
-    fallbackContent={`# Webhooks
+    fallbackContent={`# Alerts & Notifications API
 
-Receive real-time notifications for important events.
+Configure alerts and notifications for important events.
+
+## Alert Configuration
+
+### Get Alert Settings
+
+\`GET /api/user/alerts/settings\`
+
+Get current alert configuration.
+
+### Update Alert Settings
+
+\`PUT /api/user/alerts/settings\`
+
+Configure alert thresholds and notification preferences:
+
+\`\`\`json
+{
+  "budgetAlerts": {
+    "enabled": true,
+    "thresholds": [50, 80, 90, 100],
+    "frequency": "daily"
+  },
+  "anomalyDetection": {
+    "enabled": true,
+    "sensitivity": "medium"
+  },
+  "errorAlerts": {
+    "enabled": true,
+    "errorRateThreshold": 5
+  },
+  "channels": {
+    "email": true,
+    "dashboard": true
+  }
+}
+\`\`\`
+
+### Get Alerts
+
+\`GET /api/user/alerts\`
+
+Get all alerts for the authenticated user.
+
+### Mark Alert as Read
+
+\`PUT /api/user/alerts/:id/read\`
+
+Mark a specific alert as read.
+
+### Delete Alert
+
+\`DELETE /api/user/alerts/:id\`
+
+Delete a specific alert.
+
+### Test Alert
+
+\`POST /api/user/alerts/test\`
+
+Send a test alert to verify configuration.
+
+## Real-time Updates
+
+### Server-Sent Events (SSE)
+
+\`GET /api/usage/stream\`
+
+Stream real-time usage updates:
+
+\`\`\`javascript
+const eventSource = new EventSource('/api/usage/stream', {
+  headers: {
+    'Authorization': 'Bearer your-token'
+  }
+});
+
+eventSource.onmessage = (event) => {
+  const data = JSON.parse(event.data);
+  console.log('Usage update:', data);
+};
+\`\`\`
 
 ## Available Events
 
