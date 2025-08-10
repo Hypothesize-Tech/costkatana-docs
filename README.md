@@ -1,69 +1,61 @@
-# React + TypeScript + Vite
+# Cost Katana Docs — Observability & OpenTelemetry
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Cost Katana provides first‑class OpenTelemetry (OTel) support for traces, metrics, and error analytics across AI workloads. This document summarizes setup, vendor integrations, and the in‑product telemetry dashboard.
 
-Currently, two official plugins are available:
+## Features
+- Distributed tracing (Express, MongoDB, HTTP, GenAI spans)
+- RED metrics (rate, errors, duration) and GenAI metrics (tokens, cost)
+- Error aggregation and trace correlation
+- Service dependency graph
+- Frontend telemetry dashboard (KPIs, cost by model, top operations/errors, errors, explorer, traces)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Vendor Integrations (OTLP HTTP)
+- Grafana Cloud (Tempo/Prometheus), Datadog, New Relic, and any OTLP‑compatible backend
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Grafana Cloud
+```env
+OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push
+OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push
+OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Datadog
+```env
+OTLP_HTTP_TRACES_URL=https://trace.agent.datadoghq.com/v0.7/traces
+OTLP_HTTP_METRICS_URL=https://api.datadoghq.com/v1/series
+OTEL_EXPORTER_OTLP_HEADERS=DD-API-KEY=<YOUR_API_KEY>
 ```
+
+### New Relic
+```env
+OTLP_HTTP_TRACES_URL=https://otlp.nr-data.net:4318/v1/traces
+OTLP_HTTP_METRICS_URL=https://otlp.nr-data.net:4318/v1/metrics
+OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_LICENSE_KEY>
+```
+
+## Local Development
+- Use the OTel Collector locally for dev: health at `:13133/health`, Prometheus scrape at `:9464/metrics`
+- See `ai-cost-optimizer-backend/OBSERVABILITY.md` for Docker commands (Tempo, Prometheus, Grafana)
+
+## Backend Endpoints
+- `GET /api/telemetry/metrics`
+- `GET /api/telemetry/dashboard`
+- `GET /api/telemetry/traces/:traceId`
+- `GET /api/telemetry?{filters}`
+- `GET /api/telemetry/dependencies`
+- `GET /api/telemetry/health`
+
+## Frontend Dashboard (What You’ll See)
+- Performance Overview (RPM, error rate %, avg latency, P95)
+- Cost Analytics (donut by model + table)
+- Error Monitor (last errors, copy trace ID)
+- Top Operations / Top Errors (aggregated lists)
+- Telemetry Explorer (filters, pagination)
+- Trace Viewer (hierarchical spans)
+- Service Dependency Graph (service → service edges)
+
+## Privacy & Security
+- Sensitive content is redacted by default
+- Region routing and TLS supported
+
+For full details and troubleshooting, refer to the backend guide: `ai-cost-optimizer-backend/OBSERVABILITY.md`.

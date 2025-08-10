@@ -76,4 +76,48 @@ export const RateLimitsPage = () => <PlaceholderPage title="Rate Limits" descrip
 export const FAQPage = () => <PlaceholderPage title="FAQ" description="Frequently asked questions" />;
 export const SupportPage = () => <PlaceholderPage title="Support" description="Get help and support" />;
 
+export const OpenTelemetryVendorsPage: React.FC = () => {
+    return (
+        <div className="prose max-w-none dark:prose-invert">
+            <h1>OpenTelemetry & Vendor Support</h1>
+            <p>
+                Cost Katana ships with native OpenTelemetry (OTel) integration for traces and metrics. You can send data to any
+                OTLP-compatible backend including Grafana Cloud (Tempo/Prometheus), Datadog, and New Relic.
+            </p>
+
+            <h2>Quick Setup</h2>
+            <pre><code>{`# Example: Grafana Cloud
+OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push
+OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push
+OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>`}</code></pre>
+
+            <h3>Endpoints</h3>
+            <ul>
+                <li>GET /api/telemetry/metrics</li>
+                <li>GET /api/telemetry/dashboard</li>
+                <li>GET /api/telemetry/traces/:traceId</li>
+                <li>GET /api/telemetry?filters</li>
+                <li>GET /api/telemetry/dependencies</li>
+                <li>GET /api/telemetry/health</li>
+            </ul>
+
+            <h2>Dashboard Coverage</h2>
+            <ul>
+                <li>KPIs: RPM, Error %, Avg & P95 Latency</li>
+                <li>Cost by Model</li>
+                <li>Recent Errors, Top Errors</li>
+                <li>Top Operations</li>
+                <li>Telemetry Explorer (filters + pagination)</li>
+                <li>Trace Viewer (hierarchical spans)</li>
+                <li>Service Dependency Graph</li>
+            </ul>
+
+            <p>
+                For detailed setup and local collector instructions, see the backend guide
+                (<a href="https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend/blob/main/OBSERVABILITY.md" target="_blank" rel="noreferrer">OBSERVABILITY.md</a>).
+            </p>
+        </div>
+    );
+};
+
 export default PlaceholderPage;

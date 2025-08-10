@@ -42,7 +42,8 @@ import {
   WebhooksPage,
   RateLimitsPage,
   FAQPage,
-  SupportPage
+  SupportPage,
+  OpenTelemetryVendorsPage
 } from './pages/DocumentationPages';
 
 const App: React.FC = () => {
@@ -101,6 +102,9 @@ const App: React.FC = () => {
                 <Route path="/features/alerts" element={<AlertsPage />} />
                 <Route path="/features/training" element={<TrainingPage />} />
                 <Route path="/features/tracing" element={<TracingPage />} />
+
+                {/* Observability */}
+                <Route path="/observability/opentelemetry" element={<OpenTelemetryVendorsPage />} />
 
                 {/* API Reference */}
                 <Route path="/api" element={<APIOverviewPage />} />

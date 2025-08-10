@@ -98,6 +98,14 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
             ],
         },
         {
+            title: 'Observability',
+            id: 'observability',
+            icon: <Zap size={18} />,
+            items: [
+                { path: '/observability/opentelemetry', label: 'OpenTelemetry & Vendors', icon: <Database size={16} /> },
+            ],
+        },
+        {
             title: 'API Reference',
             id: 'api',
             icon: <Code size={18} />,

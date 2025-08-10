@@ -5351,3 +5351,40 @@ Phone: +65 6123 4567
 **Need immediate help?** Start a live chat on our website or email abdul@hypothesize.tech. We typically respond within 2 hours during business hours.`}
   />
 );
+
+export const OpenTelemetryVendorsPage = () => (
+  <DocumentationPage
+    title="OpenTelemetry & Vendor Support"
+    description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic"
+    fallbackContent={`# OpenTelemetry & Vendor Support
+
+Cost Katana ships with native OpenTelemetry (OTel) integration for traces and metrics.
+
+## Quick Setup (Grafana Cloud)
+
+    OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push
+    OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push
+    OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
+
+## Telemetry Endpoints
+- GET /api/telemetry/metrics
+- GET /api/telemetry/dashboard
+- GET /api/telemetry/traces/:traceId
+- GET /api/telemetry?{filters}
+- GET /api/telemetry/dependencies
+- GET /api/telemetry/health
+
+## Dashboard Coverage
+- KPIs (RPM, Error %, Avg & P95 Latency)
+- Cost by Model
+- Recent Errors & Top Errors
+- Top Operations
+- Telemetry Explorer
+- Trace Viewer
+- Service Dependency Graph
+
+See backend OBSERVABILITY.md for vendor examples and local collector instructions.`}
+  />
+);
+
+export default OpenTelemetryVendorsPage;
