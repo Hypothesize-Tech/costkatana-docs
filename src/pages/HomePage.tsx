@@ -5,11 +5,16 @@ import { Helmet } from 'react-helmet-async';
 import {
     Zap, TrendingUp, Shield, Code, Cloud, Brain,
     ArrowRight, BarChart3, Cpu, Database, Terminal, Package,
-    Github, BookOpen
+    Github, BookOpen, Activity, Network
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {
     const features = [
+        {
+            icon: <Activity className="text-cyan-600" />,
+            title: 'Distributed Tracing',
+            description: 'Visualize AI workflows with hierarchical traces, timelines, and cost attribution per span.',
+        },
         {
             icon: <TrendingUp className="text-blue-600" />,
             title: 'Real-time Cost Tracking',
@@ -31,12 +36,17 @@ const HomePage: React.FC = () => {
             description: 'Single endpoint for all AI providers with automatic failover and load balancing.',
         },
         {
+            icon: <Network className="text-pink-600" />,
+            title: 'Session Analysis',
+            description: 'Track complete agent flows with parent-child relationships and performance metrics.',
+        },
+        {
             icon: <BarChart3 className="text-orange-600" />,
             title: 'Advanced Analytics',
             description: 'Deep insights into usage patterns, cost trends, and optimization opportunities.',
         },
         {
-            icon: <Cpu className="text-pink-600" />,
+            icon: <Cpu className="text-red-600" />,
             title: 'Model Comparison',
             description: 'Compare costs and performance across different AI models and providers.',
         },
