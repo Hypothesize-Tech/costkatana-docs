@@ -5122,7 +5122,7 @@ We provide migration assistance:
 
 ---
 
-Still have questions? [Contact our support team](mailto:abdul@hypothesize.tech) or [join our Discord community](https://discord.gg/costkatana) for real-time help!`}
+Still have questions? [Contact our support team](mailto:abdul@hypothesize.tech) or [join our Discord community](https://discord.gg/Wcwzw8wM) for real-time help!`}
   />
 );
 
@@ -5157,7 +5157,7 @@ We're here to help you get the most out of Cost Katana. Whether you're just gett
 
 ### Discord Community
 Join our active Discord server for real-time help and discussions:
-- **Server**: [discord.gg/costkatana](https://discord.gg/costkatana)
+- **Server**: [discord.gg/costkatana](https://discord.gg/Wcwzw8wM)
 - **Channels**: 
   - \`#general\` - General discussions
   - \`#technical-help\` - Technical support
@@ -5171,13 +5171,6 @@ Available on our website during business hours:
 - **Response**: Immediate during business hours
 - **Available to**: All users (Pro+ get priority)
 
-## 📞 Phone Support
-
-**Pro & Enterprise Plans Only**
-- **US/Canada**: +1 (555) 123-COST
-- **UK**: +44 20 7123 4567
-- **Hours**: Monday-Friday, 9 AM - 6 PM local time
-- **Emergency Line**: Available 24/7 for Enterprise customers
 
 ## 🎓 Learning Resources
 
@@ -5186,17 +5179,6 @@ Available on our website during business hours:
 - **API Reference**: [/api](/api)
 - **Integration Guides**: [/integrations](/integrations)
 - **Best Practices**: [/features](/features)
-
-### Video Tutorials
-- **YouTube Channel**: [youtube.com/@costkatana](https://youtube.com/@costkatana)
-- **Webinar Recordings**: Available in your dashboard
-- **Demo Videos**: Feature-specific tutorials
-
-### Blog & Resources
-- **Blog**: [blog.costkatana.com](https://blog.costkatana.com)
-- **Case Studies**: Real customer success stories
-- **Whitepapers**: AI cost optimization research
-- **ROI Calculator**: Estimate your potential savings
 
 ## 🚀 Onboarding & Training
 
@@ -5223,7 +5205,7 @@ Available on our website during business hours:
 
 ### GitHub Issues
 For bug reports and feature requests:
-- **Repository**: [github.com/costkatana/issues](https://github.com/costkatana/issues)
+- **Repository**: [github.com/costkatana/issues](https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend/issues)
 - **Bug Reports**: Use the bug report template
 - **Feature Requests**: Use the feature request template
 - **Security Issues**: Email order@hypothesize.tech
@@ -5233,21 +5215,6 @@ For bug reports and feature requests:
 - **Rate Limits**: Monitor in your dashboard
 - **Error Codes**: Check our API documentation
 - **Webhooks**: Test endpoints in the dashboard
-
-### Integration Help
-We provide specific support for:
-- **SDK Issues**: All supported languages
-- **Framework Integration**: React, Vue, Angular, etc.
-- **CI/CD Pipeline**: GitHub Actions, Jenkins, etc.
-- **Monitoring Tools**: Datadog, New Relic, Grafana
-
-## 📊 Status & Uptime
-
-### Service Status
-- **Status Page**: [status.costkatana.com](https://status.costkatana.com)
-- **Uptime**: 99.9% SLA (99.99% for Enterprise)
-- **Incident History**: Transparent incident reports
-- **Maintenance Windows**: Scheduled during low-usage hours
 
 ### API Performance
 - **Response Time**: < 100ms average
@@ -5267,22 +5234,6 @@ We provide specific support for:
 - **API Key Management**: Rotate keys for security
 - **Data Export**: Download your data anytime
 - **Account Deletion**: Contact support for assistance
-
-## 🌟 Success Stories
-
-### Customer Testimonials
-
-> "Cost Katana helped us reduce our AI costs by 60% while actually improving our model performance. The insights are invaluable!"
-> 
-> — **Sarah Chen**, CTO at TechCorp
-
-> "The team's support during our migration was exceptional. We were up and running in hours, not days."
-> 
-> — **Marcus Rodriguez**, Lead Engineer at DataFlow
-
-> "Cost Katana's enterprise features and dedicated support make it perfect for our large-scale AI operations."
-> 
-> — **Dr. Emily Watson**, AI Director at MegaCorp
 
 ## 🤝 Partnership & Integration
 
@@ -5317,33 +5268,13 @@ For large organizations:
 - **Custom Pricing**: Volume discounts and enterprise features
 - **Pilot Program**: Start with a small team or project
 
-## 📍 Office Locations
-
-### Headquarters
-**San Francisco, CA**
-123 Innovation Drive, Suite 400
-San Francisco, CA 94105
-Phone: +1 (555) 123-COST
-
-### European Office
-**London, UK**
-45 Tech Street, Floor 3
-London EC2A 4DP, UK
-Phone: +44 20 7123 4567
-
-### Asia-Pacific Office
-**Singapore**
-88 Marina Bay Drive, #15-05
-Singapore 018956
-Phone: +65 6123 4567
-
 ---
 
 ## Quick Links
 
 - 🚀 [Get Started](/getting-started/introduction)
 - 📖 [Documentation](/api)
-- 💬 [Discord Community](https://discord.gg/costkatana)
+- 💬 [Discord Community](https://discord.gg/Wcwzw8wM)
 - 📧 [Email Support](mailto:abdul@hypothesize.tech)
 - 📊 [Service Status](https://status.costkatana.com)
 - 📅 [Schedule Demo](https://calendly.com/costkatana-demo)
