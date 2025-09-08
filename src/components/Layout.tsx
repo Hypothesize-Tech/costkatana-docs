@@ -86,6 +86,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                 { path: '/features/usage-tracking', label: 'Usage Tracking', icon: <TrendingUp size={16} /> },
                 { path: '/features/analytics', label: 'Cost Analytics', icon: <Database size={16} /> },
                 { path: '/features/optimization', label: 'AI Optimization', icon: <Cpu size={16} /> },
+                { path: '/features/sast', label: 'SAST Optimization', icon: <Brain size={16} /> },
                 { path: '/features/predictive-intelligence', label: 'Predictive Intelligence', icon: <Brain size={16} /> },
                 { path: '/features/projects', label: 'Projects', icon: <Layers size={16} /> },
                 { path: '/features/templates', label: 'Prompt Templates', icon: <FileText size={16} /> },

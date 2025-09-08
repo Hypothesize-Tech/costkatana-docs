@@ -33,6 +33,7 @@ import {
   AlertsPage,
   TrainingPage,
   TracingPage,
+  SastPage,
   APIOverviewPage,
   AuthenticationPage,
   UsageAPIPage,
@@ -93,6 +94,7 @@ const App: React.FC = () => {
                 <Route path="/features/usage-tracking" element={<UsageTrackingPage />} />
                 <Route path="/features/analytics" element={<CostAnalyticsPage />} />
                 <Route path="/features/optimization" element={<OptimizationPage />} />
+                <Route path="/features/sast" element={<SastPage />} />
                 <Route path="/features/predictive-intelligence" element={<PredictiveIntelligencePage />} />
                 <Route path="/features/projects" element={<ProjectsPage />} />
                 <Route path="/features/templates" element={<TemplatesPage />} />
