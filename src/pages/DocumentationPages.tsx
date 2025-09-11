@@ -8,7 +8,7 @@ export const InstallationPage = () => (
     prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }}
     fallbackContent={`# Installation Guide
 
-Get started with Cost Katana in minutes. Choose your preferred installation method.
+Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 70-95% token reduction with LISP-based optimization.
 
 ## 🚀 CLI Installation
 
@@ -1947,7 +1947,7 @@ export const FeaturesOverviewPage = () => (
     nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }}
     fallbackContent={`# Cost Katana Features Overview
 
-Comprehensive AI cost optimization platform with powerful features to reduce your AI spending by up to 70%.
+Comprehensive AI cost optimization platform powered by revolutionary **Cortex Meta-Language** to reduce your AI spending by up to **95%** through LISP-based answer generation.
 
 ![Cost Katana Features Overview](/assets/dashboard_1.png)
 
@@ -1992,7 +1992,38 @@ Deep dive into your AI spending with advanced analytics and optimization recomme
 
 ## 🚀 Advanced Features
 
-### 🤖 AI Optimization Engine
+### 🧠 Cortex Meta-Language (Revolutionary)
+The world's first AI meta-language achieving **70-95% token reduction** through LISP-based answer generation.
+
+**Cortex Features:**
+- **3-Stage Pipeline** - Encoder → Core Processor → Decoder optimization
+- **Complete Answer Generation** - Generate full responses in optimized LISP format
+- **Dynamic LISP Instructions** - AI-powered instruction generation for any context
+- **Claude Opus 4.1 Core** - Latest AI models for maximum capability
+- **Real-time Analytics** - Confidence, cost impact, and semantic integrity metrics
+- **Universal Context Handling** - Technical, business, and industry-specific processing
+
+**Usage Example:**
+\`\`\`javascript
+const response = await gateway.openai({
+  model: 'gpt-4o-mini',
+  messages: [{ role: 'user', content: 'Write a REST API in Node.js' }]
+}, {
+  cortex: {
+    enabled: true,
+    mode: 'answer_generation',
+    coreModel: 'claude-opus-4-1',
+    dynamicInstructions: true
+  }
+});
+
+// Achieve 89% token reduction!
+console.log(response.metadata.cortex.tokenReduction);
+\`\`\`
+
+[Learn More About Cortex →](/features/cortex)
+
+### 🤖 Traditional AI Optimization Engine
 Intelligent optimization powered by machine learning to automatically reduce your costs.
 
 **Optimization Types:**
