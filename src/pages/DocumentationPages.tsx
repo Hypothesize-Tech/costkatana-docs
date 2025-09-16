@@ -5236,7 +5236,7 @@ Available on our website during business hours:
 
 ### GitHub Issues
 For bug reports and feature requests:
-- **Repository**: [github.com/costkatana/issues](https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend/issues)
+- **Repository**: [github.com/costkatana/issues](https://github.com/Hypothesize-Tech/costkatana-backend/issues)
 - **Bug Reports**: Use the bug report template
 - **Feature Requests**: Use the feature request template
 - **Security Issues**: Email order@hypothesize.tech

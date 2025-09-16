@@ -173,7 +173,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                         </button>
 
                         <a
-                            href="https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend"
+                            href="https://github.com/Hypothesize-Tech/costkatana-backend"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"

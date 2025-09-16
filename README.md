@@ -35,7 +35,7 @@ OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_LICENSE_KEY>
 
 ## Local Development
 - Use the OTel Collector locally for dev: health at `:13133/health`, Prometheus scrape at `:9464/metrics`
-- See `ai-cost-optimizer-backend/OBSERVABILITY.md` for Docker commands (Tempo, Prometheus, Grafana)
+- See `costkatana-backend/OBSERVABILITY.md` for Docker commands (Tempo, Prometheus, Grafana)
 
 ## Backend Endpoints
 - `GET /api/telemetry/metrics`
@@ -58,4 +58,4 @@ OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_LICENSE_KEY>
 - Sensitive content is redacted by default
 - Region routing and TLS supported
 
-For full details and troubleshooting, refer to the backend guide: `ai-cost-optimizer-backend/OBSERVABILITY.md`.
+For full details and troubleshooting, refer to the backend guide: `costkatana-backend/OBSERVABILITY.md`.

@@ -15,7 +15,7 @@ For fastest response, please include:
 ## 🐛 Report Issues
 
 ### Backend Issues
-- **GitHub Issues**: [ai-cost-optimizer-backend](https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend/issues)
+- **GitHub Issues**: [costkatana-backend](https://github.com/Hypothesize-Tech/costkatana-backend/issues)
 - For API, authentication, or server-related problems
 
 ### Core SDK Issues  

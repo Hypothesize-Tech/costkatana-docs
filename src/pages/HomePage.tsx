@@ -131,7 +131,7 @@ const HomePage: React.FC = () => {
                             </Link>
 
                             <a
-                                href="https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend"
+                                href="https://github.com/Hypothesize-Tech/costkatana-backend"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="btn-secondary flex items-center space-x-2"

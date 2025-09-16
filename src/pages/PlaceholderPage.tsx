@@ -114,7 +114,7 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>`}</code></pre>
 
             <p>
                 For detailed setup and local collector instructions, see the backend guide
-                (<a href="https://github.com/Hypothesize-Tech/ai-cost-optimizer-backend/blob/main/OBSERVABILITY.md" target="_blank" rel="noreferrer">OBSERVABILITY.md</a>).
+                (<a href="https://github.com/Hypothesize-Tech/costkatana-backend/blob/main/OBSERVABILITY.md" target="_blank" rel="noreferrer">OBSERVABILITY.md</a>).
             </p>
         </div>
     );
