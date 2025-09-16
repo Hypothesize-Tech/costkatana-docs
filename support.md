@@ -19,7 +19,7 @@ For fastest response, please include:
 - For API, authentication, or server-related problems
 
 ### Core SDK Issues  
-- **GitHub Issues**: [ai-cost-optimizer-core](https://github.com/Hypothesize-Tech/ai-cost-optimizer-core/issues)
+- **GitHub Issues**: [ai-cost-optimizer-core](https://github.com/Hypothesize-Tech/aicostkatana-core/issues)
 - For Node.js SDK integration problems
 
 ### Python SDK Issues

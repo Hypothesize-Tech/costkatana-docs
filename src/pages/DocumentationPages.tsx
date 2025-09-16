@@ -49,7 +49,7 @@ cost-katana --version
 - **Latest Version**: 1.0.11
 - **Weekly Downloads**: 638+
 - **License**: MIT
-- **Repository**: [GitHub](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli)
+- **Repository**: [GitHub](https://github.com/Hypothesize-Tech/costkatana-cli)
 
 ## 🛠️ Quick Setup
 
@@ -193,7 +193,7 @@ npm config set strict-ssl false
 ### Getting Help
 
 - 📖 **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
-- 💬 **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/ai-cost-optimizer-cli/issues)
+- 💬 **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
 - 📧 **Email Support**: abdul@hypothesize.tech
 
 ## 🎯 Next Steps
@@ -241,7 +241,7 @@ cost-katana init
 
 ### Package Information
 
-Based on the [npm package](https://www.npmjs.com/package/ai-cost-optimizer-cli):
+Based on the [npm package](https://www.npmjs.com/package/costkatana-cli):
 
 - **Package**: \`ai-cost-optimizer-cli\`
 - **Version**: 1.0.11 (latest)
