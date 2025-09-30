@@ -5480,7 +5480,7 @@ console.log('Token Reduction:', result.optimizationMetrics.tokenReduction);
 import { GatewayClient } from '@cost-katana/core';
 
 const client = new GatewayClient({ 
-  baseUrl: 'https://api.costkatana.com',
+  baseUrl: 'https://cost-katana-backend.store',
   apiKey: 'your-api-key'
 });
 
