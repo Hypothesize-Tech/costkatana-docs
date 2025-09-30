@@ -4094,7 +4094,7 @@ Query parameters:
 import { CostKatanaClient } from '@costkatana/sdk';
 
 const client = new CostKatanaClient({
-  apiKey: process.env.COSTKATANA_API_KEY
+  apiKey: process.env.API_KEY
 });
 
 // Track usage
