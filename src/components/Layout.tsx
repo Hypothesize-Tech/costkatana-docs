@@ -132,20 +132,20 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
     ];
 
     return (
-        <div className="min-h-screen bg-gray-50 dark:bg-dark-bg">
+        <div className="min-h-screen bg-light-bg dark:bg-dark-bg-100">
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 glass-effect border-b">
+            <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-light-card/80 dark:bg-dark-card/80 border-b border-gray-200 dark:border-gray-700">
                 <div className="flex items-center justify-between px-4 py-3">
                     <div className="flex items-center space-x-4">
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="lg:hidden p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
                         >
                             {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
 
                         <Link to="/" className="flex items-center space-x-2">
-                            <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-blue-600 rounded-lg flex items-center justify-center">
+                            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
                                 <Zap className="text-white" size={24} />
                             </div>
                             <span className="text-xl font-bold text-gradient">Cost Katana</span>
@@ -155,18 +155,18 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                     <div className="flex items-center space-x-2">
                         <button
                             onClick={() => setSearchOpen(true)}
-                            className="flex items-center space-x-2 px-4 py-2 bg-gray-100 dark:bg-gray-800 rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                            className="flex items-center space-x-2 px-4 py-2 bg-light-panel dark:bg-gray-800 rounded-lg hover:bg-light-card dark:hover:bg-gray-700 transition-colors"
                         >
                             <Search size={18} />
                             <span className="hidden sm:inline text-sm">Search</span>
-                            <kbd className="hidden sm:inline px-2 py-1 text-xs bg-white dark:bg-gray-900 rounded border border-gray-300 dark:border-gray-600">
+                            <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600">
                                 ⌘K
                             </kbd>
                         </button>
 
                         <button
                             onClick={toggleDarkMode}
-                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
                         >
                             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                         </button>
@@ -175,7 +175,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                             href="https://github.com/Hypothesize-Tech/costkatana-backend"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                            className="p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
                         >
                             <Github size={20} />
                         </a>
@@ -185,7 +185,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-16 bottom-0 w-72 bg-white dark:bg-dark-card border-r border-gray-200 dark:border-dark-border overflow-y-auto transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+                className={`fixed left-0 top-16 bottom-0 w-72 bg-light-card dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 overflow-y-auto transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                     }`}
             >
                 <nav className="p-4 space-y-2">
@@ -193,7 +193,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                         <div key={section.id} className="mb-4">
                             <button
                                 onClick={() => toggleSection(section.id)}
-                                className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+                                className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-light-text-primary dark:text-dark-text-primary hover:bg-light-panel dark:hover:bg-gray-800 rounded-lg transition-colors"
                             >
                                 <div className="flex items-center space-x-2">
                                     {section.icon}
@@ -241,7 +241,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                 href="https://costkatana.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                             >
                                 <ExternalLink size={16} />
                                 <span>Website</span>
@@ -250,7 +250,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                 href="https://www.npmjs.com/package/ai-cost-tracker"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                             >
                                 <Package size={16} />
                                 <span>NPM Package</span>
@@ -259,7 +259,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                 href="https://pypi.org/project/cost-katana/"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                             >
                                 <Code size={16} />
                                 <span>PyPI Package</span>
@@ -280,10 +280,10 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                     <div className="max-w-6xl mx-auto px-6 py-8">
                         <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                             <div className="text-center md:text-left">
-                                <p className="text-sm text-gray-600 dark:text-gray-400">
+                                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                                     © 2025 Cost Katana. All rights reserved.
                                 </p>
-                                <p className="text-xs text-gray-500 dark:text-gray-500 mt-1">
+                                <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1">
                                     Made with ❤️ by the Cost Katana team
                                 </p>
                             </div>
@@ -293,13 +293,13 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                     href="https://github.com/Hypothesize-Tech"
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                    className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                                 >
                                     <Github size={20} />
                                 </a>
                                 <a
                                     href="mailto:abdul@hypothesize.tech"
-                                    className="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                                    className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                                 >
                                     <MessageCircle size={20} />
                                 </a>

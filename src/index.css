@@ -1,20 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600;700&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   * {
-    @apply border-gray-200;
+    @apply border-gray-200 dark:border-gray-700;
   }
   
   body {
-    @apply bg-white text-gray-900 transition-colors duration-300;
+    @apply bg-light-bg text-light-text-primary transition-colors duration-300;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   }
   
   body.dark {
-    @apply bg-dark-bg text-dark-text;
+    @apply bg-dark-bg-100 text-dark-text-primary;
+  }
+  
+  /* Ensure dark mode is properly applied to all elements */
+  .dark {
+    @apply bg-dark-bg-100 text-dark-text-primary;
+  }
+  
+  .dark * {
+    @apply border-gray-700;
+  }
+  
+  /* Force dark backgrounds for common elements */
+  .dark .bg-white {
+    @apply bg-dark-card;
+  }
+  
+  .dark .bg-gray-50 {
+    @apply bg-dark-bg-200;
+  }
+  
+  .dark .bg-gray-100 {
+    @apply bg-dark-bg-300;
+  }
+  
+  .dark .text-gray-900 {
+    @apply text-dark-text-primary;
+  }
+  
+  .dark .text-gray-800 {
+    @apply text-dark-text-primary;
+  }
+  
+  .dark .text-gray-700 {
+    @apply text-dark-text-secondary;
+  }
+  
+  .dark .text-gray-600 {
+    @apply text-dark-text-secondary;
+  }
+  
+  .dark .text-gray-500 {
+    @apply text-dark-text-muted;
   }
   
   /* Custom scrollbar */
@@ -38,13 +79,13 @@
 
 @layer components {
   .gradient-bg {
-    @apply bg-gradient-to-br from-primary-600 via-primary-500 to-blue-600;
+    @apply bg-gradient-primary;
     background-size: 200% 200%;
     animation: gradient 15s ease infinite;
   }
   
   .glass-effect {
-    @apply backdrop-blur-lg bg-white/80 dark:bg-dark-card/80 border border-gray-200 dark:border-dark-border;
+    @apply backdrop-blur-lg bg-light-card/80 dark:bg-dark-card/80 border border-gray-200 dark:border-gray-700;
   }
   
   .hover-lift {
@@ -52,19 +93,19 @@
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-blue-600 bg-clip-text text-transparent;
+    @apply bg-gradient-primary bg-clip-text text-transparent;
   }
   
   .btn-primary {
-    @apply px-6 py-3 bg-primary-600 text-white rounded-lg font-medium transition-all duration-300 hover:bg-primary-700 hover:shadow-lg active:scale-95;
+    @apply px-6 py-3 bg-primary-500 text-white rounded-lg font-medium transition-all duration-300 hover:bg-primary-600 hover:shadow-lg active:scale-95;
   }
   
   .btn-secondary {
-    @apply px-6 py-3 bg-gray-100 dark:bg-dark-card text-gray-900 dark:text-white rounded-lg font-medium transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:shadow-lg active:scale-95;
+    @apply px-6 py-3 bg-light-card dark:bg-dark-card text-light-text-primary dark:text-dark-text-primary rounded-lg font-medium transition-all duration-300 hover:bg-light-panel dark:hover:bg-gray-700 hover:shadow-lg active:scale-95;
   }
   
   .card {
-    @apply bg-white dark:bg-dark-card rounded-xl shadow-sm border border-gray-200 dark:border-dark-border transition-all duration-300;
+    @apply bg-light-card dark:bg-dark-card rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 transition-all duration-300;
   }
   
   .code-block {
@@ -73,40 +114,44 @@
   
   /* Sidebar link styles */
   .sidebar-link {
-    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200;
+    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-light-text-secondary dark:text-dark-text-secondary;
   }
   
   .sidebar-link:hover {
-    @apply bg-gray-100 dark:bg-gray-800 text-primary-600 dark:text-primary-400;
+    @apply bg-light-panel dark:bg-gray-800 text-primary-500 dark:text-primary-400;
   }
   
   .sidebar-link.active {
-    @apply bg-primary-50 dark:bg-primary-900/20 text-primary-600 dark:text-primary-400 border-l-4 border-primary-600;
+    @apply bg-primary-50 dark:bg-primary-900/20 text-primary-500 dark:text-primary-400 border-l-4 border-primary-500;
   }
   
   /* Documentation content styles */
   .doc-content h1 {
-    @apply text-4xl font-bold mb-6 text-gray-900 dark:text-white;
+    @apply text-4xl font-bold mb-6 text-light-text-primary dark:text-dark-text-primary;
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
   }
   
   .doc-content h2 {
-    @apply text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2;
+    @apply text-3xl font-semibold mt-8 mb-4 text-light-text-primary dark:text-dark-text-primary border-b border-gray-200 dark:border-gray-700 pb-2;
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
   }
   
   .doc-content h3 {
-    @apply text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100;
+    @apply text-2xl font-semibold mt-6 mb-3 text-light-text-primary dark:text-dark-text-primary;
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
   }
   
   .doc-content h4 {
-    @apply text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200;
+    @apply text-xl font-medium mt-4 mb-2 text-light-text-primary dark:text-dark-text-secondary;
+    font-family: 'Manrope', 'Inter', system-ui, sans-serif;
   }
   
   .doc-content p {
-    @apply mb-4 leading-relaxed text-gray-600 dark:text-gray-300;
+    @apply mb-4 leading-relaxed text-light-text-secondary dark:text-dark-text-secondary;
   }
   
   .doc-content a {
-    @apply text-primary-600 dark:text-primary-400 hover:underline;
+    @apply text-primary-500 dark:text-primary-400 hover:underline;
   }
   
   .doc-content ul {
@@ -118,7 +163,7 @@
   }
   
   .doc-content li {
-    @apply text-gray-600 dark:text-gray-300;
+    @apply text-light-text-secondary dark:text-dark-text-secondary;
   }
   
   .doc-content blockquote {
@@ -126,11 +171,13 @@
   }
   
   .doc-content code:not(pre code) {
-    @apply bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-2 py-1 rounded text-sm font-mono;
+    @apply bg-light-panel dark:bg-gray-800 text-primary-500 dark:text-primary-400 px-2 py-1 rounded text-sm;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
   }
   
   .doc-content pre {
     @apply bg-gray-900 dark:bg-black text-gray-100 rounded-lg p-4 my-4 overflow-x-auto;
+    font-family: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, monospace;
   }
   
   .doc-content table {
@@ -138,15 +185,15 @@
   }
   
   .doc-content th {
-    @apply bg-gray-50 dark:bg-gray-800 text-left p-3 font-semibold border border-gray-200 dark:border-gray-700;
+    @apply bg-light-panel dark:bg-gray-800 text-left p-3 font-semibold border border-gray-200 dark:border-gray-700 text-light-text-primary dark:text-dark-text-primary;
   }
   
   .doc-content td {
-    @apply p-3 border border-gray-200 dark:border-gray-700;
+    @apply p-3 border border-gray-200 dark:border-gray-700 text-light-text-secondary dark:text-dark-text-secondary;
   }
   
   .doc-content tr:hover {
-    @apply bg-gray-50 dark:bg-gray-800/50;
+    @apply bg-light-panel dark:bg-gray-800/50;
   }
 }
 
