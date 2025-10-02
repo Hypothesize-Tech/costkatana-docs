@@ -360,49 +360,6 @@ cost-katana key list
 cost-katana key regenerate key-id-123
 \`\`\`
 
-## 🔍 Debugging & Tracing
-
-### Request Tracing
-\`\`\`bash
-# Trace specific request
-cost-katana trace --id req-8230
-
-# View recent traces
-cost-katana trace recent --limit 10
-
-# Trace by project
-cost-katana trace project my-project
-\`\`\`
-
-### Workflow Tracing
-\`\`\`bash
-# Trace workflow lifecycle
-cost-katana trace-workflow --id workflow-98765
-
-# Recent workflow traces
-cost-katana trace-workflow recent
-\`\`\`
-
-### Prompt Debugging
-\`\`\`bash
-# Debug specific prompt
-cost-katana debug-prompt --prompt-id prompt-38271
-
-# Debug by content
-cost-katana debug-prompt content --prompt "Your prompt here"
-
-# Recent prompt debugging
-cost-katana debug-prompt recent
-\`\`\`
-
-### Prompt Comparison
-\`\`\`bash
-# Compare prompts
-cost-katana diff-prompts --ids prompt-38271 prompt-38272
-
-# Compare by content
-cost-katana diff-prompts content --prompt1 "First prompt" --prompt2 "Second prompt"
-\`\`\`
 
 ## 📊 Analytics & Reports
 
@@ -1293,14 +1250,14 @@ ck = CostKatana(
 
 # Analyze data with AI
 def analyze_data_with_ai(df):
-    prompt = f"Analyze this dataset summary: {df.describe().to_string()}"
+    prompt = f"Analyze this data summary: {df.describe().to_string()}"
     
     response = ck.chat.completions.create(
         model='gpt-4',
         messages=[{'role': 'user', 'content': prompt}],
         metadata={
             'environment': 'jupyter',
-            'dataset_shape': str(df.shape)
+            'data_shape': str(df.shape)
         }
     )
     
@@ -1308,8 +1265,8 @@ def analyze_data_with_ai(df):
 
 # Track costs for each analysis
 analysis_results = []
-for dataset in datasets:
-    result = analyze_data_with_ai(dataset)
+for data in datasets:
+    result = analyze_data_with_ai(data)
     analysis_results.append(result)
 
 # Check total cost
@@ -1333,7 +1290,7 @@ class AIAnalyzer:
     
     def summarize(self):
         """Get AI-powered data summary"""
-        prompt = f"Summarize this dataset: {self._obj.describe().to_string()}"
+        prompt = f"Summarize this data: {self._obj.describe().to_string()}"
         
         response = ck.chat.completions.create(
             model='gpt-3.5-turbo',
@@ -1825,7 +1782,7 @@ Optimize our customer support AI that handles:
 ### 3. Data Analysis
 \`\`\`
 Help optimize costs for AI-powered data analysis that processes:
-- 100 datasets per week
+- 100 data files per week
 - Each requiring 5-10 analysis steps
 - Mix of numerical and text data
 \`\`\`
@@ -2123,20 +2080,6 @@ Proactive monitoring with intelligent alerts and notifications.
 
 [Configure Alerts →](/features/alerts)
 
-## 🎓 Training & Learning
-
-### 📚 Training Hub
-Comprehensive training resources and best practices.
-
-**Training Resources:**
-- **Interactive tutorials** and guides
-- **Best practices** from industry experts
-- **Cost optimization** strategies
-- **Use case examples** and templates
-
-[Start Learning →](/features/training)
-
-![Training Resources](/assets/usage_2.png)
 
 ## 💡 Key Benefits
 
@@ -2472,7 +2415,6 @@ Our AI continuously analyzes your usage and suggests:
 - Optimize prompt length
 
 ### Long-term Strategies
-- Fine-tune custom models
 - Implement caching layers
 - Redesign workflows
 - Train smaller specialized models
@@ -3471,138 +3413,6 @@ Define automated actions when alerts trigger:
   />
 );
 
-export const TrainingPage = () => (
-  <DocumentationPage
-    title="Training & Fine-tuning"
-    description="Cost-effective model training and fine-tuning"
-    prevPage={{ path: '/features/alerts', label: 'Previous: Alerts' }}
-    fallbackContent={`# Training & Fine-tuning
-
-Optimize costs for model training and fine-tuning operations.
-
-![Training Dashboard](/assets/training_1.png)
-
-## Training Cost Management
-
-### Cost Estimation
-- **Pre-training Estimates**: Calculate before starting
-- **Dataset Analysis**: Optimize training data
-- **Compute Planning**: Right-size resources
-- **Time Estimates**: Duration predictions
-
-![Training Analytics](/assets/training_2.png)
-
-### Resource Optimization
-- **Spot Instances**: Use cheaper compute
-- **Batch Processing**: Optimize GPU usage
-- **Checkpoint Management**: Smart saving
-- **Early Stopping**: Prevent overtraining
-
-## Fine-tuning
-
-### Provider Support
-- **OpenAI**: GPT-3.5, GPT-4 fine-tuning
-- **Anthropic**: Claude fine-tuning
-- **AWS Bedrock**: Custom model training
-- **Cohere**: Custom model creation
-
-### Cost Optimization
-\`\`\`javascript
-// Optimize fine-tuning costs
-const training = await ck.training.create({
-  provider: 'openai',
-  base_model: 'gpt-3.5-turbo',
-  dataset: 'training_data.jsonl',
-  optimization: {
-    sample_rate: 0.1, // Use 10% for validation
-    early_stopping: true,
-    checkpoint_frequency: 1000,
-    use_spot_pricing: true
-  }
-});
-
-// Monitor training costs
-const status = await ck.training.getStatus(training.id);
-console.log(\`Current cost: $\${status.cost}\`);
-console.log(\`Estimated total: $\${status.estimated_total}\`);
-\`\`\`
-
-## Dataset Management
-
-### Data Preparation
-- **Format Validation**: Check data format
-- **Quality Scoring**: Assess data quality
-- **Deduplication**: Remove duplicates
-- **Balancing**: Ensure representation
-
-### Cost-Effective Strategies
-- **Synthetic Data**: Generate training data
-- **Active Learning**: Smart data selection
-- **Transfer Learning**: Leverage existing models
-- **Few-Shot Learning**: Minimize data needs
-
-## Training Monitoring
-
-### Real-time Tracking
-- **Cost Accumulation**: Watch spending
-- **Performance Metrics**: Loss, accuracy
-- **Resource Usage**: GPU, memory
-- **Progress Tracking**: Completion percentage
-
-### Optimization Insights
-- **Hyperparameter Tuning**: Optimal settings
-- **Learning Rate**: Adjustment suggestions
-- **Batch Size**: Efficiency recommendations
-- **Architecture**: Model size optimization
-
-![Training Performance Monitoring](/assets/training_3.png)
-
-## Deployment
-
-### Model Serving
-- **Endpoint Creation**: Deploy trained models
-- **Auto-scaling**: Handle variable load
-- **A/B Testing**: Compare model versions
-- **Rollback**: Quick reversion
-
-### Cost Management
-\`\`\`javascript
-// Deploy with cost controls
-const deployment = await ck.deploy({
-  model_id: 'ft-abc123',
-  config: {
-    max_instances: 5,
-    min_instances: 1,
-    scale_down_delay: 300,
-    cost_limit: {
-      daily: 100,
-      monthly: 2000
-    }
-  }
-});
-\`\`\`
-
-## Best Practices
-
-### Training Strategy
-- Start with smaller models
-- Use transfer learning
-- Implement early stopping
-- Regular checkpoint saves
-
-### Cost Control
-- Set strict budgets
-- Monitor continuously
-- Use spot pricing
-- Optimize dataset size
-
-### Quality vs Cost
-- Define success metrics
-- Test incrementally
-- Compare against baselines
-- Document trade-offs`}
-  />
-);
 
 // API Documentation Pages
 export const APIOverviewPage = () => (

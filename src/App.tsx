@@ -31,7 +31,6 @@ import {
   GatewayPage,
   KeyVaultPage,
   AlertsPage,
-  TrainingPage,
   TracingPage,
   SastPage,
   APIOverviewPage,
@@ -102,7 +101,6 @@ const App: React.FC = () => {
                 <Route path="/features/gateway" element={<GatewayPage />} />
                 <Route path="/features/key-vault" element={<KeyVaultPage />} />
                 <Route path="/features/alerts" element={<AlertsPage />} />
-                <Route path="/features/training" element={<TrainingPage />} />
                 <Route path="/features/tracing" element={<TracingPage />} />
 
                 {/* Observability */}

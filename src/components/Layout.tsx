@@ -94,7 +94,6 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                 { path: '/features/gateway', label: 'Gateway & Proxy', icon: <Cloud size={16} /> },
                 { path: '/features/key-vault', label: 'Key Vault', icon: <Key size={16} /> },
                 { path: '/features/alerts', label: 'Alerts', icon: <Bell size={16} /> },
-                { path: '/features/training', label: 'Training', icon: <Brain size={16} /> },
                 { path: '/features/tracing', label: 'Distributed Tracing', icon: <Zap size={16} /> },
             ],
         },

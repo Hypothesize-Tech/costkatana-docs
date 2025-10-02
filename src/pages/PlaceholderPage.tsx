@@ -34,12 +34,7 @@ const PlaceholderPage: React.FC<PlaceholderPageProps> = ({ title, description })
                         <p className="text-gray-600 dark:text-gray-400 mb-6">{description}</p>
                     )}
 
-                    <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 max-w-md mx-auto">
-                        <FileText className="text-gray-400 mb-3 mx-auto" size={24} />
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            This documentation page is coming soon. We're working hard to bring you comprehensive documentation for all features.
-                        </p>
-                    </div>
+
                 </div>
             </motion.div>
         </>
@@ -64,7 +59,6 @@ export const WorkflowsPage = () => <PlaceholderPage title="Workflows" descriptio
 export const GatewayPage = () => <PlaceholderPage title="Gateway & Proxy" description="Unified API gateway" />;
 export const KeyVaultPage = () => <PlaceholderPage title="Key Vault" description="Secure API key management" />;
 export const AlertsPage = () => <PlaceholderPage title="Alerts" description="Proactive monitoring alerts" />;
-export const TrainingPage = () => <PlaceholderPage title="Training" description="Cost-effective model training" />;
 export const APIOverviewPage = () => <PlaceholderPage title="API Overview" description="Complete API documentation" />;
 export const AuthenticationPage = () => <PlaceholderPage title="Authentication" description="JWT and API key auth" />;
 export const UsageAPIPage = () => <PlaceholderPage title="Usage API" description="Track AI usage via API" />;
