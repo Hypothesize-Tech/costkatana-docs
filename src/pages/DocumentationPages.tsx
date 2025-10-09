@@ -194,7 +194,7 @@ npm config set strict-ssl false
 
 - 📖 **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
 - 💬 **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
-- 📧 **Email Support**: abdul@hypothesize.tech
+- 📧 **Email Support**: support@costkatana.com
 
 ## 🎯 Next Steps
 
@@ -1889,7 +1889,7 @@ Need help with the ChatGPT integration?
 
 - **In-chat help**: Type \`/help\` in the custom GPT
 - **Documentation**: Visit [docs.costkatana.com](https://docs.costkatana.com)
-- **Email support**: abdul@hypothesize.tech
+- **Email support**: support@costkatana.com
 - **Community**: Join our Discord community
 
 Start optimizing your AI costs directly in ChatGPT today! 🎯`}
@@ -4963,7 +4963,7 @@ We provide migration assistance:
 
 ---
 
-Still have questions? [Contact our support team](mailto:abdul@hypothesize.tech) or [join our Discord community](https://discord.gg/Wcwzw8wM) for real-time help!`}
+Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/Wcwzw8wM) for real-time help!`}
   />
 );
 
@@ -4979,7 +4979,7 @@ We're here to help you get the most out of Cost Katana. Whether you're just gett
 
 ## 📧 Email Support
 
-**Primary Support**: [abdul@hypothesize.tech](mailto:abdul@hypothesize.tech)
+**Primary Support**: [support@costkatana.com](mailto:support@costkatana.com)
 - Response time: Within 24 hours
 - Available for all plan types
 - Technical issues, billing questions, feature requests
@@ -5065,7 +5065,7 @@ For bug reports and feature requests:
 ## 💰 Billing & Account Support
 
 ### Billing Questions
-- **Invoice Issues**: abdul@hypothesize.tech
+- **Invoice Issues**: support@costkatana.com
 - **Payment Problems**: Check your payment method in dashboard
 - **Usage Questions**: Detailed breakdowns available in dashboard
 - **Refund Requests**: Contact support within 30 days
@@ -5116,11 +5116,11 @@ For large organizations:
 - 🚀 [Get Started](/getting-started/introduction)
 - 📖 [Documentation](/api)
 - 💬 [Discord Community](https://discord.gg/Wcwzw8wM)
-- 📧 [Email Support](mailto:abdul@hypothesize.tech)
+- 📧 [Email Support](mailto:support@costkatana.com)
 - 📊 [Service Status](https://status.costkatana.com)
 - 📅 [Schedule Demo](https://calendly.com/costkatana-demo)
 
-**Need immediate help?** Start a live chat on our website or email abdul@hypothesize.tech. We typically respond within 2 hours during business hours.`}
+**Need immediate help?** Start a live chat on our website or email support@costkatana.com. We typically respond within 2 hours during business hours.`}
   />
 );
 

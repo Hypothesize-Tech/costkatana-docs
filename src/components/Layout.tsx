@@ -298,7 +298,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                     <Github size={20} />
                                 </a>
                                 <a
-                                    href="mailto:abdul@hypothesize.tech"
+                                    href="mailto:support@costkatana.com"
                                     className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
                                 >
                                     <MessageCircle size={20} />

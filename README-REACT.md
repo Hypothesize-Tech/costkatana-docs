@@ -214,4 +214,4 @@ Built with ❤️ by the Cost Katana team
 
 - **Website**: [costkatana.com](https://costkatana.com)
 - **GitHub**: [github.com/Hypothesize-Tech/cost-katana](https://github.com/Hypothesize-Tech/cost-katana)
-- **Support**: abdul@hypothesize.tech
+- **Support**: support@costkatana.com

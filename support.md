@@ -4,7 +4,7 @@ Get help with Cost Katana and connect with our team for any questions or assista
 
 ## 📧 Contact Information
 
-**Primary Support Email**: [abdul@hypothesize.tech](mailto:abdul@hypothesize.tech)
+**Primary Support Email**: [support@costkatana.com](mailto:support@costkatana.com)
 
 For fastest response, please include:
 - Your use case or issue description
@@ -29,7 +29,7 @@ For fastest response, please include:
 ## 🚀 Feature Requests
 
 We love hearing your ideas! Submit feature requests through:
-- **Email**: [abdul@hypothesize.tech](mailto:abdul@hypothesize.tech)
+- **Email**: [support@costkatana.com](mailto:support@costkatana.com)
 - **GitHub Issues**: Use the appropriate repository above
 
 ## 📚 Documentation
@@ -56,4 +56,4 @@ Join our growing community of AI cost optimization enthusiasts:
 
 ---
 
-**Need immediate help?** Email us at [abdul@hypothesize.tech](mailto:abdul@hypothesize.tech) - we're here to help! 🚀
+**Need immediate help?** Email us at [support@costkatana.com](mailto:support@costkatana.com) - we're here to help! 🚀

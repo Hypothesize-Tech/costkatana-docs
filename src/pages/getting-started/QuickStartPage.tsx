@@ -181,7 +181,7 @@ Set up intelligent alerts to prevent overages:
 
 ## Need Help?
 
-- 📧 **Email**: abdul@hypothesize.tech
+- 📧 **Email**: support@costkatana.com
 - 💬 **Chat**: Available in dashboard (bottom right)
 - 📚 **Docs**: You're here!
 - 🐛 **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/cost-katana/issues)
