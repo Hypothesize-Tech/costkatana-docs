@@ -56,7 +56,7 @@ const ExamplesPage: React.FC = () => {
                             Complete SDK examples with full type safety and production-ready patterns.
                         </p>
                         <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/1-cost-tracking/npm-package"
+                            href="https://github.com/Hypothesiƒze-Tech/costkatana-examples/tree/master/1-cost-tracking/npm-package"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline flex items-center"
@@ -73,7 +73,7 @@ const ExamplesPage: React.FC = () => {
                             Pythonic examples with the Cost Katana SDK and FastAPI integrations.
                         </p>
                         <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/8-python-sdk"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/8-python-sdk"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline flex items-center"
@@ -90,7 +90,7 @@ const ExamplesPage: React.FC = () => {
                             Direct API calls you can test immediately with REST Client for VS Code.
                         </p>
                         <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/1-cost-tracking/http-headers"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/http-headers"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-primary hover:underline flex items-center"
@@ -116,17 +116,17 @@ const ExamplesPage: React.FC = () => {
                         <ExampleLink
                             title="Cost Tracking"
                             description="Monitor costs across all AI providers with automatic tracking"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/1-cost-tracking"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking"
                         />
                         <ExampleLink
                             title="Budget Management"
                             description="Set spending limits and get alerts when approaching budgets"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/19-budgets"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/19-budgets"
                         />
                         <ExampleLink
                             title="Cost Analytics"
                             description="Analyze spending patterns and trends with detailed analytics"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/5-analytics"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/5-analytics"
                         />
                     </div>
                 </div>
@@ -141,19 +141,19 @@ const ExamplesPage: React.FC = () => {
                         <ExampleLink
                             title="Semantic Caching"
                             description="Cache similar requests with semantic matching (30-40% cost savings)"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/14-cache"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/14-cache"
                             badge="70-90% hit rate"
                         />
                         <ExampleLink
                             title="Cortex Optimization"
                             description="AI-powered prompt compression with the Cortex meta-language"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/4-cortex"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/4-cortex"
                             badge="30-40% savings"
                         />
                         <ExampleLink
                             title="Model Routing"
                             description="Automatically route to optimal models based on request characteristics"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/40-model-routing"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/40-model-routing"
                         />
                     </div>
                 </div>
@@ -168,18 +168,18 @@ const ExamplesPage: React.FC = () => {
                         <ExampleLink
                             title="Webhooks"
                             description="Real-time event notifications for 65+ event types"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/10-webhooks"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/10-webhooks"
                             badge="65+ events"
                         />
                         <ExampleLink
                             title="OpenTelemetry"
                             description="Distributed tracing and metrics export with full observability"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/11-observability"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/11-observability"
                         />
                         <ExampleLink
                             title="Custom Alerts"
                             description="Configure custom alert rules for costs, performance, and security"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/42-alerts"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/42-alerts"
                         />
                     </div>
                 </div>
@@ -194,17 +194,17 @@ const ExamplesPage: React.FC = () => {
                         <ExampleLink
                             title="Workflows"
                             description="Multi-step AI orchestration with parallel execution and error handling"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/13-workflows"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows"
                         />
                         <ExampleLink
                             title="AI Agents"
                             description="Create and manage AI agents with persistent context"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/27-agents"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/27-agents"
                         />
                         <ExampleLink
                             title="Agent Memory"
                             description="Persistent memory storage for AI agents across conversations"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/20-memory"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/20-memory"
                         />
                     </div>
                 </div>
@@ -219,17 +219,17 @@ const ExamplesPage: React.FC = () => {
                         <ExampleLink
                             title="Key Vault"
                             description="Secure API key management with proxy keys and rate limiting"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/15-key-vault"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/15-key-vault"
                         />
                         <ExampleLink
                             title="Guardrails"
                             description="Content moderation, PII detection, and policy enforcement"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/12-guardrails"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/12-guardrails"
                         />
                         <ExampleLink
                             title="Audit Logs"
                             description="Complete audit trail for compliance and security monitoring"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/37-audit-logs"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/37-audit-logs"
                         />
                     </div>
                 </div>
@@ -245,27 +245,27 @@ const ExamplesPage: React.FC = () => {
                     <FrameworkCard
                         name="Express.js"
                         description="REST API server with middleware integration"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/7-frameworks/express"
+                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/express"
                     />
                     <FrameworkCard
                         name="Next.js"
                         description="API routes and server components"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/7-frameworks/nextjs"
+                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nextjs"
                     />
                     <FrameworkCard
                         name="Fastify"
                         description="High-performance web framework integration"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/7-frameworks/fastify"
+                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/fastify"
                     />
                     <FrameworkCard
                         name="NestJS"
                         description="Enterprise-grade application framework"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/7-frameworks/nestjs"
+                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nestjs"
                     />
                     <FrameworkCard
                         name="FastAPI"
                         description="Modern Python web framework"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/7-frameworks"
+                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks"
                     />
                 </div>
             </div>
@@ -283,7 +283,7 @@ const ExamplesPage: React.FC = () => {
                     {features.map((feature, index) => (
                         <a
                             key={index}
-                            href={`https://github.com/Hypothesize-Tech/costkatana-examples/tree/main/${feature.folder}`}
+                            href={`https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/${feature.folder}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center p-3 bg-light-card dark:bg-dark-card rounded border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors"
