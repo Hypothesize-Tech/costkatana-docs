@@ -7,7 +7,7 @@ const ExamplesPage: React.FC = () => {
         <div className="max-w-6xl mx-auto px-4 py-8">
             {/* Hero Section */}
             <div className="mb-12">
-                <h1 className="text-4xl font-bold mb-4 bg-gradient-primary bg-clip-text text-transparent">
+                <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
                     Code Examples
                 </h1>
                 <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
@@ -17,7 +17,7 @@ const ExamplesPage: React.FC = () => {
                     href="https://github.com/Hypothesize-Tech/costkatana-examples"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 bg-gradient-primary text-white rounded-lg hover:shadow-lg transition-all"
+                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg hover:shadow-lg transition-all"
                 >
                     <Github className="mr-2" size={20} />
                     Browse Examples on GitHub
@@ -27,48 +27,48 @@ const ExamplesPage: React.FC = () => {
 
             {/* Quick Stats */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-                <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-primary mb-2">300+</div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">300+</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Code Examples</div>
                 </div>
-                <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-primary mb-2">44</div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">44</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Features Covered</div>
                 </div>
-                <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-primary mb-2">3</div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Languages</div>
                 </div>
-                <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                    <div className="text-3xl font-bold text-primary mb-2">5</div>
+                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5</div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">Frameworks</div>
                 </div>
             </div>
 
             {/* Languages & Methods */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">Available in Multiple Languages</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Available in Multiple Languages</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                        <Code className="text-primary mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2">TypeScript/Node.js</h3>
+                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <Code className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
+                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">TypeScript/Node.js</h3>
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             Complete SDK examples with full type safety and production-ready patterns.
                         </p>
                         <a
-                            href="https://github.com/Hypothesiƒze-Tech/costkatana-examples/tree/master/1-cost-tracking/npm-package"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/npm-package"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary hover:underline flex items-center"
+                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
                         >
                             View TypeScript Examples
                             <ExternalLink className="ml-1" size={14} />
                         </a>
                     </div>
 
-                    <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                        <Terminal className="text-primary mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2">Python SDK</h3>
+                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <Terminal className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
+                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Python SDK</h3>
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             Pythonic examples with the Cost Katana SDK and FastAPI integrations.
                         </p>
@@ -76,16 +76,16 @@ const ExamplesPage: React.FC = () => {
                             href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/8-python-sdk"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary hover:underline flex items-center"
+                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
                         >
                             View Python Examples
                             <ExternalLink className="ml-1" size={14} />
                         </a>
                     </div>
 
-                    <div className="p-6 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700">
-                        <FileCode className="text-primary mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2">HTTP REST APIs</h3>
+                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <FileCode className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
+                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">HTTP REST APIs</h3>
                         <p className="text-gray-600 dark:text-gray-400 mb-4">
                             Direct API calls you can test immediately with REST Client for VS Code.
                         </p>
@@ -93,7 +93,7 @@ const ExamplesPage: React.FC = () => {
                             href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/http-headers"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary hover:underline flex items-center"
+                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
                         >
                             View HTTP Examples
                             <ExternalLink className="ml-1" size={14} />
@@ -104,11 +104,11 @@ const ExamplesPage: React.FC = () => {
 
             {/* Popular Examples by Category */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6">Popular Examples by Category</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Popular Examples by Category</h2>
 
                 {/* Cost Management */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                         <span className="text-2xl mr-2">💰</span>
                         Cost Management
                     </h3>
@@ -133,7 +133,7 @@ const ExamplesPage: React.FC = () => {
 
                 {/* Performance & Optimization */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                         <span className="text-2xl mr-2">🚀</span>
                         Performance & Optimization
                     </h3>
@@ -160,7 +160,7 @@ const ExamplesPage: React.FC = () => {
 
                 {/* Monitoring & Alerts */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                         <span className="text-2xl mr-2">🔔</span>
                         Monitoring & Alerts
                     </h3>
@@ -186,7 +186,7 @@ const ExamplesPage: React.FC = () => {
 
                 {/* AI Orchestration */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                         <span className="text-2xl mr-2">🤖</span>
                         AI Orchestration
                     </h3>
@@ -211,7 +211,7 @@ const ExamplesPage: React.FC = () => {
 
                 {/* Security & Compliance */}
                 <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
                         <span className="text-2xl mr-2">🔒</span>
                         Security & Compliance
                     </h3>
@@ -237,8 +237,8 @@ const ExamplesPage: React.FC = () => {
 
             {/* Framework Integrations */}
             <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 flex items-center">
-                    <Layers className="mr-2 text-primary" size={28} />
+                <h2 className="text-2xl font-bold mb-6 flex items-center text-gray-900 dark:text-white">
+                    <Layers className="mr-2 text-blue-600 dark:text-blue-400" size={28} />
                     Framework Integrations
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -271,9 +271,9 @@ const ExamplesPage: React.FC = () => {
             </div>
 
             {/* Complete Feature List */}
-            <div className="mb-12 p-6 bg-light-panel dark:bg-dark-bg-200 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h2 className="text-2xl font-bold mb-4 flex items-center">
-                    <BookOpen className="mr-2 text-primary" size={28} />
+            <div className="mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                <h2 className="text-2xl font-bold mb-4 flex items-center text-gray-900 dark:text-white">
+                    <BookOpen className="mr-2 text-blue-600 dark:text-blue-400" size={28} />
                     Complete Feature Index
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 mb-6">
@@ -286,19 +286,19 @@ const ExamplesPage: React.FC = () => {
                             href={`https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/${feature.folder}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center p-3 bg-light-card dark:bg-dark-card rounded border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-colors"
+                            className="flex items-center p-3 bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors"
                         >
                             <span className="font-mono text-sm text-gray-500 dark:text-gray-400 mr-3 w-8">{feature.number}</span>
-                            <span className="text-sm flex-1">{feature.name}</span>
-                            <ExternalLink className="text-gray-400" size={14} />
+                            <span className="text-sm flex-1 text-gray-900 dark:text-white">{feature.name}</span>
+                            <ExternalLink className="text-gray-400 dark:text-gray-500" size={14} />
                         </a>
                     ))}
                 </div>
             </div>
 
             {/* Getting Started */}
-            <div className="p-8 bg-gradient-primary rounded-lg text-white">
-                <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
+            <div className="p-8 bg-blue-600 rounded-lg text-white">
+                <h2 className="text-2xl font-bold mb-4 text-white">Ready to Get Started?</h2>
                 <p className="mb-6 text-white/90">
                     Clone the examples repository and start building with Cost Katana in minutes.
                 </p>
@@ -318,14 +318,14 @@ const ExamplesPage: React.FC = () => {
                         href="https://github.com/Hypothesize-Tech/costkatana-examples"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 bg-white text-primary rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+                        className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
                     >
                         <Github className="mr-2" size={20} />
                         View on GitHub
                     </a>
                     <Link
                         to="/getting-started/quick-start"
-                        className="inline-flex items-center px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors font-semibold border-2 border-white/30"
+                        className="inline-flex items-center px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors font-semibold border-2 border-white"
                     >
                         Read Quick Start Guide
                     </Link>
@@ -341,18 +341,18 @@ const ExampleLink: React.FC<{ title: string; description: string; href: string; 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="block p-4 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-all"
+        className="block p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 transition-all shadow-sm"
     >
         <div className="flex items-start justify-between mb-2">
-            <h4 className="font-semibold text-primary">{title}</h4>
+            <h4 className="font-semibold text-blue-600 dark:text-blue-400">{title}</h4>
             {badge && (
-                <span className="px-2 py-1 text-xs bg-primary/10 text-primary rounded">
+                <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
                     {badge}
                 </span>
             )}
         </div>
         <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{description}</p>
-        <span className="text-xs text-primary flex items-center">
+        <span className="text-xs text-blue-600 dark:text-blue-400 flex items-center">
             View Examples <ExternalLink className="ml-1" size={12} />
         </span>
     </a>
@@ -363,11 +363,11 @@ const FrameworkCard: React.FC<{ name: string; description: string; href: string 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="p-4 bg-light-card dark:bg-dark-card rounded-lg border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-primary transition-all"
+        className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 transition-all shadow-sm"
     >
-        <h4 className="font-semibold mb-2 flex items-center justify-between">
+        <h4 className="font-semibold mb-2 flex items-center justify-between text-gray-900 dark:text-white">
             {name}
-            <ExternalLink className="text-gray-400" size={16} />
+            <ExternalLink className="text-gray-400 dark:text-gray-500" size={16} />
         </h4>
         <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
     </a>
