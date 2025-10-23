@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const IntroductionPage = lazy(() => import('./pages/getting-started/IntroductionPage'));
 const QuickStartPage = lazy(() => import('./pages/getting-started/QuickStartPage'));
+const ExamplesPage = lazy(() => import('./pages/ExamplesPage'));
 
 // Import documentation pages with real content
 import {
@@ -80,6 +81,9 @@ const App: React.FC = () => {
                 <Route path="/getting-started/introduction" element={<IntroductionPage />} />
                 <Route path="/getting-started/quick-start" element={<QuickStartPage />} />
                 <Route path="/getting-started/installation" element={<InstallationPage />} />
+
+                {/* Examples */}
+                <Route path="/examples" element={<ExamplesPage />} />
 
                 {/* Integrations */}
                 <Route path="/integrations/cli" element={<CLIPage />} />

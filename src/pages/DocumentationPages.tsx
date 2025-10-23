@@ -4963,7 +4963,7 @@ We provide migration assistance:
 
 ---
 
-Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/Wcwzw8wM) for real-time help!`}
+Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/D8nDArmKbY) for real-time help!`}
   />
 );
 
@@ -4998,7 +4998,7 @@ We're here to help you get the most out of Cost Katana. Whether you're just gett
 
 ### Discord Community
 Join our active Discord server for real-time help and discussions:
-- **Server**: [discord.gg/costkatana](https://discord.gg/Wcwzw8wM)
+- **Server**: [discord.gg/costkatana](https://discord.gg/D8nDArmKbY)
 - **Channels**: 
   - \`#general\` - General discussions
   - \`#technical-help\` - Technical support
@@ -5115,7 +5115,7 @@ For large organizations:
 
 - 🚀 [Get Started](/getting-started/introduction)
 - 📖 [Documentation](/api)
-- 💬 [Discord Community](https://discord.gg/Wcwzw8wM)
+- 💬 [Discord Community](https://discord.gg/D8nDArmKbY)
 - 📧 [Email Support](mailto:support@costkatana.com)
 - 📊 [Service Status](https://status.costkatana.com)
 - 📅 [Schedule Demo](https://calendly.com/costkatana-demo)
