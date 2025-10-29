@@ -1646,7 +1646,7 @@ Our ChatGPT custom GPT provides instant access to Cost Katana's optimization fea
 ### Installation
 
 1. **Access Custom GPT**: Visit [ChatGPT Custom GPTs](https://chat.openai.com/gpts)
-2. **Search for Cost Katana**: Find "Cost Katana AI Cost Optimizer"
+2. **Search for Cost Katana**: Find "CostKatana"
 3. **Install**: Click "Use this GPT"
 4. **Configure**: Connect your Cost Katana API key
 
@@ -1818,7 +1818,7 @@ Optimize costs for an AI coding assistant that:
 3. Configure your AI providers
 
 ### Step 2: Install Custom GPT
-1. Go to ChatGPT and find "Cost Katana AI Cost Optimizer"
+1. Go to ChatGPT and find "CostKatana"
 2. Click "Use this GPT"
 3. Follow the setup instructions
 
@@ -3552,37 +3552,91 @@ export const TracingPage = () => (
     nextPage={{ path: '/api', label: 'Next: API Reference' }}
     fallbackContent={`# Distributed Tracing
 
-Cost Katana provides enterprise-grade distributed tracing for all your AI operations. Track every LLM call, tool execution, and API request with automatic parent-child relationships, latency metrics, and cost attribution.
+Cost Katana provides enterprise-grade distributed tracing and session replay for all your AI operations. Track every LLM call, tool execution, and API request with automatic parent-child relationships, latency metrics, and cost attribution.
 
 ![Sessions Overview](/assets/sessions_1.png)
 
+## Unified Sessions Page
+
+The Sessions page provides two powerful views for monitoring your AI applications:
+
+### 1. 🎬 Session Replays
+Record and replay in-app AI interactions with complete context:
+- **Timeline Playback**: View AI interactions chronologically
+- **Full Context**: See prompts, responses, costs, and latency
+- **User Actions**: Track button clicks and navigation
+- **Code Context**: Capture active files and code snippets
+- **System Metrics**: Monitor CPU, memory, and performance
+
+### 2. 🐛 Debug Traces  
+Distributed tracing for API-level debugging:
+- **Span Trees**: Visualize request hierarchies
+- **Timeline View**: See parallel operations
+- **Performance Analysis**: Identify bottlenecks
+- **Error Tracking**: Debug failures with full context
+
 ## Features
 
-### 🌳 Hierarchical Traces
+### 🎬 Session Replay Features
+
+#### Automatic Recording
+Record AI interactions across different features:
+- **Chat Sessions**: Conversational AI interactions
+- **Experimentation**: A/B tests and experiments
+- **Workflows**: Multi-step AI pipelines
+- **Agents**: Autonomous AI agent actions
+- **Notebooks**: Jupyter/notebook interactions
+
+#### Rich Context Capture
+- **AI Interactions**: Full prompts, responses, tokens, costs, and latency
+- **User Actions**: Button clicks, form submissions, navigation
+- **Code Context**: Active file, cursor position, code snippets
+- **System Metrics**: CPU, memory, active requests
+- **Workspace State**: Full environment snapshot
+
+#### Advanced Filtering
+Filter sessions by:
+- Feature type (chat, experimentation, workflow, etc.)
+- Date range
+- Cost range
+- Token usage
+- AI model
+- Status (active, completed, error)
+- Custom metadata
+
+#### Export & Sharing
+- **JSON Export**: Download session data
+- **CSV Export**: Export for analysis in Excel
+- **Shareable Links**: Generate temporary viewing links
+- **API Access**: Programmatic access to replays
+
+### 🌳 Distributed Tracing Features
+
+#### Hierarchical Traces
 - **Automatic Span Relationships**: Parent-child trace relationships
 - **Trace Trees**: Visualize complex workflows
 - **Session Grouping**: Group related operations
 - **Depth Tracking**: Understand call stack depth
 
-### ⚡ Zero-Code Instrumentation
+#### Zero-Code Instrumentation
 - **Express Middleware**: One line to add tracing
 - **Auto-instrumentation**: Automatic for all requests
 - **Context Propagation**: Seamless trace context flow
 - **Session Management**: Automatic session creation
 
-### 💰 Cost Attribution
+#### Cost Attribution
 - **Per-Span Costs**: Track cost at every level
 - **Token Counting**: Input/output token metrics
 - **Model Attribution**: Cost by model and provider
 - **Budget Tracking**: Real-time budget monitoring
 
-### 📊 Visual Timeline
+#### Visual Timeline
 - **Interactive Visualization**: Drag, zoom, filter
 - **Gantt Charts**: See parallel operations
 - **Latency Analysis**: Identify bottlenecks
 - **Critical Path**: Find optimization opportunities
 
-### 🔒 PII Redaction
+#### PII Redaction
 - **Automatic Sanitization**: Server-side redaction
 - **Configurable Rules**: Custom sensitive keys
 - **Compliance Ready**: GDPR/CCPA compliant
@@ -3590,7 +3644,88 @@ Cost Katana provides enterprise-grade distributed tracing for all your AI operat
 
 ## Getting Started
 
-### 1. Add Middleware
+### Session Replay Recording
+
+#### 1. Install SDK
+
+\`\`\`bash
+npm install cost-katana
+\`\`\`
+
+#### 2. Start Recording
+
+\`\`\`typescript
+import { SessionReplayClient } from 'cost-katana/trace';
+
+const replayClient = new SessionReplayClient({
+  apiKey: process.env.COST_KATANA_API_KEY
+});
+
+// Start recording a chat session
+const { sessionId } = await replayClient.startRecording({
+  userId: 'user_123',
+  feature: 'chat',
+  label: 'Customer Support Chat'
+});
+\`\`\`
+
+#### 3. Record AI Interactions
+
+\`\`\`typescript
+await replayClient.recordInteraction({
+  sessionId,
+  interaction: {
+    timestamp: new Date(),
+    model: 'gpt-4',
+    prompt: 'What is the status of my order?',
+    response: 'Let me check that for you...',
+    tokens: { input: 15, output: 25 },
+    cost: 0.0008,
+    latency: 1200,
+    provider: 'openai'
+  }
+});
+\`\`\`
+
+#### 4. End Recording
+
+\`\`\`typescript
+await replayClient.endRecording(sessionId);
+\`\`\`
+
+#### React Hook Example
+
+\`\`\`typescript
+import { useSessionRecording } from 'cost-katana/trace';
+
+function ChatComponent() {
+  const { recordInteraction } = useSessionRecording({
+    userId: 'user_123',
+    feature: 'chat',
+    autoStart: true
+  });
+
+  const handleSendMessage = async (message) => {
+    const response = await callAI(message);
+    
+    await recordInteraction({
+      model: 'gpt-4',
+      prompt: message,
+      response: response.text,
+      tokens: response.tokens,
+      cost: response.cost,
+      latency: response.latency,
+      provider: 'openai'
+    });
+  };
+
+  return <div>...</div>;
+}
+\`\`\`
+
+### Distributed Tracing
+
+#### 1. Add Middleware
 
 \`\`\`javascript
 import { LocalTraceService, createTraceMiddleware } from 'ai-cost-tracker/trace';
@@ -3608,7 +3743,7 @@ app.use(createTraceMiddleware({
 }));
 \`\`\`
 
-### 2. Use Tracked Providers
+#### 2. Use Tracked Providers
 
 \`\`\`javascript
 import { TrackedOpenAI } from 'ai-cost-tracker/trace';
@@ -3627,13 +3762,13 @@ const response = await ai.makeRequest({
 });
 \`\`\`
 
-### 3. View Traces
+#### 3. View Sessions
 
 Navigate to the Sessions page in your Cost Katana dashboard to:
-- View all sessions with filters
-- Explore trace trees
-- Analyze timelines
-- Export trace data
+- **Replays Tab**: View AI interaction timeline and playback
+- **Debug Traces Tab**: Explore trace trees and timelines
+- Filter, search, and analyze both types of sessions
+- Export data and generate shareable links
 
 ## Trace Data Model
 
