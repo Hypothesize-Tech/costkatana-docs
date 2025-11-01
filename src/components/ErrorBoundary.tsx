@@ -85,7 +85,7 @@ class ErrorBoundary extends Component<Props, State> {
                             <div className="flex space-x-3">
                                 <button
                                     onClick={this.handleReset}
-                                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors"
+                                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors btn"
                                 >
                                     <RefreshCw size={18} />
                                     <span>Try Again</span>
@@ -93,7 +93,7 @@ class ErrorBoundary extends Component<Props, State> {
 
                                 <button
                                     onClick={this.handleGoHome}
-                                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+                                    className="flex-1 flex items-center justify-center space-x-2 px-4 py-3 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors btn"
                                 >
                                     <Home size={18} />
                                     <span>Go Home</span>
