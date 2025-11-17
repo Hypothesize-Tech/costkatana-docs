@@ -246,7 +246,7 @@ const HomePage: React.FC = () => {
                                 <Terminal className="text-green-600 mb-4" size={32} />
                                 <h3 className="font-semibold mb-2">CLI Tool</h3>
                                 <code className="text-sm bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                    npm i -g ai-cost-optimizer-cli
+                                    npm i -g cost-katana-cli
                                 </code>
                             </div>
 
@@ -254,7 +254,7 @@ const HomePage: React.FC = () => {
                                 <Package className="text-blue-600 mb-4" size={32} />
                                 <h3 className="font-semibold mb-2">Node.js SDK</h3>
                                 <code className="text-sm bg-gray-100 dark:bg-gray-800 px-2 py-1 rounded">
-                                    npm i ai-cost-tracker
+                                    npm i cost-katana
                                 </code>
                             </div>
 

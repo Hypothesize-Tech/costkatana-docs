@@ -18,7 +18,7 @@ Install the Cost Katana CLI globally using npm:
 
 \`\`\`bash
 # Install globally via npm
-npm install -g ai-cost-optimizer-cli
+npm install -g cost-katana-cli
 
 # Verify installation
 cost-katana --version
@@ -29,13 +29,13 @@ cost-katana --version
 #### Using npx (No Global Install)
 \`\`\`bash
 # Run without installing globally
-npx ai-cost-optimizer-cli init
+npx cost-katana-cli init
 \`\`\`
 
 #### Using Yarn
 \`\`\`bash
 # Global installation with Yarn
-yarn global add ai-cost-optimizer-cli
+yarn global add cost-katana-cli
 
 # Verify installation
 cost-katana --version
@@ -43,9 +43,9 @@ cost-katana --version
 
 ### Package Information
 
-[![npm version](https://badge.fury.io/js/ai-cost-optimizer-cli.svg)](https://www.npmjs.com/package/ai-cost-optimizer-cli)
+[![npm version](https://badge.fury.io/js/cost-katana-cli.svg)](https://www.npmjs.com/package/cost-katana-cli)
 
-- **Package Name**: \`ai-cost-optimizer-cli\`
+- **Package Name**: \`cost-katana-cli\`
 - **Latest Version**: 1.0.11
 - **Weekly Downloads**: 638+
 - **License**: MIT
@@ -111,7 +111,7 @@ docker run -it --rm costkatana/cli:latest init
 \`\`\`yaml
 # GitHub Actions example
 - name: Install Cost Katana CLI
-  run: npm install -g ai-cost-optimizer-cli
+  run: npm install -g cost-katana-cli
 
 - name: Initialize Cost Katana
   run: cost-katana init --api-key \${{ secrets.API_KEY }}
@@ -168,10 +168,10 @@ ck = CostKatana(api_key='your-api-key')
 #### Permission Errors
 \`\`\`bash
 # On macOS/Linux, use sudo for global install
-sudo npm install -g ai-cost-optimizer-cli
+sudo npm install -g cost-katana-cli
 
 # Or use npx to avoid global installation
-npx ai-cost-optimizer-cli init
+npx cost-katana-cli init
 \`\`\`
 
 #### Node.js Version Issues
@@ -230,7 +230,7 @@ Install the Cost Katana CLI globally using npm:
 
 \`\`\`bash
 # Install globally via npm
-npm install -g ai-cost-optimizer-cli
+npm install -g cost-katana-cli
 
 # Verify installation
 cost-katana --version
@@ -243,7 +243,7 @@ cost-katana init
 
 Based on the [npm package](https://www.npmjs.com/package/costkatana-cli):
 
-- **Package**: \`ai-cost-optimizer-cli\`
+- **Package**: \`cost-katana-cli\`
 - **Version**: 1.0.11 (latest)
 - **Weekly Downloads**: 638+
 - **License**: MIT
@@ -458,7 +458,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Cost Katana CLI
-        run: npm install -g ai-cost-optimizer-cli
+        run: npm install -g cost-katana-cli
       - name: Run Cost Analysis
         run: cost-katana analytics --format json --export cost-report.json
         env:
@@ -468,7 +468,7 @@ jobs:
 ### Docker Integration
 \`\`\`dockerfile
 FROM node:18-alpine
-RUN npm install -g ai-cost-optimizer-cli
+RUN npm install -g cost-katana-cli
 COPY . .
 RUN cost-katana analytics --export build-cost-report.json
 CMD ["npm", "start"]
@@ -494,7 +494,7 @@ cost-katana analytics --verbose
 
 ## 🚀 Getting Started
 
-1. **Install**: \`npm install -g ai-cost-optimizer-cli\`
+1. **Install**: \`npm install -g cost-katana-cli\`
 2. **Initialize**: \`cost-katana init\`
 3. **Explore**: \`cost-katana --help\`
 4. **Analyze**: \`cost-katana analytics\`
@@ -823,7 +823,7 @@ jobs:
           node-version: '18'
           
       - name: Install Cost Katana CLI
-        run: npm install -g ai-cost-optimizer-cli
+        run: npm install -g cost-katana-cli
         
       - name: Run Cost Analysis
         run: |
@@ -846,7 +846,7 @@ jobs:
 FROM node:18-alpine
 
 # Install Cost Katana CLI globally
-RUN npm install -g ai-cost-optimizer-cli
+RUN npm install -g cost-katana-cli
 
 # Copy application files
 COPY package*.json ./
@@ -1000,7 +1000,7 @@ async function chatWithCaching(messages) {
 
 ## 🚀 Getting Started
 
-1. **Install CLI**: \`npm install -g ai-cost-optimizer-cli\`
+1. **Install CLI**: \`npm install -g cost-katana-cli\`
 2. **Initialize**: \`cost-katana init\`
 3. **Install SDK**: \`npm install @cost-katana/node-sdk\`
 4. **Start Tracking**: Begin monitoring your AI costs
@@ -3728,7 +3728,7 @@ function ChatComponent() {
 #### 1. Add Middleware
 
 \`\`\`javascript
-import { LocalTraceService, createTraceMiddleware } from 'ai-cost-tracker/trace';
+import { LocalTraceService, createTraceMiddleware } from 'cost-katana/trace';
 
 // Create trace service
 const traceService = new LocalTraceService({
@@ -3746,7 +3746,7 @@ app.use(createTraceMiddleware({
 #### 2. Use Tracked Providers
 
 \`\`\`javascript
-import { TrackedOpenAI } from 'ai-cost-tracker/trace';
+import { TrackedOpenAI } from 'cost-katana/trace';
 
 const ai = new TrackedOpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -3844,7 +3844,7 @@ const traceService = new LocalTraceService({
 
 ### Production (Cloud)
 \`\`\`javascript
-import { TraceClient } from 'ai-cost-tracker/trace';
+import { TraceClient } from 'cost-katana/trace';
 
 const traceService = new TraceClient({
   apiKey: process.env.API_KEY,
