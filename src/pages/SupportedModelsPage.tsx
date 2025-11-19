@@ -1,7 +1,33 @@
 import React, { useState, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Search, Cpu, Sparkles, Zap, DollarSign, Filter } from 'lucide-react';
+import {
+    Search,
+    Cpu,
+    Sparkles,
+    Zap,
+    DollarSign,
+    Filter,
+    Bot,
+    Brain,
+    SearchIcon,
+    Cloud,
+    X,
+    Microscope,
+    Wind,
+    Target,
+    Zap as Lightning,
+    Beef,
+    FileText,
+    Eye,
+    Music,
+    Image as ImageIcon,
+    Film,
+    Laptop,
+    Calculator,
+    Star,
+    Clipboard
+} from 'lucide-react';
 
 interface Model {
     id: string;
@@ -16,7 +42,7 @@ interface Model {
 interface Provider {
     id: string;
     name: string;
-    logo: string;
+    logo: React.ComponentType<any>;
     description: string;
     models: Model[];
 }
@@ -30,7 +56,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'openai',
             name: 'OpenAI',
-            logo: '🤖',
+            logo: Bot,
             description: 'GPT-5, GPT-4o, O-Series reasoning models, DALL-E, and more',
             models: [
                 { id: 'gpt-5', name: 'GPT-5', series: 'GPT-5 Series', useCases: ['text', 'reasoning', 'coding', 'agents'], pricingTier: 3, isLatest: true, isRecommended: true },
@@ -51,7 +77,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'anthropic',
             name: 'Anthropic',
-            logo: '🧠',
+            logo: Brain,
             description: 'Claude Sonnet 4.5, Claude 4, Claude 3.5 Sonnet, and more',
             models: [
                 { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', series: 'Claude 4.5 Series', useCases: ['text', 'reasoning', 'coding'], pricingTier: 3, isLatest: true, isRecommended: true },
@@ -67,7 +93,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'google',
             name: 'Google AI',
-            logo: '🔍',
+            logo: SearchIcon,
             description: 'Gemini 2.5 Pro, Gemini 2.0 Flash, Imagen, Veo, and more',
             models: [
                 { id: 'gemini-2-5-pro', name: 'Gemini 2.5 Pro', series: 'Gemini 2.5 Series', useCases: ['text', 'vision', 'audio'], pricingTier: 2, isLatest: true, isRecommended: true },
@@ -82,7 +108,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'aws-bedrock',
             name: 'AWS Bedrock',
-            logo: '☁️',
+            logo: Cloud,
             description: 'Amazon Nova, Claude on Bedrock, Llama, Mistral, and more',
             models: [
                 { id: 'nova-pro', name: 'Amazon Nova Pro', series: 'Nova Series', useCases: ['text', 'vision'], pricingTier: 2, isRecommended: true },
@@ -95,7 +121,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'xai',
             name: 'xAI',
-            logo: '✖️',
+            logo: X,
             description: 'Grok-2, Grok Vision, and more',
             models: [
                 { id: 'grok-2', name: 'Grok-2', series: 'Grok Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -106,7 +132,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'deepseek',
             name: 'DeepSeek',
-            logo: '🔬',
+            logo: Microscope,
             description: 'DeepSeek Chat and DeepSeek Reasoner models',
             models: [
                 { id: 'deepseek-chat', name: 'DeepSeek Chat', series: 'DeepSeek Series', useCases: ['text', 'coding'], pricingTier: 1, isRecommended: true },
@@ -116,7 +142,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'mistral',
             name: 'Mistral AI',
-            logo: '🌪️',
+            logo: Wind,
             description: 'Mistral Large, Codestral, Pixtral, and more',
             models: [
                 { id: 'mistral-large', name: 'Mistral Large', series: 'Mistral Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -128,7 +154,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'cohere',
             name: 'Cohere',
-            logo: '🎯',
+            logo: Target,
             description: 'Command R+, Command R, embeddings, and reranking',
             models: [
                 { id: 'command-r-plus', name: 'Command R+', series: 'Command Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -139,7 +165,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'groq',
             name: 'Groq',
-            logo: '⚡',
+            logo: Lightning,
             description: 'Ultra-fast Llama, Mixtral, and Gemma models',
             models: [
                 { id: 'llama-3-3-70b', name: 'Llama 3.3 70B', series: 'Llama Series', useCases: ['text', 'fast'], pricingTier: 1, isRecommended: true },
@@ -150,7 +176,7 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'meta',
             name: 'Meta',
-            logo: '🦙',
+            logo: Beef,
             description: 'Llama 3.3, Llama 3.2, Llama 3.1, and more',
             models: [
                 { id: 'llama-3-3-70b', name: 'Llama 3.3 70B', series: 'Llama 3.3 Series', useCases: ['text', 'coding'], pricingTier: 1, isRecommended: true },
@@ -192,25 +218,28 @@ const SupportedModelsPage: React.FC = () => {
     const totalModels = providers.reduce((sum, provider) => sum + provider.models.length, 0);
 
     const getPricingIcon = (tier: 1 | 2 | 3) => {
-        return '💰'.repeat(tier);
+        return Array(tier).fill(null).map((_, i) => (
+            <DollarSign key={i} size={14} className="inline-block" />
+        ));
     };
 
     const getUseCaseIcon = (useCase: string) => {
-        const icons: Record<string, string> = {
-            text: '📝',
-            vision: '👁️',
-            audio: '🎵',
-            image: '🖼️',
-            video: '🎬',
-            coding: '💻',
-            reasoning: '🧮',
-            fast: '⚡',
-            premium: '⭐',
-            research: '🔬',
-            agents: '🤖',
-            transcription: '📋',
+        const icons: Record<string, React.ComponentType<any>> = {
+            text: FileText,
+            vision: Eye,
+            audio: Music,
+            image: ImageIcon,
+            video: Film,
+            coding: Laptop,
+            reasoning: Calculator,
+            fast: Zap,
+            premium: Star,
+            research: Microscope,
+            agents: Bot,
+            transcription: Clipboard,
         };
-        return icons[useCase] || '🔹';
+        const IconComponent = icons[useCase] || Cpu;
+        return <IconComponent size={14} className="inline-block" />;
     };
 
     return (
@@ -310,7 +339,9 @@ const SupportedModelsPage: React.FC = () => {
                             >
                                 {/* Provider Header */}
                                 <div className="flex items-center mb-6">
-                                    <div className="text-4xl mr-4">{provider.logo}</div>
+                                    <div className="mr-4">
+                                        <provider.logo size={40} className="text-gray-700 dark:text-gray-300" />
+                                    </div>
                                     <div>
                                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                                             {provider.name}

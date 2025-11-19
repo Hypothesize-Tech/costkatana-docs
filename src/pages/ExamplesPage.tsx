@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Github, Code, Terminal, FileCode, Layers, BookOpen } from 'lucide-react';
+import { ExternalLink, Github, Code, Terminal, FileCode, Layers, BookOpen, Rocket } from 'lucide-react';
 
 const ExamplesPage: React.FC = () => {
     return (
@@ -134,7 +134,7 @@ const ExamplesPage: React.FC = () => {
                 {/* Performance & Optimization */}
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <span className="text-2xl mr-2">🚀</span>
+                        <Rocket className="mr-2" size={24} />
                         Performance & Optimization
                     </h3>
                     <div className="space-y-3">

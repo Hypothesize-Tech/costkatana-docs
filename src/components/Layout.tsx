@@ -31,7 +31,8 @@ import {
     FileText,
     Package,
     Cpu,
-    BookMarked
+    BookMarked,
+    Heart
 } from 'lucide-react';
 import SearchModal from './SearchModal';
 
@@ -286,8 +287,8 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                 <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                                     © 2025 Cost Katana. All rights reserved.
                                 </p>
-                                <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1">
-                                    Made with ❤️ by the Cost Katana team
+                                <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
+                                    Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
                                 </p>
                             </div>
 

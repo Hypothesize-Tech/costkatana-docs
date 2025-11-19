@@ -3,7 +3,49 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
-import { Copy, Check } from 'lucide-react';
+import {
+    Copy,
+    Check,
+    CheckCircle2,
+    BarChart3,
+    TrendingUp,
+    Zap,
+    AlertTriangle,
+    AlertCircle,
+    Circle,
+    PartyPopper,
+    Bot,
+    Sparkles,
+    Target,
+    Rocket,
+    DollarSign,
+    Trophy,
+    Settings,
+    Wrench,
+    Building,
+    Shield,
+    Palette,
+    Cloud,
+    Monitor,
+    Lightbulb,
+    Link,
+    Phone,
+    GraduationCap,
+    Heart,
+    X,
+    Microscope,
+    Wind,
+    FileText,
+    Eye,
+    Music,
+    Image,
+    Film,
+    Laptop,
+    Star,
+    Clipboard,
+    Calculator,
+    TrendingDown
+} from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface MarkdownContentProps {
@@ -23,6 +65,72 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         } catch {
             toast.error('Failed to copy code');
         }
+    };
+
+    // Emoji to icon mapping
+    const emojiToIcon: Record<string, React.ComponentType<any>> = {
+        '✅': CheckCircle2,
+        '❌': X,
+        '⚠️': AlertTriangle,
+        '🚨': AlertCircle,
+        '🔴': Circle,
+        '📊': BarChart3,
+        '📈': TrendingUp,
+        '📉': TrendingDown,
+        '⚡': Zap,
+        '🎯': Target,
+        '🔧': Wrench,
+        '📝': FileText,
+        '💻': Laptop,
+        '🚀': Rocket,
+        '💡': Lightbulb,
+        '🤖': Bot,
+        '🔮': Sparkles,
+        '🎨': Palette,
+        '🏆': Trophy,
+        '💰': DollarSign,
+        '🔒': Shield,
+        '☁️': Cloud,
+        '✖️': X,
+        '🌪️': Wind,
+        '🖼️': Image,
+        '🎬': Film,
+        '🎵': Music,
+        '👁️': Eye,
+        '🧮': Calculator,
+        '🔬': Microscope,
+        '📋': Clipboard,
+        '🎉': PartyPopper,
+        '❤️': Heart,
+        '🖥️': Monitor,
+        '🛠️': Settings,
+        '⚙️': Settings,
+        '🛡️': Shield,
+        '🔗': Link,
+        '📞': Phone,
+        '🎓': GraduationCap,
+        '🏢': Building,
+        '⭐': Star,
+    };
+
+    // Function to replace emojis in text with icon components
+    const replaceEmojisWithIcons = (text: string): React.ReactNode => {
+        const emojiRegex = /(✅|❌|⚠️|🚨|🔴|📊|📈|📉|⚡|🎯|🔧|📝|💻|🚀|💡|🤖|🔮|🎨|🏆|💰|🔒|☁️|✖️|🌪️|🖼️|🎬|🎵|👁️|🧮|🔬|📋|🎉|❤️|🖥️|🛠️|⚙️|🛡️|🔗|📞|🎓|🏢|⭐)/g;
+        const parts = text.split(emojiRegex);
+
+        return parts.map((part, index) => {
+            const IconComponent = emojiToIcon[part];
+            if (IconComponent) {
+                return (
+                    <IconComponent
+                        key={index}
+                        size={18}
+                        className="inline-block mx-0.5 align-middle"
+                    />
+                );
+            }
+            return part;
+        });
     };
 
     // Custom components for markdown rendering
@@ -95,11 +203,16 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         ),
 
         // Blockquotes
-        blockquote: ({ children, ...props }: any) => (
-            <blockquote className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg" {...props}>
-                {children}
-            </blockquote>
-        ),
+        blockquote: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <blockquote className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg" {...props}>
+                    {processedChildren}
+                </blockquote>
+            );
+        },
 
         // Links
         a: ({ href, children, ...props }: any) => {
@@ -130,43 +243,80 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             </ol>
         ),
 
-        li: ({ children, ...props }: any) => (
-            <li className="text-gray-600 dark:text-gray-300" {...props}>
-                {children}
-            </li>
-        ),
+        li: ({ children, ...props }: any) => {
+            // Process text content to replace emojis
+            const processChildren = (child: any): any => {
+                if (typeof child === 'string') {
+                    return replaceEmojisWithIcons(child);
+                }
+                return child;
+            };
+
+            const processedChildren = React.Children.map(children, processChildren);
+
+            return (
+                <li className="text-gray-600 dark:text-gray-300" {...props}>
+                    {processedChildren}
+                </li>
+            );
+        },
 
         // Headings
-        h1: ({ children, ...props }: any) => (
-            <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white" {...props}>
-                {children}
-            </h1>
-        ),
+        h1: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white" {...props}>
+                    {processedChildren}
+                </h1>
+            );
+        },
 
-        h2: ({ children, ...props }: any) => (
-            <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2" {...props}>
-                {children}
-            </h2>
-        ),
+        h2: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2" {...props}>
+                    {processedChildren}
+                </h2>
+            );
+        },
 
-        h3: ({ children, ...props }: any) => (
-            <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100" {...props}>
-                {children}
-            </h3>
-        ),
+        h3: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100" {...props}>
+                    {processedChildren}
+                </h3>
+            );
+        },
 
-        h4: ({ children, ...props }: any) => (
-            <h4 className="text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200" {...props}>
-                {children}
-            </h4>
-        ),
+        h4: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <h4 className="text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200" {...props}>
+                    {processedChildren}
+                </h4>
+            );
+        },
 
         // Paragraphs
-        p: ({ children, ...props }: any) => (
-            <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300" {...props}>
-                {children}
-            </p>
-        ),
+        p: ({ children, ...props }: any) => {
+            const processedChildren = React.Children.map(children, (child: any) =>
+                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
+            );
+            return (
+                <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300" {...props}>
+                    {processedChildren}
+                </p>
+            );
+        },
 
         // Horizontal rules
         hr: ({ ...props }: any) => (
@@ -180,7 +330,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                 e.target.style.display = 'none';
             };
 
-            const handleLoad = (e: any) => {
+            const handleLoad = () => {
                 console.log('Image loaded successfully:', src);
             };
 
