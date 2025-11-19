@@ -42,7 +42,9 @@ interface Model {
 interface Provider {
     id: string;
     name: string;
-    logo: React.ComponentType<any>;
+    logo: string; // Path to logo image
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    logoFallback?: React.ComponentType<any>; // Fallback icon if image not available
     description: string;
     models: Model[];
 }
@@ -56,7 +58,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'openai',
             name: 'OpenAI',
-            logo: Bot,
+            logo: '/assets/openai.png',
+            logoFallback: Bot,
             description: 'GPT-5, GPT-4o, O-Series reasoning models, DALL-E, and more',
             models: [
                 { id: 'gpt-5', name: 'GPT-5', series: 'GPT-5 Series', useCases: ['text', 'reasoning', 'coding', 'agents'], pricingTier: 3, isLatest: true, isRecommended: true },
@@ -77,7 +80,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'anthropic',
             name: 'Anthropic',
-            logo: Brain,
+            logo: '/assets/claudeai.png',
+            logoFallback: Brain,
             description: 'Claude Sonnet 4.5, Claude 4, Claude 3.5 Sonnet, and more',
             models: [
                 { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', series: 'Claude 4.5 Series', useCases: ['text', 'reasoning', 'coding'], pricingTier: 3, isLatest: true, isRecommended: true },
@@ -93,7 +97,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'google',
             name: 'Google AI',
-            logo: SearchIcon,
+            logo: '/assets/geminiai.svg',
+            logoFallback: SearchIcon,
             description: 'Gemini 2.5 Pro, Gemini 2.0 Flash, Imagen, Veo, and more',
             models: [
                 { id: 'gemini-2-5-pro', name: 'Gemini 2.5 Pro', series: 'Gemini 2.5 Series', useCases: ['text', 'vision', 'audio'], pricingTier: 2, isLatest: true, isRecommended: true },
@@ -108,7 +113,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'aws-bedrock',
             name: 'AWS Bedrock',
-            logo: Cloud,
+            logo: '/assets/aws-bedrock.svg',
+            logoFallback: Cloud,
             description: 'Amazon Nova, Claude on Bedrock, Llama, Mistral, and more',
             models: [
                 { id: 'nova-pro', name: 'Amazon Nova Pro', series: 'Nova Series', useCases: ['text', 'vision'], pricingTier: 2, isRecommended: true },
@@ -121,7 +127,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'xai',
             name: 'xAI',
-            logo: X,
+            logo: '',
+            logoFallback: X,
             description: 'Grok-2, Grok Vision, and more',
             models: [
                 { id: 'grok-2', name: 'Grok-2', series: 'Grok Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -132,7 +139,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'deepseek',
             name: 'DeepSeek',
-            logo: Microscope,
+            logo: '',
+            logoFallback: Microscope,
             description: 'DeepSeek Chat and DeepSeek Reasoner models',
             models: [
                 { id: 'deepseek-chat', name: 'DeepSeek Chat', series: 'DeepSeek Series', useCases: ['text', 'coding'], pricingTier: 1, isRecommended: true },
@@ -142,7 +150,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'mistral',
             name: 'Mistral AI',
-            logo: Wind,
+            logo: '/assets/mistral_logo.svg',
+            logoFallback: Wind,
             description: 'Mistral Large, Codestral, Pixtral, and more',
             models: [
                 { id: 'mistral-large', name: 'Mistral Large', series: 'Mistral Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -154,7 +163,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'cohere',
             name: 'Cohere',
-            logo: Target,
+            logo: '/assets/cohere_logo.svg',
+            logoFallback: Target,
             description: 'Command R+, Command R, embeddings, and reranking',
             models: [
                 { id: 'command-r-plus', name: 'Command R+', series: 'Command Series', useCases: ['text', 'reasoning'], pricingTier: 2, isRecommended: true },
@@ -165,7 +175,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'groq',
             name: 'Groq',
-            logo: Lightning,
+            logo: '/assets/grokai.png',
+            logoFallback: Lightning,
             description: 'Ultra-fast Llama, Mixtral, and Gemma models',
             models: [
                 { id: 'llama-3-3-70b', name: 'Llama 3.3 70B', series: 'Llama Series', useCases: ['text', 'fast'], pricingTier: 1, isRecommended: true },
@@ -176,7 +187,8 @@ const SupportedModelsPage: React.FC = () => {
         {
             id: 'meta',
             name: 'Meta',
-            logo: Beef,
+            logo: '',
+            logoFallback: Beef,
             description: 'Llama 3.3, Llama 3.2, Llama 3.1, and more',
             models: [
                 { id: 'llama-3-3-70b', name: 'Llama 3.3 70B', series: 'Llama 3.3 Series', useCases: ['text', 'coding'], pricingTier: 1, isRecommended: true },
@@ -224,6 +236,7 @@ const SupportedModelsPage: React.FC = () => {
     };
 
     const getUseCaseIcon = (useCase: string) => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const icons: Record<string, React.ComponentType<any>> = {
             text: FileText,
             vision: Eye,
@@ -339,8 +352,16 @@ const SupportedModelsPage: React.FC = () => {
                             >
                                 {/* Provider Header */}
                                 <div className="flex items-center mb-6">
-                                    <div className="mr-4">
-                                        <provider.logo size={40} className="text-gray-700 dark:text-gray-300" />
+                                    <div className="mr-4 w-12 h-12 flex items-center justify-center">
+                                        {provider.logo ? (
+                                            <img
+                                                src={provider.logo}
+                                                alt={`${provider.name} logo`}
+                                                className="w-10 h-10 object-contain"
+                                            />
+                                        ) : provider.logoFallback ? (
+                                            <provider.logoFallback size={40} className="text-gray-700 dark:text-gray-300" />
+                                        ) : null}
                                     </div>
                                     <div>
                                         <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
