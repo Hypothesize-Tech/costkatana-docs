@@ -64,6 +64,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                 { path: '/getting-started/introduction', label: 'Introduction', icon: <FileText size={16} /> },
                 { path: '/getting-started/quick-start', label: 'Quick Start', icon: <Zap size={16} /> },
                 { path: '/getting-started/installation', label: 'Installation', icon: <Package size={16} /> },
+                { path: '/models', label: 'Supported Models', icon: <Cpu size={16} /> },
                 { path: '/examples', label: 'Code Examples', icon: <BookMarked size={16} /> },
             ],
         },

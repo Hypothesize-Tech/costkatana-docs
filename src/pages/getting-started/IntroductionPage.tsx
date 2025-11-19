@@ -17,7 +17,13 @@ Monitor your AI applications with intelligent insights, predictive analytics, an
 Cost Katana transforms how you manage AI costs by providing:
 
 - **🤖 AI-Powered Intelligence**: Personalized recommendations based on your usage patterns
-- **📊 Real-time Monitoring**: Live tracking across all AI providers (OpenAI, Anthropic, AWS Bedrock, Google AI, and more)
+- **📊 Real-time Monitoring**: Live tracking across 400+ AI models from 10 providers:
+  - OpenAI (GPT-5, GPT-4o, O3, DALL-E 3, Whisper)
+  - Anthropic (Claude Sonnet 4.5, Claude 4, Claude 3.5 Sonnet)
+  - Google AI (Gemini 2.5 Pro, Gemini 2.0 Flash, Imagen 4, Veo 3)
+  - AWS Bedrock (Amazon Nova, Claude on Bedrock, Llama 3.3)
+  - xAI (Grok-2, Grok Vision)
+  - DeepSeek, Mistral AI, Cohere, Groq, Meta Llama
 - **🔮 Predictive Analytics**: AI forecasts spending trends and prevents limit overruns
 - **⚡ Smart Optimization**: Automated prompt optimization and model recommendations
 - **🎯 Project Management**: Organize usage by projects with budget tracking
@@ -38,9 +44,11 @@ Cost Katana transforms how you manage AI costs by providing:
 - **Usage Intelligence**: Deep insights into spending patterns and efficiency
 
 ### 🔗 Universal Integration
-- **Multi-Provider Support**: OpenAI, Anthropic, AWS Bedrock, Google AI, Cohere, and more
+- **Multi-Provider Support**: 400+ models across 10 providers
+  - Latest models: GPT-5, Claude Sonnet 4.5, Gemini 2.5 Pro
+  - All major providers: OpenAI, Anthropic, Google, AWS, xAI, and more
 - **ChatGPT Custom GPT**: Direct integration with personalized AI tips
-- **Development Tools**: VSCode/Cursor extensions, CLI tools, SDKs
+- **Development Tools**: VSCode/Cursor extensions, CLI tools, SDKs with type-safe constants
 - **API Gateway**: Unified proxy with caching, retries, and optimization
 
 ### 🚨 Proactive Monitoring

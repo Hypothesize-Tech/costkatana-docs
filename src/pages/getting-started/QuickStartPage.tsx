@@ -86,10 +86,10 @@ const ck = new CostKatana({
   apiKey: 'ck_your_api_key_here'
 });
 
-// Track OpenAI usage
+// Track OpenAI usage with latest models
 const response = await ck.track({
   provider: 'openai',
-  model: 'gpt-4',
+  model: 'gpt-4o',  // or 'gpt-5', 'gpt-4o-mini'
   usage: {
     prompt_tokens: 100,
     completion_tokens: 50
@@ -99,6 +99,22 @@ const response = await ck.track({
 // Get AI optimization tips
 const tips = await ck.getOptimizationTips();
 console.log(tips.recommendations);
+\`\`\`
+
+### Option 4: Using Type-Safe Constants (Recommended for TypeScript)
+Prevent typos and get autocomplete with type-safe model constants:
+
+\`\`\`javascript
+import { CostKatana, OPENAI, ANTHROPIC, GOOGLE } from 'ai-cost-tracker';
+
+const ck = new CostKatana({ apiKey: 'ck_your_api_key_here' });
+
+// Type-safe model selection - no typos!
+const response = await ck.track({
+  provider: 'openai',
+  model: OPENAI.GPT_5,  // Autocomplete supported!
+  usage: { prompt_tokens: 100, completion_tokens: 50 }
+});
 \`\`\`
 
 ### Option 3: Python SDK
@@ -113,10 +129,10 @@ from cost_katana import CostKatana
 
 ck = CostKatana(api_key="ck_your_api_key_here")
 
-# Track Anthropic usage
+# Track Anthropic usage with latest models
 response = ck.track(
     provider="anthropic",
-    model="claude-3-sonnet",
+    model="claude-3-5-sonnet-20241022",  # or 'claude-sonnet-4-5'
     usage={
         "input_tokens": 150,
         "output_tokens": 75
@@ -126,6 +142,21 @@ response = ck.track(
 # Get predictive analytics
 forecast = ck.get_cost_forecast()
 print(f"Predicted monthly cost: ${'{'}forecast.predicted_cost{'}'}")
+\`\`\`
+
+**Using Type-Safe Constants in Python:**
+
+\`\`\`python
+from cost_katana import CostKatana, anthropic, google, openai
+
+ck = CostKatana(api_key="ck_your_api_key_here")
+
+# Type-safe model selection - prevents typos!
+response = ck.track(
+    provider="google",
+    model=google.gemini_2_5_pro,  # Latest Gemini model
+    usage={"input_tokens": 150, "output_tokens": 75}
+)
 \`\`\`
 
 ---

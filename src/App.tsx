@@ -12,6 +12,7 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const IntroductionPage = lazy(() => import('./pages/getting-started/IntroductionPage'));
 const QuickStartPage = lazy(() => import('./pages/getting-started/QuickStartPage'));
 const ExamplesPage = lazy(() => import('./pages/ExamplesPage'));
+const SupportedModelsPage = lazy(() => import('./pages/SupportedModelsPage'));
 
 // Import documentation pages with real content
 import {
@@ -84,6 +85,9 @@ const App: React.FC = () => {
 
                 {/* Examples */}
                 <Route path="/examples" element={<ExamplesPage />} />
+
+                {/* Models */}
+                <Route path="/models" element={<SupportedModelsPage />} />
 
                 {/* Integrations */}
                 <Route path="/integrations/cli" element={<CLIPage />} />

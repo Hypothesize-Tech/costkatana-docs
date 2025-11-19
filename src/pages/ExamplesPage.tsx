@@ -155,6 +155,18 @@ const ExamplesPage: React.FC = () => {
                             description="Automatically route to optimal models based on request characteristics"
                             href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/40-model-routing"
                         />
+                        <ExampleLink
+                            title="Model Comparison & Selection"
+                            description="Compare costs and performance across 400+ AI models from 10 providers"
+                            href="/models"
+                            badge="400+ models"
+                        />
+                        <ExampleLink
+                            title="Type-Safe Model Constants"
+                            description="Use type-safe constants to prevent typos and get autocomplete support"
+                            href="/getting-started/quick-start#option-4-using-type-safe-constants-recommended-for-typescript"
+                            badge="TypeScript/Python"
+                        />
                     </div>
                 </div>
 
