@@ -64,100 +64,109 @@ Once logged in, you'll need an API key to start tracking usage:
 
 ## Step 3: Choose Your Integration Method
 
-### Option 1: ChatGPT Custom GPT (Easiest)
-Perfect for ChatGPT Plus users - get instant AI-powered optimization tips:
-
-1. **Visit our Custom GPT**: [chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o](https://chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o)
-2. **Click "Start Chat"**
-3. **Enter your API key** when prompted
-4. **Start chatting** - usage is automatically tracked with AI insights!
-
-### Option 2: Node.js SDK
-For JavaScript/TypeScript developers:
+### Option 1: Node.js SDK (Core Package)
+For JavaScript/TypeScript developers - the most powerful way to integrate:
 
 \`\`\`bash
-npm install ai-cost-tracker
+npm install cost-katana
 \`\`\`
 
 \`\`\`javascript
-import { CostKatana } from 'ai-cost-tracker';
+import { ai, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';
 
-const ck = new CostKatana({
-  apiKey: 'ck_your_api_key_here'
-});
+// Simple AI call with automatic cost tracking
+const response = await ai(OPENAI.GPT_4O, 'Explain quantum computing');
+console.log(response.text);
+console.log(\`Cost: $\${response.cost}\`);
 
-// Track OpenAI usage with latest models
-const response = await ck.track({
-  provider: 'openai',
-  model: 'gpt-4o',  // or 'gpt-5', 'gpt-4o-mini'
-  usage: {
-    prompt_tokens: 100,
-    completion_tokens: 50
-  }
-});
-
-// Get AI optimization tips
-const tips = await ck.getOptimizationTips();
-console.log(tips.recommendations);
+// Compare multiple models
+const models = [OPENAI.GPT_4O, ANTHROPIC.CLAUDE_3_5_SONNET_20241022, GOOGLE.GEMINI_2_5_PRO];
+for (const model of models) {
+  const result = await ai(model, 'Write a haiku about AI');
+  console.log(\`\${model}: $\${result.cost}\`);
+}
 \`\`\`
 
-### Option 4: Using Type-Safe Constants (Recommended for TypeScript)
-Prevent typos and get autocomplete with type-safe model constants:
+**Type-Safe Model Constants (Recommended):**
 
 \`\`\`javascript
-import { CostKatana, OPENAI, ANTHROPIC, GOOGLE } from 'ai-cost-tracker';
+// Import model constants for autocomplete and type safety
+import { ai, chat, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';
 
-const ck = new CostKatana({ apiKey: 'ck_your_api_key_here' });
+// No more typos - your IDE will autocomplete!
+const response = await ai(OPENAI.GPT_5, 'Hello, world!');
 
-// Type-safe model selection - no typos!
-const response = await ck.track({
-  provider: 'openai',
-  model: OPENAI.GPT_5,  // Autocomplete supported!
-  usage: { prompt_tokens: 100, completion_tokens: 50 }
-});
+// Start a chat session
+const chatSession = chat(ANTHROPIC.CLAUDE_SONNET_4_5, 'You are a helpful assistant');
+await chatSession.send('What is machine learning?');
 \`\`\`
 
-### Option 3: Python SDK
-For Python developers:
+### Option 2: Python SDK
+For Python developers - with type-safe model constants:
 
 \`\`\`bash
 pip install cost-katana
 \`\`\`
 
 \`\`\`python
-from cost_katana import CostKatana
+from cost_katana import ai, anthropic, google, openai
 
-ck = CostKatana(api_key="ck_your_api_key_here")
+# Simple AI call with automatic cost tracking
+response = ai(openai.gpt_4o, "Explain quantum computing")
+print(response.text)
+print(f"Cost: ${response.cost}")
 
-# Track Anthropic usage with latest models
-response = ck.track(
-    provider="anthropic",
-    model="claude-3-5-sonnet-20241022",  # or 'claude-sonnet-4-5'
-    usage={
-        "input_tokens": 150,
-        "output_tokens": 75
-    }
-)
-
-# Get predictive analytics
-forecast = ck.get_cost_forecast()
-print(f"Predicted monthly cost: ${'{'}forecast.predicted_cost{'}'}")
+# Compare multiple models
+models = [openai.gpt_4o, anthropic.claude_3_5_sonnet_20241022, google.gemini_2_5_pro]
+for model in models:
+    result = ai(model, "Write a haiku about AI")
+    print(f"{model}: ${result.cost}")
 \`\`\`
 
-**Using Type-Safe Constants in Python:**
+**Type-Safe Model Constants (Recommended):**
 
 \`\`\`python
-from cost_katana import CostKatana, anthropic, google, openai
+from cost_katana import ai, chat, openai, anthropic, google
 
-ck = CostKatana(api_key="ck_your_api_key_here")
+# No more typos - type-safe model selection!
+response = ai(google.gemini_2_5_pro, "Hello, world!")
 
-# Type-safe model selection - prevents typos!
-response = ck.track(
-    provider="google",
-    model=google.gemini_2_5_pro,  # Latest Gemini model
-    usage={"input_tokens": 150, "output_tokens": 75}
-)
+# Start a chat session
+chat_session = chat(anthropic.claude_sonnet_4_5, "You are a helpful assistant")
+chat_session.send("What is machine learning?")
 \`\`\`
+
+### Option 3: CLI Tool
+For terminal enthusiasts - the fastest way to get started:
+
+\`\`\`bash
+npm install -g cost-katana-cli
+\`\`\`
+
+\`\`\`bash
+# Ask a quick question
+cost-katana ask "What is the meaning of life?"
+
+# Start an interactive chat session
+cost-katana chat
+
+# Compare costs across models
+cost-katana compare "Explain AI" -m gpt-4o,claude-3-5-sonnet,gemini-2-5-pro
+
+# View all supported models
+cost-katana models
+
+# Check your usage and costs
+cost-katana usage
+\`\`\`
+
+### Option 4: ChatGPT Custom GPT
+Perfect for ChatGPT Plus users - get instant AI-powered optimization tips:
+
+1. **Visit our Custom GPT**: [chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence](https://chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o)
+2. **Click "Start Chat"**
+3. **Enter your API key** when prompted
+4. **Start chatting** - usage is automatically tracked with AI insights!
 
 ---
 
