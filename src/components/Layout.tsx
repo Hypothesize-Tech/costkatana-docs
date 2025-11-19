@@ -58,6 +58,18 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
 
     const navigation = [
         {
+            title: 'Quick Links',
+            id: 'quick-links',
+            icon: <ExternalLink size={18} />,
+            items: [
+                { path: 'https://costkatana.com', label: 'Landing Page', icon: <Home size={16} />, external: true },
+                { path: 'https://app.costkatana.com', label: 'Web App', icon: <Zap size={16} />, external: true },
+                { path: 'https://www.npmjs.com/package/cost-katana', label: 'NPM Package (Node.js)', icon: <Package size={16} />, external: true },
+                { path: 'https://www.npmjs.com/package/cost-katana-cli', label: 'NPM CLI Package', icon: <Terminal size={16} />, external: true },
+                { path: 'https://pypi.org/project/cost-katana', label: 'PyPI Package (Python)', icon: <Package size={16} />, external: true },
+            ],
+        },
+        {
             title: 'Getting Started',
             id: 'getting-started',
             icon: <BookOpen size={18} />,
@@ -220,16 +232,30 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                         className="overflow-hidden"
                                     >
                                         <div className="ml-2 mt-1 space-y-1">
-                                            {section.items.map((item) => (
-                                                <Link
-                                                    key={item.path}
-                                                    to={item.path}
-                                                    className={`sidebar-link ${location.pathname === item.path ? 'active' : ''
-                                                        }`}
-                                                >
-                                                    {item.icon}
-                                                    <span className="ml-2">{item.label}</span>
-                                                </Link>
+                                            {section.items.map((item: any) => (
+                                                item.external ? (
+                                                    <a
+                                                        key={item.path}
+                                                        href={item.path}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="sidebar-link flex items-center"
+                                                    >
+                                                        {item.icon}
+                                                        <span className="ml-2 flex-1">{item.label}</span>
+                                                        <ExternalLink size={14} className="ml-1 opacity-50" />
+                                                    </a>
+                                                ) : (
+                                                    <Link
+                                                        key={item.path}
+                                                        to={item.path}
+                                                        className={`sidebar-link ${location.pathname === item.path ? 'active' : ''
+                                                            }`}
+                                                    >
+                                                        {item.icon}
+                                                        <span className="ml-2">{item.label}</span>
+                                                    </Link>
+                                                )
                                             ))}
                                         </div>
                                     </motion.div>
@@ -238,38 +264,6 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                         </div>
                     ))}
 
-                    {/* External Links */}
-                    <div className="pt-4 mt-4 border-t border-gray-200 dark:border-gray-700">
-                        <div className="space-y-2">
-                            <a
-                                href="https://costkatana.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                            >
-                                <ExternalLink size={16} />
-                                <span>Website</span>
-                            </a>
-                            <a
-                                href="https://www.npmjs.com/package/ai-cost-tracker"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                            >
-                                <Package size={16} />
-                                <span>NPM Package</span>
-                            </a>
-                            <a
-                                href="https://pypi.org/project/cost-katana/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center space-x-2 px-3 py-2 text-sm text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                            >
-                                <Code size={16} />
-                                <span>PyPI Package</span>
-                            </a>
-                        </div>
-                    </div>
                 </nav>
             </aside>
 

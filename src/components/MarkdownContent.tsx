@@ -44,7 +44,20 @@ import {
     Star,
     Clipboard,
     Calculator,
-    TrendingDown
+    TrendingDown,
+    Brain,
+    Smartphone,
+    Mail,
+    MessageCircle,
+    Book,
+    Bug,
+    Lock,
+    Package,
+    Globe,
+    RefreshCw,
+    PlayCircle,
+    Navigation,
+    Bell
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -89,7 +102,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         '🎨': Palette,
         '🏆': Trophy,
         '💰': DollarSign,
-        '🔒': Shield,
+        '🔒': Lock,
         '☁️': Cloud,
         '✖️': X,
         '🌪️': Wind,
@@ -111,11 +124,26 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         '🎓': GraduationCap,
         '🏢': Building,
         '⭐': Star,
+        '🧠': Brain,
+        '📱': Smartphone,
+        '📧': Mail,
+        '💬': MessageCircle,
+        '📚': Book,
+        '🐛': Bug,
+        '📦': Package,
+        '🌐': Globe,
+        '🔄': RefreshCw,
+        '🎭': PlayCircle,
+        '🦙': Navigation,
+        '🐍': Bug,
+        '✨': Sparkles,
+        '🎊': PartyPopper,
+        '🔔': Bell,
     };
 
     // Function to replace emojis in text with icon components
     const replaceEmojisWithIcons = (text: string): React.ReactNode => {
-        const emojiRegex = /(✅|❌|⚠️|🚨|🔴|📊|📈|📉|⚡|🎯|🔧|📝|💻|🚀|💡|🤖|🔮|🎨|🏆|💰|🔒|☁️|✖️|🌪️|🖼️|🎬|🎵|👁️|🧮|🔬|📋|🎉|❤️|🖥️|🛠️|⚙️|🛡️|🔗|📞|🎓|🏢|⭐)/g;
+        const emojiRegex = /(✅|❌|⚠️|🚨|🔴|📊|📈|📉|⚡|🎯|🔧|📝|💻|🚀|💡|🤖|🔮|🎨|🏆|💰|🔒|☁️|✖️|🌪️|🖼️|🎬|🎵|👁️|🧮|🔬|📋|🎉|❤️|🖥️|🛠️|⚙️|🛡️|🔗|📞|🎓|🏢|⭐|🧠|📱|📧|💬|📚|🐛|📦|🌐|🔄|🎭|🦙|🐍|✨|🎊|🔔)/g;
         const parts = text.split(emojiRegex);
 
         return parts.map((part, index) => {
@@ -130,6 +158,31 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                 );
             }
             return part;
+        });
+    };
+
+    // Recursive function to process all children including nested elements
+    const processChildrenRecursively = (children: any): any => {
+        return React.Children.map(children, (child: any) => {
+            // If it's a string, replace emojis
+            if (typeof child === 'string') {
+                return replaceEmojisWithIcons(child);
+            }
+
+            // If it's a React element with children, process recursively
+            if (React.isValidElement(child)) {
+                const props = child.props as any;
+                if (props && props.children) {
+                    return React.cloneElement(
+                        child,
+                        props,
+                        processChildrenRecursively(props.children)
+                    );
+                }
+            }
+
+            // Return other elements as-is
+            return child;
         });
     };
 
@@ -203,16 +256,11 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         ),
 
         // Blockquotes
-        blockquote: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <blockquote className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg" {...props}>
-                    {processedChildren}
-                </blockquote>
-            );
-        },
+        blockquote: ({ children, ...props }: any) => (
+            <blockquote className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg" {...props}>
+                {processChildrenRecursively(children)}
+            </blockquote>
+        ),
 
         // Links
         a: ({ href, children, ...props }: any) => {
@@ -225,7 +273,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                     className="text-primary-600 dark:text-primary-400 hover:underline"
                     {...props}
                 >
-                    {children}
+                    {processChildrenRecursively(children)}
                 </a>
             );
         },
@@ -243,80 +291,43 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             </ol>
         ),
 
-        li: ({ children, ...props }: any) => {
-            // Process text content to replace emojis
-            const processChildren = (child: any): any => {
-                if (typeof child === 'string') {
-                    return replaceEmojisWithIcons(child);
-                }
-                return child;
-            };
-
-            const processedChildren = React.Children.map(children, processChildren);
-
-            return (
-                <li className="text-gray-600 dark:text-gray-300" {...props}>
-                    {processedChildren}
-                </li>
-            );
-        },
+        li: ({ children, ...props }: any) => (
+            <li className="text-gray-600 dark:text-gray-300" {...props}>
+                {processChildrenRecursively(children)}
+            </li>
+        ),
 
         // Headings
-        h1: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white" {...props}>
-                    {processedChildren}
-                </h1>
-            );
-        },
+        h1: ({ children, ...props }: any) => (
+            <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white" {...props}>
+                {processChildrenRecursively(children)}
+            </h1>
+        ),
 
-        h2: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2" {...props}>
-                    {processedChildren}
-                </h2>
-            );
-        },
+        h2: ({ children, ...props }: any) => (
+            <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2" {...props}>
+                {processChildrenRecursively(children)}
+            </h2>
+        ),
 
-        h3: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100" {...props}>
-                    {processedChildren}
-                </h3>
-            );
-        },
+        h3: ({ children, ...props }: any) => (
+            <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100" {...props}>
+                {processChildrenRecursively(children)}
+            </h3>
+        ),
 
-        h4: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <h4 className="text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200" {...props}>
-                    {processedChildren}
-                </h4>
-            );
-        },
+        h4: ({ children, ...props }: any) => (
+            <h4 className="text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200" {...props}>
+                {processChildrenRecursively(children)}
+            </h4>
+        ),
 
         // Paragraphs
-        p: ({ children, ...props }: any) => {
-            const processedChildren = React.Children.map(children, (child: any) =>
-                typeof child === 'string' ? replaceEmojisWithIcons(child) : child
-            );
-            return (
-                <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300" {...props}>
-                    {processedChildren}
-                </p>
-            );
-        },
+        p: ({ children, ...props }: any) => (
+            <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300" {...props}>
+                {processChildrenRecursively(children)}
+            </p>
+        ),
 
         // Horizontal rules
         hr: ({ ...props }: any) => (

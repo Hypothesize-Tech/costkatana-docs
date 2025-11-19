@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Github, Code, Terminal, FileCode, Layers, BookOpen, Rocket } from 'lucide-react';
+import { ExternalLink, Github, Code, Terminal, FileCode, Layers, BookOpen, Rocket, DollarSign, Bell, Bot, Lock } from 'lucide-react';
 
 const ExamplesPage: React.FC = () => {
     return (
@@ -109,7 +109,7 @@ const ExamplesPage: React.FC = () => {
                 {/* Cost Management */}
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <span className="text-2xl mr-2">💰</span>
+                        <DollarSign className="mr-2" size={24} />
                         Cost Management
                     </h3>
                     <div className="space-y-3">
@@ -173,7 +173,7 @@ const ExamplesPage: React.FC = () => {
                 {/* Monitoring & Alerts */}
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <span className="text-2xl mr-2">🔔</span>
+                        <Bell className="mr-2" size={24} />
                         Monitoring & Alerts
                     </h3>
                     <div className="space-y-3">
@@ -199,7 +199,7 @@ const ExamplesPage: React.FC = () => {
                 {/* AI Orchestration */}
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <span className="text-2xl mr-2">🤖</span>
+                        <Bot className="mr-2" size={24} />
                         AI Orchestration
                     </h3>
                     <div className="space-y-3">
@@ -224,7 +224,7 @@ const ExamplesPage: React.FC = () => {
                 {/* Security & Compliance */}
                 <div className="mb-8">
                     <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <span className="text-2xl mr-2">🔒</span>
+                        <Lock className="mr-2" size={24} />
                         Security & Compliance
                     </h3>
                     <div className="space-y-3">
