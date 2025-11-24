@@ -189,7 +189,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
 
         // Find and scroll to element immediately
         const scrollToElement = () => {
-            let element = document.getElementById(id);
+            let element = document.getElementById(id) as HTMLElement | null;
 
             // If exact ID not found, try to find elements with suffix (e.g., quick-setup-2)
             if (!element) {
@@ -197,13 +197,13 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
                 const suffixMatches = Array.from(headings).filter(h => h.id.startsWith(id + '-'));
                 if (suffixMatches.length > 0) {
                     // Use the first suffix match (usually -2 for duplicates)
-                    element = suffixMatches[0];
+                    element = suffixMatches[0] as HTMLElement;
                 }
             }
 
             if (element) {
                 // Scroll the content container, not the entire document
-                const contentContainer = document.getElementById('main-content');
+                const contentContainer = document.getElementById('main-content') as HTMLElement | null;
                 if (contentContainer) {
                     const elementTop = element.offsetTop;
                     contentContainer.scrollTo({

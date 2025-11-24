@@ -296,7 +296,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
             // Try multiple extraction strategies
             if (React.isValidElement(children)) {
-                const codeElement = children;
+                const codeElement = children as React.ReactElement<any>;
                 // Strategy 1: Direct children prop (most common case)
                 if (codeElement.props?.children) {
                     extracted = extractTextContent(codeElement.props.children);

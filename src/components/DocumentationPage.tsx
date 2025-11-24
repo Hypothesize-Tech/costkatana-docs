@@ -39,19 +39,19 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
         if (hash) {
             // Wait for content to render, then scroll to hash in content container
             const timer = setTimeout(() => {
-                let element = document.getElementById(hash);
+                let element = document.getElementById(hash) as HTMLElement | null;
 
                 // If exact ID not found, try to find elements with suffix (e.g., quick-setup-2)
                 if (!element) {
                     const headings = document.querySelectorAll('h1, h2, h3, h4');
                     const suffixMatches = Array.from(headings).filter(h => h.id.startsWith(hash + '-'));
                     if (suffixMatches.length > 0) {
-                        element = suffixMatches[0];
+                        element = suffixMatches[0] as HTMLElement;
                     }
                 }
 
                 if (element) {
-                    const contentContainer = document.getElementById('main-content');
+                    const contentContainer = document.getElementById('main-content') as HTMLElement | null;
                     if (contentContainer) {
                         const elementTop = element.offsetTop;
                         contentContainer.scrollTo({
@@ -83,12 +83,12 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                     const headings = document.querySelectorAll('h1, h2, h3, h4');
                     const suffixMatches = Array.from(headings).filter(h => h.id.startsWith(hash + '-'));
                     if (suffixMatches.length > 0) {
-                        element = suffixMatches[0];
+                        element = suffixMatches[0] as HTMLElement;
                     }
                 }
 
                 if (element) {
-                    const contentContainer = document.getElementById('main-content');
+                    const contentContainer = document.getElementById('main-content') as HTMLElement | null;
                     if (contentContainer) {
                         const elementTop = element.offsetTop;
                         contentContainer.scrollTo({
