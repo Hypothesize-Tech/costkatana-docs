@@ -1,16 +1,11 @@
 import DocumentationPage from "../components/DocumentationPage";
 
 // Getting Started Pages
-export const InstallationPage = () => (
-  <DocumentationPage
-    title="Installation"
-    description="Detailed installation instructions for Cost Katana"
-    prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }}
-    fallbackContent={`# Installation Guide
+export const InstallationPage = () => ( <DocumentationPage title="Installation" description="Detailed installation instructions for Cost Katana" prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }} fallbackContent={`# Installation Guide
 
 Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 40-75% token reduction with LISP-based optimization.
 
-## 🎯 Primary Package: Core SDK (Recommended)
+## Primary Package: Core SDK (Recommended)
 
 ### Node.js/TypeScript Core Package
 
@@ -25,18 +20,17 @@ npm install cost-katana
 
 [![npm version](https://badge.fury.io/js/cost-katana.svg)](https://www.npmjs.com/package/cost-katana)
 
-- **Package Name**: \`cost-katana\` ⭐ **Primary Package**
+- **Package Name**: \`cost-katana\` **Primary Package**
 - **Latest Version**: 2.1.3
 - **Repository**: [GitHub](https://github.com/Hypothesize-Tech/costkatana-core)
 - **License**: MIT
-- **TypeScript**: ✅ Built-in type declarations
+- **TypeScript**: Built-in type declarations
 
 ### Quick Start Example
 
-\`\`\`javascript
-import { ai, OPENAI } from 'cost-katana';
+Try this example with all necessary imports and context included:
 
-// Simple AI call with automatic cost tracking
+\`\`\`smart:javascript:{"imports":["import { ai, OPENAI } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete example with imports and dependencies"}
 const response = await ai(OPENAI.GPT_4O, 'Hello, world!');
 console.log(response.text);
 console.log(\`Cost: $\${response.cost}\`);
@@ -44,15 +38,15 @@ console.log(\`Cost: $\${response.cost}\`);
 
 ### Why Choose the Core Package?
 
-- ✅ **Type-safe model constants** with IDE autocomplete
-- ✅ **Automatic cost tracking** for all AI providers
-- ✅ **Zero configuration** required
-- ✅ **Full TypeScript support** with complete type definitions
-- ✅ **Production-ready** with enterprise features
+- **Type-safe model constants** with IDE autocomplete
+- **Automatic cost tracking** for all AI providers
+- **Zero configuration** required
+- **Full TypeScript support** with complete type definitions
+- **Production-ready** with enterprise features
 
 ---
 
-## 🚀 Alternative: CLI Installation
+## Alternative: CLI Installation
 
 ### Global Installation
 
@@ -93,7 +87,7 @@ cost-katana --version
 - **License**: MIT
 - **Repository**: [GitHub](https://github.com/Hypothesize-Tech/costkatana-cli)
 
-## 🛠️ Quick Setup
+## Quick Setup
 
 Once installed, initialize your configuration:
 
@@ -104,25 +98,25 @@ cost-katana init
 
 This will guide you through:
 
-### 🔐 Required Configuration
+### Required Configuration
 - **Project Name** - Identify your project for cost tracking
 - **API Key** - Secure authentication to Cost Katana backend
 - **Default Model** - Choose your preferred AI model (GPT-4, Claude, Gemini, etc.)
 - **Monthly Token Budget** - Set your monthly token consumption limit
 
-### ⚙️ Optional Settings
+### Optional Settings
 - **Base URL** - Backend API endpoint
 - **Advanced Settings** - Temperature, max tokens, cost limits
 
-## 📱 Platform Support
+## Platform Support
 
 Cost Katana CLI works on all major platforms:
 
-- ✅ **Windows** (Windows 10+)
-- ✅ **macOS** (macOS 10.15+)
-- ✅ **Linux** (Ubuntu 18.04+, CentOS 7+, etc.)
+- **Windows** (Windows 10+)
+- **macOS** (macOS 10.15+)
+- **Linux** (Ubuntu 18.04+, CentOS 7+, etc.)
 
-## 🔧 Prerequisites
+## Prerequisites
 
 ### System Requirements
 - **Node.js** 18.0.0 or higher
@@ -138,7 +132,7 @@ node --version
 npm --version
 \`\`\`
 
-## 🏢 Enterprise Installation
+## Enterprise Installation
 
 ### Docker Installation
 \`\`\`bash
@@ -152,17 +146,12 @@ docker run -it --rm costkatana/cli:latest init
 ### CI/CD Integration
 \`\`\`yaml
 # GitHub Actions example
-- name: Install Cost Katana CLI
-  run: npm install -g cost-katana-cli
+- name: Install Cost Katana CLI run: npm install -g cost-katana-cli
 
-- name: Initialize Cost Katana
-  run: cost-katana init --api-key \${{ secrets.API_KEY }}
-  
-- name: Run Cost Analysis
-  run: cost-katana analytics --format json --export analysis.json
+- name: Initialize Cost Katana run: cost-katana init --api-key \${{ secrets.API_KEY }} - name: Run Cost Analysis run: cost-katana analytics --format json --export analysis.json
 \`\`\`
 
-## 🔍 Verification
+## Verification
 
 Test your installation:
 
@@ -177,20 +166,18 @@ cost-katana --help
 cost-katana test
 \`\`\`
 
-## 📦 Additional SDK Options
+## Additional SDK Options
 
 ### Python SDK
 \`\`\`bash
 pip install cost-katana
 \`\`\`
 
-\`\`\`python
-from cost_katana import CostKatana
-
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Python SDK initialization example"}
 ck = CostKatana(api_key='your-api-key')
 \`\`\`
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -221,11 +208,11 @@ npm config set strict-ssl false
 
 ### Getting Help
 
-- 📖 **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
-- 💬 **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
-- 📧 **Email Support**: support@costkatana.com
+- **Documentation**: [docs.costkatana.com](https://docs.costkatana.com)
+- **GitHub Issues**: [Report Issues](https://github.com/Hypothesize-Tech/costkatana-cli/issues)
+- **Email Support**: support@costkatana.com
 
-## 🎯 Next Steps
+## Next Steps
 
 After installation:
 
@@ -235,24 +222,17 @@ After installation:
 4. **Optimize Costs**: \`cost-katana optimize\`
 5. **Set Budgets**: \`cost-katana set-budget\`
 
-Ready to start saving on AI costs? Let's go! 🚀`}
-  />
+Ready to start saving on AI costs? Let's go! `} />
 );
 
 // Integrations Pages
-export const CLIPage = () => (
-  <DocumentationPage
-    title="CLI Tool"
-    description="Powerful command-line interface for AI cost optimization"
-    prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }}
-    nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }}
-    fallbackContent={`# Cost Katana CLI
+export const CLIPage = () => ( <DocumentationPage title="CLI Tool" description="Powerful command-line interface for AI cost optimization" prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }} nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }} fallbackContent={`# Cost Katana CLI
 
 The most powerful command-line interface for AI cost optimization and management.
 
 ![CLI Interface](/assets/cli.png)
 
-## 🚀 Installation
+## Installation
 
 ### Global Installation (Recommended)
 
@@ -277,11 +257,20 @@ Based on the [npm package](https://www.npmjs.com/package/costkatana-cli):
 - **Version**: 1.0.11 (latest)
 - **Weekly Downloads**: 638+
 - **License**: MIT
-- **TypeScript**: ✅ Built-in type declarations
+- **TypeScript**: Built-in type declarations
 
-## 🔧 Core Commands
+## Core Commands
 
 ### Setup & Configuration
+
+Follow this step-by-step guide to get started:
+
+\`\`\`steps:CLI Setup Guide
+[{"title":"Install CLI","description":"Install the Cost Katana CLI globally","content":"Install the CLI using npm:","code":"npm install -g cost-katana-cli"},{"title":"Initialize","description":"Set up your configuration","content":"Run the initialization command:","code":"cost-katana init"},{"title":"Test Configuration","description":"Verify your setup","content":"Test your configuration:","code":"cost-katana test"},{"title":"Start Tracking","description":"Begin tracking your AI costs","content":"View your analytics:","code":"cost-katana analytics"}]
+\`\`\`
+
+Or use these commands directly:
+
 \`\`\`bash
 # Initialize with interactive setup
 cost-katana init
@@ -332,7 +321,7 @@ cost-katana budget status
 cost-katana set-budget alerts --enable-slack --slack-channel #ai-costs
 \`\`\`
 
-## 🔄 Advanced Features
+## Advanced Features
 
 ### Workflow Management
 \`\`\`bash
@@ -388,10 +377,7 @@ cost-katana key list
 
 # Regenerate key
 cost-katana key regenerate key-id-123
-\`\`\`
-
-
-## 📊 Analytics & Reports
+\`\`\` ## Analytics & Reports
 
 ### Prompt Metrics
 \`\`\`bash
@@ -429,7 +415,7 @@ cost-katana retry-log stats --range 30d
 cost-katana retry-log failure-type timeout
 \`\`\`
 
-## 🛡️ Security & Auditing
+## Security & Auditing
 
 ### Firewall Auditing
 \`\`\`bash
@@ -452,7 +438,7 @@ cost-katana agent-inspect --agent-id agent-buyer-ranker
 cost-katana agent-inspect recent --limit 20
 \`\`\`
 
-## 🎯 AI-Powered Features
+## AI-Powered Features
 
 ### Model Suggestions
 \`\`\`bash
@@ -475,24 +461,14 @@ cost-katana replay-session --session-id session-1234
 cost-katana replay-session recent --limit 5
 \`\`\`
 
-## 🔧 CI/CD Integration
+## CI/CD Integration
 
 ### GitHub Actions
 \`\`\`yaml
 name: AI Cost Monitoring
 on: [push, pull_request]
 
-jobs:
-  cost-analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Install Cost Katana CLI
-        run: npm install -g cost-katana-cli
-      - name: Run Cost Analysis
-        run: cost-katana analytics --format json --export cost-report.json
-        env:
-          API_KEY: \${{ secrets.API_KEY }}
+jobs: cost-analysis: runs-on: ubuntu-latest steps: - uses: actions/checkout@v3 - name: Install Cost Katana CLI run: npm install -g cost-katana-cli - name: Run Cost Analysis run: cost-katana analytics --format json --export cost-report.json env: API_KEY: \${{ secrets.API_KEY }}
 \`\`\`
 
 ### Docker Integration
@@ -504,7 +480,7 @@ RUN cost-katana analytics --export build-cost-report.json
 CMD ["npm", "start"]
 \`\`\`
 
-## 🎨 Output Formats
+## Output Formats
 
 All commands support multiple output formats:
 
@@ -522,7 +498,7 @@ cost-katana analytics --format csv --export report.csv
 cost-katana analytics --verbose
 \`\`\`
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install**: \`npm install -g cost-katana-cli\`
 2. **Initialize**: \`cost-katana init\`
@@ -530,22 +506,16 @@ cost-katana analytics --verbose
 4. **Analyze**: \`cost-katana analytics\`
 5. **Optimize**: Start saving on AI costs!
 
-The CLI is your command center for AI cost optimization. Get started today! 🎯`}
-  />
+The CLI is your command center for AI cost optimization. Get started today! `} />
 );
 
-export const NodeJSPage = () => (
-  <DocumentationPage
-    title="Node.js SDK"
-    description="Integrate Cost Katana with your Node.js applications"
-    nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }}
-    fallbackContent={`# Node.js SDK Integration
+export const NodeJSPage = () => ( <DocumentationPage title="Node.js SDK" description="Integrate Cost Katana with your Node.js applications" nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }} fallbackContent={`# Node.js SDK Integration
 
 Complete guide to integrating the Cost Katana SDK with your Node.js applications for programmatic AI cost optimization.
 
 ![Node.js SDK Integration](/assets/nodejs_sdk.png)
 
-## 📦 Node.js SDK
+## Node.js SDK
 
 For programmatic integration in your Node.js applications.
 
@@ -557,22 +527,13 @@ npm install cost-katana
 
 ### Quick Start
 
-\`\`\`javascript
-import { AICostTracker } from 'cost-katana';
+Try this example with all necessary imports and context:
 
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: 'your-openai-api-key' }
-  ],
-  tracking: { enableAutoTracking: true }
+\`\`\`smart:javascript:{"imports":["import { AICostTracker } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete Node.js integration example with automatic cost tracking"}
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: 'your-openai-api-key' } ], tracking: { enableAutoTracking: true }
 });
 
-// Make AI requests with automatic cost tracking
-const response = await ck.chat.completions.create({
-    model: 'gpt-4',
-  messages: [
-    { role: 'user', content: 'Hello, world!' }
-  ]
+const response = await tracker.chat.completions.create({ model: 'gpt-4', messages: [{ role: 'user', content: 'Hello, world!' }]
 });
 
 console.log(response.choices[0].message.content);
@@ -581,36 +542,24 @@ console.log(response.choices[0].message.content);
 ### Advanced Usage
 
 #### Project-based Tracking
-\`\`\`javascript
-const ck = new CostKatana({
-  apiKey: 'your-api-key',
-  project: 'customer-support-bot' // Track costs per project
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Track costs per project with metadata"}
+const ck = new CostKatana({ apiKey: 'your-api-key', project: 'customer-support-bot' // Track costs per project
 });
 
-const response = await ck.chat.completions.create({
-  model: 'gpt-3.5-turbo',
-  messages: messages,
-  metadata: {
-    user_id: 'user-123',
-    session_id: 'session-456'
-  }
+const response = await ck.chat.completions.create({ model: 'gpt-3.5-turbo', messages: messages, metadata: { user_id: 'user-123', session_id: 'session-456' }
 });
 \`\`\`
 
 #### Cost Optimization
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Get optimization suggestions and apply them to reduce costs"}
 // Get optimization suggestions
-const suggestions = await ck.optimization.getSuggestions({
-  prompt: 'Your long prompt here...',
-  model: 'gpt-4'
+const suggestions = await ck.optimization.getSuggestions({ prompt: 'Your long prompt here...', model: 'gpt-4'
 });
 
 console.log('Potential savings:', suggestions.costSavings);
 
 // Apply optimization
-const optimized = await ck.optimization.optimize({
-  prompt: 'Your long prompt here...',
-  strategy: 'aggressive'
+const optimized = await ck.optimization.optimize({ prompt: 'Your long prompt here...', strategy: 'aggressive'
 });
 
 console.log('Optimized prompt:', optimized.optimizedPrompt);
@@ -618,7 +567,7 @@ console.log('Token reduction:', optimized.tokensSaved);
 \`\`\`
 
 #### Budget Monitoring
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Monitor budget usage and set up alerts"}
 // Check budget status
 const budget = await ck.budget.getStatus('my-project');
 
@@ -626,53 +575,25 @@ console.log(\`Budget usage: \${budget.usagePercentage}%\`);
 console.log(\`Remaining: $\${budget.remaining}\`);
 
 // Set budget alerts
-await ck.budget.setAlert({
-  project: 'my-project',
-  threshold: 80, // Alert at 80%
-  channels: ['email', 'slack']
+await ck.budget.setAlert({ project: 'my-project', threshold: 80, // Alert at 80% channels: ['email', 'slack']
 });
 \`\`\`
 
 ![SDK Integration Example](/assets/optimization_1.png)
 
-## 🌐 Framework Integrations
+## Framework Integrations
 
 ### Express.js
 
-\`\`\`javascript
-const express = require('express');
-const { AICostTracker } = require('cost-katana');
-
+\`\`\`smart:javascript:{"imports":["const express = require('express');","const { AICostTracker } = require('cost-katana');"],"dependencies":["express","cost-katana"],"description":"Express.js integration with automatic cost tracking"}
 const app = express();
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
 app.use(express.json());
 
 // Chat endpoint with cost tracking
-app.post('/api/chat', async (req, res) => {
-  try {
-    const response = await ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: req.body.messages,
-      metadata: {
-        endpoint: '/api/chat',
-        user_ip: req.ip
-      }
-    });
-
-    res.json({
-      message: response.choices[0].message.content,
-      usage: response.usage,
-      cost: response.cost
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+app.post('/api/chat', async (req, res) => { try { const response = await tracker.chat.completions.create({ model: 'gpt-3.5-turbo', messages: req.body.messages, metadata: { endpoint: '/api/chat', user_ip: req.ip } }); res.json({ message: response.choices[0].message.content, usage: response.usage, cost: response.cost }); } catch (error) { res.status(500).json({ error: error.message }); }
 });
 
 app.listen(3000);
@@ -680,172 +601,50 @@ app.listen(3000);
 
 ### Next.js
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { AICostTracker } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Next.js API route with cost tracking"}
 // pages/api/chat.js
-import { AICostTracker } from 'cost-katana';
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const { messages } = req.body;
-
-    const response = await ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages,
-      metadata: {
-        framework: 'nextjs',
-        route: '/api/chat'
-      }
-    });
-
-    res.json({
-      message: response.choices[0].message.content,
-      cost: response.cost,
-      usage: response.usage
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+export default async function handler(req, res) { if (req.method !== 'POST') { return res.status(405).json({ error: 'Method not allowed' }); } try { const { messages } = req.body; const response = await tracker.chat.completions.create({ model: 'gpt-3.5-turbo', messages, metadata: { framework: 'nextjs', route: '/api/chat' } }); res.json({ message: response.choices[0].message.content, cost: response.cost, usage: response.usage }); } catch (error) { res.status(500).json({ error: error.message }); }
 }
 \`\`\`
 
 ### NestJS
 
-\`\`\`typescript
+\`\`\`smart:typescript:{"imports":["import { Injectable } from '@nestjs/common';","import { AICostTracker } from 'cost-katana';"],"dependencies":["@nestjs/common","cost-katana"],"description":"NestJS service with cost tracking"}
 // chat.service.ts
-import { Injectable } from '@nestjs/common';
-import { AICostTracker } from 'cost-katana';
-
 @Injectable()
-export class ChatService {
-  private readonly tracker: AICostTracker;
-
-  constructor() {
-    this.tracker = await AICostTracker.create({
-      providers: [
-        { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-      ],
-      tracking: { enableAutoTracking: true }
-    });
-  }
-
-  async chat(messages: any[]): Promise<any> {
-    const response = await this.ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages,
-      metadata: {
-        service: 'ChatService',
-        framework: 'nestjs'
-      }
-    });
-
-    return {
-      message: response.choices[0].message.content,
-      cost: response.cost,
-      usage: response.usage
-    };
-  }
+export class ChatService { private readonly tracker: AICostTracker; constructor() { this.tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true } }); } async chat(messages: any[]): Promise<any> { const response = await this.tracker.chat.completions.create({ model: 'gpt-3.5-turbo', messages, metadata: { service: 'ChatService', framework: 'nestjs' } }); return { message: response.choices[0].message.content, cost: response.cost, usage: response.usage }; }
 }
 \`\`\`
 
 ![Framework Integration Examples](/assets/gateway_1.png)
 
-## ☁️ Cloud Deployment
+## Cloud Deployment
 
 ### AWS Lambda
 
-\`\`\`javascript
-const { AICostTracker } = require('cost-katana');
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+\`\`\`smart:javascript:{"imports":["const { AICostTracker } = require('cost-katana');"],"dependencies":["cost-katana"],"description":"AWS Lambda function with cost tracking"}
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
-exports.handler = async (event) => {
-  try {
-    const { messages } = JSON.parse(event.body);
-
-    const response = await ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages,
-      metadata: {
-        platform: 'aws-lambda',
-        function_name: process.env.AWS_LAMBDA_FUNCTION_NAME
-      }
-    });
-
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      },
-      body: JSON.stringify({
-        message: response.choices[0].message.content,
-        cost: response.cost
-      })
-    };
-  } catch (error) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: error.message })
-    };
-  }
+exports.handler = async (event) => { try { const { messages } = JSON.parse(event.body); const response = await tracker.chat.completions.create({ model: 'gpt-3.5-turbo', messages, metadata: { platform: 'aws-lambda', function_name: process.env.AWS_LAMBDA_FUNCTION_NAME } }); return { statusCode: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }, body: JSON.stringify({ message: response.choices[0].message.content, cost: response.cost }) }; } catch (error) { return { statusCode: 500, body: JSON.stringify({ error: error.message }) }; }
 };
 \`\`\`
 
 ### Vercel Functions
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { AICostTracker } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Vercel serverless function with cost tracking"}
 // api/chat.js
-import { AICostTracker } from 'cost-katana';
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  try {
-    const response = await ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: req.body.messages,
-      metadata: {
-        platform: 'vercel',
-        region: process.env.VERCEL_REGION
-      }
-    });
-
-    res.json({
-      message: response.choices[0].message.content,
-      cost: response.cost
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+export default async function handler(req, res) { if (req.method !== 'POST') { return res.status(405).json({ error: 'Method not allowed' }); } try { const response = await tracker.chat.completions.create({ model: 'gpt-3.5-turbo', messages: req.body.messages, metadata: { platform: 'vercel', region: process.env.VERCEL_REGION } }); res.json({ message: response.choices[0].message.content, cost: response.cost }); } catch (error) { res.status(500).json({ error: error.message }); }
 }
 \`\`\`
 
-## 🔧 Development Workflow
+## Development Workflow
 
 ### GitHub Actions
 
@@ -853,32 +652,7 @@ export default async function handler(req, res) {
 name: AI Cost Monitoring
 on: [push, pull_request]
 
-jobs:
-  cost-analysis:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          
-      - name: Install Cost Katana CLI
-        run: npm install -g cost-katana-cli
-        
-      - name: Run Cost Analysis
-        run: |
-          cost-katana analytics --format json --export cost-report.json
-          cost-katana budget status --project \${{ github.repository }}
-        env:
-          API_KEY: \${{ secrets.API_KEY }}
-          
-      - name: Upload Cost Report
-        uses: actions/upload-artifact@v3
-        with:
-          name: cost-report
-          path: cost-report.json
+jobs: cost-analysis: runs-on: ubuntu-latest steps: - uses: actions/checkout@v3 - name: Setup Node.js uses: actions/setup-node@v3 with: node-version: '18' - name: Install Cost Katana CLI run: npm install -g cost-katana-cli - name: Run Cost Analysis run: | cost-katana analytics --format json --export cost-report.json cost-katana budget status --project \${{ github.repository }} env: API_KEY: \${{ secrets.API_KEY }} - name: Upload Cost Report uses: actions/upload-artifact@v3 with: name: cost-report path: cost-report.json
 \`\`\`
 
 ### Docker Integration
@@ -906,64 +680,30 @@ RUN cost-katana analytics --export build-cost-report.json
 CMD ["npm", "start"]
 \`\`\`
 
-## 📊 Monitoring & Analytics
+## Monitoring & Analytics
 
 ### Real-time Monitoring
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["const { AICostTracker } = require('cost-katana');"],"dependencies":["cost-katana"],"description":"Real-time cost monitoring with automatic alerts"}
 // monitor.js
-const { AICostTracker } = require('cost-katana');
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
 // Monitor costs in real-time
-setInterval(async () => {
-  const analytics = await ck.analytics.getCurrent();
-  
-  console.log(\`Current hourly spend: $\${analytics.hourlySpend}\`);
-  console.log(\`Requests this hour: \${analytics.requestCount}\`);
-  
-  if (analytics.hourlySpend > 10) {
-    console.warn('⚠️ High spending detected!');
-    // Send alert
-  }
+setInterval(async () => { const analytics = await tracker.analytics.getCurrent(); console.log(\`Current hourly spend: $\${analytics.hourlySpend}\`); console.log(\`Requests this hour: \${analytics.requestCount}\`); if (analytics.hourlySpend > 10) { console.warn(' High spending detected!'); // Send alert }
 }, 60000); // Check every minute
 \`\`\`
 
 ### Custom Dashboards
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["const express = require('express');","const { AICostTracker } = require('cost-katana');"],"dependencies":["express","cost-katana"],"description":"Custom dashboard API with analytics, budget, and optimization data"}
 // dashboard-data.js
-const express = require('express');
-const { AICostTracker } = require('cost-katana');
-
 const app = express();
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
 // Dashboard API endpoint
-app.get('/api/dashboard', async (req, res) => {
-  const [analytics, budget, optimization] = await Promise.all([
-    ck.analytics.getUsage({ days: 7 }),
-    ck.budget.getStatus(),
-    ck.optimization.getSummary()
-  ]);
-
-  res.json({
-    analytics,
-    budget,
-    optimization,
-    timestamp: new Date()
-  });
+app.get('/api/dashboard', async (req, res) => { const [analytics, budget, optimization] = await Promise.all([ tracker.analytics.getUsage({ days: 7 }), tracker.budget.getStatus(), tracker.optimization.getSummary() ]); res.json({ analytics, budget, optimization, timestamp: new Date() });
 });
 
 app.listen(3001);
@@ -971,82 +711,38 @@ app.listen(3001);
 
 ![Analytics Dashboard](/assets/analytics_2.png)
 
-## 🎯 Best Practices
+## Best Practices
 
 ### 1. Environment Configuration
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":[],"dependencies":[],"description":"Environment-based configuration for different deployment stages"}
 // config.js
-const config = {
-  development: {
-    costKatana: {
-      apiKey: process.env.COST_KATANA_DEV_KEY,
-      project: 'my-app-dev',
-      optimization: 'conservative'
-    }
-  },
-  production: {
-    costKatana: {
-      apiKey: process.env.COST_KATANA_PROD_KEY,
-      project: 'my-app-prod',
-      optimization: 'aggressive'
-    }
-  }
+const config = { development: { costKatana: { apiKey: process.env.COST_KATANA_DEV_KEY, project: 'my-app-dev', optimization: 'conservative' } }, production: { costKatana: { apiKey: process.env.COST_KATANA_PROD_KEY, project: 'my-app-prod', optimization: 'aggressive' } }
 };
 
 export default config[process.env.NODE_ENV || 'development'];
 \`\`\`
 
 ### 2. Error Handling
-\`\`\`javascript
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY,
-  retries: 3,
-  timeout: 30000
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Robust error handling with automatic fallback to cheaper models"}
+const ck = new CostKatana({ apiKey: process.env.API_KEY, retries: 3, timeout: 30000
 });
 
-try {
-  const response = await ck.chat.completions.create({
-    model: 'gpt-4',
-    messages: messages
-  });
-  
-  return response;
-} catch (error) {
-  if (error.code === 'RATE_LIMIT_EXCEEDED') {
-    // Switch to cheaper model
-    return await ck.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: messages
-    });
-  }
-  
-  throw error;
+try { const response = await ck.chat.completions.create({ model: 'gpt-4', messages: messages }); return response;
+} catch (error) { if (error.code === 'RATE_LIMIT_EXCEEDED') { // Switch to cheaper model return await ck.chat.completions.create({ model: 'gpt-3.5-turbo', messages: messages }); } throw error;
 }
 \`\`\`
 
 ### 3. Cost Optimization
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Smart caching implementation to reduce API calls and costs"}
 // Implement smart caching
+const ck = new CostKatana({ apiKey: process.env.API_KEY });
 const cache = new Map();
 
-async function chatWithCaching(messages) {
-  const cacheKey = JSON.stringify(messages);
-  
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey);
-  }
-  
-  const response = await ck.chat.completions.create({
-    model: 'gpt-3.5-turbo',
-    messages
-  });
-  
-  cache.set(cacheKey, response);
-  return response;
+async function chatWithCaching(messages) { const cacheKey = JSON.stringify(messages); if (cache.has(cacheKey)) { return cache.get(cacheKey); } const response = await ck.chat.completions.create({ model: 'gpt-3.5-turbo', messages }); cache.set(cacheKey, response); return response;
 }
 \`\`\`
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install CLI**: \`npm install -g cost-katana-cli\`
 2. **Initialize**: \`cost-katana init\`
@@ -1054,23 +750,14 @@ async function chatWithCaching(messages) {
 4. **Start Tracking**: Begin monitoring your AI costs
 5. **Optimize**: Use insights to reduce expenses
 
-Ready to optimize your Node.js AI costs? Get started today! 🎯`}
-  />
+Ready to optimize your Node.js AI costs? Get started today! `} />
 );
 
-export const PythonPage = () => (
-  <DocumentationPage
-    title="Python SDK"
-    description="Integrate Cost Katana with your Python applications"
-    prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }}
-    nextPage={{ path: '/integrations/cli', label: 'Next: CLI Tool' }}
-    fallbackContent={`# Python SDK Integration
+export const PythonPage = () => ( <DocumentationPage title="Python SDK" description="Integrate Cost Katana with your Python applications" prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }} nextPage={{ path: '/integrations/cli', label: 'Next: CLI Tool' }} fallbackContent={`# Python SDK Integration
 
 Complete guide to integrating Cost Katana with your Python applications for AI cost optimization.
 
-![Python SDK Integration](/assets/python_sdk.png)        
-
-## 🐍 Python SDK
+![Python SDK Integration](/assets/python_sdk.png) ## Python SDK
 
 ### Installation
 
@@ -1080,59 +767,36 @@ pip install cost-katana
 
 ### Quick Start
 
-\`\`\`python
-from cost_katana import CostKatana
+Try this example with all necessary imports and context:
 
-# Initialize the client
-ck = CostKatana(
-    api_key='your-cost-katana-api-key',
-    base_url='https://cost-katana-backend.store'  # optional
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Complete Python integration example"}
+ck = CostKatana(api_key='your-api-key')
+response = ck.chat.completions.create( model='gpt-4', messages=[{'role': 'user', 'content': 'Hello, world!'}]
 )
-
-# Make AI requests with automatic cost tracking
-response = ck.chat.completions.create(
-    model='gpt-4',
-    messages=[
-        {'role': 'user', 'content': 'Hello, world!'}
-    ]
-)
-
 print(response.choices[0].message.content)
 \`\`\`
 
 ### Advanced Usage
 
 #### Project-based Tracking
-\`\`\`python
-ck = CostKatana(
-    api_key='your-api-key',
-    project='ml-research-project'  # Track costs per project
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Track costs per project with metadata"}
+ck = CostKatana( api_key='your-api-key', project='ml-research-project' # Track costs per project
 )
 
-response = ck.chat.completions.create(
-    model='gpt-3.5-turbo',
-    messages=messages,
-    metadata={
-        'user_id': 'user-123',
-        'experiment_id': 'exp-456'
-    }
+response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=messages, metadata={ 'user_id': 'user-123', 'experiment_id': 'exp-456' }
 )
 \`\`\`
 
 #### Cost Optimization
-\`\`\`python
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Get optimization suggestions and apply them to reduce costs"}
 # Get optimization suggestions
-suggestions = ck.optimization.get_suggestions(
-    prompt='Your long prompt here...',
-    model='gpt-4'
+suggestions = ck.optimization.get_suggestions( prompt='Your long prompt here...', model='gpt-4'
 )
 
 print(f'Potential savings: {suggestions.cost_savings}')
 
 # Apply optimization
-optimized = ck.optimization.optimize(
-    prompt='Your long prompt here...',
-    strategy='aggressive'
+optimized = ck.optimization.optimize( prompt='Your long prompt here...', strategy='aggressive'
 )
 
 print(f'Optimized prompt: {optimized.optimized_prompt}')
@@ -1140,7 +804,7 @@ print(f'Token reduction: {optimized.tokens_saved}')
 \`\`\`
 
 #### Budget Monitoring
-\`\`\`python
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Monitor budget usage and set up alerts"}
 # Check budget status
 budget = ck.budget.get_status('my-project')
 
@@ -1148,174 +812,73 @@ print(f'Budget usage: {budget.usage_percentage}%')
 print(f'Remaining: $' + str(budget.remaining))
 
 # Set budget alerts
-ck.budget.set_alert(
-    project='my-project',
-    threshold=80,  # Alert at 80%
-    channels=['email', 'slack']
+ck.budget.set_alert( project='my-project', threshold=80, # Alert at 80% channels=['email', 'slack']
 )
 \`\`\`
 
 ![Python SDK Usage](/assets/usage_2.png)
 
-## 🌐 Framework Integrations
+## Framework Integrations
 
 ### Django
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from django.http import JsonResponse","from django.views.decorators.csrf import csrf_exempt","from cost_katana import CostKatana","import json"],"dependencies":["django","cost-katana"],"description":"Django view with cost tracking"}
 # views.py
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from cost_katana import CostKatana
-import json
 
-ck = CostKatana(
-    api_key=settings.API_KEY,
-    project='django-chat-app'
+ck = CostKatana( api_key=settings.API_KEY, project='django-chat-app'
 )
 
 @csrf_exempt
-def chat_endpoint(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=data['messages'],
-            metadata={
-                'framework': 'django',
-                'endpoint': '/api/chat',
-                'user_ip': request.META.get('REMOTE_ADDR')
-            }
-        )
-        
-        return JsonResponse({
-            'message': response.choices[0].message.content,
-            'cost': response.cost,
-            'usage': response.usage
-        })
+def chat_endpoint(request): if request.method == 'POST': data = json.loads(request.body) response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=data['messages'], metadata={ 'framework': 'django', 'endpoint': '/api/chat', 'user_ip': request.META.get('REMOTE_ADDR') } ) return JsonResponse({ 'message': response.choices[0].message.content, 'cost': response.cost, 'usage': response.usage })
 \`\`\`
 
 ### Flask
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from flask import Flask, request, jsonify","from cost_katana import CostKatana","import os"],"dependencies":["flask","cost-katana"],"description":"Flask application with cost tracking"}
 # app.py
-from flask import Flask, request, jsonify
-from cost_katana import CostKatana
-import os
-
 app = Flask(__name__)
-ck = CostKatana(
-    api_key=os.getenv('API_KEY'),
-    project='flask-api'
+ck = CostKatana( api_key=os.getenv('API_KEY'), project='flask-api'
 )
 
 @app.route('/api/chat', methods=['POST'])
-def chat():
-    try:
-        data = request.get_json()
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=data['messages'],
-            metadata={
-                'framework': 'flask',
-                'endpoint': '/api/chat'
-            }
-        )
-        
-        return jsonify({
-            'message': response.choices[0].message.content,
-            'cost': response.cost,
-            'usage': response.usage
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+def chat(): try: data = request.get_json() response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=data['messages'], metadata={ 'framework': 'flask', 'endpoint': '/api/chat' } ) return jsonify({ 'message': response.choices[0].message.content, 'cost': response.cost, 'usage': response.usage }) except Exception as e: return jsonify({'error': str(e)}), 500
 
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == '__main__': app.run(debug=True)
 \`\`\`
 
 ### FastAPI
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from fastapi import FastAPI, HTTPException","from pydantic import BaseModel","from cost_katana import CostKatana","from typing import List","import os"],"dependencies":["fastapi","pydantic","cost-katana"],"description":"FastAPI application with cost tracking"}
 # main.py
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from cost_katana import CostKatana
-from typing import List
-import os
-
 app = FastAPI()
-ck = CostKatana(
-    api_key=os.getenv('API_KEY'),
-    project='fastapi-service'
+ck = CostKatana( api_key=os.getenv('API_KEY'), project='fastapi-service'
 )
 
-class ChatRequest(BaseModel):
-    messages: List[dict]
+class ChatRequest(BaseModel): messages: List[dict]
 
-class ChatResponse(BaseModel):
-    message: str
-    cost: float
-    usage: dict
+class ChatResponse(BaseModel): message: str cost: float usage: dict
 
 @app.post('/api/chat', response_model=ChatResponse)
-async def chat(request: ChatRequest):
-    try:
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=request.messages,
-            metadata={
-                'framework': 'fastapi',
-                'endpoint': '/api/chat'
-            }
-        )
-        
-        return ChatResponse(
-            message=response.choices[0].message.content,
-            cost=response.cost,
-            usage=response.usage
-        )
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+async def chat(request: ChatRequest): try: response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=request.messages, metadata={ 'framework': 'fastapi', 'endpoint': '/api/chat' } ) return ChatResponse( message=response.choices[0].message.content, cost=response.cost, usage=response.usage ) except Exception as e: raise HTTPException(status_code=500, detail=str(e))
 \`\`\`
 
 ![Python Framework Examples](/assets/usage_3.png)
 
-## 🔬 Data Science & ML Integration
+## Data Science & ML Integration
 
 ### Jupyter Notebooks
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["import pandas as pd","from cost_katana import CostKatana"],"dependencies":["pandas","cost-katana"],"description":"Jupyter Notebook integration with AI-powered data analysis"}
 # In Jupyter Notebook
-import pandas as pd
-from cost_katana import CostKatana
-
-ck = CostKatana(
-    api_key='your-api-key',
-    project='data-analysis-notebook'
+ck = CostKatana( api_key='your-api-key', project='data-analysis-notebook'
 )
 
 # Analyze data with AI
-def analyze_data_with_ai(df):
-    prompt = f"Analyze this data summary: {df.describe().to_string()}"
-    
-    response = ck.chat.completions.create(
-        model='gpt-4',
-        messages=[{'role': 'user', 'content': prompt}],
-        metadata={
-            'environment': 'jupyter',
-            'data_shape': str(df.shape)
-        }
-    )
-    
-    return response.choices[0].message.content
+def analyze_data_with_ai(df): prompt = f"Analyze this data summary: {df.describe().to_string()}" response = ck.chat.completions.create( model='gpt-4', messages=[{'role': 'user', 'content': prompt}], metadata={ 'environment': 'jupyter', 'data_shape': str(df.shape) } ) return response.choices[0].message.content
 
 # Track costs for each analysis
 analysis_results = []
-for data in datasets:
-    result = analyze_data_with_ai(data)
-    analysis_results.append(result)
+for data in datasets: result = analyze_data_with_ai(data) analysis_results.append(result)
 
 # Check total cost
 budget = ck.budget.get_status('data-analysis-notebook')
@@ -1324,28 +887,12 @@ print(f'Total cost for analysis: $' + str(budget.current_spend))
 
 ### Pandas Integration
 
-\`\`\`python
-import pandas as pd
-from cost_katana import CostKatana
-
+\`\`\`smart:python:{"imports":["import pandas as pd","from cost_katana import CostKatana"],"dependencies":["pandas","cost-katana"],"description":"Pandas DataFrame accessor for AI-powered data analysis"}
 ck = CostKatana(api_key='your-api-key')
 
 # Custom pandas accessor for AI analysis
 @pd.api.extensions.register_dataframe_accessor("ai_analyze")
-class AIAnalyzer:
-    def __init__(self, pandas_obj):
-        self._obj = pandas_obj
-    
-    def summarize(self):
-        """Get AI-powered data summary"""
-        prompt = f"Summarize this data: {self._obj.describe().to_string()}"
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=[{'role': 'user', 'content': prompt}]
-        )
-        
-        return response.choices[0].message.content
+class AIAnalyzer: def __init__(self, pandas_obj): self._obj = pandas_obj def summarize(self): """Get AI-powered data summary""" prompt = f"Summarize this data: {self._obj.describe().to_string()}" response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=[{'role': 'user', 'content': prompt}] ) return response.choices[0].message.content
 
 # Usage
 df = pd.read_csv('data.csv')
@@ -1355,38 +902,12 @@ print(summary)
 
 ### Scikit-learn Integration
 
-\`\`\`python
-from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestClassifier
-from cost_katana import CostKatana
-
-ck = CostKatana(
-    api_key='your-api-key',
-    project='ml-model-analysis'
+\`\`\`smart:python:{"imports":["from sklearn.model_selection import train_test_split","from sklearn.ensemble import RandomForestClassifier","from cost_katana import CostKatana"],"dependencies":["scikit-learn","cost-katana"],"description":"Scikit-learn integration with AI-powered model interpretation"}
+ck = CostKatana( api_key='your-api-key', project='ml-model-analysis'
 )
 
 # AI-powered model interpretation
-def interpret_model_results(model, X_test, y_test):
-    score = model.score(X_test, y_test)
-    feature_importance = model.feature_importances_
-    
-    prompt = f"""
-    Interpret these ML model results:
-    - Accuracy: {score:.4f}
-    - Top 5 features: {dict(zip(X_test.columns[:5], feature_importance[:5]))}
-    """
-    
-    response = ck.chat.completions.create(
-        model='gpt-4',
-        messages=[{'role': 'user', 'content': prompt}],
-        metadata={
-            'model_type': 'RandomForest',
-            'accuracy': score,
-            'features_count': len(X_test.columns)
-        }
-    )
-    
-    return response.choices[0].message.content
+def interpret_model_results(model, X_test, y_test): score = model.score(X_test, y_test) feature_importance = model.feature_importances_ prompt = f""" Interpret these ML model results: - Accuracy: {score:.4f} - Top 5 features: {dict(zip(X_test.columns[:5], feature_importance[:5]))} """ response = ck.chat.completions.create( model='gpt-4', messages=[{'role': 'user', 'content': prompt}], metadata={ 'model_type': 'RandomForest', 'accuracy': score, 'features_count': len(X_test.columns) } ) return response.choices[0].message.content
 
 # Train model and get AI interpretation
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -1395,160 +916,50 @@ interpretation = interpret_model_results(model, X_test, y_test)
 print(interpretation)
 \`\`\`
 
-## ☁️ Cloud Deployment
+## Cloud Deployment
 
 ### AWS Lambda
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["import json","from cost_katana import CostKatana","import os"],"dependencies":["cost-katana"],"description":"AWS Lambda function with Python and cost tracking"}
 # lambda_function.py
-import json
-from cost_katana import CostKatana
-import os
-
-ck = CostKatana(
-    api_key=os.environ['API_KEY'],
-    project='lambda-function'
+ck = CostKatana( api_key=os.environ['API_KEY'], project='lambda-function'
 )
 
-def lambda_handler(event, context):
-    try:
-        body = json.loads(event['body'])
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=body['messages'],
-            metadata={
-                'platform': 'aws-lambda',
-                'function_name': context.function_name,
-                'request_id': context.aws_request_id
-            }
-        )
-        
-        return {
-            'statusCode': 200,
-            'headers': {
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*'
-            },
-            'body': json.dumps({
-                'message': response.choices[0].message.content,
-                'cost': response.cost
-            })
-        }
-    except Exception as e:
-        return {
-            'statusCode': 500,
-            'body': json.dumps({'error': str(e)})
-        }
+def lambda_handler(event, context): try: body = json.loads(event['body']) response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=body['messages'], metadata={ 'platform': 'aws-lambda', 'function_name': context.function_name, 'request_id': context.aws_request_id } ) return { 'statusCode': 200, 'headers': { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }, 'body': json.dumps({ 'message': response.choices[0].message.content, 'cost': response.cost }) } except Exception as e: return { 'statusCode': 500, 'body': json.dumps({'error': str(e)}) }
 \`\`\`
 
 ### Google Cloud Functions
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from flask import Flask, request, jsonify","from cost_katana import CostKatana","import os"],"dependencies":["flask","cost-katana"],"description":"Google Cloud Functions HTTP function with cost tracking"}
 # main.py
 from flask import Flask, request, jsonify
 from cost_katana import CostKatana
 import os
 
-ck = CostKatana(
-    api_key=os.getenv('API_KEY'),
-    project='gcp-function'
+ck = CostKatana( api_key=os.getenv('API_KEY'), project='gcp-function'
 )
 
-def chat_function(request):
-    """HTTP Cloud Function for chat completion"""
-    if request.method != 'POST':
-        return jsonify({'error': 'Method not allowed'}), 405
-    
-    try:
-        data = request.get_json()
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=data['messages'],
-            metadata={
-                'platform': 'gcp-functions',
-                'region': os.getenv('FUNCTION_REGION')
-            }
-        )
-        
-        return jsonify({
-            'message': response.choices[0].message.content,
-            'cost': response.cost
-        })
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+def chat_function(request): """HTTP Cloud Function for chat completion""" if request.method != 'POST': return jsonify({'error': 'Method not allowed'}), 405 try: data = request.get_json() response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=data['messages'], metadata={ 'platform': 'gcp-functions', 'region': os.getenv('FUNCTION_REGION') } ) return jsonify({ 'message': response.choices[0].message.content, 'cost': response.cost }) except Exception as e: return jsonify({'error': str(e)}), 500
 \`\`\`
 
 ### Azure Functions
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["import logging","import json","import azure.functions as func","from cost_katana import CostKatana","import os"],"dependencies":["azure-functions","cost-katana"],"description":"Azure Functions HTTP trigger with cost tracking"}
 # __init__.py
-import logging
-import json
-import azure.functions as func
-from cost_katana import CostKatana
-import os
-
-ck = CostKatana(
-    api_key=os.environ['API_KEY'],
-    project='azure-function'
+ck = CostKatana( api_key=os.environ['API_KEY'], project='azure-function'
 )
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
-    logging.info('Python HTTP trigger function processed a request.')
-
-    try:
-        req_body = req.get_json()
-        
-        response = ck.chat.completions.create(
-            model='gpt-3.5-turbo',
-            messages=req_body['messages'],
-            metadata={
-                'platform': 'azure-functions',
-                'function_app': os.getenv('WEBSITE_SITE_NAME')
-            }
-        )
-        
-        return func.HttpResponse(
-            json.dumps({
-                'message': response.choices[0].message.content,
-                'cost': response.cost
-            }),
-            status_code=200,
-            mimetype='application/json'
-        )
-    except Exception as e:
-        return func.HttpResponse(
-            json.dumps({'error': str(e)}),
-            status_code=500,
-            mimetype='application/json'
-        )
+def main(req: func.HttpRequest) -> func.HttpResponse: logging.info('Python HTTP trigger function processed a request.') try: req_body = req.get_json() response = ck.chat.completions.create( model='gpt-3.5-turbo', messages=req_body['messages'], metadata={ 'platform': 'azure-functions', 'function_app': os.getenv('WEBSITE_SITE_NAME') } ) return func.HttpResponse( json.dumps({ 'message': response.choices[0].message.content, 'cost': response.cost }), status_code=200, mimetype='application/json' ) except Exception as e: return func.HttpResponse( json.dumps({'error': str(e)}), status_code=500, mimetype='application/json' )
 \`\`\`
 
-## 📊 Monitoring & Analytics
+## Monitoring & Analytics
 
 ### Real-time Cost Monitoring
 
-\`\`\`python
-import time
-from cost_katana import CostKatana
-
+\`\`\`smart:python:{"imports":["import time","from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"Real-time cost monitoring with automated alerts"}
 ck = CostKatana(api_key='your-api-key')
 
-def monitor_costs():
-    """Monitor AI costs in real-time"""
-    while True:
-        analytics = ck.analytics.get_current()
-        
-        print(f'Current hourly spend: $' + str(analytics.hourly_spend))
-        print(f'Requests this hour: {analytics.request_count}')
-        
-        if analytics.hourly_spend > 10:
-            print('⚠️ High spending detected!')
-            # Send alert
-            
-        time.sleep(60)  # Check every minute
+def monitor_costs(): """Monitor AI costs in real-time""" while True: analytics = ck.analytics.get_current() print(f'Current hourly spend: $' + str(analytics.hourly_spend)) print(f'Requests this hour: {analytics.request_count}') if analytics.hourly_spend > 10: print(' High spending detected!') # Send alert time.sleep(60) # Check every minute
 
 # Run monitoring
 monitor_costs()
@@ -1556,106 +967,57 @@ monitor_costs()
 
 ### Custom Dashboards
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from flask import Flask, jsonify","from cost_katana import CostKatana","import asyncio","import time"],"dependencies":["flask","cost-katana"],"description":"Custom Flask dashboard with async analytics aggregation"}
 from flask import Flask, jsonify
 from cost_katana import CostKatana
 import asyncio
+import time
 
 app = Flask(__name__)
 ck = CostKatana(api_key='your-api-key')
 
 @app.route('/api/dashboard')
-async def dashboard_data():
-    """Get dashboard data"""
-    analytics, budget, optimization = await asyncio.gather(
-        ck.analytics.get_usage(days=7),
-        ck.budget.get_status(),
-        ck.optimization.get_summary()
-    )
-    
-    return jsonify({
-        'analytics': analytics,
-        'budget': budget,
-        'optimization': optimization,
-        'timestamp': time.time()
-    })
+async def dashboard_data(): """Get dashboard data""" analytics, budget, optimization = await asyncio.gather( ck.analytics.get_usage(days=7), ck.budget.get_status(), ck.optimization.get_summary() ) return jsonify({ 'analytics': analytics, 'budget': budget, 'optimization': optimization, 'timestamp': time.time() })
 
-if __name__ == '__main__':
-    app.run(port=3001)
+if __name__ == '__main__': app.run(port=3001)
 \`\`\`
 
-## 🎯 Best Practices
+## Best Practices
 
 ### 1. Environment Configuration
-\`\`\`python
+\`\`\`smart:python:{"imports":["import os"],"dependencies":[],"description":"Environment-based configuration for different deployment stages"}
 # config.py
 import os
 
-class Config:
-    API_KEY = os.getenv('API_KEY')
-    PROJECT_NAME = os.getenv('PROJECT_NAME', 'my-python-app')
-    
-    # Different settings for different environments
-    if os.getenv('ENVIRONMENT') == 'production':
-        OPTIMIZATION_STRATEGY = 'aggressive'
-        COST_KATANA_PROJECT = f'{PROJECT_NAME}-prod'
-    else:
-        OPTIMIZATION_STRATEGY = 'conservative'
-        COST_KATANA_PROJECT = f'{PROJECT_NAME}-dev'
+class Config: API_KEY = os.getenv('API_KEY') PROJECT_NAME = os.getenv('PROJECT_NAME', 'my-python-app') # Different settings for different environments if os.getenv('ENVIRONMENT') == 'production': OPTIMIZATION_STRATEGY = 'aggressive' COST_KATANA_PROJECT = f'{PROJECT_NAME}-prod' else: OPTIMIZATION_STRATEGY = 'conservative' COST_KATANA_PROJECT = f'{PROJECT_NAME}-dev'
 
 config = Config()
 \`\`\`
 
 ### 2. Error Handling
-\`\`\`python
+\`\`\`smart:python:{"imports":["from cost_katana import CostKatana, RateLimitError, CostLimitError"],"dependencies":["cost-katana"],"description":"Robust error handling with automatic fallback to cheaper models"}
 from cost_katana import CostKatana, RateLimitError, CostLimitError
 
-ck = CostKatana(
-    api_key='your-api-key',
-    retries=3,
-    timeout=30
+ck = CostKatana( api_key='your-api-key', retries=3, timeout=30
 )
 
-try:
-    response = ck.chat.completions.create(
-        model='gpt-4',
-        messages=messages
-    )
-    
-    return response
-except RateLimitError:
-    # Switch to cheaper model
-    return ck.chat.completions.create(
-        model='gpt-3.5-turbo',
-        messages=messages
-    )
-except CostLimitError:
-    # Handle budget exceeded
-    print('Budget limit reached!')
-    return None
+try: response = ck.chat.completions.create( model='gpt-4', messages=messages ) return response
+except RateLimitError: # Switch to cheaper model return ck.chat.completions.create( model='gpt-3.5-turbo', messages=messages )
+except CostLimitError: # Handle budget exceeded print('Budget limit reached!') return None
 \`\`\`
 
 ### 3. Cost Optimization
-\`\`\`python
+\`\`\`smart:python:{"imports":["from functools import lru_cache","import hashlib","import json","from cost_katana import CostKatana"],"dependencies":["cost-katana"],"description":"LRU cache implementation for reducing duplicate API calls and costs"}
 # Implement caching
-from functools import lru_cache
-import hashlib
+ck = CostKatana(api_key='your-api-key')
 
 @lru_cache(maxsize=1000)
-def cached_chat_completion(messages_hash, model):
-    return ck.chat.completions.create(
-        model=model,
-        messages=json.loads(messages_hash)
-    )
+def cached_chat_completion(messages_hash, model): return ck.chat.completions.create( model=model, messages=json.loads(messages_hash) )
 
-def chat_with_caching(messages, model='gpt-3.5-turbo'):
-    messages_str = json.dumps(messages, sort_keys=True)
-    messages_hash = hashlib.md5(messages_str.encode()).hexdigest()
-    
-    return cached_chat_completion(messages_hash, model)
+def chat_with_caching(messages, model='gpt-3.5-turbo'): messages_str = json.dumps(messages, sort_keys=True) messages_hash = hashlib.md5(messages_str.encode()).hexdigest() return cached_chat_completion(messages_hash, model)
 \`\`\`
 
-## 🚀 Getting Started
+## Getting Started
 
 1. **Install SDK**: \`pip install cost-katana\`
 2. **Get API Key**: Sign up at [costkatana.com](https://costkatana.com)
@@ -1663,35 +1025,37 @@ def chat_with_caching(messages, model='gpt-3.5-turbo'):
 4. **Start Tracking**: Begin monitoring your AI costs
 5. **Optimize**: Use insights to reduce expenses
 
-Ready to optimize your Python AI costs? Get started today! 🐍`}
-  />
+Ready to optimize your Python AI costs? Get started today! `} />
 );
 
-export const ChatGPTPage = () => (
-  <DocumentationPage
-    title="ChatGPT Integration"
-    description="Direct ChatGPT custom GPT integration for instant optimization"
-    prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }}
-    fallbackContent={`# ChatGPT Integration
+export const ChatGPTPage = () => ( <DocumentationPage title="ChatGPT Integration" description="Direct ChatGPT custom GPT integration for instant optimization" prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }} fallbackContent={`# ChatGPT Integration
 
 Direct integration with ChatGPT through custom GPT for instant AI cost optimization and analysis.
 
 ![ChatGPT Integration](/assets/gpt.png)
 
-## 🤖 Custom GPT Integration
+## Custom GPT Integration
 
 ### Overview
 
 Our ChatGPT custom GPT provides instant access to Cost Katana's optimization features directly within ChatGPT conversations.
 
 **Features:**
-- ✨ **Instant Prompt Optimization** - Optimize prompts in real-time
-- 📊 **Cost Analysis** - Get immediate cost breakdowns
-- 🎯 **Model Recommendations** - AI-powered model suggestions
-- 📈 **Usage Tracking** - Monitor your AI spending
-- 🔄 **Workflow Analysis** - Analyze multi-step AI processes
+- **Instant Prompt Optimization** - Optimize prompts in real-time
+- **Cost Analysis** - Get immediate cost breakdowns
+- **Model Recommendations** - AI-powered model suggestions
+- **Usage Tracking** - Monitor your AI spending
+- **Workflow Analysis** - Analyze multi-step AI processes
 
 ### Installation
+
+Follow this step-by-step guide:
+
+\`\`\`steps:ChatGPT Integration Setup
+[{"title":"Access Custom GPT","description":"Open ChatGPT Custom GPTs","content":"Visit the ChatGPT Custom GPTs page:","code":"https://chat.openai.com/gpts"},{"title":"Find Cost Katana","description":"Search for Cost Katana GPT","content":"Search for 'CostKatana' in the GPT store","code":"Search: CostKatana"},{"title":"Install GPT","description":"Add the Custom GPT","content":"Click 'Use this GPT' to add it to your ChatGPT","code":"Click: Use this GPT"},{"title":"Configure API Key","description":"Connect your Cost Katana account","content":"Enter your Cost Katana API key when prompted","code":"API Key: ck_your_key_here"}]
+\`\`\`
+
+Or follow these steps manually:
 
 1. **Access Custom GPT**: Visit [ChatGPT Custom GPTs](https://chat.openai.com/gpts)
 2. **Search for Cost Katana**: Find "CostKatana"
@@ -1700,7 +1064,7 @@ Our ChatGPT custom GPT provides instant access to Cost Katana's optimization fea
 
 ![Custom GPT Setup](/assets/prompt_templates_2.png)
 
-## 💬 Chat Commands
+## Chat Commands
 
 ### Prompt Optimization
 \`\`\`
@@ -1746,7 +1110,7 @@ Help me plan a budget for an AI-powered content generation service that needs to
 - Scaling recommendations
 - Risk mitigation tips
 
-## 🔧 Advanced Features
+## Advanced Features
 
 ### Workflow Analysis
 \`\`\`
@@ -1787,7 +1151,7 @@ Compare the total cost of ownership for building a chatbot using different AI pr
 
 ![ChatGPT Analysis Results](/assets/analytics_1.png)
 
-## 📊 Usage Analytics
+## Usage Analytics
 
 ### Real-time Monitoring
 The custom GPT can access your Cost Katana dashboard to provide:
@@ -1796,12 +1160,9 @@ The custom GPT can access your Cost Katana dashboard to provide:
 - **Usage trends** and patterns
 - **Budget utilization** percentages
 - **Cost anomaly** detection
-- **Optimization opportunities**
-
-### Interactive Reports
+- **Optimization opportunities** ### Interactive Reports
 \`\`\`
-Show me my AI spending report for the last 30 days with optimization recommendations.
-   \`\`\`
+Show me my AI spending report for the last 30 days with optimization recommendations. \`\`\`
 
 **Report includes:**
 - Visual spending breakdown
@@ -1809,23 +1170,21 @@ Show me my AI spending report for the last 30 days with optimization recommendat
 - Efficiency metrics
 - Action items for cost reduction
 
-## 🎯 Use Cases
+## Use Cases
 
 ### 1. Content Creation Teams
 \`\`\`
 I need to optimize costs for a content team that creates:
 - 50 blog posts per month
-- 200 social media posts per month  
-- 20 email newsletters per month
-   \`\`\`
+- 200 social media posts per month 
+- 20 email newsletters per month \`\`\`
 
 ### 2. Customer Support
 \`\`\`
 Optimize our customer support AI that handles:
 - 1000 tickets per day
 - Average response length: 100 words
-- Required response time: < 30 seconds
-   \`\`\`
+- Required response time: < 30 seconds \`\`\`
 
 ### 3. Data Analysis
 \`\`\`
@@ -1844,7 +1203,7 @@ Optimize costs for an AI coding assistant that:
 - Explains complex algorithms
 \`\`\`
 
-## 🔐 Security & Privacy
+## Security & Privacy
 
 ### Data Protection
 - **No data storage**: Conversations are not stored by Cost Katana
@@ -1858,7 +1217,7 @@ Optimize costs for an AI coding assistant that:
 - **Revocable**: API access can be revoked anytime
 - **Read-only**: Cannot modify your Cost Katana settings
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Step 1: Setup Cost Katana Account
 1. Sign up at [costkatana.com](https://costkatana.com)
@@ -1881,7 +1240,7 @@ Optimize costs for an AI coding assistant that:
 3. Receive model recommendations
 4. Monitor your savings!
 
-## 💡 Pro Tips
+## Pro Tips
 
 ### Effective Commands
 - Be specific about your use case
@@ -1909,7 +1268,7 @@ A: Yes, it supports OpenAI, Anthropic, AWS Bedrock, Google AI, Cohere, and more.
 **Q: Is my data secure?**
 A: Absolutely. We only access cost and usage data through your API key, never your actual prompts or responses.
 
-## 🔗 Integration Examples
+## Integration Examples
 
 ### Slack Integration
 Set up automated cost reports in Slack:
@@ -1931,7 +1290,7 @@ Help me create a dashboard widget showing cost per customer support ticket resol
 
 ![Integration Dashboard](/assets/dashboard_2.png)
 
-## 📞 Support
+## Support
 
 Need help with the ChatGPT integration?
 
@@ -1940,25 +1299,19 @@ Need help with the ChatGPT integration?
 - **Email support**: support@costkatana.com
 - **Community**: Join our Discord community
 
-Start optimizing your AI costs directly in ChatGPT today! 🎯`}
-  />
+Start optimizing your AI costs directly in ChatGPT today! `} />
 );
 
 // Features Pages
-export const FeaturesOverviewPage = () => (
-  <DocumentationPage
-    title="Features Overview"
-    description="Explore all Cost Katana features for AI cost optimization"
-    nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }}
-    fallbackContent={`# Cost Katana Features Overview
+export const FeaturesOverviewPage = () => ( <DocumentationPage title="Features Overview" description="Explore all Cost Katana features for AI cost optimization" nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }} fallbackContent={`# Cost Katana Features Overview
 
 Comprehensive AI cost optimization platform powered by revolutionary **Cortex Meta-Language** to reduce your AI spending by up to **95%** through LISP-based answer generation.
 
 ![Cost Katana Features Overview](/assets/dashboard_1.png)
 
-## 🎯 Core Features
+## Core Features
 
-### 📊 Real-time Dashboard
+### Real-time Dashboard
 Monitor your AI costs and usage in real-time with beautiful, customizable dashboards.
 
 **Key Benefits:**
@@ -1971,7 +1324,7 @@ Monitor your AI costs and usage in real-time with beautiful, customizable dashbo
 
 ![Dashboard Analytics](/assets/analytics_1.png)
 
-### 📈 Usage Tracking
+### Usage Tracking
 Comprehensive tracking of all your AI API calls with detailed analytics and insights.
 
 **Features:**
@@ -1982,7 +1335,7 @@ Comprehensive tracking of all your AI API calls with detailed analytics and insi
 
 [Learn More →](/features/usage-tracking)
 
-### 💰 Cost Analytics
+### Cost Analytics
 Deep dive into your AI spending with advanced analytics and optimization recommendations.
 
 **Analytics Include:**
@@ -1995,9 +1348,9 @@ Deep dive into your AI spending with advanced analytics and optimization recomme
 
 ![Cost Analytics Dashboard](/assets/analytics_2.png)
 
-## 🚀 Advanced Features
+## Advanced Features
 
-### 🧠 Cortex Meta-Language (Revolutionary)
+### Cortex Meta-Language (Revolutionary)
 The world's first AI meta-language achieving **40-75% token reduction** through LISP-based answer generation.
 
 **Cortex Features:**
@@ -2008,18 +1361,11 @@ The world's first AI meta-language achieving **40-75% token reduction** through 
 - **Real-time Analytics** - Confidence, cost impact, and semantic integrity metrics
 - **Universal Context Handling** - Technical, business, and industry-specific processing
 
-**Usage Example:**
-\`\`\`javascript
-const response = await gateway.openai({
-  model: 'gpt-4o-mini',
-  messages: [{ role: 'user', content: 'Write a REST API in Node.js' }]
-}, {
-  cortex: {
-    enabled: true,
-    mode: 'answer_generation',
-    coreModel: 'claude-opus-4-1',
-    dynamicInstructions: true
-  }
+**Usage Example:** Try this example with all necessary imports and context:
+
+\`\`\`smart:javascript:{"imports":["import { gateway } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete Cortex example with automatic token reduction"}
+const response = await gateway.openai({ model: 'gpt-4o-mini', messages: [{ role: 'user', content: 'Write a REST API in Node.js' }]
+}, { cortex: { enabled: true, mode: 'answer_generation', coreModel: 'claude-opus-4-1', dynamicInstructions: true }
 });
 
 // Achieve 89% token reduction!
@@ -2028,7 +1374,7 @@ console.log(response.metadata.cortex.tokenReduction);
 
 [Learn More About Cortex →](/features/cortex)
 
-### 🤖 Traditional AI Optimization Engine
+### Traditional AI Optimization Engine
 Intelligent optimization powered by machine learning to automatically reduce your costs.
 
 **Optimization Types:**
@@ -2041,7 +1387,7 @@ Intelligent optimization powered by machine learning to automatically reduce you
 
 ![AI Optimization Results](/assets/optimization_1.png)
 
-### 🔮 Predictive Intelligence
+### Predictive Intelligence
 AI-powered forecasting and recommendations to stay ahead of your costs.
 
 **Predictive Features:**
@@ -2052,7 +1398,7 @@ AI-powered forecasting and recommendations to stay ahead of your costs.
 
 [Explore Intelligence →](/features/predictive-intelligence)
 
-### 📁 Project Management
+### Project Management
 Organize and track costs across multiple projects and teams.
 
 **Project Features:**
@@ -2065,9 +1411,9 @@ Organize and track costs across multiple projects and teams.
 
 ![Project Management Interface](/assets/usage_1.png)
 
-## 🛠️ Productivity Tools
+## Productivity Tools
 
-### 📝 Prompt Templates
+### Prompt Templates
 Pre-built and custom templates to standardize your AI interactions.
 
 **Template Benefits:**
@@ -2078,7 +1424,7 @@ Pre-built and custom templates to standardize your AI interactions.
 
 [Browse Templates →](/features/templates)
 
-### ⚡ Workflows
+### Workflows
 Automate complex AI processes with visual workflow builder.
 
 **Workflow Capabilities:**
@@ -2091,9 +1437,9 @@ Automate complex AI processes with visual workflow builder.
 
 ![Workflow Builder](/assets/workflows_1.png)
 
-## 🔧 Infrastructure Features
+## Infrastructure Features
 
-### 🌐 Gateway & Proxy
+### Gateway & Proxy
 Centralized gateway for all your AI API calls with built-in optimization.
 
 **Gateway Features:**
@@ -2104,7 +1450,7 @@ Centralized gateway for all your AI API calls with built-in optimization.
 
 [Setup Gateway →](/features/gateway)
 
-### 🔐 Key Vault
+### Key Vault
 Secure management of all your AI provider API keys.
 
 **Security Features:**
@@ -2117,7 +1463,7 @@ Secure management of all your AI provider API keys.
 
 ![Security Dashboard](/assets/gateway_1.png)
 
-### 🚨 Alerts & Monitoring
+### Alerts & Monitoring
 Proactive monitoring with intelligent alerts and notifications.
 
 **Alert Types:**
@@ -2126,36 +1472,33 @@ Proactive monitoring with intelligent alerts and notifications.
 - **Performance issues** and downtime
 - **Optimization opportunities** and recommendations
 
-[Configure Alerts →](/features/alerts)
+[Configure Alerts →](/features/alerts) ## Key Benefits
 
-
-## 💡 Key Benefits
-
-### 💸 **Cost Savings**
+### **Cost Savings**
 - **Average 70% reduction** in AI costs
 - **Intelligent optimization** without quality loss
 - **Automatic scaling** based on usage patterns
 - **Budget controls** and spending limits
 
-### 📊 **Visibility & Control**
+### **Visibility & Control**
 - **Complete transparency** into AI spending
 - **Granular tracking** at request level
 - **Team collaboration** and cost allocation
 - **Compliance reporting** and audit trails
 
-### ⚡ **Performance**
+### **Performance**
 - **Sub-100ms latency** added overhead
 - **99.9% uptime** SLA with redundancy
 - **Global edge** deployment for speed
 - **Automatic failover** and load balancing
 
-### 🔒 **Security**
+### **Security**
 - **Enterprise-grade** encryption and security
 - **SOC 2 Type II** compliance
 - **Zero data retention** policy
 - **Advanced access** controls and audit logs
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Quick Setup (5 minutes)
 1. **Sign up** for your free account
@@ -2164,48 +1507,41 @@ Proactive monitoring with intelligent alerts and notifications.
 4. **Start tracking** and optimizing immediately
 
 ### Implementation Options
-- **🖥️ Web Dashboard** - Complete web interface
-- **⚡ CLI Tool** - Command-line power user interface
-- **📦 SDKs** - Node.js, Python, and more
-- **🔌 API** - Direct REST API integration
+- ** Web Dashboard** - Complete web interface
+- ** CLI Tool** - Command-line power user interface
+- ** SDKs** - Node.js, Python, and more
+- ** API** - Direct REST API integration
 
 ### Support & Resources
-- **📖 Documentation** - Comprehensive guides and tutorials
-- **💬 Community** - Discord community and forums
-- **🎯 Support** - 24/7 technical support
-- **🎓 Training** - Onboarding and best practices
+- ** Documentation** - Comprehensive guides and tutorials
+- ** Community** - Discord community and forums
+- ** Support** - 24/7 technical support
+- ** Training** - Onboarding and best practices
 
-## 📈 Success Stories
+## Success Stories
 
 ### Startup Success
 *"Cost Katana helped us reduce our AI costs by 80% while scaling from 1K to 1M users. The automatic optimization saved us $50K+ in our first year."*
 
-### Enterprise Efficiency  
+### Enterprise Efficiency 
 *"With 500+ developers using AI APIs, Cost Katana gave us the visibility and control we needed. We now track every dollar and optimize continuously."*
 
 ### Agency Growth
 *"Managing AI costs for 50+ clients was impossible before Cost Katana. Now we have complete transparency and can offer cost optimization as a service."*
 
-## 🎯 Ready to Get Started?
+## Ready to Get Started?
 
 Choose your path to AI cost optimization:
 
-- **🚀 Start Free Trial** - No credit card required
-- **📞 Schedule Demo** - See Cost Katana in action
-- **📖 Read Documentation** - Technical implementation guides
-- **💬 Join Community** - Connect with other users
+- ** Start Free Trial** - No credit card required
+- ** Schedule Demo** - See Cost Katana in action
+- ** Read Documentation** - Technical implementation guides
+- ** Join Community** - Connect with other users
 
-Transform your AI costs today with Cost Katana! 💰✨`}
-  />
+Transform your AI costs today with Cost Katana! `} />
 );
 
-export const DashboardPage = () => (
-  <DocumentationPage
-    title="Dashboard"
-    description="Real-time monitoring and insights dashboard"
-    prevPage={{ path: '/features', label: 'Back to Features' }}
-    nextPage={{ path: '/features/usage-tracking', label: 'Next: Usage Tracking' }}
-    fallbackContent={`# Dashboard
+export const DashboardPage = () => ( <DocumentationPage title="Dashboard" description="Real-time monitoring and insights dashboard" prevPage={{ path: '/features', label: 'Back to Features' }} nextPage={{ path: '/features/usage-tracking', label: 'Next: Usage Tracking' }} fallbackContent={`# Dashboard
 
 Real-time monitoring and insights dashboard for comprehensive AI cost tracking.
 
@@ -2218,6 +1554,13 @@ Real-time monitoring and insights dashboard for comprehensive AI cost tracking.
 - **Usage Metrics**: Real-time API call monitoring
 - **Provider Status**: Health checks for all AI providers
 - **Performance Metrics**: Response times and success rates
+
+### Try It Out
+
+Test the dashboard API to get real-time metrics:
+
+\`\`\`api:GET:/api/v1/dashboard/metrics:Get Dashboard Metrics:{"Authorization":"Bearer YOUR_API_KEY"}:{}:{"success":true,"metrics":{"totalCost":1250.50,"totalRequests":45000,"avgCostPerRequest":0.028,"topModels":["gpt-4","claude-3-opus"]}}
+\`\`\`
 
 ![Advanced Dashboard Analytics](/assets/dashboard_2.png)
 
@@ -2266,17 +1609,10 @@ Real-time monitoring and insights dashboard for comprehensive AI cost tracking.
 - Cost-saving opportunities
 - Model recommendations
 - Usage efficiency tips
-- Performance improvements`}
-  />
+- Performance improvements`} />
 );
 
-export const UsageTrackingPage = () => (
-  <DocumentationPage
-    title="Usage Tracking"
-    description="Track your AI usage across all providers"
-    prevPage={{ path: '/features/dashboard', label: 'Previous: Dashboard' }}
-    nextPage={{ path: '/features/analytics', label: 'Next: Cost Analytics' }}
-    fallbackContent={`# Usage Tracking
+export const UsageTrackingPage = () => ( <DocumentationPage title="Usage Tracking" description="Track your AI usage across all providers" prevPage={{ path: '/features/dashboard', label: 'Previous: Dashboard' }} nextPage={{ path: '/features/analytics', label: 'Next: Cost Analytics' }} fallbackContent={`# Usage Tracking
 
 Track your AI API usage across all providers with detailed insights and real-time monitoring.
 
@@ -2300,9 +1636,7 @@ When using our SDKs, usage is automatically tracked:
 
 \`\`\`javascript
 // Node.js
-const response = await ck.chat.completions.create({
-  model: "gpt-4",
-  messages: [{ role: "user", content: "Hello" }]
+const response = await ck.chat.completions.create({ model: "gpt-4", messages: [{ role: "user", content: "Hello" }]
 });
 // Usage automatically tracked!
 \`\`\`
@@ -2311,16 +1645,16 @@ const response = await ck.chat.completions.create({
 
 For custom integrations, manually track usage:
 
-\`\`\`javascript
-await ck.track({
-  provider: 'openai',
-  model: 'gpt-4',
-  usage: {
-    prompt_tokens: 100,
-    completion_tokens: 50,
-    total_tokens: 150
-  }
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Manual usage tracking example with all imports"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+await ck.track({ provider: 'openai', model: 'gpt-4', usage: { prompt_tokens: 100, completion_tokens: 50, total_tokens: 150 }
 });
+\`\`\`
+
+Or test the tracking API directly:
+
+\`\`\`api:POST:/api/v1/usage/track:Track AI Usage:{"Authorization":"Bearer YOUR_API_KEY","Content-Type":"application/json"}:{"provider":"openai","model":"gpt-4","usage":{"prompt_tokens":100,"completion_tokens":50,"total_tokens":150}}:{"success":true,"tracked":{"id":"track_123","provider":"openai","tokens":150,"cost":0.002}}
 \`\`\`
 
 ## Usage Dashboard
@@ -2341,17 +1675,10 @@ Set up usage alerts to prevent overages:
 - Daily usage limits
 - Monthly budget caps
 - Unusual activity detection
-- Rate limit warnings`}
-  />
+- Rate limit warnings`} />
 );
 
-export const CostAnalyticsPage = () => (
-  <DocumentationPage
-    title="Cost Analytics"
-    description="Advanced cost analysis and reporting"
-    prevPage={{ path: '/features/usage-tracking', label: 'Previous: Usage Tracking' }}
-    nextPage={{ path: '/features/optimization', label: 'Next: AI Optimization' }}
-    fallbackContent={`# Cost Analytics
+export const CostAnalyticsPage = () => ( <DocumentationPage title="Cost Analytics" description="Advanced cost analysis and reporting" prevPage={{ path: '/features/usage-tracking', label: 'Previous: Usage Tracking' }} nextPage={{ path: '/features/optimization', label: 'Next: AI Optimization' }} fallbackContent={`# Cost Analytics
 
 Get deep insights into your AI spending with advanced analytics and reporting.
 
@@ -2408,17 +1735,10 @@ Our AI analyzes your usage and provides:
 - **Optimization Recommendations**: Specific actions to reduce costs
 - **Model Suggestions**: Cheaper alternatives for your use cases
 - **Batch Processing Opportunities**: Combine requests for savings
-- **Caching Strategies**: Reduce redundant API calls`}
-  />
+- **Caching Strategies**: Reduce redundant API calls`} />
 );
 
-export const OptimizationPage = () => (
-  <DocumentationPage
-    title="AI Optimization"
-    description="Intelligent cost reduction strategies powered by AI"
-    prevPage={{ path: '/features/analytics', label: 'Previous: Cost Analytics' }}
-    nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }}
-    fallbackContent={`# AI-Powered Optimization
+export const OptimizationPage = () => ( <DocumentationPage title="AI Optimization" description="Intelligent cost reduction strategies powered by AI" prevPage={{ path: '/features/analytics', label: 'Previous: Cost Analytics' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# AI-Powered Optimization
 
 Reduce your AI costs by up to 70% with intelligent optimization strategies.
 
@@ -2431,6 +1751,17 @@ Reduce your AI costs by up to 70% with intelligent optimization strategies.
 - **Token Reduction**: Remove unnecessary tokens
 - **Context Management**: Smart context window usage
 - **Prompt Templates**: Reusable optimized prompts
+
+### Try Optimization
+
+Use this example with all necessary imports and context:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete optimization example"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+const result = await ck.optimization.optimize({ prompt: 'Your prompt here', strategy: 'aggressive'
+});
+console.log('Savings:', result.costSavings);
+\`\`\`
 
 ![Optimization Results](/assets/optimization_2.png)
 
@@ -2472,22 +1803,25 @@ Our AI continuously analyzes your usage and suggests:
 ### One-Click Optimizations
 Apply recommendations instantly:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Apply optimization recommendations"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Get optimization suggestions
 const suggestions = await ck.getOptimizations();
+console.log('Available optimizations:', suggestions);
 
 // Apply selected optimizations
-await ck.applyOptimization(suggestions[0].id);
+if (suggestions.length > 0) { const result = await ck.applyOptimization(suggestions[0].id); console.log('Optimization applied:', result);
+}
 \`\`\`
 
 ### Custom Rules
 Define your own optimization rules:
 
-\`\`\`javascript
-ck.addRule({
-  name: 'Use GPT-3.5 for summaries',
-  condition: { task: 'summarization' },
-  action: { model: 'gpt-3.5-turbo' }
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create custom optimization rules"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+ck.addRule({ name: 'Use GPT-3.5 for summaries', condition: { task: 'summarization' }, action: { model: 'gpt-3.5-turbo' }
 });
 \`\`\`
 
@@ -2498,17 +1832,10 @@ Monitor optimization impact:
 - **Savings Dashboard**: Real-time cost reduction metrics
 - **Before/After Comparison**: See the impact of each optimization
 - **Quality Metrics**: Ensure output quality is maintained
-- **ROI Tracking**: Measure optimization effectiveness`}
-  />
+- **ROI Tracking**: Measure optimization effectiveness`} />
 );
 
-export const PredictiveIntelligencePage = () => (
-  <DocumentationPage
-    title="Predictive Intelligence"
-    description="AI-powered forecasting and predictive analytics"
-    prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }}
-    nextPage={{ path: '/features/projects', label: 'Next: Projects' }}
-    fallbackContent={`# Predictive Intelligence
+export const PredictiveIntelligencePage = () => ( <DocumentationPage title="Predictive Intelligence" description="AI-powered forecasting and predictive analytics" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/projects', label: 'Next: Projects' }} fallbackContent={`# Predictive Intelligence
 
 Leverage AI to forecast costs, predict usage patterns, and prevent budget overruns.
 
@@ -2571,15 +1898,14 @@ Get notified before issues occur:
 ### Automated Actions
 Set up automatic responses:
 
-\`\`\`javascript
-ck.setPredictiveAction({
-  trigger: 'budget_80_percent',
-  action: 'switch_to_cheaper_model',
-  models: {
-    from: 'gpt-4',
-    to: 'gpt-3.5-turbo'
-  }
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Set up predictive actions for automatic cost optimization"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+// Set up predictive action
+await ck.setPredictiveAction({ trigger: 'budget_80_percent', action: 'switch_to_cheaper_model', models: { from: 'gpt-4', to: 'gpt-3.5-turbo' }
 });
+
+console.log('Predictive action configured!');
 \`\`\`
 
 ![Advanced Predictive Analytics](/assets/predictive_intelligence_3.png)
@@ -2592,17 +1918,10 @@ The Predictive Intelligence dashboard shows:
 - **Confidence Scores**: Prediction reliability metrics
 - **Risk Indicators**: Potential issues highlighted
 - **Recommendation Cards**: AI-suggested actions
-- **What-If Scenarios**: Test different strategies`}
-  />
+- **What-If Scenarios**: Test different strategies`} />
 );
 
-export const ProjectsPage = () => (
-  <DocumentationPage
-    title="Project Management"
-    description="Organize and track AI usage by projects"
-    prevPage={{ path: '/features/predictive-intelligence', label: 'Previous: Predictive Intelligence' }}
-    nextPage={{ path: '/features/templates', label: 'Next: Prompt Templates' }}
-    fallbackContent={`# Project Management
+export const ProjectsPage = () => ( <DocumentationPage title="Project Management" description="Organize and track AI usage by projects" prevPage={{ path: '/features/predictive-intelligence', label: 'Previous: Predictive Intelligence' }} nextPage={{ path: '/features/templates', label: 'Next: Prompt Templates' }} fallbackContent={`# Project Management
 
 Organize your AI usage by projects for better cost tracking and team collaboration.
 
@@ -2634,22 +1953,21 @@ Organize your AI usage by projects for better cost tracking and team collaborati
 
 ### Via Dashboard
 1. Navigate to **Projects** → **New Project**
-2. Enter project details:
-   - Name and description
-   - Budget and limits
-   - Team members
-   - Tags and categories
+2. Enter project details: - Name and description - Budget and limits - Team members - Tags and categories
 
 ### Via API
-\`\`\`javascript
-const project = await ck.projects.create({
-  name: 'Customer Support Bot',
-  budget: 1000,
-  team: ['alice@example.com', 'bob@example.com'],
-  limits: {
-    daily_spend: 50,
-    requests_per_minute: 100
-  }
+
+Try creating a project:
+
+\`\`\`api:POST:/api/v1/projects:Create Project:{"Authorization":"Bearer YOUR_API_KEY","Content-Type":"application/json"}:{"name":"Customer Support Bot","budget":1000,"description":"AI-powered customer support"}:{"success":true,"project":{"id":"proj_123","name":"Customer Support Bot","budget":1000}}
+\`\`\`
+
+Or use the SDK:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create a project with the SDK"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+const project = await ck.projects.create({ name: 'Customer Support Bot', budget: 1000, team: ['alice@example.com', 'bob@example.com'], limits: { daily_spend: 50, requests_per_minute: 100 }
 });
 \`\`\`
 
@@ -2705,17 +2023,10 @@ const project = await ck.projects.create({
 - Assign clear owners
 - Regular review meetings
 - Share optimization wins
-- Document best practices`}
-  />
+- Document best practices`} />
 );
 
-export const TemplatesPage = () => (
-  <DocumentationPage
-    title="Prompt Templates"
-    description="Create and manage reusable optimized prompts"
-    prevPage={{ path: '/features/projects', label: 'Previous: Projects' }}
-    nextPage={{ path: '/features/workflows', label: 'Next: Workflows' }}
-    fallbackContent={`# Prompt Templates
+export const TemplatesPage = () => ( <DocumentationPage title="Prompt Templates" description="Create and manage reusable optimized prompts" prevPage={{ path: '/features/projects', label: 'Previous: Projects' }} nextPage={{ path: '/features/workflows', label: 'Next: Workflows' }} fallbackContent={`# Prompt Templates
 
 Create, manage, and share optimized prompt templates to reduce costs and improve consistency.
 
@@ -2749,35 +2060,44 @@ Create, manage, and share optimized prompt templates to reduce costs and improve
 Use our visual builder:
 
 1. Navigate to **Templates** → **Create New**
-2. Choose template type:
-   - System prompts
-   - User prompts
-   - Chain templates
-   - Function calling
+2. Choose template type: - System prompts - User prompts - Chain templates - Function calling
 
-3. Define variables:
-   \`\`\`
-   {{user_name}} - User's name
-   {{context}} - Dynamic context
-   {{language}} - Target language
-   \`\`\`
+3. Define variables: \`\`\` {{user_name}} - User's name {{context}} - Dynamic context {{language}} - Target language \`\`\`
 
 4. Optimize and save
 
 ### Via Code
-\`\`\`javascript
-const template = await ck.templates.create({
-  name: 'Customer Support Response',
-  prompt: 'You are a helpful assistant. User: {{query}}',
-  variables: ['query'],
-  model: 'gpt-3.5-turbo',
-  max_tokens: 150
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create and run prompt templates programmatically"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+const template = await ck.templates.create({ name: 'Customer Support Response', prompt: 'You are a helpful assistant. User: {{query}}', variables: ['query'], model: 'gpt-3.5-turbo', max_tokens: 150
 });
 
 // Use template
-const response = await ck.templates.run(template.id, {
-  variables: { query: 'How do I reset my password?' }
+const response = await ck.templates.run(template.id, { variables: { query: 'How do I reset my password?' }
 });
+\`\`\`
+
+### Try Template Creation
+
+Use this example with all necessary imports and context:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create and use prompt templates"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+// Create a template
+const template = await ck.templates.create({ name: 'Customer Support', content: 'Help the user with: {{query}}', variables: ['query'], model: 'gpt-3.5-turbo', max_tokens: 150
+});
+
+console.log('Template created:', template.id);
+
+// Use template
+const response = await ck.templates.run(template.id, { variables: { query: 'How do I reset my password?' }
+});
+
+console.log('Response:', response);
 \`\`\`
 
 ## Template Optimization
@@ -2833,17 +2153,10 @@ Tools for fine-tuning:
 - Monitor template performance
 - A/B test variations
 - Track cost per use
-- Optimize regularly`}
-  />
+- Optimize regularly`} />
 );
 
-export const WorkflowsPage = () => (
-  <DocumentationPage
-    title="Workflows"
-    description="Multi-step AI operation monitoring and optimization"
-    prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }}
-    nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }}
-    fallbackContent={`# Workflow Management
+export const WorkflowsPage = () => ( <DocumentationPage title="Workflows" description="Multi-step AI operation monitoring and optimization" prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }} nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }} fallbackContent={`# Workflow Management
 
 Design, monitor, and optimize multi-step AI workflows for complex operations.
 
@@ -2875,44 +2188,19 @@ Design, monitor, and optimize multi-step AI workflows for complex operations.
 
 ### Visual Builder
 1. Open **Workflows** → **Create New**
-2. Drag components from the palette:
-   - AI Model calls
-   - Data transformations
-   - Conditionals
-   - External APIs
+2. Drag components from the palette: - AI Model calls - Data transformations - Conditionals - External APIs
 
 3. Connect components with arrows
 4. Configure each step
 5. Test and deploy
 
 ### Code-Based
-\`\`\`javascript
-const workflow = await ck.workflows.create({
-  name: 'Document Processing',
-  steps: [
-    {
-      id: 'extract',
-      type: 'ai_call',
-      model: 'gpt-4',
-      prompt: 'Extract key points from: {{document}}'
-    },
-    {
-      id: 'summarize',
-      type: 'ai_call',
-      model: 'gpt-3.5-turbo',
-      prompt: 'Summarize: {{extract.output}}',
-      depends_on: ['extract']
-    },
-    {
-      id: 'translate',
-      type: 'parallel',
-      steps: [
-        { model: 'gpt-3.5', prompt: 'Translate to Spanish' },
-        { model: 'gpt-3.5', prompt: 'Translate to French' }
-      ],
-      depends_on: ['summarize']
-    }
-  ]
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create multi-step AI workflows with dependencies and parallel processing"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+const workflow = await ck.workflows.create({ name: 'Document Processing', steps: [ { id: 'extract', type: 'ai_call', model: 'gpt-4', prompt: 'Extract key points from: {{document}}' }, { id: 'summarize', type: 'ai_call', model: 'gpt-3.5-turbo', prompt: 'Summarize: {{extract.output}}', depends_on: ['extract'] }, { id: 'translate', type: 'parallel', steps: [ { model: 'gpt-3.5', prompt: 'Translate to Spanish' }, { model: 'gpt-3.5', prompt: 'Translate to French' } ], depends_on: ['summarize'] } ]
 });
 \`\`\`
 
@@ -2962,17 +2250,10 @@ const workflow = await ck.workflows.create({
 - **Workflow Versions**: Track changes
 - **Rollback**: Revert to previous versions
 - **A/B Testing**: Test workflow variations
-- **Staging**: Test before production`}
-  />
+- **Staging**: Test before production`} />
 );
 
-export const GatewayPage = () => (
-  <DocumentationPage
-    title="Gateway & Proxy"
-    description="Unified API gateway for all AI providers"
-    prevPage={{ path: '/features/workflows', label: 'Previous: Workflows' }}
-    nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }}
-    fallbackContent={`# Gateway & Proxy
+export const GatewayPage = () => ( <DocumentationPage title="Gateway & Proxy" description="Unified API gateway for all AI providers" prevPage={{ path: '/features/workflows', label: 'Previous: Workflows' }} nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }} fallbackContent={`# Gateway & Proxy
 
 Use Cost Katana as a unified gateway for all your AI providers with built-in optimization.
 
@@ -3003,27 +2284,32 @@ Use Cost Katana as a unified gateway for all your AI providers with built-in opt
 ## Setup
 
 ### Quick Start
-\`\`\`bash
-# Point your API calls to Cost Katana
-export AI_ENDPOINT="https://gateway.costkatana.com/v1"
-export API_KEY="ck_your_key_here"
+
+Follow this setup guide:
+
+\`\`\`steps:Gateway Setup
+[{"title":"Set Endpoint","description":"Configure your API endpoint","content":"Point your API calls to Cost Katana:","code":"export AI_ENDPOINT=\"https://gateway.costkatana.com/v1\""},{"title":"Set API Key","description":"Add your API key","content":"Set your authentication key:","code":"export API_KEY=\"ck_your_key_here\""},{"title":"Test Connection","description":"Verify gateway is working","content":"Test the connection:","code":"curl -H \"Authorization: Bearer $API_KEY\" $AI_ENDPOINT/health"}]
+\`\`\`
+
+Or use the SDK:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatanaGateway } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Configure and use the API gateway"}
+// Configure gateway behavior
+const gateway = new CostKatanaGateway({ apiKey: 'ck_your_key', routing: { strategy: 'least_cost', providers: ['openai', 'anthropic', 'bedrock'], fallback: 'openai' }, optimization: { cache: true, compress: true, batch: true }
+});
+
+// Make a request through the gateway
+const response = await gateway.chat.completions.create({ model: 'gpt-4', messages: [{ role: 'user', content: 'Hello!' }]
+});
+
+console.log('Response:', response);
+console.log('Provider used:', response.metadata.provider);
+console.log('Cost:', response.metadata.cost);
 \`\`\`
 
 ### Configuration
-\`\`\`javascript
-// Configure gateway behavior
-const gateway = new CostKatanaGateway({
-  apiKey: 'ck_your_key',
-  routing: {
-    strategy: 'least_cost',
-    providers: ['openai', 'anthropic', 'bedrock'],
-    fallback: 'openai'
-  },
-  optimization: {
-    cache: true,
-    compress: true,
-    batch: true
-  }
+\`\`\`smart:javascript:{"imports":["import { CostKatanaGateway } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete gateway configuration example"}
+const gateway = new CostKatanaGateway({ apiKey: 'ck_your_key', routing: { strategy: 'least_cost', providers: ['openai', 'anthropic', 'bedrock'], fallback: 'openai' }, optimization: { cache: true, compress: true, batch: true }
 });
 \`\`\`
 
@@ -3033,12 +2319,7 @@ const gateway = new CostKatanaGateway({
 Route to the most cost-effective provider:
 
 \`\`\`javascript
-{
-  strategy: 'least_cost',
-  constraints: {
-    max_latency: 1000, // ms
-    min_quality: 0.9
-  }
+{ strategy: 'least_cost', constraints: { max_latency: 1000, // ms min_quality: 0.9 }
 }
 \`\`\`
 
@@ -3046,11 +2327,7 @@ Route to the most cost-effective provider:
 Route based on response time:
 
 \`\`\`javascript
-{
-  strategy: 'fastest',
-  constraints: {
-    max_cost: 0.10 // per request
-  }
+{ strategy: 'fastest', constraints: { max_cost: 0.10 // per request }
 }
 \`\`\`
 
@@ -3058,13 +2335,7 @@ Route based on response time:
 Define your own routing logic:
 
 \`\`\`javascript
-{
-  strategy: 'custom',
-  rules: [
-    { if: 'task === "code"', then: 'anthropic' },
-    { if: 'task === "creative"', then: 'openai' },
-    { if: 'urgent === true', then: 'fastest' }
-  ]
+{ strategy: 'custom', rules: [ { if: 'task === "code"', then: 'anthropic' }, { if: 'task === "creative"', then: 'openai' }, { if: 'urgent === true', then: 'fastest' } ]
 }
 \`\`\`
 
@@ -3108,17 +2379,10 @@ Define your own routing logic:
 - **Encryption**: TLS 1.3 for transit
 - **PII Redaction**: Remove sensitive data
 - **Audit Logging**: Complete audit trail
-- **Compliance**: GDPR, SOC2 compliant`}
-  />
+- **Compliance**: GDPR, SOC2 compliant`} />
 );
 
-export const KeyVaultPage = () => (
-  <DocumentationPage
-    title="Key Vault"
-    description="Secure API key management and rotation"
-    prevPage={{ path: '/features/gateway', label: 'Previous: Gateway & Proxy' }}
-    nextPage={{ path: '/features/alerts', label: 'Next: Alerts' }}
-    fallbackContent={`# Key Vault
+export const KeyVaultPage = () => ( <DocumentationPage title="Key Vault" description="Secure API key management and rotation" prevPage={{ path: '/features/gateway', label: 'Previous: Gateway & Proxy' }} nextPage={{ path: '/features/alerts', label: 'Next: Alerts' }} fallbackContent={`# Key Vault
 
 Securely manage, rotate, and audit your AI provider API keys.
 
@@ -3151,56 +2415,47 @@ Securely manage, rotate, and audit your AI provider API keys.
 ### Via Dashboard
 1. Navigate to **Key Vault** → **Add Key**
 2. Select provider (OpenAI, Anthropic, etc.)
-3. Enter key details:
-   - Key name/alias
-   - API key value
-   - Environment (dev/staging/prod)
-   - Usage limits
+3. Enter key details: - Key name/alias - API key value - Environment (dev/staging/prod) - Usage limits
 
 4. Set permissions and save
 
 ### Via API
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Add API keys to vault and use them for API calls with usage limits"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Add a new API key
-const key = await ck.vault.addKey({
-  provider: 'openai',
-  name: 'Production Key',
-  value: 'sk-...',
-  environment: 'production',
-  limits: {
-    monthly_spend: 1000,
-    requests_per_minute: 100
-  }
+const key = await ck.vault.addKey({ provider: 'openai', name: 'Production Key', value: 'sk-...', environment: 'production', limits: { monthly_spend: 1000, requests_per_minute: 100 }
 });
 
 // Use the key
-const response = await ck.chat.completions.create({
-  model: 'gpt-4',
-  messages: [...],
-  key_id: key.id // Use specific key
+const response = await ck.chat.completions.create({ model: 'gpt-4', messages: [{ role: 'user', content: 'Hello!' }], key_id: key.id // Use specific key
 });
 \`\`\`
 
 ## Key Rotation
 
 ### Manual Rotation
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Manually rotate API keys with grace period for zero-downtime updates"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Rotate a key
-await ck.vault.rotateKey(keyId, {
-  new_value: 'sk-new-key...',
-  grace_period: 300 // 5 minutes overlap
+await ck.vault.rotateKey(keyId, { new_value: 'sk-new-key...', grace_period: 300 // 5 minutes overlap
 });
 \`\`\`
 
 ### Automatic Rotation
 Set up scheduled rotation:
 
-\`\`\`javascript
-await ck.vault.setRotationPolicy({
-  key_id: keyId,
-  schedule: 'monthly',
-  notification: 'email',
-  auto_generate: true // If provider supports
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Configure automatic key rotation with scheduled updates and notifications"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+await ck.vault.setRotationPolicy({ key_id: keyId, schedule: 'monthly', notification: 'email', auto_generate: true // If provider supports
 });
 \`\`\`
 
@@ -3213,12 +2468,13 @@ await ck.vault.setRotationPolicy({
 - **Audit**: View key usage logs
 
 ### Team Access
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Grant team access to API keys with role-based permissions"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Grant team access
-await ck.vault.grantAccess({
-  key_id: keyId,
-  team_id: 'engineering',
-  permissions: ['read', 'use']
+await ck.vault.grantAccess({ key_id: keyId, team_id: 'engineering', permissions: ['read', 'use']
 });
 \`\`\`
 
@@ -3268,17 +2524,10 @@ await ck.vault.grantAccess({
 - Set spending limits per key
 - Monitor key usage
 - Consolidate where possible
-- Review unused keys`}
-  />
+- Review unused keys`} />
 );
 
-export const AlertsPage = () => (
-  <DocumentationPage
-    title="Alerts & Notifications"
-    description="Proactive monitoring and intelligent alerting"
-    prevPage={{ path: '/features/key-vault', label: 'Previous: Key Vault' }}
-    nextPage={{ path: '/features/training', label: 'Next: Training' }}
-    fallbackContent={`# Alerts & Notifications
+export const AlertsPage = () => ( <DocumentationPage title="Alerts & Notifications" description="Proactive monitoring and intelligent alerting" prevPage={{ path: '/features/key-vault', label: 'Previous: Key Vault' }} nextPage={{ path: '/features/training', label: 'Next: Training' }} fallbackContent={`# Alerts & Notifications
 
 Set up intelligent alerts to monitor costs, usage, and performance.
 
@@ -3309,44 +2558,27 @@ Set up intelligent alerts to monitor costs, usage, and performance.
 ## Setting Up Alerts
 
 ### Quick Setup
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create budget and usage alerts with multiple notification channels"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Create a budget alert
-await ck.alerts.create({
-  type: 'budget',
-  threshold: 80, // 80% of budget
-  project: 'production',
-  channels: ['email', 'slack'],
-  actions: ['notify', 'throttle']
+await ck.alerts.create({ type: 'budget', threshold: 80, // 80% of budget project: 'production', channels: ['email', 'slack'], actions: ['notify', 'throttle']
 });
 
 // Create usage alert
-await ck.alerts.create({
-  type: 'rate_limit',
-  threshold: 90, // 90% of limit
-  provider: 'openai',
-  channels: ['webhook'],
-  webhook_url: 'https://your-app.com/webhook'
+await ck.alerts.create({ type: 'rate_limit', threshold: 90, // 90% of limit provider: 'openai', channels: ['webhook'], webhook_url: 'https://your-app.com/webhook'
 });
 \`\`\`
 
 ### Advanced Configuration
-\`\`\`javascript
-await ck.alerts.create({
-  name: 'High Cost Per Request',
-  condition: {
-    metric: 'cost_per_request',
-    operator: 'greater_than',
-    value: 0.50,
-    window: '5m' // 5 minute window
-  },
-  severity: 'critical',
-  channels: ['email', 'sms', 'slack'],
-  actions: [
-    { type: 'notify' },
-    { type: 'switch_model', to: 'gpt-3.5-turbo' },
-    { type: 'throttle', limit: 10 }
-  ],
-  cooldown: 300 // 5 minutes between alerts
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create advanced alerts with custom conditions, severity levels, and automated actions"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+await ck.alerts.create({ name: 'High Cost Per Request', condition: { metric: 'cost_per_request', operator: 'greater_than', value: 0.50, window: '5m' // 5 minute window }, severity: 'critical', channels: ['email', 'sms', 'slack'], actions: [ { type: 'notify' }, { type: 'switch_model', to: 'gpt-3.5-turbo' }, { type: 'throttle', limit: 10 } ], cooldown: 300 // 5 minutes between alerts
 });
 \`\`\`
 
@@ -3359,29 +2591,20 @@ await ck.alerts.create({
 - **Custom Templates**: Branded emails
 
 ### Slack
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Configure Slack integration for alert notifications"}
+import { CostKatana } from 'cost-katana';
+
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
 // Configure Slack integration
-await ck.integrations.slack.connect({
-  webhook_url: 'https://hooks.slack.com/...',
-  channel: '#ai-costs',
-  username: 'Cost Katana Bot'
+await ck.integrations.slack.connect({ webhook_url: 'https://hooks.slack.com/...', channel: '#ai-costs', username: 'Cost Katana Bot'
 });
 \`\`\`
 
 ### Webhooks
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":[],"dependencies":[],"description":"Webhook payload structure for alert notifications"}
 // Webhook payload example
-{
-  "alert_id": "alt_123",
-  "type": "budget_threshold",
-  "severity": "warning",
-  "message": "Project X at 80% of budget",
-  "details": {
-    "current_spend": 800,
-    "budget": 1000,
-    "projection": 1200
-  },
-  "timestamp": "2024-01-15T10:30:00Z"
+{ "alert_id": "alt_123", "type": "budget_threshold", "severity": "warning", "message": "Project X at 80% of budget", "details": { "current_spend": 800, "budget": 1000, "projection": 1200 }, "timestamp": "2024-01-15T10:30:00Z"
 }
 \`\`\`
 
@@ -3397,37 +2620,20 @@ await ck.integrations.slack.connect({
 Define automated actions when alerts trigger:
 
 #### Throttling
-\`\`\`javascript
-{
-  action: 'throttle',
-  config: {
-    requests_per_minute: 10,
-    duration: 3600 // 1 hour
-  }
+\`\`\`smart:javascript:{"imports":[],"dependencies":[],"description":"Throttling action configuration for alert responses"}
+{ action: 'throttle', config: { requests_per_minute: 10, duration: 3600 // 1 hour }
 }
 \`\`\`
 
 #### Model Switching
-\`\`\`javascript
-{
-  action: 'switch_model',
-  config: {
-    from: 'gpt-4',
-    to: 'gpt-3.5-turbo',
-    revert_after: 3600
-  }
+\`\`\`smart:javascript:{"imports":[],"dependencies":[],"description":"Model switching action configuration for cost optimization"}
+{ action: 'switch_model', config: { from: 'gpt-4', to: 'gpt-3.5-turbo', revert_after: 3600 }
 }
 \`\`\`
 
 #### Circuit Breaker
-\`\`\`javascript
-{
-  action: 'circuit_breaker',
-  config: {
-    provider: 'openai',
-    duration: 300,
-    fallback: 'anthropic'
-  }
+\`\`\`smart:javascript:{"imports":[],"dependencies":[],"description":"Circuit breaker action configuration for provider failover"}
+{ action: 'circuit_breaker', config: { provider: 'openai', duration: 300, fallback: 'anthropic' }
 }
 \`\`\`
 
@@ -3457,18 +2663,9 @@ Define automated actions when alerts trigger:
 - Document response procedures
 - Assign clear owners
 - Set up escalation paths
-- Regular alert reviews`}
-  />
-);
-
-
-// API Documentation Pages
-export const APIOverviewPage = () => (
-  <DocumentationPage
-    title="API Overview"
-    description="Complete API reference for Cost Katana"
-    nextPage={{ path: '/api/authentication', label: 'Next: Authentication' }}
-    fallbackContent={`# API Overview
+- Regular alert reviews`} />
+); // API Documentation Pages
+export const APIOverviewPage = () => ( <DocumentationPage title="API Overview" description="Complete API reference for Cost Katana" nextPage={{ path: '/api/authentication', label: 'Next: Authentication' }} fallbackContent={`# API Overview
 
 Complete REST API reference for Cost Katana. All endpoints use JSON for request and response bodies.
 
@@ -3494,9 +2691,7 @@ Authorization: Bearer ck_your_api_key_here
 
 ## API Versioning
 
-The API is versioned. Current version: **v1**
-
-\`\`\`
+The API is versioned. Current version: **v1** \`\`\`
 https://cost-katana-backend.store/v1/...
 \`\`\`
 
@@ -3507,24 +2702,14 @@ All API responses follow a consistent format:
 ### Success Response
 
 \`\`\`json
-{
-  "success": true,
-  "data": {
-    // Response data here
-  }
+{ "success": true, "data": { // Response data here }
 }
 \`\`\`
 
 ### Error Response
 
 \`\`\`json
-{
-  "success": false,
-  "error": {
-    "code": "ERROR_CODE",
-    "message": "Human-readable error message",
-    "details": {}
-  }
+{ "success": false, "error": { "code": "ERROR_CODE", "message": "Human-readable error message", "details": {} }
 }
 \`\`\`
 
@@ -3559,6 +2744,11 @@ X-RateLimit-Reset: 1642075200
 - **GET** \`/v1/usage/project/:projectId\` - Get project usage
 
 [View Usage API →](/api/usage)
+
+#### Try It Out - Test the Usage API
+
+\`\`\`api:POST:/v1/usage/track:Track AI API Usage:{"Authorization":"Bearer YOUR_API_KEY","Content-Type":"application/json"}:{"project":"demo-project","provider":"openai","model":"gpt-4","tokens":1500,"cost":0.045}:{"success":true,"usage":{"id":"usage_123","project":"demo-project","tokens":1500,"cost":0.045,"timestamp":"2024-01-15T10:30:00Z"}}
+\`\`\`
 
 ### Analytics
 - **GET** \`/v1/analytics\` - Get analytics data
@@ -3631,30 +2821,30 @@ pip install cost-katana
 ## Getting Started
 
 1. **Get Your API Key**: Sign up and generate an API key from the dashboard
-2. **Make Your First Request**: Try the authentication endpoint
+2. **Make Your First Request**: Try the authentication endpoint below
 3. **Explore Endpoints**: Use the interactive API documentation
 4. **Integrate**: Use our SDKs or make direct HTTP requests
+
+### Try Authentication
+
+Test the authentication endpoint:
+
+\`\`\`api:GET:/api/v1/auth/me:Get Current User:{"Authorization":"Bearer YOUR_API_KEY"}:{}:{"success":true,"user":{"id":"user_123","email":"user@example.com","plan":"pro"}}
+\`\`\`
 
 ## Support
 
 Need help with the API?
 
-- 📖 **Documentation**: Browse detailed endpoint documentation
-- 💬 **Community**: Join our [Discord](https://discord.gg/D8nDArmKbY)
-- 📧 **Email**: support@costkatana.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/costkatana-backend/issues)
+- **Documentation**: Browse detailed endpoint documentation
+- **Community**: Join our [Discord](https://discord.gg/D8nDArmKbY)
+- **Email**: support@costkatana.com
+- **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/costkatana-backend/issues)
 
-Ready to start? Begin with [Authentication →](/api/authentication)`}
-  />
+Ready to start? Begin with [Authentication →](/api/authentication)`} />
 );
 
-export const AuthenticationPage = () => (
-  <DocumentationPage
-    title="Authentication"
-    description="JWT and API key authentication methods"
-    prevPage={{ path: '/api', label: 'Back to API Overview' }}
-    nextPage={{ path: '/api/usage', label: 'Next: Usage API' }}
-    fallbackContent={`# Authentication
+export const AuthenticationPage = () => ( <DocumentationPage title="Authentication" description="JWT and API key authentication methods" prevPage={{ path: '/api', label: 'Back to API Overview' }} nextPage={{ path: '/api/usage', label: 'Next: Usage API' }} fallbackContent={`# Authentication
 
 Cost Katana supports multiple authentication methods for secure API access.
 
@@ -3673,8 +2863,7 @@ Include your key in requests:
 
 \`\`\`bash
 # Header authentication (recommended)
-curl -H "Authorization: Bearer ck_your_api_key" \\
-  https://cost-katana-backend.store/v1/usage
+curl -H "Authorization: Bearer ck_your_api_key" \\ https://cost-katana-backend.store/v1/usage
 
 # Query parameter (less secure)
 curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
@@ -3691,40 +2880,23 @@ curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
 ### Login Flow
 \`\`\`javascript
 // Obtain JWT token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    email: 'user@example.com',
-    password: 'your_password'
-  })
+const response = await fetch('https://cost-katana-backend.store/v1/auth/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ email: 'user@example.com', password: 'your_password' })
 });
 
 const { token } = await response.json();
 
 // Use token in subsequent requests
-const data = await fetch('https://cost-katana-backend.store/v1/usage', {
-  headers: {
-    'Authorization': \`Bearer \${token}\`
-  }
+const data = await fetch('https://cost-katana-backend.store/v1/usage', { headers: { 'Authorization': \`Bearer \${token}\` }
 });
 \`\`\`
 
 ### Token Refresh
 \`\`\`javascript
 // Refresh expired token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/refresh', {
-  method: 'POST',
-  headers: {
-    'Authorization': \`Bearer \${refreshToken}\`
-  }
+const response = await fetch('https://cost-katana-backend.store/v1/auth/refresh', { method: 'POST', headers: { 'Authorization': \`Bearer \${refreshToken}\` }
 });
 
-const { token, refreshToken: newRefreshToken } = await response.json();
-
-
-
-## Security Best Practices
+const { token, refreshToken: newRefreshToken } = await response.json(); ## Security Best Practices
 
 ### Key Management
 - Never commit keys to version control
@@ -3738,13 +2910,7 @@ For additional security, sign requests:
 \`\`\`javascript
 const crypto = require('crypto');
 
-function signRequest(payload, secret) {
-  const signature = crypto
-    .createHmac('sha256', secret)
-    .update(JSON.stringify(payload))
-    .digest('hex');
-  
-  return signature;
+function signRequest(payload, secret) { const signature = crypto .createHmac('sha256', secret) .update(JSON.stringify(payload)) .digest('hex'); return signature;
 }
 
 // Include signature in request
@@ -3761,22 +2927,13 @@ headers['X-Signature'] = signature;
 Restrict API access by IP:
 
 \`\`\`javascript
-await ck.security.addWhitelist({
-  ips: ['192.168.1.1', '10.0.0.0/24'],
-  keys: ['ck_specific_key']
+await ck.security.addWhitelist({ ips: ['192.168.1.1', '10.0.0.0/24'], keys: ['ck_specific_key']
 });
-\`\`\``}
-  />
+\`\`\``} />
 );
 
 // Tracing Feature Page
-export const TracingPage = () => (
-  <DocumentationPage
-    title="Distributed Tracing"
-    description="Enterprise-grade distributed tracing for AI operations"
-    prevPage={{ path: '/features/training', label: 'Previous: Training & Fine-tuning' }}
-    nextPage={{ path: '/api', label: 'Next: API Reference' }}
-    fallbackContent={`# Distributed Tracing
+export const TracingPage = () => ( <DocumentationPage title="Distributed Tracing" description="Enterprise-grade distributed tracing for AI operations" prevPage={{ path: '/features/training', label: 'Previous: Training & Fine-tuning' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# Distributed Tracing
 
 Cost Katana provides enterprise-grade distributed tracing and session replay for all your AI operations. Track every LLM call, tool execution, and API request with automatic parent-child relationships, latency metrics, and cost attribution.
 
@@ -3786,7 +2943,7 @@ Cost Katana provides enterprise-grade distributed tracing and session replay for
 
 The Sessions page provides two powerful views for monitoring your AI applications:
 
-### 1. 🎬 Session Replays
+### 1. Session Replays
 Record and replay in-app AI interactions with complete context:
 - **Timeline Playback**: View AI interactions chronologically
 - **Full Context**: See prompts, responses, costs, and latency
@@ -3794,7 +2951,7 @@ Record and replay in-app AI interactions with complete context:
 - **Code Context**: Capture active files and code snippets
 - **System Metrics**: Monitor CPU, memory, and performance
 
-### 2. 🐛 Debug Traces  
+### 2. Debug Traces 
 Distributed tracing for API-level debugging:
 - **Span Trees**: Visualize request hierarchies
 - **Timeline View**: See parallel operations
@@ -3803,7 +2960,7 @@ Distributed tracing for API-level debugging:
 
 ## Features
 
-### 🎬 Session Replay Features
+### Session Replay Features
 
 #### Automatic Recording
 Record AI interactions across different features:
@@ -3836,7 +2993,7 @@ Filter sessions by:
 - **Shareable Links**: Generate temporary viewing links
 - **API Access**: Programmatic access to replays
 
-### 🌳 Distributed Tracing Features
+### Distributed Tracing Features
 
 #### Hierarchical Traces
 - **Automatic Span Relationships**: Parent-child trace relationships
@@ -3880,72 +3037,46 @@ npm install cost-katana
 
 #### 2. Start Recording
 
-\`\`\`typescript
+\`\`\`smart:typescript:{"imports":["import { SessionReplayClient } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Start recording a session replay for AI interactions"}
 import { SessionReplayClient } from 'cost-katana/trace';
 
-const replayClient = new SessionReplayClient({
-  apiKey: process.env.COST_KATANA_API_KEY
+const replayClient = new SessionReplayClient({ apiKey: process.env.COST_KATANA_API_KEY
 });
 
 // Start recording a chat session
-const { sessionId } = await replayClient.startRecording({
-  userId: 'user_123',
-  feature: 'chat',
-  label: 'Customer Support Chat'
+const { sessionId } = await replayClient.startRecording({ userId: 'user_123', feature: 'chat', label: 'Customer Support Chat'
 });
 \`\`\`
 
 #### 3. Record AI Interactions
 
-\`\`\`typescript
-await replayClient.recordInteraction({
-  sessionId,
-  interaction: {
-    timestamp: new Date(),
-    model: 'gpt-4',
-    prompt: 'What is the status of my order?',
-    response: 'Let me check that for you...',
-    tokens: { input: 15, output: 25 },
-    cost: 0.0008,
-    latency: 1200,
-    provider: 'openai'
-  }
+\`\`\`smart:typescript:{"imports":["import { SessionReplayClient } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Record AI interactions with full context including tokens, cost, and latency"}
+import { SessionReplayClient } from 'cost-katana/trace';
+
+const replayClient = new SessionReplayClient({ apiKey: process.env.COST_KATANA_API_KEY
+});
+
+await replayClient.recordInteraction({ sessionId, interaction: { timestamp: new Date(), model: 'gpt-4', prompt: 'What is the status of my order?', response: 'Let me check that for you...', tokens: { input: 15, output: 25 }, cost: 0.0008, latency: 1200, provider: 'openai' }
 });
 \`\`\`
 
 #### 4. End Recording
 
-\`\`\`typescript
+\`\`\`smart:typescript:{"imports":["import { SessionReplayClient } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"End session recording and finalize the replay"}
+import { SessionReplayClient } from 'cost-katana/trace';
+
+const replayClient = new SessionReplayClient({ apiKey: process.env.COST_KATANA_API_KEY
+});
+
 await replayClient.endRecording(sessionId);
 \`\`\`
 
 #### React Hook Example
 
-\`\`\`typescript
+\`\`\`smart:typescript:{"imports":["import { useSessionRecording } from 'cost-katana/trace';"],"dependencies":["cost-katana","react"],"description":"Use React hook for automatic session recording in React components"}
 import { useSessionRecording } from 'cost-katana/trace';
 
-function ChatComponent() {
-  const { recordInteraction } = useSessionRecording({
-    userId: 'user_123',
-    feature: 'chat',
-    autoStart: true
-  });
-
-  const handleSendMessage = async (message) => {
-    const response = await callAI(message);
-    
-    await recordInteraction({
-      model: 'gpt-4',
-      prompt: message,
-      response: response.text,
-      tokens: response.tokens,
-      cost: response.cost,
-      latency: response.latency,
-      provider: 'openai'
-    });
-  };
-
-  return <div>...</div>;
+function ChatComponent() { const { recordInteraction } = useSessionRecording({ userId: 'user_123', feature: 'chat', autoStart: true }); const handleSendMessage = async (message) => { const response = await callAI(message); await recordInteraction({ model: 'gpt-4', prompt: message, response: response.text, tokens: response.tokens, cost: response.cost, latency: response.latency, provider: 'openai' }); }; return <div>...</div>;
 }
 \`\`\`
 
@@ -3953,38 +3084,35 @@ function ChatComponent() {
 
 #### 1. Add Middleware
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService, createTraceMiddleware } from 'cost-katana/trace';","import express from 'express';"],"dependencies":["cost-katana","express"],"description":"Add distributed tracing middleware to Express application"}
 import { LocalTraceService, createTraceMiddleware } from 'cost-katana/trace';
+import express from 'express';
+
+const app = express();
 
 // Create trace service
-const traceService = new LocalTraceService({
-  storageMode: 'file',
-  storageDir: './traces'
+const traceService = new LocalTraceService({ storageMode: 'file', storageDir: './traces'
 });
 
 // Add to Express app
-app.use(createTraceMiddleware({
-  startSpan: traceService.startSpan.bind(traceService),
-  endSpan: traceService.endSpan.bind(traceService)
+app.use(createTraceMiddleware({ startSpan: traceService.startSpan.bind(traceService), endSpan: traceService.endSpan.bind(traceService)
 }));
 \`\`\`
 
 #### 2. Use Tracked Providers
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { TrackedOpenAI } from 'cost-katana/trace';","import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Use tracked OpenAI client for automatic distributed tracing of AI calls"}
 import { TrackedOpenAI } from 'cost-katana/trace';
+import { LocalTraceService } from 'cost-katana/trace';
 
-const ai = new TrackedOpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-  traceContext: req.traceContext,
-  startSpan: traceService.startSpan.bind(traceService),
-  endSpan: traceService.endSpan.bind(traceService)
+const traceService = new LocalTraceService({ storageMode: 'file', storageDir: './traces'
+});
+
+const ai = new TrackedOpenAI({ apiKey: process.env.OPENAI_API_KEY, traceContext: req.traceContext, startSpan: traceService.startSpan.bind(traceService), endSpan: traceService.endSpan.bind(traceService)
 });
 
 // All calls are automatically traced!
-const response = await ai.makeRequest({
-  model: 'gpt-4',
-  messages: [{ role: 'user', content: 'Hello!' }]
+const response = await ai.makeRequest({ model: 'gpt-4', messages: [{ role: 'user', content: 'Hello!' }]
 });
 \`\`\`
 
@@ -3999,37 +3127,14 @@ Navigate to the Sessions page in your Cost Katana dashboard to:
 ## Trace Data Model
 
 ### Session
-\`\`\`typescript
-{
-  sessionId: string;
-  userId?: string;
-  label?: string;
-  status: 'active' | 'completed' | 'error';
-  totalSpans: number;
-  totalCostUSD: number;
-  totalInputTokens: number;
-  totalOutputTokens: number;
-  startedAt: Date;
-  endedAt?: Date;
+\`\`\`smart:typescript:{"imports":[],"dependencies":[],"description":"Session data model structure for distributed tracing"}
+{ sessionId: string; userId?: string; label?: string; status: 'active' | 'completed' | 'error'; totalSpans: number; totalCostUSD: number; totalInputTokens: number; totalOutputTokens: number; startedAt: Date; endedAt?: Date;
 }
 \`\`\`
 
 ### Trace (Span)
-\`\`\`typescript
-{
-  traceId: string;
-  sessionId: string;
-  parentId?: string;
-  name: string;
-  type: 'http' | 'llm' | 'tool' | 'retrieval' | 'custom';
-  status: 'pending' | 'ok' | 'error';
-  model?: string;
-  tokens?: { input: number; output: number };
-  costUSD?: number;
-  startedAt: Date;
-  endedAt?: Date;
-  duration?: number;
-  depth: number;
+\`\`\`smart:typescript:{"imports":[],"dependencies":[],"description":"Trace span data model structure with hierarchical relationships"}
+{ traceId: string; sessionId: string; parentId?: string; name: string; type: 'http' | 'llm' | 'tool' | 'retrieval' | 'custom'; status: 'pending' | 'ok' | 'error'; model?: string; tokens?: { input: number; output: number }; costUSD?: number; startedAt: Date; endedAt?: Date; duration?: number; depth: number;
 }
 \`\`\`
 
@@ -4037,44 +3142,39 @@ Navigate to the Sessions page in your Cost Katana dashboard to:
 
 Track any operation with custom spans:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Create custom spans to track any operation in your application"}
+import { LocalTraceService } from 'cost-katana/trace';
+
+const traceService = new LocalTraceService({ storageMode: 'file', storageDir: './traces'
+});
+
 // Start a custom span
-const span = await traceService.startSpan({
-  sessionId: req.traceContext.sessionId,
-  parentId: req.traceContext.traceId,
-  name: 'database-query',
-  type: 'tool',
-  metadata: { query: 'SELECT * FROM users' }
+const span = await traceService.startSpan({ sessionId: req.traceContext.sessionId, parentId: req.traceContext.traceId, name: 'database-query', type: 'tool', metadata: { query: 'SELECT * FROM users' }
 });
 
 // Your custom logic
 const result = await db.query('...');
 
 // End the span with metrics
-await traceService.endSpan(span.traceId, {
-  status: 'ok',
-  metadata: { rowCount: result.rows.length }
+await traceService.endSpan(span.traceId, { status: 'ok', metadata: { rowCount: result.rows.length }
 });
 \`\`\`
 
 ## Storage Options
 
 ### Local Development
-\`\`\`javascript
-const traceService = new LocalTraceService({
-  storageMode: 'memory',
-  maxSessions: 1000,
-  autoSave: true
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Configure local trace service for development with in-memory storage"}
+import { LocalTraceService } from 'cost-katana/trace';
+
+const traceService = new LocalTraceService({ storageMode: 'memory', maxSessions: 1000, autoSave: true
 });
 \`\`\`
 
 ### Production (Cloud)
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { TraceClient } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Configure cloud trace client for production with Cost Katana backend"}
 import { TraceClient } from 'cost-katana/trace';
 
-const traceService = new TraceClient({
-  apiKey: process.env.API_KEY,
-  projectId: process.env.PROJECT_ID
+const traceService = new TraceClient({ apiKey: process.env.API_KEY, projectId: process.env.PROJECT_ID
 });
 \`\`\`
 
@@ -4092,21 +3192,24 @@ const traceService = new TraceClient({
 ### Sampling
 Control trace sampling for high-volume applications:
 
-\`\`\`javascript
-const traceService = new LocalTraceService({
-  samplingRate: 0.1, // Sample 10% of requests
-  alwaysSample: ['error', 'slow'] // Always trace errors and slow requests
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Configure sampling rates to control trace volume for high-traffic applications"}
+import { LocalTraceService } from 'cost-katana/trace';
+
+const traceService = new LocalTraceService({ samplingRate: 0.1, // Sample 10% of requests alwaysSample: ['error', 'slow'] // Always trace errors and slow requests
 });
 \`\`\`
 
 ### Export & Import
 Export traces for analysis or migration:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Export and import traces in OpenTelemetry format for analysis or migration"}
+import { LocalTraceService } from 'cost-katana/trace';
+
+const traceService = new LocalTraceService({ storageMode: 'file', storageDir: './traces'
+});
+
 // Export traces
-const traces = await traceService.export({
-  format: 'opentelemetry',
-  sessionId: 'session_123'
+const traces = await traceService.export({ format: 'opentelemetry', sessionId: 'session_123'
 });
 
 // Import traces
@@ -4116,11 +3219,13 @@ await traceService.import(traces);
 ### Alerting
 Set up alerts for trace anomalies:
 
-\`\`\`javascript
-traceService.addAlert({
-  condition: 'latency > 5000',
-  action: 'notify',
-  channel: 'slack'
+\`\`\`smart:javascript:{"imports":["import { LocalTraceService } from 'cost-katana/trace';"],"dependencies":["cost-katana"],"description":"Configure alerts for trace anomalies like high latency or errors"}
+import { LocalTraceService } from 'cost-katana/trace';
+
+const traceService = new LocalTraceService({ storageMode: 'file', storageDir: './traces'
+});
+
+traceService.addAlert({ condition: 'latency > 5000', action: 'notify', channel: 'slack'
 });
 \`\`\`
 
@@ -4147,17 +3252,10 @@ Tracing adds minimal overhead:
 ### PII Concerns
 - Configure redactKeys for custom fields
 - Use redactedContent in UI
-- Enable audit logging for compliance`}
-  />
+- Enable audit logging for compliance`} />
 );
 
-export const UsageAPIPage = () => (
-  <DocumentationPage
-    title="Usage API"
-    description="Track AI usage programmatically"
-    prevPage={{ path: '/api/authentication', label: 'Previous: Authentication' }}
-    nextPage={{ path: '/api/analytics', label: 'Next: Analytics API' }}
-    fallbackContent={`# Usage API
+export const UsageAPIPage = () => ( <DocumentationPage title="Usage API" description="Track AI usage programmatically" prevPage={{ path: '/api/authentication', label: 'Previous: Authentication' }} nextPage={{ path: '/api/analytics', label: 'Next: Analytics API' }} fallbackContent={`# Usage API
 
 The Usage API allows you to track and manage AI API usage across all providers programmatically.
 
@@ -4169,19 +3267,22 @@ The Usage API allows you to track and manage AI API usage across all providers p
 
 Track a single AI API call:
 
+Try it out:
+
+\`\`\`api:POST:/api/v1/usage/track:Track AI Usage:{"Authorization":"Bearer YOUR_API_KEY","Content-Type":"application/json"}:{"provider":"openai","model":"gpt-4","usage":{"prompt_tokens":100,"completion_tokens":50,"total_tokens":150},"cost":0.002}:{"success":true,"tracked":{"id":"usage_123","timestamp":"2024-01-15T10:30:00Z"}}
+\`\`\`
+
+Or use the SDK:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Track usage with the SDK"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+await ck.usage.track({ provider: 'openai', model: 'gpt-4', usage: { prompt_tokens: 100, completion_tokens: 50, total_tokens: 150 }, cost: 0.002
+});
+\`\`\`
+
 \`\`\`json
-{
-  "provider": "openai",
-  "model": "gpt-4",
-  "promptTokens": 150,
-  "completionTokens": 50,
-  "totalTokens": 200,
-  "cost": 0.012,
-  "projectId": "proj_123",
-  "metadata": {
-    "requestId": "req_456",
-    "userId": "user_789"
-  }
+{ "provider": "openai", "model": "gpt-4", "promptTokens": 150, "completionTokens": 50, "totalTokens": 200, "cost": 0.012, "projectId": "proj_123", "metadata": { "requestId": "req_456", "userId": "user_789" }
 }
 \`\`\`
 
@@ -4205,21 +3306,7 @@ Query parameters:
 
 Response:
 \`\`\`json
-{
-  "success": true,
-  "data": {
-    "totalCost": 1234.56,
-    "totalTokens": 5000000,
-    "totalRequests": 10000,
-    "breakdown": [
-      {
-        "date": "2025-01-01",
-        "cost": 123.45,
-        "tokens": 500000,
-        "requests": 1000
-      }
-    ]
-  }
+{ "success": true, "data": { "totalCost": 1234.56, "totalTokens": 5000000, "totalRequests": 10000, "breakdown": [ { "date": "2025-01-01", "cost": 123.45, "tokens": 500000, "requests": 1000 } ] }
 }
 \`\`\`
 
@@ -4264,51 +3351,29 @@ Query parameters:
 \`\`\`typescript
 import { AICostTracker } from 'cost-katana';
 
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 
 // Track usage
-await client.usage.track({
-  provider: 'openai',
-  model: 'gpt-4',
-  promptTokens: 150,
-  completionTokens: 50,
-  cost: 0.012
+await client.usage.track({ provider: 'openai', model: 'gpt-4', promptTokens: 150, completionTokens: 50, cost: 0.012
 });
 
 // Get statistics
-const stats = await client.usage.getStats({
-  startDate: '2025-01-01',
-  endDate: '2025-01-31',
-  groupBy: 'day'
+const stats = await client.usage.getStats({ startDate: '2025-01-01', endDate: '2025-01-31', groupBy: 'day'
 });
 \`\`\`
 
 ### Python
 
-\`\`\`python
-from costkatana import CostKatanaClient
-
+\`\`\`smart:python:{"imports":["from costkatana import CostKatanaClient"],"dependencies":["cost-katana"],"description":"Track usage and get statistics with the Python SDK"}
 client = CostKatanaClient(api_key='your_api_key')
 
 # Track usage
-client.usage.track(
-    provider='openai',
-    model='gpt-4',
-    prompt_tokens=150,
-    completion_tokens=50,
-    cost=0.012
+client.usage.track( provider='openai', model='gpt-4', prompt_tokens=150, completion_tokens=50, cost=0.012
 )
 
 # Get statistics
-stats = client.usage.get_stats(
-    start_date='2025-01-01',
-    end_date='2025-01-31',
-    group_by='day'
+stats = client.usage.get_stats( start_date='2025-01-01', end_date='2025-01-31', group_by='day'
 )
 \`\`\`
 
@@ -4326,17 +3391,10 @@ stats = client.usage.get_stats(
 | 401 | Invalid or missing API key |
 | 403 | Insufficient permissions |
 | 429 | Rate limit exceeded |
-| 500 | Internal server error |`}
-  />
+| 500 | Internal server error |`} />
 );
 
-export const AnalyticsAPIPage = () => (
-  <DocumentationPage
-    title="Analytics API"
-    description="Retrieve analytics data via API"
-    prevPage={{ path: '/api/usage', label: 'Previous: Usage API' }}
-    nextPage={{ path: '/api/projects', label: 'Next: Projects API' }}
-    fallbackContent={`# Analytics API
+export const AnalyticsAPIPage = () => ( <DocumentationPage title="Analytics API" description="Retrieve analytics data via API" prevPage={{ path: '/api/usage', label: 'Previous: Usage API' }} nextPage={{ path: '/api/projects', label: 'Next: Projects API' }} fallbackContent={`# Analytics API
 
 Access comprehensive analytics data for AI usage, costs, and performance metrics.
 
@@ -4352,6 +3410,11 @@ Query parameters:
 - \`groupBy\`: provider | model | project | user
 - \`period\`: hour | day | week | month | year
 
+Try it out:
+
+\`\`\`api:GET:/api/v1/analytics:Get Analytics:{"Authorization":"Bearer YOUR_API_KEY"}:{"startDate":"2024-01-01","endDate":"2024-01-31","groupBy":"model"}:{"success":true,"data":{"totalCost":2500.75,"byModel":{"gpt-4":1500.50,"claude-3-opus":1000.25}}}
+\`\`\`
+
 ### Get Dashboard Data
 
 \`GET /api/analytics/dashboard\`
@@ -4359,27 +3422,7 @@ Query parameters:
 Get comprehensive dashboard analytics:
 
 \`\`\`json
-{
-  "success": true,
-  "data": {
-    "totalCost": 12345.67,
-    "totalRequests": 100000,
-    "totalTokens": 50000000,
-    "avgResponseTime": 250,
-    "errorRate": 0.02,
-    "topModels": [
-      {
-        "model": "gpt-4",
-        "usage": 45.5,
-        "cost": 5000.00
-      }
-    ],
-    "costTrend": {
-      "daily": 2.5,
-      "weekly": 15.3,
-      "monthly": 8.7
-    }
-  }
+{ "success": true, "data": { "totalCost": 12345.67, "totalRequests": 100000, "totalTokens": 50000000, "avgResponseTime": 250, "errorRate": 0.02, "topModels": [ { "model": "gpt-4", "usage": 45.5, "cost": 5000.00 } ], "costTrend": { "daily": 2.5, "weekly": 15.3, "monthly": 8.7 } }
 }
 \`\`\`
 
@@ -4402,19 +3445,7 @@ Compare analytics across multiple projects.
 AI-powered optimization recommendations:
 
 \`\`\`json
-{
-  "success": true,
-  "data": {
-    "potentialSavings": 2500.00,
-    "recommendations": [
-      {
-        "type": "model_switch",
-        "description": "Switch GPT-4 to Claude-3-haiku for simple tasks",
-        "estimatedSavings": 1000.00,
-        "impact": "low"
-      }
-    ]
-  }
+{ "success": true, "data": { "potentialSavings": 2500.00, "recommendations": [ { "type": "model_switch", "description": "Switch GPT-4 to Claude-3-haiku for simple tasks", "estimatedSavings": 1000.00, "impact": "low" } ] }
 }
 \`\`\`
 
@@ -4446,40 +3477,26 @@ Query parameters:
 ### JavaScript/TypeScript
 
 \`\`\`typescript
-const analytics = await client.analytics.getSummary({
-  dateRange: 'last_30_days'
+const analytics = await client.analytics.getSummary({ dateRange: 'last_30_days'
 });
 
-const costs = await client.analytics.getCosts({
-  startDate: '2025-01-01',
-  endDate: '2025-01-31',
-  groupBy: 'model'
+const costs = await client.analytics.getCosts({ startDate: '2025-01-01', endDate: '2025-01-31', groupBy: 'model'
 });
 \`\`\`
 
 ### Python
 
-\`\`\`python
-analytics = client.analytics.get_summary(
-    date_range='last_30_days'
+\`\`\`smart:python:{"imports":["from costkatana import CostKatanaClient"],"dependencies":["cost-katana"],"description":"Get analytics summary and cost breakdowns with the Python SDK"}
+client = CostKatanaClient(api_key='your_api_key')
+analytics = client.analytics.get_summary( date_range='last_30_days'
 )
 
-costs = client.analytics.get_costs(
-    start_date='2025-01-01',
-    end_date='2025-01-31',
-    group_by='model'
+costs = client.analytics.get_costs( start_date='2025-01-01', end_date='2025-01-31', group_by='model'
 )
-\`\`\``}
-  />
+\`\`\``} />
 );
 
-export const ProjectsAPIPage = () => (
-  <DocumentationPage
-    title="Projects API"
-    description="Manage projects programmatically"
-    prevPage={{ path: '/api/analytics', label: 'Previous: Analytics API' }}
-    nextPage={{ path: '/api/optimization', label: 'Next: Optimization API' }}
-    fallbackContent={`# Projects API
+export const ProjectsAPIPage = () => ( <DocumentationPage title="Projects API" description="Manage projects programmatically" prevPage={{ path: '/api/analytics', label: 'Previous: Analytics API' }} nextPage={{ path: '/api/optimization', label: 'Next: Optimization API' }} fallbackContent={`# Projects API
 
 Create and manage projects for organizing AI usage and costs.
 
@@ -4497,22 +3514,18 @@ Returns all projects for the authenticated user.
 
 Create a new project:
 
-\`\`\`json
-{
-  "name": "Production API",
-  "description": "Main production AI endpoints",
-  "budget": {
-    "amount": 5000.00,
-    "period": "monthly",
-    "currency": "USD"
-  },
-  "tags": ["production", "critical"],
-  "settings": {
-    "defaultModel": "gpt-4",
-    "maxTokens": 2000,
-    "rateLimit": 100
-  }
-}
+Try it out:
+
+\`\`\`api:POST:/api/v1/projects:Create Project:{"Authorization":"Bearer YOUR_API_KEY","Content-Type":"application/json"}:{"name":"Production API","description":"Main production AI endpoints","budget":{"amount":5000.00,"period":"monthly","currency":"USD"},"tags":["production","critical"]}:{"success":true,"project":{"id":"proj_123","name":"Production API","budget":5000.00}}
+\`\`\`
+
+Or use the SDK:
+
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create a project with the SDK"}
+const ck = new CostKatana({ apiKey: 'your-api-key' });
+
+const project = await ck.projects.create({ name: 'Production API', description: 'Main production AI endpoints', budget: { amount: 5000.00, period: 'monthly', currency: 'USD' }, tags: ['production', 'critical']
+});
 \`\`\`
 
 ### Get Project Details
@@ -4558,10 +3571,7 @@ Export project data in various formats.
 Add a team member to the project:
 
 \`\`\`json
-{
-  "email": "user@example.com",
-  "role": "viewer",
-  "permissions": ["read", "analyze"]
+{ "email": "user@example.com", "role": "viewer", "permissions": ["read", "analyze"]
 }
 \`\`\`
 
@@ -4571,50 +3581,35 @@ Add a team member to the project:
 
 \`\`\`typescript
 // Create project
-const project = await client.projects.create({
-  name: 'Production API',
-  budget: { monthly: 5000 }
+const project = await client.projects.create({ name: 'Production API', budget: { monthly: 5000 }
 });
 
 // Get usage
 const usage = await client.projects.getUsage(project.id);
 
 // Add member
-await client.projects.addMember(project.id, {
-  email: 'team@example.com',
-  role: 'editor'
+await client.projects.addMember(project.id, { email: 'team@example.com', role: 'editor'
 });
 \`\`\`
 
 ### Python
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from costkatana import CostKatanaClient"],"dependencies":["cost-katana"],"description":"Create projects, track usage, and manage team members with the Python SDK"}
 # Create project
-project = client.projects.create(
-    name='Production API',
-    budget={'monthly': 5000}
+client = CostKatanaClient(api_key='your_api_key')
+project = client.projects.create( name='Production API', budget={'monthly': 5000}
 )
 
 # Get usage
 usage = client.projects.get_usage(project.id)
 
 # Add member
-client.projects.add_member(
-    project.id,
-    email='team@example.com',
-    role='editor'
+client.projects.add_member( project.id, email='team@example.com', role='editor'
 )
-\`\`\``}
-  />
+\`\`\``} />
 );
 
-export const OptimizationAPIPage = () => (
-  <DocumentationPage
-    title="Optimization API"
-    description="Access AI optimization features via API"
-    prevPage={{ path: '/api/projects', label: 'Previous: Projects API' }}
-    nextPage={{ path: '/api/webhooks', label: 'Next: Webhooks' }}
-    fallbackContent={`# Optimization API
+export const OptimizationAPIPage = () => ( <DocumentationPage title="Optimization API" description="Access AI optimization features via API" prevPage={{ path: '/api/projects', label: 'Previous: Projects API' }} nextPage={{ path: '/api/webhooks', label: 'Next: Webhooks' }} fallbackContent={`# Optimization API
 
 Programmatically access Cost Katana's AI optimization features.
 
@@ -4633,25 +3628,13 @@ Get AI-powered optimization suggestions based on your usage patterns.
 Optimize a prompt for reduced token usage:
 
 \`\`\`json
-{
-  "prompt": "Your original prompt here",
-  "model": "gpt-4",
-  "optimizationGoal": "cost",
-  "preserveIntent": true
+{ "prompt": "Your original prompt here", "model": "gpt-4", "optimizationGoal": "cost", "preserveIntent": true
 }
 \`\`\`
 
 Response:
 \`\`\`json
-{
-  "success": true,
-  "data": {
-    "originalTokens": 150,
-    "optimizedTokens": 75,
-    "savingsPercent": 50,
-    "optimizedPrompt": "Optimized version of prompt",
-    "quality_score": 0.95
-  }
+{ "success": true, "data": { "originalTokens": 150, "optimizedTokens": 75, "savingsPercent": 50, "optimizedPrompt": "Optimized version of prompt", "quality_score": 0.95 }
 }
 \`\`\`
 
@@ -4692,14 +3675,7 @@ Revert an applied optimization.
 Get the best model for your use case:
 
 \`\`\`json
-{
-  "task": "text_generation",
-  "requirements": {
-    "maxLatency": 1000,
-    "minQuality": 0.8,
-    "budget": 0.10
-  },
-  "prompt": "Sample prompt"
+{ "task": "text_generation", "requirements": { "maxLatency": 1000, "minQuality": 0.8, "budget": 0.10 }, "prompt": "Sample prompt"
 }
 \`\`\`
 
@@ -4710,13 +3686,7 @@ Get the best model for your use case:
 Optimize multiple prompts at once:
 
 \`\`\`json
-{
-  "prompts": [
-    "First prompt",
-    "Second prompt"
-  ],
-  "model": "gpt-4",
-  "strategy": "aggressive"
+{ "prompts": [ "First prompt", "Second prompt" ], "model": "gpt-4", "strategy": "aggressive"
 }
 \`\`\`
 
@@ -4738,51 +3708,29 @@ View past optimizations and their results.
 
 \`\`\`typescript
 // Optimize prompt
-const result = await client.optimization.optimizePrompt({
-  prompt: 'Your detailed prompt here',
-  model: 'gpt-4',
-  goal: 'cost'
+const result = await client.optimization.optimizePrompt({ prompt: 'Your detailed prompt here', model: 'gpt-4', goal: 'cost'
 });
 
 // Get recommendations
-const recommendation = await client.optimization.recommendModel({
-  task: 'summarization',
-  requirements: {
-    maxLatency: 500,
-    budget: 0.05
-  }
+const recommendation = await client.optimization.recommendModel({ task: 'summarization', requirements: { maxLatency: 500, budget: 0.05 }
 });
 \`\`\`
 
 ### Python
 
-\`\`\`python
+\`\`\`smart:python:{"imports":["from costkatana import CostKatanaClient"],"dependencies":["cost-katana"],"description":"Optimize prompts and get model recommendations with the Python SDK"}
 # Optimize prompt
-result = client.optimization.optimize_prompt(
-    prompt='Your detailed prompt here',
-    model='gpt-4',
-    goal='cost'
+client = CostKatanaClient(api_key='your_api_key')
+result = client.optimization.optimize_prompt( prompt='Your detailed prompt here', model='gpt-4', goal='cost'
 )
 
 # Get recommendations
-recommendation = client.optimization.recommend_model(
-    task='summarization',
-    requirements={
-        'max_latency': 500,
-        'budget': 0.05
-    }
+recommendation = client.optimization.recommend_model( task='summarization', requirements={ 'max_latency': 500, 'budget': 0.05 }
 )
-\`\`\``}
-  />
+\`\`\``} />
 );
 
-export const WebhooksPage = () => (
-  <DocumentationPage
-    title="Webhooks"
-    description="Real-time event notifications"
-    prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }}
-    nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }}
-    fallbackContent={`# Alerts & Notifications API
+export const WebhooksPage = () => ( <DocumentationPage title="Webhooks" description="Real-time event notifications" prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }} nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }} fallbackContent={`# Alerts & Notifications API
 
 Configure alerts and notifications for important events.
 
@@ -4801,24 +3749,7 @@ Get current alert configuration.
 Configure alert thresholds and notification preferences:
 
 \`\`\`json
-{
-  "budgetAlerts": {
-    "enabled": true,
-    "thresholds": [50, 80, 90, 100],
-    "frequency": "daily"
-  },
-  "anomalyDetection": {
-    "enabled": true,
-    "sensitivity": "medium"
-  },
-  "errorAlerts": {
-    "enabled": true,
-    "errorRateThreshold": 5
-  },
-  "channels": {
-    "email": true,
-    "dashboard": true
-  }
+{ "budgetAlerts": { "enabled": true, "thresholds": [50, 80, 90, 100], "frequency": "daily" }, "anomalyDetection": { "enabled": true, "sensitivity": "medium" }, "errorAlerts": { "enabled": true, "errorRateThreshold": 5 }, "channels": { "email": true, "dashboard": true }
 }
 \`\`\`
 
@@ -4855,15 +3786,10 @@ Send a test alert to verify configuration.
 Stream real-time usage updates:
 
 \`\`\`javascript
-const eventSource = new EventSource('/api/usage/stream', {
-  headers: {
-    'Authorization': 'Bearer your-token'
-  }
+const eventSource = new EventSource('/api/usage/stream', { headers: { 'Authorization': 'Bearer your-token' }
 });
 
-eventSource.onmessage = (event) => {
-  const data = JSON.parse(event.data);
-  console.log('Usage update:', data);
+eventSource.onmessage = (event) => { const data = JSON.parse(event.data); console.log('Usage update:', data);
 };
 \`\`\`
 
@@ -4891,11 +3817,7 @@ eventSource.onmessage = (event) => {
 \`POST /api/v1/webhooks\`
 
 \`\`\`json
-{
-  "url": "https://your-app.com/webhook",
-  "events": ["cost.threshold_reached", "usage.error_spike"],
-  "secret": "your_webhook_secret",
-  "active": true
+{ "url": "https://your-app.com/webhook", "events": ["cost.threshold_reached", "usage.error_spike"], "secret": "your_webhook_secret", "active": true
 }
 \`\`\`
 
@@ -4904,19 +3826,7 @@ eventSource.onmessage = (event) => {
 All webhooks send POST requests with this structure:
 
 \`\`\`json
-{
-  "event": "cost.threshold_reached",
-  "timestamp": "2025-01-15T10:30:00Z",
-  "data": {
-    "projectId": "proj_123",
-    "threshold": 1000.00,
-    "currentSpend": 1050.00,
-    "period": "monthly"
-  },
-  "metadata": {
-    "webhookId": "wh_456",
-    "attempt": 1
-  }
+{ "event": "cost.threshold_reached", "timestamp": "2025-01-15T10:30:00Z", "data": { "projectId": "proj_123", "threshold": 1000.00, "currentSpend": 1050.00, "period": "monthly" }, "metadata": { "webhookId": "wh_456", "attempt": 1 }
 }
 \`\`\`
 
@@ -4929,13 +3839,7 @@ Verify webhook authenticity using HMAC-SHA256:
 \`\`\`javascript
 const crypto = require('crypto');
 
-function verifyWebhook(payload, signature, secret) {
-  const hash = crypto
-    .createHmac('sha256', secret)
-    .update(payload)
-    .digest('hex');
-  
-  return hash === signature;
+function verifyWebhook(payload, signature, secret) { const hash = crypto .createHmac('sha256', secret) .update(payload) .digest('hex'); return hash === signature;
 }
 \`\`\`
 
@@ -4963,16 +3867,10 @@ function verifyWebhook(payload, signature, secret) {
 
 \`POST /api/v1/webhooks/:webhookId/test\`
 
-Send a test event to verify configuration.`}
-  />
+Send a test event to verify configuration.`} />
 );
 
-export const RateLimitsPage = () => (
-  <DocumentationPage
-    title="Rate Limits"
-    description="API usage limits and quotas"
-    prevPage={{ path: '/api/webhooks', label: 'Previous: Webhooks' }}
-    fallbackContent={`# Rate Limits
+export const RateLimitsPage = () => ( <DocumentationPage title="Rate Limits" description="API usage limits and quotas" prevPage={{ path: '/api/webhooks', label: 'Previous: Webhooks' }} fallbackContent={`# Rate Limits
 
 Understanding and managing API rate limits for optimal performance.
 
@@ -5014,12 +3912,7 @@ X-RateLimit-Retry-After: 60
 When rate limited, you'll receive:
 
 \`\`\`json
-{
-  "error": "rate_limit_exceeded",
-  "message": "Too many requests",
-  "retryAfter": 60,
-  "limit": 1000,
-  "window": "1m"
+{ "error": "rate_limit_exceeded", "message": "Too many requests", "retryAfter": 60, "limit": 1000, "window": "1m"
 }
 \`\`\`
 
@@ -5027,19 +3920,7 @@ When rate limited, you'll receive:
 
 1. **Implement Exponential Backoff**
 \`\`\`javascript
-async function makeRequestWithRetry(fn, maxRetries = 3) {
-  for (let i = 0; i < maxRetries; i++) {
-    try {
-      return await fn();
-    } catch (error) {
-      if (error.status === 429) {
-        const delay = Math.pow(2, i) * 1000;
-        await sleep(delay);
-      } else {
-        throw error;
-      }
-    }
-  }
+async function makeRequestWithRetry(fn, maxRetries = 3) { for (let i = 0; i < maxRetries; i++) { try { return await fn(); } catch (error) { if (error.status === 429) { const delay = Math.pow(2, i) * 1000; await sleep(delay); } else { throw error; } } }
 }
 \`\`\`
 
@@ -5078,28 +3959,13 @@ Track your API usage in real-time:
 \`GET /api/v1/usage/rate-limits\`
 
 \`\`\`json
-{
-  "current": {
-    "requests": 450,
-    "limit": 1000,
-    "remaining": 550,
-    "resetAt": "2025-01-15T10:35:00Z"
-  },
-  "daily": {
-    "requests": 15000,
-    "limit": 100000
-  }
+{ "current": { "requests": 450, "limit": 1000, "remaining": 550, "resetAt": "2025-01-15T10:35:00Z" }, "daily": { "requests": 15000, "limit": 100000 }
 }
-\`\`\``}
-  />
+\`\`\``} />
 );
 
 // Support Pages
-export const FAQPage = () => (
-  <DocumentationPage
-    title="Frequently Asked Questions"
-    description="Common questions about Cost Katana"
-    fallbackContent={`# Frequently Asked Questions
+export const FAQPage = () => ( <DocumentationPage title="Frequently Asked Questions" description="Common questions about Cost Katana" fallbackContent={`# Frequently Asked Questions
 
 ## General Questions
 
@@ -5123,8 +3989,7 @@ Cost Katana supports all major AI providers:
 - **Anthropic** (Claude 3, Claude 2, Claude Instant)
 - **AWS Bedrock** (Claude, Titan, Jurassic, etc.)
 - **Google AI** (Gemini, PaLM, Imagen)
-- **Azure OpenAI** 
-- **Cohere**
+- **Azure OpenAI** - **Cohere**
 - **Hugging Face**
 - And many more...
 
@@ -5267,7 +4132,7 @@ Yes! Join our active community:
 
 Cost Katana has generous rate limits:
 - **Free Tier**: 1,000 requests/minute
-- **Pro**: 10,000 requests/minute  
+- **Pro**: 10,000 requests/minute 
 - **Enterprise**: Custom limits based on your needs
 
 We also provide rate limiting features to help you control your own AI usage.
@@ -5297,9 +4162,7 @@ Cost Katana works with any language that can make HTTP requests. We provide offi
 - **Java**
 - **C#/.NET**
 - **PHP**
-- **Ruby**
-
-## Troubleshooting
+- **Ruby** ## Troubleshooting
 
 ### I'm not seeing cost data in my dashboard
 
@@ -5327,21 +4190,16 @@ We provide migration assistance:
 
 ---
 
-Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/D8nDArmKbY) for real-time help!`}
-  />
+Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/D8nDArmKbY) for real-time help!`} />
 );
 
-export const SupportPage = () => (
-  <DocumentationPage
-    title="Support & Contact"
-    description="Get help with Cost Katana"
-    fallbackContent={`# Support & Contact
+export const SupportPage = () => ( <DocumentationPage title="Support & Contact" description="Get help with Cost Katana" fallbackContent={`# Support & Contact
 
 ## Get Help with Cost Katana
 
 We're here to help you get the most out of Cost Katana. Whether you're just getting started or need advanced technical support, we have multiple ways to assist you.
 
-## 📧 Email Support
+## Email Support
 
 **Primary Support**: [support@costkatana.com](mailto:support@costkatana.com)
 - Response time: Within 24 hours
@@ -5358,26 +4216,18 @@ We're here to help you get the most out of Cost Katana. Whether you're just gett
 - Compliance documentation
 - Data processing agreements
 
-## 💬 Live Chat & Community
+## Live Chat & Community
 
 ### Discord Community
 Join our active Discord server for real-time help and discussions:
 - **Server**: [discord.gg/costkatana](https://discord.gg/D8nDArmKbY)
-- **Channels**: 
-  - \`#general\` - General discussions
-  - \`#technical-help\` - Technical support
-  - \`#feature-requests\` - Suggest new features
-  - \`#integrations\` - Integration help
-  - \`#announcements\` - Product updates
+- **Channels**: - \`#general\` - General discussions - \`#technical-help\` - Technical support - \`#feature-requests\` - Suggest new features - \`#integrations\` - Integration help - \`#announcements\` - Product updates
 
 ### Live Chat
 Available on our website during business hours:
 - **Hours**: Monday-Friday, 9 AM - 6 PM PST
 - **Response**: Immediate during business hours
-- **Available to**: All users (Pro+ get priority)
-
-
-## 🎓 Learning Resources
+- **Available to**: All users (Pro+ get priority) ## Learning Resources
 
 ### Documentation
 - **Getting Started Guide**: [/getting-started/introduction](/getting-started/introduction)
@@ -5385,7 +4235,7 @@ Available on our website during business hours:
 - **Integration Guides**: [/integrations](/integrations)
 - **Best Practices**: [/features](/features)
 
-## 🚀 Onboarding & Training
+## Onboarding & Training
 
 ### Free Onboarding (All Plans)
 - **30-minute setup call** with our team
@@ -5406,7 +4256,7 @@ Available on our website during business hours:
 - **Custom SLA agreements**
 - **On-site training** available
 
-## 🔧 Technical Support
+## Technical Support
 
 ### GitHub Issues
 For bug reports and feature requests:
@@ -5426,7 +4276,7 @@ For bug reports and feature requests:
 - **Global CDN**: Multiple regions for low latency
 - **Auto-scaling**: Handles traffic spikes automatically
 
-## 💰 Billing & Account Support
+## Billing & Account Support
 
 ### Billing Questions
 - **Invoice Issues**: support@costkatana.com
@@ -5440,7 +4290,7 @@ For bug reports and feature requests:
 - **Data Export**: Download your data anytime
 - **Account Deletion**: Contact support for assistance
 
-## 🤝 Partnership & Integration
+## Partnership & Integration
 
 ### Technology Partners
 Interested in building an integration with Cost Katana?
@@ -5455,7 +4305,7 @@ Interested in building an integration with Cost Katana?
 - **Sales Support**: Joint sales calls and technical demos
 - **Competitive Pricing**: Attractive margins for partners
 
-## 📅 Schedule a Call
+## Schedule a Call
 
 ### Demo & Consultation
 Book a personalized demo:
@@ -5477,30 +4327,21 @@ For large organizations:
 
 ## Quick Links
 
-- 🚀 [Get Started](/getting-started/introduction)
-- 📖 [Documentation](/api)
-- 💬 [Discord Community](https://discord.gg/D8nDArmKbY)
-- 📧 [Email Support](mailto:support@costkatana.com)
-- 📊 [Service Status](https://status.costkatana.com)
-- 📅 [Schedule Demo](https://calendly.com/costkatana-demo)
+- [Get Started](/getting-started/introduction)
+- [Documentation](/api)
+- [Discord Community](https://discord.gg/D8nDArmKbY)
+- [Email Support](mailto:support@costkatana.com)
+- [Service Status](https://status.costkatana.com)
+- [Schedule Demo](https://calendly.com/costkatana-demo)
 
-**Need immediate help?** Start a live chat on our website or email support@costkatana.com. We typically respond within 2 hours during business hours.`}
-  />
+**Need immediate help?** Start a live chat on our website or email support@costkatana.com. We typically respond within 2 hours during business hours.`} />
 );
 
-export const OpenTelemetryVendorsPage = () => (
-  <DocumentationPage
-    title="OpenTelemetry & Vendor Support"
-    description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic"
-    fallbackContent={`# OpenTelemetry & Vendor Support
+export const OpenTelemetryVendorsPage = () => ( <DocumentationPage title="OpenTelemetry & Vendor Support" description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic" fallbackContent={`# OpenTelemetry & Vendor Support
 
 Cost Katana ships with native OpenTelemetry (OTel) integration for traces and metrics.
 
-## Quick Setup (Grafana Cloud)
-
-    OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push
-    OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push
-    OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
+## Quick Setup (Grafana Cloud) OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
 
 ## Telemetry Endpoints
 - GET /api/telemetry/metrics
@@ -5519,22 +4360,15 @@ Cost Katana ships with native OpenTelemetry (OTel) integration for traces and me
 - Trace Viewer
 - Service Dependency Graph
 
-See backend OBSERVABILITY.md for vendor examples and local collector instructions.`}
-  />
+See backend OBSERVABILITY.md for vendor examples and local collector instructions.`} />
 );
 
 // SAST Features Page
-export const SastPage = () => (
-  <DocumentationPage
-    title="SAST (Semantic Abstract Syntax Tree) Optimization"
-    description="Advanced semantic optimization using SAST for unambiguous, cross-lingual AI processing"
-    prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }}
-    nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }}
-    fallbackContent={`# SAST (Semantic Abstract Syntax Tree) Optimization
+export const SastPage = () => ( <DocumentationPage title="SAST (Semantic Abstract Syntax Tree) Optimization" description="Advanced semantic optimization using SAST for unambiguous, cross-lingual AI processing" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# SAST (Semantic Abstract Syntax Tree) Optimization
 
 SAST represents the next evolution in AI optimization, transforming natural language into unambiguous semantic primitives for superior token efficiency and cross-lingual compatibility.
 
-## 🧬 What is SAST?
+## What is SAST?
 
 SAST is a **Semantic Abstract Syntax Tree** that converts ambiguous natural language into a computationally simple, unambiguous structure using semantic primitives. Unlike traditional text-based optimization, SAST creates a universal semantic representation that works across languages and eliminates ambiguity.
 
@@ -5552,22 +4386,20 @@ SAST is a **Semantic Abstract Syntax Tree** that converts ambiguous natural lang
 "I saw a man on the hill with a telescope"
 ↓ (Semantic parsing)
 Frame: [EVENT]
-├── Agent: concept_1001 (person/I)
-├── Action: action_2001 (perceive/see) 
-├── Object: concept_1001 (person/man)
-├── Location: concept_2001 (elevated_terrain/hill)
-└── Instrument: concept_3001 (optical_device/telescope)
+ Agent: concept_1001 (person/I)
+ Action: action_2001 (perceive/see) Object: concept_1001 (person/man)
+ Location: concept_2001 (elevated_terrain/hill)
+ Instrument: concept_3001 (optical_device/telescope)
 \`\`\`
 
-## 🚀 Key Benefits
+## Key Benefits
 
 ### 1. **Ambiguity Resolution**
 - **Telescope Demo**: Resolves "I saw a man on the hill with a telescope" 
 - Distinguishes between "man has telescope" vs "I used telescope"
 - 95% accuracy in structural disambiguation
 
-### 2. **Cross-Lingual Compatibility**  
-- Same SAST representation across English, Spanish, French, German
+### 2. **Cross-Lingual Compatibility** - Same SAST representation across English, Spanish, French, German
 - Universal semantic primitives work regardless of source language
 - Enables true multilingual AI applications
 
@@ -5581,7 +4413,7 @@ Frame: [EVENT]
 - Meaning-first approach ensures intent is never lost
 - Context-aware optimization maintains relationships
 
-## 📊 Performance Metrics
+## Performance Metrics
 
 ### Optimization Results
 - **Token Reduction**: 30-40% average improvement
@@ -5596,12 +4428,11 @@ Frame: [EVENT]
 cost-katana sast compare "I saw a man on the hill with a telescope"
 
 Results:
-├── Traditional Cortex: 24 tokens, 15% ambiguity, 85% semantic clarity
-├── SAST Cortex: 18 tokens, 0% ambiguity, 95% semantic clarity  
-└── Improvement: 25% token reduction, 100% ambiguity resolution
+ Traditional Cortex: 24 tokens, 15% ambiguity, 85% semantic clarity
+ SAST Cortex: 18 tokens, 0% ambiguity, 95% semantic clarity Improvement: 25% token reduction, 100% ambiguity resolution
 \`\`\`
 
-## 🛠️ Usage Examples
+## Usage Examples
 
 ### CLI Usage
 \`\`\`bash
@@ -5628,25 +4459,14 @@ cost-katana sast stats
 \`\`\`
 
 ### Node.js SDK
-\`\`\`javascript
-import { PromptOptimizer } from 'cost-katana';
-
-const tracker = await AICostTracker.create({
-  providers: [{ provider: 'openai', apiKey: process.env.OPENAI_API_KEY }],
-  tracking: { enableAutoTracking: true }
+\`\`\`smart:javascript:{"imports":["import { AICostTracker } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"SAST optimization with Node.js SDK including ambiguity resolution and cross-lingual support"}
+const tracker = await AICostTracker.create({ providers: [{ provider: 'openai', apiKey: process.env.OPENAI_API_KEY }], tracking: { enableAutoTracking: true }
 });
 
 const optimizer = tracker.getOptimizer();
 
 // Basic optimization
-const result = await optimizer.optimizePrompt(
-  "I saw a man on the hill with a telescope",
-  {
-    language: 'en',
-    disambiguationStrategy: 'hybrid',
-    preserveAmbiguity: false,
-    enableCrossLingual: true
-  }
+const result = await optimizer.optimizePrompt( "I saw a man on the hill with a telescope", { language: 'en', disambiguationStrategy: 'hybrid', preserveAmbiguity: false, enableCrossLingual: true }
 );
 
 console.log('Optimized:', result.optimizedText);
@@ -5655,69 +4475,45 @@ console.log('Token Reduction:', result.optimizationMetrics.tokenReduction);
 \`\`\`
 
 ### Gateway Integration
-\`\`\`javascript
-import { GatewayClient } from 'cost-katana';
-
-const client = new GatewayClient({ 
-  baseUrl: 'https://cost-katana-backend.store',
-  apiKey: 'your-api-key'
+\`\`\`smart:javascript:{"imports":["import { GatewayClient } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Gateway client with SAST optimization and comparison between traditional and SAST approaches"}
+const client = new GatewayClient({ baseUrl: 'https://cost-katana-backend.store', apiKey: 'your-api-key'
 });
 
 // Use SAST optimization
-const response = await client.withSast('/v1/chat/completions', {
-  model: 'gpt-4',
-  messages: [{ role: 'user', content: 'Complex ambiguous prompt' }]
-}, {
-  language: 'en',
-  ambiguityResolution: true,
-  crossLingualMode: true
+const response = await client.withSast('/v1/chat/completions', { model: 'gpt-4', messages: [{ role: 'user', content: 'Complex ambiguous prompt' }]
+}, { language: 'en', ambiguityResolution: true, crossLingualMode: true
 });
 
 // Compare traditional vs SAST
-const comparison = await client.compareSast('/v1/chat/completions', {
-  model: 'gpt-4', 
-  messages: [{ role: 'user', content: 'Your prompt' }]
+const comparison = await client.compareSast('/v1/chat/completions', { model: 'gpt-4', messages: [{ role: 'user', content: 'Your prompt' }]
 });
 
 console.log('Recommended approach:', comparison.comparison.recommendedApproach);
 \`\`\`
 
 ### Python Integration
-\`\`\`python
-import cost_katana
-
+\`\`\`smart:python:{"imports":["import cost_katana"],"dependencies":["cost-katana"],"description":"SAST optimization, semantic primitives, and universal semantics with the Python SDK"}
 # Configure client
 client = cost_katana.configure(api_key="your-api-key")
 
 # SAST optimization
-result = client.optimize_with_sast(
-    prompt="I saw a man on the hill with a telescope",
-    language="en",
-    ambiguity_resolution=True,
-    cross_lingual=True
+result = client.optimize_with_sast( prompt="I saw a man on the hill with a telescope", language="en", ambiguity_resolution=True, cross_lingual=True
 )
 
-# Compare approaches  
-comparison = client.compare_sast_vs_traditional(
-    prompt="Your ambiguous text",
-    language="en"
+# Compare approaches 
+comparison = client.compare_sast_vs_traditional( prompt="Your ambiguous text", language="en"
 )
 
 # Explore semantic primitives
-primitives = client.search_semantic_primitives(
-    term="action",
-    category="concept", 
-    limit=20
+primitives = client.search_semantic_primitives( term="action", category="concept", limit=20
 )
 
 # Test universal semantics
-universal_test = client.test_universal_semantics(
-    concept="love",
-    languages=["en", "es", "fr", "de"]
+universal_test = client.test_universal_semantics( concept="love", languages=["en", "es", "fr", "de"]
 )
 \`\`\`
 
-## 📚 Semantic Primitives System
+## Semantic Primitives System
 
 SAST uses a comprehensive vocabulary of semantic primitives organized into categories:
 
@@ -5732,19 +4528,10 @@ SAST uses a comprehensive vocabulary of semantic primitives organized into categ
 ### Cross-Lingual Mapping
 Each primitive supports multiple languages:
 \`\`\`json
-{
-  "concept_1001": {
-    "baseForm": "person",
-    "translations": {
-      "en": ["person", "individual", "human"],
-      "es": ["persona", "individuo"],
-      "fr": ["personne", "individu"],
-      "de": ["Person", "Individuum"]
-    }
-  }
+{ "concept_1001": { "baseForm": "person", "translations": { "en": ["person", "individual", "human"], "es": ["persona", "individuo"], "fr": ["personne", "individu"], "de": ["Person", "Individuum"] } }
 \`\`\`
 
-## 🔬 Advanced Features
+## Advanced Features
 
 ### 1. **Disambiguation Strategies**
 - **Strict**: Highest precision, may preserve some ambiguity
@@ -5763,13 +4550,12 @@ Each primitive supports multiple languages:
 cost-katana sast universal "love" --languages "en,es,fr,de,ja"
 
 Results:
-├── Unification Score: 92.3%
-├── Universal Compatible: ✓
-├── Translations: 5 languages
-└── SAST Representations: Consistent across all languages
+ Unification Score: 92.3%
+ Universal Compatible: Translations: 5 languages
+ SAST Representations: Consistent across all languages
 \`\`\`
 
-## 🎯 Use Cases
+## Use Cases
 
 ### Perfect for:
 - **Multilingual Applications**: Same optimization works across languages
@@ -5785,7 +4571,7 @@ Results:
 - **Education**: Learning content optimization
 - **Customer Support**: Multilingual query understanding
 
-## 🔧 Configuration
+## Configuration
 
 ### Frontend (React/TypeScript)
 Access SAST through the dashboard at \`/sast\` with components for:
@@ -5797,19 +4583,16 @@ Access SAST through the dashboard at \`/sast\` with components for:
 
 ### Backend Integration
 SAST integrates seamlessly with existing Cortex infrastructure:
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import cortexGatewayMiddleware from 'cost-katana/middleware';"],"dependencies":["cost-katana"],"description":"Backend middleware integration with SAST headers for automatic processing"}
 // Gateway middleware automatically detects SAST requests
 app.use(cortexGatewayMiddleware);
 
 // Headers trigger SAST processing
-headers: {
-  'CostKatana-Cortex-Operation': 'sast',
-  'CostKatana-Cortex-Ambiguity-Resolution': 'true',
-  'CostKatana-Cortex-Cross-Lingual-Mode': 'true'
+headers: { 'CostKatana-Cortex-Operation': 'sast', 'CostKatana-Cortex-Ambiguity-Resolution': 'true', 'CostKatana-Cortex-Cross-Lingual-Mode': 'true'
 }
 \`\`\`
 
-## 📈 Getting Started
+## Getting Started
 
 ### 1. **Enable SAST in Dashboard**
 Navigate to \`/sast\` in your Cost Katana dashboard to explore SAST features interactively.
@@ -5828,7 +4611,10 @@ cost-katana sast compare "Ambiguous sentence"
 
 ### 3. **SDK Integration**
 Add SAST to existing applications with minimal code changes:
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { AICostTracker } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Enable SAST mode in existing SDK integration with minimal code changes"}
+const client = await AICostTracker.create({ providers: [{ provider: 'openai', apiKey: process.env.OPENAI_API_KEY }]
+});
+
 // Enable SAST mode
 const result = await client.optimize(prompt, { useSast: true });
 \`\`\`
@@ -5836,11 +4622,11 @@ const result = await client.optimize(prompt, { useSast: true });
 ### 4. **API Integration**
 Use SAST through REST API endpoints:
 - \`POST /api/optimizations/sast/optimize\` - SAST optimization
-- \`POST /api/optimizations/sast/compare\` - Compare approaches  
+- \`POST /api/optimizations/sast/compare\` - Compare approaches 
 - \`GET /api/optimizations/sast/vocabulary\` - Explore primitives
 - \`POST /api/optimizations/sast/universal-test\` - Cross-lingual testing
 
-## 🤔 When to Use SAST
+## When to Use SAST
 
 **Use SAST when:**
 - Content has ambiguous structures or meanings
@@ -5855,7 +4641,7 @@ Use SAST through REST API endpoints:
 - Speed is more important than precision
 - Existing workflows are sufficient
 
-## 📖 Learn More
+## Learn More
 
 - **[SAST Dashboard](/sast)** - Interactive SAST exploration
 - **[CLI Documentation](/integrations/cli)** - Command-line usage
@@ -5865,18 +4651,11 @@ Use SAST through REST API endpoints:
 
 ---
 
-*SAST represents the cutting edge of semantic optimization. Experience 30-40% token reductions while achieving unprecedented semantic clarity and cross-lingual compatibility.*`}
-  />
+*SAST represents the cutting edge of semantic optimization. Experience 30-40% token reductions while achieving unprecedented semantic clarity and cross-lingual compatibility.*`} />
 );
 
 // Telemetry Dashboard Feature Page
-export const TelemetryDashboardPage = () => (
-  <DocumentationPage
-    title="Telemetry Dashboard"
-    description="AI-powered telemetry dashboard with real-time insights and analytics"
-    prevPage={{ path: '/observability/opentelemetry', label: 'Previous: OpenTelemetry & Vendors' }}
-    nextPage={{ path: '/features/sessions', label: 'Next: Sessions & Session Replay' }}
-    fallbackContent={`# Telemetry Dashboard
+export const TelemetryDashboardPage = () => ( <DocumentationPage title="Telemetry Dashboard" description="AI-powered telemetry dashboard with real-time insights and analytics" prevPage={{ path: '/observability/opentelemetry', label: 'Previous: OpenTelemetry & Vendors' }} nextPage={{ path: '/features/sessions', label: 'Next: Sessions & Session Replay' }} fallbackContent={`# Telemetry Dashboard
 
 The Telemetry Dashboard provides comprehensive AI-powered insights into your application's performance, costs, and operations with real-time analytics and intelligent recommendations.
 
@@ -5907,12 +4686,9 @@ Monitor key performance indicators in real-time:
 - **Average Latency** - Mean response time across all operations
 - **P95 Latency** - 95th percentile response time
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"const apiKey = process.env.COST_KATANA_API_KEY;\\"],\\"dependencies\\":[],\\"description\\":\\"Fetching performance metrics from the telemetry dashboard API\\"}
 // Example: Fetching performance metrics
-const response = await fetch('/api/telemetry/dashboard/enhanced', {
-  headers: {
-    'Authorization': \`Bearer \${apiKey}\`
-  }
+const response = await fetch('/api/telemetry/dashboard/enhanced', { headers: { 'Authorization': \`Bearer \${apiKey}\` }
 });
 
 const data = await response.json();
@@ -5962,14 +4738,8 @@ Advanced querying and filtering:
 
 Configure your application to send telemetry data:
 
-\`\`\`javascript
-import { AICostTracker } from 'cost-katana';
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Enable telemetry collection with automatic tracking\\"}
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 \`\`\`
 
@@ -5986,13 +4756,9 @@ Navigate to the Telemetry Dashboard in the web app:
 
 Customize telemetry collection settings:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Configure telemetry collection settings for optimal data collection\\"}
 // Configure telemetry settings
-await client.telemetry.configure({
-  sampleRate: 1.0, // 100% sampling
-  batchSize: 100,
-  flushInterval: 5000, // 5 seconds
-  includeMetadata: true
+await client.telemetry.configure({ sampleRate: 1.0, // 100% sampling batchSize: 100, flushInterval: 5000, // 5 seconds includeMetadata: true
 });
 \`\`\`
 
@@ -6016,14 +4782,8 @@ The dashboard includes AI-powered analysis that provides:
 
 ### Example AI Recommendation
 
-\`\`\`json
-{
-  "trace_id": "trace_123",
-  "operation": "text_generation",
-  "insight": "Switching from GPT-4 to GPT-4o-mini would reduce costs by 75% with minimal quality impact",
-  "cost_impact": -0.15,
-  "routing_decision": "gpt-4o-mini",
-  "priority": "high"
+\`\`\`smart:json:{\\"dependencies\\":[],\\"description\\":\\"Example AI recommendation response from the telemetry dashboard\\"}
+{ "trace_id": "trace_123", "operation": "text_generation", "insight": "Switching from GPT-4 to GPT-4o-mini would reduce costs by 75% with minimal quality impact", "cost_impact": -0.15, "routing_decision": "gpt-4o-mini", "priority": "high"
 }
 \`\`\`
 
@@ -6060,22 +4820,14 @@ Customize dashboard settings:
 
 ### Fetch Enhanced Dashboard Data
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/telemetry/dashboard/enhanced \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Fetch enhanced dashboard data using the telemetry API\\"}
+curl -X GET https://cost-katana-backend.store/api/telemetry/dashboard/enhanced \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Query Telemetry Data
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/telemetry/query \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "query": "service:api AND operation:chat",
-    "timeRange": "1h",
-    "limit": 100
-  }'
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Query telemetry data with custom filters and time ranges\\"}
+curl -X POST https://cost-katana-backend.store/api/telemetry/query \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "query": "service:api AND operation:chat", "timeRange": "1h", "limit": 100 }'
 \`\`\`
 
 ## Best Practices
@@ -6091,18 +4843,11 @@ curl -X POST https://cost-katana-backend.store/api/telemetry/query \\
 - [OpenTelemetry & Vendors](/observability/opentelemetry) - Vendor integrations
 - [Distributed Tracing](/features/tracing) - Trace collection and analysis
 - [Telemetry API](/api/telemetry) - API reference
-- [Cost Analytics](/features/analytics) - Cost analysis features`}
-  />
+- [Cost Analytics](/features/analytics) - Cost analysis features`} />
 );
 
 // Sessions & Session Replay Feature Page
-export const SessionsPage = () => (
-  <DocumentationPage
-    title="Sessions & Session Replay"
-    description="Record and replay AI interactions with complete context for debugging and analysis"
-    prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }}
-    nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }}
-    fallbackContent={`# Sessions & Session Replay
+export const SessionsPage = () => ( <DocumentationPage title="Sessions & Session Replay" description="Record and replay AI interactions with complete context for debugging and analysis" prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }} nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }} fallbackContent={`# Sessions & Session Replay
 
 Record and replay AI interactions with complete context, including prompts, responses, costs, and user actions for comprehensive debugging and analysis.
 
@@ -6198,14 +4943,8 @@ Distributed tracing for API-level debugging with hierarchical trace visualizatio
 
 ### 1. Enable Session Recording
 
-\`\`\`javascript
-import { AICostTracker } from 'cost-katana';
-
-const tracker = await AICostTracker.create({
-  providers: [
-    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
-  ],
-  tracking: { enableAutoTracking: true }
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Enable automatic session recording for AI interactions\\"}
+const tracker = await AICostTracker.create({ providers: [ { provider: 'openai', apiKey: process.env.OPENAI_API_KEY } ], tracking: { enableAutoTracking: true }
 });
 \`\`\`
 
@@ -6220,16 +4959,12 @@ Navigate to **Sessions** in the sidebar:
 
 ### 3. Replay a Session
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\",\\"const sessionId = 'your-session-id';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Replay a recorded session with custom playback options\\"}
 // Get session replay data
 const session = await client.sessions.getReplay(sessionId);
 
 // Playback session
-session.replay({
-  speed: 1.0, // Playback speed
-  onEvent: (event) => {
-    console.log('Event:', event);
-  }
+session.replay({ speed: 1.0, // Playback speed onEvent: (event) => { console.log('Event:', event); }
 });
 \`\`\`
 
@@ -6262,15 +4997,12 @@ The Session Replay Player provides:
 
 ### View Trace Tree
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\",\\"const traceId = 'your-trace-id';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Get and visualize distributed trace tree with costs and latency\\"}
 // Get trace details
 const trace = await client.sessions.getTrace(traceId);
 
 // Visualize trace tree
-trace.visualize({
-  showCosts: true,
-  showLatency: true,
-  groupByService: true
+trace.visualize({ showCosts: true, showLatency: true, groupByService: true
 });
 \`\`\`
 
@@ -6285,24 +5017,20 @@ trace.visualize({
 
 ### List Sessions
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/session-replay/sessions \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "feature=chat&status=completed&limit=50"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List all sessions with optional filters for feature type, status, and limit\\"}
+curl -X GET https://cost-katana-backend.store/api/session-replay/sessions \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "feature=chat&status=completed&limit=50"
 \`\`\`
 
 ### Get Session Replay
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/session-replay/sessions/SESSION_ID \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific session replay by session ID\\"}
+curl -X GET https://cost-katana-backend.store/api/session-replay/sessions/SESSION_ID \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Get Trace Details
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve detailed trace information by trace ID\\"}
+curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ## Best Practices
@@ -6318,18 +5046,11 @@ curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\
 - [Distributed Tracing](/features/tracing) - Trace collection and analysis
 - [Telemetry Dashboard](/features/telemetry) - Telemetry insights
 - [Logs Management](/features/logs) - Log analysis
-- [Session Replay API](/api/session-replay) - API reference`}
-  />
+- [Session Replay API](/api/session-replay) - API reference`} />
 );
 
 // Logs Management Feature Page
-export const LogsPage = () => (
-  <DocumentationPage
-    title="Logs Management"
-    description="Comprehensive log management with AI-powered querying, filtering, and analysis"
-    prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }}
-    nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }}
-    fallbackContent={`# Logs Management
+export const LogsPage = () => ( <DocumentationPage title="Logs Management" description="Comprehensive log management with AI-powered querying, filtering, and analysis" prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }} nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }} fallbackContent={`# Logs Management
 
 Comprehensive log management system with AI-powered querying, real-time streaming, advanced filtering, and intelligent analysis for all your AI operations.
 
@@ -6394,16 +5115,9 @@ Raw JSON view for developers:
 
 Enable real-time log streaming for live monitoring:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Enable real-time log streaming with custom filters and event handlers\\"}
 // Enable real-time streaming
-const logStream = client.logs.stream({
-  filters: {
-    level: 'error',
-    service: 'api'
-  },
-  onLog: (log) => {
-    console.log('New log:', log);
-  }
+const logStream = client.logs.stream({ filters: { level: 'error', service: 'api' }, onLog: (log) => { console.log('New log:', log); }
 });
 
 // Stop streaming
@@ -6414,10 +5128,9 @@ logStream.stop();
 
 Query logs using natural language:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Query logs using natural language with AI-powered search and insights\\"}
 // Natural language query
-const results = await client.logs.query(
-  "Show me all errors from the last hour related to GPT-4"
+const results = await client.logs.query( "Show me all errors from the last hour related to GPT-4"
 );
 
 // Results include:
@@ -6454,22 +5167,13 @@ Filter logs by multiple criteria:
 
 ### Filter Examples
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Filter logs by service, level, time range, and cost thresholds\\"}
 // Filter by service and error level
-const logs = await client.logs.list({
-  filters: {
-    service: 'api',
-    level: 'error',
-    timeRange: '1h'
-  }
+const logs = await client.logs.list({ filters: { service: 'api', level: 'error', timeRange: '1h' }
 });
 
 // Filter by cost threshold
-const expensiveLogs = await client.logs.list({
-  filters: {
-    minCost: 0.10,
-    timeRange: '24h'
-  }
+const expensiveLogs = await client.logs.list({ filters: { minCost: 0.10, timeRange: '24h' }
 });
 \`\`\`
 
@@ -6477,10 +5181,8 @@ const expensiveLogs = await client.logs.list({
 
 Get real-time statistics about your logs:
 
-\`\`\`javascript
-const stats = await client.logs.getStats({
-  timeRange: '24h',
-  groupBy: ['service', 'model']
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Get real-time log statistics with grouping and time range filters\\"}
+const stats = await client.logs.getStats({ timeRange: '24h', groupBy: ['service', 'model']
 });
 
 console.log('Total logs:', stats.total);
@@ -6492,23 +5194,17 @@ console.log('Average cost:', stats.avgCost);
 
 Export logs in multiple formats:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Export logs in JSON, CSV, or JSONL formats with custom filters\\"}
 // Export as JSON
-const jsonBlob = await client.logs.export({
-  format: 'json',
-  filters: { service: 'api' }
+const jsonBlob = await client.logs.export({ format: 'json', filters: { service: 'api' }
 });
 
 // Export as CSV
-const csvBlob = await client.logs.export({
-  format: 'csv',
-  filters: { timeRange: '7d' }
+const csvBlob = await client.logs.export({ format: 'csv', filters: { timeRange: '7d' }
 });
 
 // Export as JSONL
-const jsonlBlob = await client.logs.export({
-  format: 'jsonl',
-  filters: { level: 'error' }
+const jsonlBlob = await client.logs.export({ format: 'jsonl', filters: { level: 'error' }
 });
 \`\`\`
 
@@ -6527,40 +5223,26 @@ View full details for any log entry:
 
 ### List Logs
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/logs/ai \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "service=api&level=error&limit=100"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List logs with filters for service, level, and limit\\"}
+curl -X GET https://cost-katana-backend.store/api/logs/ai \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "service=api&level=error&limit=100"
 \`\`\`
 
 ### Get Log by ID
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/logs/ai/LOG_ID \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific log entry by log ID\\"}
+curl -X GET https://cost-katana-backend.store/api/logs/ai/LOG_ID \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Natural Language Query
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/logs/ai/chat \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "query": "Show me all errors from the last hour",
-    "context": {
-      "timeRange": "1h"
-    }
-  }'
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Query logs using natural language with AI-powered search\\"}
+curl -X POST https://cost-katana-backend.store/api/logs/ai/chat \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "query": "Show me all errors from the last hour", "context": { "timeRange": "1h" } }'
 \`\`\`
 
 ### Export Logs
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "format=json&service=api&timeRange=24h" \\
-  --output logs.json
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Export logs in various formats (JSON, CSV, JSONL) with filters\\"}
+curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "format=json&service=api&timeRange=24h" \\ --output logs.json
 \`\`\`
 
 ## Best Practices
@@ -6576,18 +5258,11 @@ curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\
 
 - [Sessions & Session Replay](/features/sessions) - Session recording
 - [Telemetry Dashboard](/features/telemetry) - Telemetry insights
-- [Logs API](/api/logs) - API reference`}
-  />
+- [Logs API](/api/logs) - API reference`} />
 );
 
 // Cache Management Feature Page
-export const CachePage = () => (
-  <DocumentationPage
-    title="Cache Management"
-    description="Redis cache dashboard and management for optimizing AI costs through intelligent caching"
-    prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }}
-    nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }}
-    fallbackContent={`# Cache Management
+export const CachePage = () => ( <DocumentationPage title="Cache Management" description="Redis cache dashboard and management for optimizing AI costs through intelligent caching" prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }} nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }} fallbackContent={`# Cache Management
 
 Redis cache dashboard and management system for optimizing AI costs through intelligent caching of prompts, responses, and intermediate results.
 
@@ -6673,23 +5348,17 @@ Configure cache settings:
 
 ### TTL Configuration
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Configure cache TTL (Time To Live) settings for default, max, and min values\\"}
 // Set default TTL
-client.cache.configure({
-  defaultTTL: 3600, // 1 hour
-  maxTTL: 86400, // 24 hours
-  minTTL: 60 // 1 minute
+client.cache.configure({ defaultTTL: 3600, // 1 hour maxTTL: 86400, // 24 hours minTTL: 60 // 1 minute
 });
 \`\`\`
 
 ### Eviction Policy
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Configure cache eviction policy, memory limits, and maximum keys\\"}
 // Configure eviction policy
-client.cache.configure({
-  evictionPolicy: 'lru', // Least Recently Used
-  maxMemory: '512mb',
-  maxKeys: 100000
+client.cache.configure({ evictionPolicy: 'lru', // Least Recently Used maxMemory: '512mb', maxKeys: 100000
 });
 \`\`\`
 
@@ -6704,33 +5373,26 @@ client.cache.configure({
 
 ### Get from Cache
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker, ai } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\",\\"const prompt = 'your-prompt-here';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Get value from cache with fallback to fetch and cache on miss\\"}
 // Get cached value
 const cached = await client.cache.get('prompt:user:123');
 
-if (cached) {
-  return cached; // Cache hit
-} else {
-  // Cache miss - fetch and cache
-  const result = await ai.generate(prompt);
-  await client.cache.set('prompt:user:123', result, { ttl: 3600 });
-  return result;
+if (cached) { return cached; // Cache hit
+} else { // Cache miss - fetch and cache const result = await ai.generate(prompt); await client.cache.set('prompt:user:123', result, { ttl: 3600 }); return result;
 }
 \`\`\`
 
 ### Set Cache
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\",\\"const value = 'your-value-here';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Set cache value with TTL and optional tags for organized invalidation\\"}
 // Set cache with TTL
-await client.cache.set('key', value, {
-  ttl: 3600, // 1 hour
-  tags: ['user', 'prompt']
+await client.cache.set('key', value, { ttl: 3600, // 1 hour tags: ['user', 'prompt']
 });
 \`\`\`
 
 ### Delete Cache
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Delete cache entries by key, pattern, or tags\\"}
 // Delete specific key
 await client.cache.delete('key');
 
@@ -6743,14 +5405,9 @@ await client.cache.deleteByTags(['user', 'prompt']);
 
 ### Cache Warming
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\",\\"const commonPrompt1 = 'your-common-prompt-1';\\",\\"const commonPrompt2 = 'your-common-prompt-2';\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Pre-populate cache with frequently used data to improve hit rates\\"}
 // Pre-populate cache
-await client.cache.warm({
-  keys: [
-    { key: 'prompt:common:1', value: commonPrompt1 },
-    { key: 'prompt:common:2', value: commonPrompt2 }
-  ],
-  ttl: 86400 // 24 hours
+await client.cache.warm({ keys: [ { key: 'prompt:common:1', value: commonPrompt1 }, { key: 'prompt:common:2', value: commonPrompt2 } ], ttl: 86400 // 24 hours
 });
 \`\`\`
 
@@ -6767,7 +5424,7 @@ Cost Katana automatically caches:
 
 With Cortex enabled, semantically similar prompts share cache entries:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{\\"imports\\":[],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Example of semantic caching where similar prompts share cache entries\\"}
 // These prompts share the same cache entry
 const prompt1 = "What is the weather today?";
 const prompt2 = "Tell me today's weather";
@@ -6780,43 +5437,32 @@ const prompt3 = "How's the weather?";
 
 ### Get Cache Statistics
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/cache/stats \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve cache statistics including hit rate, size, and performance metrics\\"}
+curl -X GET https://cost-katana-backend.store/api/cache/stats \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### List Cache Keys
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/cache/keys \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "pattern=prompt:*&limit=100"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List cache keys with optional pattern matching and limit\\"}
+curl -X GET https://cost-katana-backend.store/api/cache/keys \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "pattern=prompt:*&limit=100"
 \`\`\`
 
 ### Get Cache Key
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific cache key value by key name\\"}
+curl -X GET https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Delete Cache Key
 
-\`\`\`bash
-curl -X DELETE https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Delete a specific cache key by key name\\"}
+curl -X DELETE https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Clear Cache
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/cache/clear \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "pattern": "prompt:*",
-    "tags": ["user"]
-  }'
+\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Clear cache entries by pattern or tags\\"}
+curl -X POST https://cost-katana-backend.store/api/cache/clear \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "pattern": "prompt:*", "tags": ["user"] }'
 \`\`\`
 
 ## Best Practices
@@ -6833,18 +5479,11 @@ curl -X POST https://cost-katana-backend.store/api/cache/clear \\
 
 - [Gateway & Proxy](/features/gateway) - Gateway caching
 - [Cortex Optimization](/features/sast) - Semantic caching
-- [Cache API](/api/cache) - API reference`}
-  />
+- [Cache API](/api/cache) - API reference`} />
 );
 
 // Advanced Monitoring Feature Page
-export const AdvancedMonitoringPage = () => (
-  <DocumentationPage
-    title="Advanced Monitoring"
-    description="Advanced monitoring tools for comprehensive AI operation tracking and analysis"
-    prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }}
-    nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }}
-    fallbackContent={`# Advanced Monitoring
+export const AdvancedMonitoringPage = () => ( <DocumentationPage title="Advanced Monitoring" description="Advanced monitoring tools for comprehensive AI operation tracking and analysis" prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }} nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }} fallbackContent={`# Advanced Monitoring
 
 Advanced monitoring tools for comprehensive tracking, analysis, and optimization of AI operations with real-time insights and intelligent alerts.
 
@@ -6910,42 +5549,25 @@ Deep performance analysis tools:
 
 ### Get Monitoring Metrics
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/monitoring/metrics \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "timeRange=1h&groupBy=service"
+\`\`\`smart:bash:{"description":"Get real-time monitoring metrics with time range and grouping options"}
+curl -X GET https://cost-katana-backend.store/api/monitoring/metrics \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "timeRange=1h&groupBy=service"
 \`\`\`
 
 ### Create Alert
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/monitoring/alerts \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "name": "High Error Rate",
-    "condition": "error_rate > 0.05",
-    "threshold": 0.05,
-    "notificationChannels": ["email", "slack"]
-  }'
+\`\`\`smart:bash:{"description":"Create an intelligent alert with custom conditions and notification channels"}
+curl -X POST https://cost-katana-backend.store/api/monitoring/alerts \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "name": "High Error Rate", "condition": "error_rate > 0.05", "threshold": 0.05, "notificationChannels": ["email", "slack"] }'
 \`\`\`
 
 ## Related Documentation
 
 - [Telemetry Dashboard](/features/telemetry) - Telemetry insights
 - [Logs Management](/features/logs) - Log analysis
-- [Monitoring API](/api/monitoring) - API reference`}
-  />
+- [Monitoring API](/api/monitoring) - API reference`} />
 );
 
 // Unexplained Costs Feature Page
-export const UnexplainedCostsPage = () => (
-  <DocumentationPage
-    title="Unexplained Costs"
-    description="Cost attribution analysis to identify and explain unexpected AI costs"
-    prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }}
-    nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }}
-    fallbackContent={`# Unexplained Costs
+export const UnexplainedCostsPage = () => ( <DocumentationPage title="Unexplained Costs" description="Cost attribution analysis to identify and explain unexpected AI costs" prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }} nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }} fallbackContent={`# Unexplained Costs
 
 Cost attribution analysis system to identify, explain, and optimize unexpected AI costs with intelligent root cause analysis.
 
@@ -6998,40 +5620,25 @@ AI-powered analysis to identify:
 
 ### Get Unexplained Costs
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/unexplained-costs \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "timeRange=7d&threshold=0.10"
+\`\`\`smart:bash:{"description":"Retrieve unexplained costs with time range and threshold filters"}
+curl -X GET https://cost-katana-backend.store/api/unexplained-costs \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "timeRange=7d&threshold=0.10"
 \`\`\`
 
 ### Analyze Cost
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/unexplained-costs/analyze \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "costId": "cost_123",
-    "includeRecommendations": true
-  }'
+\`\`\`smart:bash:{"description":"Perform AI-powered root cause analysis on specific cost with optimization recommendations"}
+curl -X POST https://cost-katana-backend.store/api/unexplained-costs/analyze \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "costId": "cost_123", "includeRecommendations": true }'
 \`\`\`
 
 ## Related Documentation
 
 - [Cost Analytics](/features/analytics) - Cost analysis
 - [Optimization](/features/optimization) - Cost optimization
-- [Unexplained Costs API](/api/unexplained-costs) - API reference`}
-  />
+- [Unexplained Costs API](/api/unexplained-costs) - API reference`} />
 );
 
 // Experimentation Feature Page
-export const ExperimentationPage = () => (
-  <DocumentationPage
-    title="Experimentation"
-    description="A/B testing and experimentation platform for optimizing AI model selection and costs"
-    prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }}
-    nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }}
-    fallbackContent={`# Experimentation
+export const ExperimentationPage = () => ( <DocumentationPage title="Experimentation" description="A/B testing and experimentation platform for optimizing AI model selection and costs" prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }} nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }} fallbackContent={`# Experimentation
 
 A/B testing and experimentation platform for optimizing AI model selection, prompt strategies, and costs through systematic testing and comparison.
 
@@ -7060,12 +5667,10 @@ Real-time prompt optimization:
 - **Token Reduction** - Optimize token usage
 - **Quality Preservation** - Maintain quality while reducing costs
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Simulate cost optimization with real-time prompt analysis and model recommendations"}
 // Simulate cost optimization
-const simulation = await client.experimentation.simulate({
-  prompt: "Your prompt here",
-  currentModel: "gpt-4",
-  targetModels: ["gpt-4o-mini", "gpt-3.5-turbo"]
+const client = new CostKatana({ apiKey: 'your-api-key' });
+const simulation = await client.experimentation.simulate({ prompt: "Your prompt here", currentModel: "gpt-4", targetModels: ["gpt-4o-mini", "gpt-3.5-turbo"]
 });
 
 console.log('Potential savings:', simulation.savings);
@@ -7082,12 +5687,10 @@ Compare different AI models:
 - **Quality Metrics** - Quality scores and metrics
 - **Recommendations** - Best model recommendations
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Compare multiple AI models side-by-side with cost, latency, and quality metrics"}
 // Compare models
-const comparison = await client.experimentation.compare({
-  prompt: "Your prompt",
-  models: ["gpt-4", "gpt-4o-mini", "claude-3-opus"],
-  metrics: ["cost", "latency", "quality"]
+const client = new CostKatana({ apiKey: 'your-api-key' });
+const comparison = await client.experimentation.compare({ prompt: "Your prompt", models: ["gpt-4", "gpt-4o-mini", "claude-3-opus"], metrics: ["cost", "latency", "quality"]
 });
 
 console.log('Best model:', comparison.bestModel);
@@ -7116,46 +5719,25 @@ Track optimization wins:
 
 ### Run Experiment
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/experimentation/model-comparison \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "prompt": "Your prompt",
-    "models": ["gpt-4", "gpt-4o-mini"],
-    "metrics": ["cost", "quality"]
-  }'
+\`\`\`smart:bash:{"description":"Run A/B test experiment comparing multiple models with cost and quality metrics"}
+curl -X POST https://cost-katana-backend.store/api/experimentation/model-comparison \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "prompt": "Your prompt", "models": ["gpt-4", "gpt-4o-mini"], "metrics": ["cost", "quality"] }'
 \`\`\`
 
 ### Simulate Cost
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/experimentation/real-time-simulation \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "prompt": "Your prompt",
-    "currentModel": "gpt-4",
-    "targetModels": ["gpt-4o-mini"]
-  }'
+\`\`\`smart:bash:{"description":"Simulate cost optimization scenarios with real-time analysis and savings projections"}
+curl -X POST https://cost-katana-backend.store/api/experimentation/real-time-simulation \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "prompt": "Your prompt", "currentModel": "gpt-4", "targetModels": ["gpt-4o-mini"] }'
 \`\`\`
 
 ## Related Documentation
 
 - [AI Optimization](/features/optimization) - Optimization features
 - [Cost Analytics](/features/analytics) - Cost analysis
-- [Experimentation API](/api/experimentation) - API reference`}
-  />
+- [Experimentation API](/api/experimentation) - API reference`} />
 );
 
 // Moderation Feature Page
-export const ModerationPage = () => (
-  <DocumentationPage
-    title="Moderation"
-    description="Content moderation and safety features for AI-generated content"
-    prevPage={{ path: '/features/experimentation', label: 'Previous: Experimentation' }}
-    nextPage={{ path: '/features/security', label: 'Next: Security' }}
-    fallbackContent={`# Moderation
+export const ModerationPage = () => ( <DocumentationPage title="Moderation" description="Content moderation and safety features for AI-generated content" prevPage={{ path: '/features/experimentation', label: 'Previous: Experimentation' }} nextPage={{ path: '/features/security', label: 'Next: Security' }} fallbackContent={`# Moderation
 
 Content moderation and safety features for AI-generated content with automated filtering, policy enforcement, and compliance monitoring.
 
@@ -7186,18 +5768,14 @@ Automated content filtering:
 - **Sensitive Content** - Identify sensitive content
 - **Custom Filters** - Custom filtering rules
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Moderate content with automated filtering for toxicity, profanity, and PII detection"}
 // Moderate content
-const result = await client.moderation.moderate({
-  content: "User content here",
-  policies: ["toxicity", "profanity", "pii"]
+const client = new CostKatana({ apiKey: 'your-api-key' });
+const result = await client.moderation.moderate({ content: "User content here", policies: ["toxicity", "profanity", "pii"]
 });
 
-if (result.isSafe) {
-  // Content is safe
-} else {
-  // Handle unsafe content
-  console.log('Violations:', result.violations);
+if (result.isSafe) { // Content is safe
+} else { // Handle unsafe content console.log('Violations:', result.violations);
 }
 \`\`\`
 
@@ -7223,31 +5801,18 @@ Track compliance:
 
 ### Moderate Content
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/moderation/moderate \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "content": "Content to moderate",
-    "policies": ["toxicity", "profanity"]
-  }'
+\`\`\`smart:bash:{"description":"Moderate content with automated filtering and policy enforcement for safety compliance"}
+curl -X POST https://cost-katana-backend.store/api/moderation/moderate \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "content": "Content to moderate", "policies": ["toxicity", "profanity"] }'
 \`\`\`
 
 ## Related Documentation
 
 - [Security](/features/security) - Security features
-- [Moderation API](/api/moderation) - API reference`}
-  />
+- [Moderation API](/api/moderation) - API reference`} />
 );
 
 // Security Feature Page
-export const SecurityPage = () => (
-  <DocumentationPage
-    title="Security"
-    description="Security and compliance features for protecting AI operations and data"
-    prevPage={{ path: '/features/moderation', label: 'Previous: Moderation' }}
-    nextPage={{ path: '/features/memory', label: 'Next: Memory' }}
-    fallbackContent={`# Security
+export const SecurityPage = () => ( <DocumentationPage title="Security" description="Security and compliance features for protecting AI operations and data" prevPage={{ path: '/features/moderation', label: 'Previous: Moderation' }} nextPage={{ path: '/features/memory', label: 'Next: Memory' }} fallbackContent={`# Security
 
 Comprehensive security and compliance features for protecting AI operations, data, and ensuring regulatory compliance.
 
@@ -7308,27 +5873,19 @@ Regulatory compliance:
 
 ### Get Security Status
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/security/status \\
-  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`smart:bash:{"description":"Get current security status including compliance, encryption, and threat detection status"}
+curl -X GET https://cost-katana-backend.store/api/security/status \\ -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ## Related Documentation
 
 - [Key Vault](/features/key-vault) - Key management
 - [Moderation](/features/moderation) - Content moderation
-- [Security API](/api/security) - API reference`}
-  />
+- [Security API](/api/security) - API reference`} />
 );
 
 // Memory Feature Page
-export const MemoryPage = () => (
-  <DocumentationPage
-    title="Memory"
-    description="Memory management and context preservation for AI conversations and operations"
-    prevPage={{ path: '/features/security', label: 'Previous: Security' }}
-    nextPage={{ path: '/features/cost-lake', label: 'Next: Cost Lake' }}
-    fallbackContent={`# Memory
+export const MemoryPage = () => ( <DocumentationPage title="Memory" description="Memory management and context preservation for AI conversations and operations" prevPage={{ path: '/features/security', label: 'Previous: Security' }} nextPage={{ path: '/features/cost-lake', label: 'Next: Cost Lake' }} fallbackContent={`# Memory
 
 Memory management system for preserving context across AI conversations and operations with intelligent context retrieval and management.
 
@@ -7357,18 +5914,14 @@ Preserve context across:
 - **Operations** - Maintain operational context
 - **Users** - Preserve user preferences
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Store and retrieve memories with context preservation for AI conversations"}
 // Store memory
-await client.memory.store({
-  key: "user_preference",
-  value: { theme: "dark", language: "en" },
-  context: { userId: "user_123" }
+const client = new CostKatana({ apiKey: 'your-api-key' });
+await client.memory.store({ key: "user_preference", value: { theme: "dark", language: "en" }, context: { userId: "user_123" }
 });
 
 // Retrieve memory
-const memory = await client.memory.retrieve({
-  key: "user_preference",
-  context: { userId: "user_123" }
+const memory = await client.memory.retrieve({ key: "user_preference", context: { userId: "user_123" }
 });
 \`\`\`
 
@@ -7394,40 +5947,24 @@ Intelligent context retrieval:
 
 ### Store Memory
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/memory/store \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "key": "user_preference",
-    "value": {"theme": "dark"},
-    "context": {"userId": "user_123"}
-  }'
+\`\`\`smart:bash:{"description":"Store memory with context for preserving user preferences and conversation history"}
+curl -X POST https://cost-katana-backend.store/api/memory/store \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "key": "user_preference", "value": {"theme": "dark"}, "context": {"userId": "user_123"} }'
 \`\`\`
 
 ### Retrieve Memory
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/memory/retrieve \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "key=user_preference&userId=user_123"
+\`\`\`smart:bash:{"description":"Retrieve stored memory with intelligent context matching and semantic search"}
+curl -X GET https://cost-katana-backend.store/api/memory/retrieve \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "key=user_preference&userId=user_123"
 \`\`\`
 
 ## Related Documentation
 
 - [Chat API](/api/chat) - Chat with memory
-- [Memory API](/api/memory) - API reference`}
-  />
+- [Memory API](/api/memory) - API reference`} />
 );
 
 // Cost Lake Feature Page
-export const CostLakePage = () => (
-  <DocumentationPage
-    title="Cost Lake"
-    description="Data warehouse for comprehensive cost data analysis and reporting"
-    prevPage={{ path: '/features/memory', label: 'Previous: Memory' }}
-    nextPage={{ path: '/features/github-integrations', label: 'Next: GitHub Integrations' }}
-    fallbackContent={`# Cost Lake
+export const CostLakePage = () => ( <DocumentationPage title="Cost Lake" description="Data warehouse for comprehensive cost data analysis and reporting" prevPage={{ path: '/features/memory', label: 'Previous: Memory' }} nextPage={{ path: '/features/github-integrations', label: 'Next: GitHub Integrations' }} fallbackContent={`# Cost Lake
 
 Data warehouse for comprehensive cost data analysis, reporting, and business intelligence with historical data retention and advanced analytics.
 
@@ -7479,31 +6016,18 @@ Advanced analytics:
 
 ### Query Cost Lake
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/cost-lake/query \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "query": "SELECT * FROM costs WHERE date >= '2024-01-01'",
-    "format": "json"
-  }'
+\`\`\`smart:bash:{"description":"Query the Cost Lake data warehouse with SQL-like syntax for comprehensive cost data analysis"}
+curl -X POST https://cost-katana-backend.store/api/cost-lake/query \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "query": "SELECT * FROM costs WHERE date >= '2024-01-01'", "format": "json" }'
 \`\`\`
 
 ## Related Documentation
 
 - [Cost Analytics](/features/analytics) - Cost analysis
-- [Cost Lake API](/api/cost-lake) - API reference`}
-  />
+- [Cost Lake API](/api/cost-lake) - API reference`} />
 );
 
 // GitHub Integrations Feature Page
-export const GitHubIntegrationsPage = () => (
-  <DocumentationPage
-    title="GitHub Integrations"
-    description="Integrate Cost Katana with GitHub for code-aware AI operations and context"
-    prevPage={{ path: '/features/cost-lake', label: 'Previous: Cost Lake' }}
-    nextPage={{ path: '/api', label: 'Next: API Reference' }}
-    fallbackContent={`# GitHub Integrations
+export const GitHubIntegrationsPage = () => ( <DocumentationPage title="GitHub Integrations" description="Integrate Cost Katana with GitHub for code-aware AI operations and context" prevPage={{ path: '/features/cost-lake', label: 'Previous: Cost Lake' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# GitHub Integrations
 
 Integrate Cost Katana with GitHub to enable code-aware AI operations, repository context, and intelligent code analysis.
 
@@ -7537,15 +6061,10 @@ Connect GitHub repositories:
 
 Use code as context:
 
-\`\`\`javascript
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Use GitHub repository context in AI chat operations for code-aware conversations"}
 // Use repository context in chat
-const response = await client.chat.send({
-  message: "Explain this function",
-  context: {
-    repository: "my-repo",
-    file: "src/utils.ts",
-    function: "processData"
-  }
+const client = new CostKatana({ apiKey: 'your-api-key' });
+const response = await client.chat.send({ message: "Explain this function", context: { repository: "my-repo", file: "src/utils.ts", function: "processData" }
 });
 \`\`\`
 
@@ -7562,29 +6081,20 @@ Analyze pull requests:
 
 ### Connect Repository
 
-\`\`\`bash
-curl -X POST https://cost-katana-backend.store/api/github/connect \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "repository": "owner/repo",
-    "accessToken": "github_token"
-  }'
+\`\`\`smart:bash:{"description":"Connect a GitHub repository to enable code-aware AI operations and repository context"}
+curl -X POST https://cost-katana-backend.store/api/github/connect \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -H "Content-Type: application/json" \\ -d '{ "repository": "owner/repo", "accessToken": "github_token" }'
 \`\`\`
 
 ### Get Repository Context
 
-\`\`\`bash
-curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/context \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "file=src/utils.ts&function=processData"
+\`\`\`smart:bash:{"description":"Retrieve repository context including file and function information for AI operations"}
+curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/context \\ -H "Authorization: Bearer YOUR_API_KEY" \\ -G -d "file=src/utils.ts&function=processData"
 \`\`\`
 
 ## Related Documentation
 
 - [Integrations](/features/integrations) - Other integrations
-- [GitHub API](/api/github) - API reference`}
-  />
+- [GitHub API](/api/github) - API reference`} />
 );
 
 // ============================================
@@ -7592,13 +6102,7 @@ curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/contex
 // ============================================
 
 // Chat API Page
-export const ChatAPIPage = () => (
-  <DocumentationPage
-    title="Chat API"
-    description="Complete API reference for chat endpoints and message handling"
-    prevPage={{ path: '/api/rate-limits', label: 'Previous: Rate Limits' }}
-    nextPage={{ path: '/api/agent', label: 'Next: Agent API' }}
-    fallbackContent={`# Chat API
+export const ChatAPIPage = () => ( <DocumentationPage title="Chat API" description="Complete API reference for chat endpoints and message handling" prevPage={{ path: '/api/rate-limits', label: 'Previous: Rate Limits' }} nextPage={{ path: '/api/agent', label: 'Next: Agent API' }} fallbackContent={`# Chat API
 
 Complete API reference for chat endpoints, message handling, conversation management, and integration commands.
 
@@ -7624,20 +6128,8 @@ Get list of available AI models for chat.
 GET /api/chat/models
 \`\`\`
 
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "models": [
-    {
-      "id": "gpt-4",
-      "name": "GPT-4",
-      "provider": "openai",
-      "maxTokens": 8192,
-      "supportsStreaming": true
-    }
-  ]
+**Response:** \`\`\`json
+{ "success": true, "models": [ { "id": "gpt-4", "name": "GPT-4", "provider": "openai", "maxTokens": 8192, "supportsStreaming": true } ]
 }
 \`\`\`
 
@@ -7650,40 +6142,13 @@ POST /api/chat/message
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "message": "Hello, how are you?",
-  "modelId": "gpt-4",
-  "conversationId": "optional_conversation_id",
-  "temperature": 0.7,
-  "maxTokens": 1000,
-  "documentIds": ["doc1", "doc2"],
-  "templateId": "optional_template_id",
-  "templateVariables": {
-    "variable1": "value1"
-  }
+**Request Body:** \`\`\`json
+{ "message": "Hello, how are you?", "modelId": "gpt-4", "conversationId": "optional_conversation_id", "temperature": 0.7, "maxTokens": 1000, "documentIds": ["doc1", "doc2"], "templateId": "optional_template_id", "templateVariables": { "variable1": "value1" }
 }
 \`\`\`
 
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "message": {
-    "id": "msg_123",
-    "content": "I'm doing well, thank you!",
-    "model": "gpt-4",
-    "cost": 0.002,
-    "tokens": {
-      "input": 10,
-      "output": 15
-    },
-    "timestamp": "2024-01-01T00:00:00Z"
-  },
-  "conversationId": "conv_123"
+**Response:** \`\`\`json
+{ "success": true, "message": { "id": "msg_123", "content": "I'm doing well, thank you!", "model": "gpt-4", "cost": 0.002, "tokens": { "input": 10, "output": 15 }, "timestamp": "2024-01-01T00:00:00Z" }, "conversationId": "conv_123"
 }
 \`\`\`
 
@@ -7696,14 +6161,8 @@ POST /api/chat/conversations
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "title": "My Conversation",
-  "metadata": {
-    "projectId": "project_123"
-  }
+**Request Body:** \`\`\`json
+{ "title": "My Conversation", "metadata": { "projectId": "project_123" }
 }
 \`\`\`
 
@@ -7715,9 +6174,7 @@ Get all conversations for the authenticated user.
 GET /api/chat/conversations
 \`\`\`
 
-**Query Parameters:**
-
-- \`limit\` (optional): Number of conversations to return (default: 50)
+**Query Parameters:** - \`limit\` (optional): Number of conversations to return (default: 50)
 - \`page\` (optional): Page number (default: 1)
 - \`includeArchived\` (optional): Include archived conversations (default: false)
 
@@ -7729,13 +6186,9 @@ Get message history for a conversation.
 GET /api/chat/conversations/:conversationId/history
 \`\`\`
 
-**Path Parameters:**
+**Path Parameters:** - \`conversationId\`: The conversation ID
 
-- \`conversationId\`: The conversation ID
-
-**Query Parameters:**
-
-- \`limit\` (optional): Number of messages to return (default: 50)
+**Query Parameters:** - \`limit\` (optional): Number of messages to return (default: 50)
 - \`before\` (optional): Get messages before this timestamp
 
 ### Update Conversation GitHub Context
@@ -7747,13 +6200,8 @@ PATCH /api/chat/conversations/:conversationId/github-context
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "repository": "owner/repo",
-  "file": "src/utils.ts",
-  "function": "processData"
+**Request Body:** \`\`\`json
+{ "repository": "owner/repo", "file": "src/utils.ts", "function": "processData"
 }
 \`\`\`
 
@@ -7774,12 +6222,8 @@ POST /api/chat/integrations/execute
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "command": "@slack list channels",
-  "integrationType": "slack"
+**Request Body:** \`\`\`json
+{ "command": "@slack list channels", "integrationType": "slack"
 }
 \`\`\`
 
@@ -7791,9 +6235,7 @@ Get autocomplete suggestions for integration commands.
 GET /api/chat/integrations/autocomplete
 \`\`\`
 
-**Query Parameters:**
-
-- \`query\`: Partial command query
+**Query Parameters:** - \`query\`: Partial command query
 - \`integrationType\`: Type of integration
 
 ## Error Responses
@@ -7801,13 +6243,7 @@ GET /api/chat/integrations/autocomplete
 All endpoints may return the following error responses:
 
 \`\`\`json
-{
-  "success": false,
-  "error": {
-    "code": "ERROR_CODE",
-    "message": "Error message",
-    "details": {}
-  }
+{ "success": false, "error": { "code": "ERROR_CODE", "message": "Error message", "details": {} }
 }
 \`\`\`
 
@@ -7820,18 +6256,11 @@ All endpoints may return the following error responses:
 
 - [Agent API](/api/agent) - AI agent endpoints
 - [Memory API](/api/memory) - Memory management
-- [Chat Feature](/features/dashboard) - Chat features`}
-  />
+- [Chat Feature](/features/dashboard) - Chat features`} />
 );
 
 // Agent API Page
-export const AgentAPIPage = () => (
-  <DocumentationPage
-    title="Agent API"
-    description="Complete API reference for AI agent query and analysis endpoints"
-    prevPage={{ path: '/api/chat', label: 'Previous: Chat API' }}
-    nextPage={{ path: '/api/gateway', label: 'Next: Gateway API' }}
-    fallbackContent={`# Agent API
+export const AgentAPIPage = () => ( <DocumentationPage title="Agent API" description="Complete API reference for AI agent query and analysis endpoints" prevPage={{ path: '/api/chat', label: 'Previous: Chat API' }} nextPage={{ path: '/api/gateway', label: 'Next: Gateway API' }} fallbackContent={`# Agent API
 
 Complete API reference for AI agent endpoints including query processing, streaming, feedback, and project wizard functionality.
 
@@ -7858,27 +6287,13 @@ POST /api/agent/query
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "query": "Analyze my cost trends",
-  "context": {
-    "projectId": "project_123",
-    "conversationId": "conv_123",
-    "previousMessages": []
-  }
+**Request Body:** \`\`\`json
+{ "query": "Analyze my cost trends", "context": { "projectId": "project_123", "conversationId": "conv_123", "previousMessages": [] }
 }
 \`\`\`
 
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "response": "Based on your usage data...",
-  "insights": [],
-  "recommendations": []
+**Response:** \`\`\`json
+{ "success": true, "response": "Based on your usage data...", "insights": [], "recommendations": []
 }
 \`\`\`
 
@@ -7891,12 +6306,8 @@ POST /api/agent/stream
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "query": "Your query here",
-  "context": {}
+**Request Body:** \`\`\`json
+{ "query": "Your query here", "context": {}
 }
 \`\`\`
 
@@ -7919,15 +6330,8 @@ POST /api/agent/feedback
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "insight": "This response was helpful",
-  "rating": 5,
-  "metadata": {
-    "conversationId": "conv_123"
-  }
+**Request Body:** \`\`\`json
+{ "insight": "This response was helpful", "rating": 5, "metadata": { "conversationId": "conv_123" }
 }
 \`\`\`
 
@@ -7939,9 +6343,7 @@ Get conversation history with the agent.
 GET /api/agent/conversations
 \`\`\`
 
-**Query Parameters:**
-
-- \`conversationId\` (optional): Specific conversation ID
+**Query Parameters:** - \`conversationId\` (optional): Specific conversation ID
 - \`limit\` (optional): Number of conversations (1-100, default: 50)
 
 ### Get Suggested Queries
@@ -7961,12 +6363,8 @@ POST /api/agent/wizard/start
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "projectType": "web-app",
-  "quickStart": true
+**Request Body:** \`\`\`json
+{ "projectType": "web-app", "quickStart": true
 }
 \`\`\`
 
@@ -7979,33 +6377,19 @@ POST /api/agent/wizard/continue
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "response": "I want to build a chat app",
-  "wizardState": {
-    "step": 1,
-    "data": {}
-  }
+**Request Body:** \`\`\`json
+{ "response": "I want to build a chat app", "wizardState": { "step": 1, "data": {} }
 }
 \`\`\`
 
 ## Related Documentation
 
 - [Chat API](/api/chat) - Chat endpoints
-- [Gateway API](/api/gateway) - Gateway endpoints`}
-  />
+- [Gateway API](/api/gateway) - Gateway endpoints`} />
 );
 
 // Memory API Page
-export const MemoryAPIPage = () => (
-  <DocumentationPage
-    title="Memory API"
-    description="Complete API reference for memory management endpoints"
-    prevPage={{ path: '/api/gateway', label: 'Previous: Gateway API' }}
-    nextPage={{ path: '/api/cache', label: 'Next: Cache API' }}
-    fallbackContent={`# Memory API
+export const MemoryAPIPage = () => ( <DocumentationPage title="Memory API" description="Complete API reference for memory management endpoints" prevPage={{ path: '/api/gateway', label: 'Previous: Gateway API' }} nextPage={{ path: '/api/cache', label: 'Next: Cache API' }} fallbackContent={`# Memory API
 
 Complete API reference for memory management endpoints including user preferences, conversation history, and memory insights.
 
@@ -8031,9 +6415,7 @@ Get user memory insights.
 GET /api/memory/:userId/insights
 \`\`\`
 
-**Path Parameters:**
-
-- \`userId\`: User ID
+**Path Parameters:** - \`userId\`: User ID
 
 ### Get User Preferences
 
@@ -8052,17 +6434,8 @@ PUT /api/memory/:userId/preferences
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "preferredModel": "gpt-4",
-  "preferredChatMode": "balanced",
-  "preferredStyle": "professional",
-  "responseLength": "detailed",
-  "technicalLevel": "intermediate",
-  "commonTopics": ["coding", "ai"],
-  "costPreference": "balanced"
+**Request Body:** \`\`\`json
+{ "preferredModel": "gpt-4", "preferredChatMode": "balanced", "preferredStyle": "professional", "responseLength": "detailed", "technicalLevel": "intermediate", "commonTopics": ["coding", "ai"], "costPreference": "balanced"
 }
 \`\`\`
 
@@ -8074,9 +6447,7 @@ Get conversation history with memory context.
 GET /api/memory/:userId/conversations
 \`\`\`
 
-**Query Parameters:**
-
-- \`limit\` (optional): Number of conversations (1-100, default: 50)
+**Query Parameters:** - \`limit\` (optional): Number of conversations (1-100, default: 50)
 - \`page\` (optional): Page number (default: 1)
 - \`includeArchived\` (optional): Include archived conversations (default: false)
 
@@ -8088,9 +6459,7 @@ Get similar conversations.
 GET /api/memory/:userId/similar
 \`\`\`
 
-**Query Parameters:**
-
-- \`query\`: Search query (required)
+**Query Parameters:** - \`query\`: Search query (required)
 - \`limit\` (optional): Number of results (1-20, default: 10)
 
 ### Get Personalized Recommendations
@@ -8101,9 +6470,7 @@ Get personalized recommendations.
 GET /api/memory/:userId/recommendations
 \`\`\`
 
-**Query Parameters:**
-
-- \`query\`: Query for recommendations (required)
+**Query Parameters:** - \`query\`: Query for recommendations (required)
 
 ### Archive Conversation
 
@@ -8114,11 +6481,8 @@ PUT /api/memory/conversations/:conversationId/archive
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "userId": "user_123"
+**Request Body:** \`\`\`json
+{ "userId": "user_123"
 }
 \`\`\`
 
@@ -8166,18 +6530,11 @@ GET /api/memory/:userId/stats
 ## Related Documentation
 
 - [Memory Feature](/features/memory) - Memory features
-- [Chat API](/api/chat) - Chat endpoints`}
-  />
+- [Chat API](/api/chat) - Chat endpoints`} />
 );
 
 // Cache API Page
-export const CacheAPIPage = () => (
-  <DocumentationPage
-    title="Cache API"
-    description="Complete API reference for cache management endpoints"
-    prevPage={{ path: '/api/memory', label: 'Previous: Memory API' }}
-    nextPage={{ path: '/api/telemetry', label: 'Next: Telemetry API' }}
-    fallbackContent={`# Cache API
+export const CacheAPIPage = () => ( <DocumentationPage title="Cache API" description="Complete API reference for cache management endpoints" prevPage={{ path: '/api/memory', label: 'Previous: Memory API' }} nextPage={{ path: '/api/telemetry', label: 'Next: Telemetry API' }} fallbackContent={`# Cache API
 
 Complete API reference for cache management endpoints including statistics, clearing, export, import, and warmup operations.
 
@@ -8203,19 +6560,8 @@ Get cache statistics and metrics.
 GET /api/cache/stats
 \`\`\`
 
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "stats": {
-    "totalKeys": 1000,
-    "cacheSize": "50MB",
-    "hitRate": 0.85,
-    "missRate": 0.15,
-    "costSavings": 150.50,
-    "evictions": 10
-  }
+**Response:** \`\`\`json
+{ "success": true, "stats": { "totalKeys": 1000, "cacheSize": "50MB", "hitRate": 0.85, "missRate": 0.15, "costSavings": 150.50, "evictions": 10 }
 }
 \`\`\`
 
@@ -8228,12 +6574,8 @@ DELETE /api/cache/clear
 Content-Type: application/json
 \`\`\`
 
-**Request Body (optional):**
-
-\`\`\`json
-{
-  "pattern": "prompt:*",
-  "tags": ["user"]
+**Request Body (optional):** \`\`\`json
+{ "pattern": "prompt:*", "tags": ["user"]
 }
 \`\`\`
 
@@ -8245,9 +6587,7 @@ Export cache data.
 GET /api/cache/export
 \`\`\`
 
-**Query Parameters:**
-
-- \`format\` (optional): Export format (json, csv, default: json)
+**Query Parameters:** - \`format\` (optional): Export format (json, csv, default: json)
 - \`pattern\` (optional): Key pattern filter
 
 ### Import Cache Data
@@ -8259,17 +6599,8 @@ POST /api/cache/import
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "data": [
-    {
-      "key": "prompt:1",
-      "value": "cached_response",
-      "ttl": 3600
-    }
-  ]
+**Request Body:** \`\`\`json
+{ "data": [ { "key": "prompt:1", "value": "cached_response", "ttl": 3600 } ]
 }
 \`\`\`
 
@@ -8282,35 +6613,19 @@ POST /api/cache/warmup
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "keys": [
-    {
-      "key": "prompt:common:1",
-      "value": "common_response",
-      "ttl": 86400
-    }
-  ]
+**Request Body:** \`\`\`json
+{ "keys": [ { "key": "prompt:common:1", "value": "common_response", "ttl": 86400 } ]
 }
 \`\`\`
 
 ## Related Documentation
 
 - [Cache Feature](/features/cache) - Cache features
-- [Gateway API](/api/gateway) - Gateway caching`}
-  />
+- [Gateway API](/api/gateway) - Gateway caching`} />
 );
 
 // Telemetry API Page
-export const TelemetryAPIPage = () => (
-  <DocumentationPage
-    title="Telemetry API"
-    description="Complete API reference for telemetry data endpoints"
-    prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }}
-    nextPage={{ path: '/api/logs', label: 'Next: Logs API' }}
-    fallbackContent={`# Telemetry API
+export const TelemetryAPIPage = () => ( <DocumentationPage title="Telemetry API" description="Complete API reference for telemetry data endpoints" prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }} nextPage={{ path: '/api/logs', label: 'Next: Logs API' }} fallbackContent={`# Telemetry API
 
 Complete API reference for telemetry data endpoints including dashboard data, querying, and analytics.
 
@@ -8336,31 +6651,10 @@ Get enhanced dashboard data with AI insights.
 GET /api/telemetry/dashboard/enhanced
 \`\`\`
 
-**Query Parameters:**
+**Query Parameters:** - \`timeRange\` (optional): Time range (1h, 24h, 7d, 30d, default: 24h)
 
-- \`timeRange\` (optional): Time range (1h, 24h, 7d, 30d, default: 24h)
-
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "enhanced_dashboard": {
-    "current": {
-      "requests_per_minute": 100,
-      "error_rate": 0.02,
-      "avg_latency_ms": 250,
-      "p95_latency_ms": 500
-    },
-    "enrichment": {
-      "stats": {
-        "total_spans": 10000,
-        "enriched_spans": 9500,
-        "enrichment_rate": 0.95
-      },
-      "ai_recommendations": []
-    }
-  }
+**Response:** \`\`\`json
+{ "success": true, "enhanced_dashboard": { "current": { "requests_per_minute": 100, "error_rate": 0.02, "avg_latency_ms": 250, "p95_latency_ms": 500 }, "enrichment": { "stats": { "total_spans": 10000, "enriched_spans": 9500, "enrichment_rate": 0.95 }, "ai_recommendations": [] } }
 }
 \`\`\`
 
@@ -8373,31 +6667,19 @@ POST /api/telemetry/query
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "query": "service:api AND operation:chat",
-  "timeRange": "1h",
-  "limit": 100
+**Request Body:** \`\`\`json
+{ "query": "service:api AND operation:chat", "timeRange": "1h", "limit": 100
 }
 \`\`\`
 
 ## Related Documentation
 
 - [Telemetry Dashboard](/features/telemetry) - Telemetry features
-- [Distributed Tracing](/features/tracing) - Trace collection`}
-  />
+- [Distributed Tracing](/features/tracing) - Trace collection`} />
 );
 
 // Logs API Page
-export const LogsAPIPage = () => (
-  <DocumentationPage
-    title="Logs API"
-    description="Complete API reference for logs query endpoints"
-    prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }}
-    nextPage={{ path: '/api/budget', label: 'Next: Budget API' }}
-    fallbackContent={`# Logs API
+export const LogsAPIPage = () => ( <DocumentationPage title="Logs API" description="Complete API reference for logs query endpoints" prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }} nextPage={{ path: '/api/budget', label: 'Next: Budget API' }} fallbackContent={`# Logs API
 
 Complete API reference for logs query endpoints including listing, filtering, natural language queries, and export.
 
@@ -8423,9 +6705,7 @@ Get list of AI logs with filtering.
 GET /api/logs/ai
 \`\`\`
 
-**Query Parameters:**
-
-- \`service\` (optional): Filter by service
+**Query Parameters:** - \`service\` (optional): Filter by service
 - \`model\` (optional): Filter by model
 - \`level\` (optional): Filter by log level (debug, info, warning, error)
 - \`status\` (optional): Filter by status (success, error, pending)
@@ -8443,9 +6723,7 @@ Get a specific log by ID.
 GET /api/logs/ai/:logId
 \`\`\`
 
-**Path Parameters:**
-
-- \`logId\`: Log ID
+**Path Parameters:** - \`logId\`: Log ID
 
 ### Natural Language Query
 
@@ -8456,14 +6734,8 @@ POST /api/logs/ai/chat
 Content-Type: application/json
 \`\`\`
 
-**Request Body:**
-
-\`\`\`json
-{
-  "query": "Show me all errors from the last hour",
-  "context": {
-    "timeRange": "1h"
-  }
+**Request Body:** \`\`\`json
+{ "query": "Show me all errors from the last hour", "context": { "timeRange": "1h" }
 }
 \`\`\`
 
@@ -8477,27 +6749,18 @@ Export logs in various formats.
 GET /api/logs/ai/export
 \`\`\`
 
-**Query Parameters:**
-
-- \`format\` (optional): Export format (json, csv, jsonl, default: json)
+**Query Parameters:** - \`format\` (optional): Export format (json, csv, jsonl, default: json)
 - \`service\` (optional): Filter by service
 - \`timeRange\` (optional): Time range filter
 
 ## Related Documentation
 
 - [Logs Feature](/features/logs) - Logs management
-- [Telemetry API](/api/telemetry) - Telemetry endpoints`}
-  />
+- [Telemetry API](/api/telemetry) - Telemetry endpoints`} />
 );
 
 // Budget API Page
-export const BudgetAPIPage = () => (
-  <DocumentationPage
-    title="Budget API"
-    description="Complete API reference for budget management endpoints"
-    prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }}
-    nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }}
-    fallbackContent={`# Budget API
+export const BudgetAPIPage = () => ( <DocumentationPage title="Budget API" description="Complete API reference for budget management endpoints" prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }} nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }} fallbackContent={`# Budget API
 
 Complete API reference for budget management endpoints.
 
@@ -8523,36 +6786,19 @@ Get current budget status and usage.
 GET /api/budget/status
 \`\`\`
 
-**Response:**
-
-\`\`\`json
-{
-  "success": true,
-  "budget": {
-    "total": 1000.00,
-    "used": 750.50,
-    "remaining": 249.50,
-    "percentage": 75.05,
-    "period": "monthly"
-  }
+**Response:** \`\`\`json
+{ "success": true, "budget": { "total": 1000.00, "used": 750.50, "remaining": 249.50, "percentage": 75.05, "period": "monthly" }
 }
 \`\`\`
 
 ## Related Documentation
 
 - [Alerts](/features/alerts) - Budget alerts
-- [Cost Analytics](/features/analytics) - Cost analysis`}
-  />
+- [Cost Analytics](/features/analytics) - Cost analysis`} />
 );
 
 // Session Replay API Page
-export const SessionReplayAPIPage = () => (
-  <DocumentationPage
-    title="Session Replay API"
-    description="Complete API reference for session replay endpoints"
-    prevPage={{ path: '/api/budget', label: 'Previous: Budget API' }}
-    nextPage={{ path: '/api/trace', label: 'Next: Trace API' }}
-    fallbackContent={`# Session Replay API
+export const SessionReplayAPIPage = () => ( <DocumentationPage title="Session Replay API" description="Complete API reference for session replay endpoints" prevPage={{ path: '/api/budget', label: 'Previous: Budget API' }} nextPage={{ path: '/api/trace', label: 'Next: Trace API' }} fallbackContent={`# Session Replay API
 
 Complete API reference for session replay endpoints.
 
@@ -8578,9 +6824,7 @@ Get list of sessions with filtering.
 GET /api/session-replay/sessions
 \`\`\`
 
-**Query Parameters:**
-
-- \`feature\` (optional): Filter by feature type
+**Query Parameters:** - \`feature\` (optional): Filter by feature type
 - \`status\` (optional): Filter by status
 - \`from\` (optional): Start date
 - \`to\` (optional): End date
@@ -8597,18 +6841,11 @@ GET /api/session-replay/sessions/:sessionId
 ## Related Documentation
 
 - [Sessions Feature](/features/sessions) - Session features
-- [Distributed Tracing](/features/tracing) - Trace collection`}
-  />
+- [Distributed Tracing](/features/tracing) - Trace collection`} />
 );
 
 // Trace API Page
-export const TraceAPIPage = () => (
-  <DocumentationPage
-    title="Trace API"
-    description="Complete API reference for distributed tracing endpoints"
-    prevPage={{ path: '/api/session-replay', label: 'Previous: Session Replay API' }}
-    nextPage={{ path: '/api', label: 'Next: API Overview' }}
-    fallbackContent={`# Trace API
+export const TraceAPIPage = () => ( <DocumentationPage title="Trace API" description="Complete API reference for distributed tracing endpoints" prevPage={{ path: '/api/session-replay', label: 'Previous: Session Replay API' }} nextPage={{ path: '/api', label: 'Next: API Overview' }} fallbackContent={`# Trace API
 
 Complete API reference for distributed tracing endpoints.
 
@@ -8634,9 +6871,7 @@ Get trace details by trace ID.
 GET /api/v1/traces/:traceId
 \`\`\`
 
-**Path Parameters:**
-
-- \`traceId\`: Trace ID
+**Path Parameters:** - \`traceId\`: Trace ID
 
 ### List Traces
 
@@ -8646,9 +6881,7 @@ Get list of traces with filtering.
 GET /api/v1/traces
 \`\`\`
 
-**Query Parameters:**
-
-- \`service\` (optional): Filter by service
+**Query Parameters:** - \`service\` (optional): Filter by service
 - \`operation\` (optional): Filter by operation
 - \`from\` (optional): Start timestamp
 - \`to\` (optional): End timestamp
@@ -8657,8 +6890,7 @@ GET /api/v1/traces
 ## Related Documentation
 
 - [Distributed Tracing](/features/tracing) - Trace features
-- [Sessions](/features/sessions) - Session replay`}
-  />
+- [Sessions](/features/sessions) - Session replay`} />
 );
 
 export default OpenTelemetryVendorsPage;

@@ -2,11 +2,15 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, FileText, AlertCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FileText, AlertCircle, Clock } from 'lucide-react';
 import MarkdownContent from './MarkdownContent';
 import TableOfContents from './TableOfContents';
+import Breadcrumb from './Breadcrumb';
+import ReadingProgress from './ReadingProgress';
+import MiniTOC from './MiniTOC';
 import LoadingSpinner from './LoadingSpinner';
 import { useMarkdownContent } from '../hooks/useMarkdownContent';
+import { useReading } from '../contexts/ReadingContext';
 
 interface NavigationLink {
     path: string;
@@ -30,6 +34,7 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
 }) => {
     const location = useLocation();
     const { content, loading, error } = useMarkdownContent(location.pathname, fallbackContent);
+    const { settings, estimateReadingTime, getReadingPosition, saveReadingPosition } = useReading();
 
     // Handle hash navigation on mount and when hash changes
     useEffect(() => {
@@ -76,7 +81,7 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
         const handleHashChange = () => {
             const hash = window.location.hash.slice(1);
             if (hash) {
-                let element = document.getElementById(hash);
+                let element = document.getElementById(hash) as HTMLElement | null;
 
                 // If exact ID not found, try to find elements with suffix (e.g., quick-setup-2)
                 if (!element) {
@@ -109,6 +114,33 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
         return () => window.removeEventListener('hashchange', handleHashChange);
     }, []);
 
+    // Bookmarking: Save and restore scroll position
+    useEffect(() => {
+        if (!loading && content) {
+            // Restore reading position
+            const savedPosition = getReadingPosition(location.pathname);
+            if (savedPosition > 0) {
+                const contentContainer = document.getElementById('main-content') as HTMLElement | null;
+                if (contentContainer) {
+                    setTimeout(() => {
+                        contentContainer.scrollTop = savedPosition;
+                    }, 100);
+                }
+            }
+
+            // Save reading position on scroll
+            const contentContainer = document.getElementById('main-content') as HTMLElement | null;
+            if (contentContainer) {
+                const handleScroll = () => {
+                    saveReadingPosition(location.pathname, contentContainer.scrollTop);
+                };
+
+                contentContainer.addEventListener('scroll', handleScroll);
+                return () => contentContainer.removeEventListener('scroll', handleScroll);
+            }
+        }
+    }, [loading, content, location.pathname, getReadingPosition, saveReadingPosition]);
+
     if (loading) {
         return <LoadingSpinner />;
     }
@@ -129,6 +161,25 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                 <div className="flex gap-8 items-start relative">
                     {/* Main Content - Scrollable */}
                     <div className="flex-1 min-w-0 max-w-4xl max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide" id="main-content">
+                        {/* Breadcrumb Navigation and Reading Info */}
+                        <div className="mb-6">
+                            <div className="flex items-center justify-between mb-4">
+                                <Breadcrumb />
+                                {settings.showReadingTime && content && (
+                                    <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                        <Clock className="w-4 h-4" />
+                                        <span>{estimateReadingTime(content)} min read</span>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Reading Progress */}
+                        <ReadingProgress contentContainerId="main-content" />
+
+                        {/* Mini Table of Contents */}
+                        <MiniTOC content={content} className="mb-6" />
+
                         {error && !content ? (
                             <div className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-12 text-center">
                                 <div className="flex justify-center mb-6">

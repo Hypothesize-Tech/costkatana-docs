@@ -73,28 +73,17 @@ npm install cost-katana
 
 > **🎯 Primary Package**: \`cost-katana\` is our #1 priority package. This is the core SDK that provides the most features and best developer experience.
 
-\`\`\`javascript
-import { ai, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';
+Try this example with automatic imports and context:
 
-// Simple AI call with automatic cost tracking
+\`\`\`smart:javascript:{"imports":["import { ai, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Complete example with automatic cost tracking"}
 const response = await ai(OPENAI.GPT_4O, 'Explain quantum computing');
 console.log(response.text);
 console.log(\`Cost: $\\\${response.cost}\`);
-
-// Compare multiple models
-const models = [OPENAI.GPT_4O, ANTHROPIC.CLAUDE_3_5_SONNET_20241022, GOOGLE.GEMINI_2_5_PRO];
-for (const model of models) {
-  const result = await ai(model, 'Write a haiku about AI');
-  console.log(\`\\\${model}: $\\\${result.cost}\`);
-}
 \`\`\`
 
 **Type-Safe Model Constants (Recommended):**
 
-\`\`\`javascript
-// Import model constants for autocomplete and type safety
-import { ai, chat, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';
-
+\`\`\`smart:javascript:{"imports":["import { ai, chat, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Type-safe model constants with autocomplete"}
 // No more typos - your IDE will autocomplete!
 const response = await ai(OPENAI.GPT_5, 'Hello, world!');
 
@@ -110,26 +99,17 @@ For Python developers - with type-safe model constants:
 pip install cost-katana
 \`\`\`
 
-\`\`\`python
-from cost_katana import ai, anthropic, google, openai
+Try this Python example with automatic imports:
 
-# Simple AI call with automatic cost tracking
+\`\`\`smart:python:{"imports":["from cost_katana import ai, openai"],"dependencies":["cost-katana"],"description":"Python example with automatic cost tracking"}
 response = ai(openai.gpt_4o, "Explain quantum computing")
 print(response.text)
 print(f"Cost: $\\{response.cost\\}")
-
-# Compare multiple models
-models = [openai.gpt_4o, anthropic.claude_3_5_sonnet_20241022, google.gemini_2_5_pro]
-for model in models:
-    result = ai(model, "Write a haiku about AI")
-    print(f"{model}: $\\{result.cost\\}")
 \`\`\`
 
 **Type-Safe Model Constants (Recommended):**
 
-\`\`\`python
-from cost_katana import ai, chat, openai, anthropic, google
-
+\`\`\`smart:python:{"imports":["from cost_katana import ai, chat, openai, anthropic, google"],"dependencies":["cost-katana"],"description":"Type-safe Python model constants"}
 # No more typos - type-safe model selection!
 response = ai(google.gemini_2_5_pro, "Hello, world!")
 

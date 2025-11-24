@@ -135,6 +135,55 @@
     display: none;  /* Chrome, Safari and Opera */
   }
 
+  /* Print styles for better documentation printing */
+  @media print {
+    /* Hide UI elements that aren't needed in print */
+    header,
+    aside,
+    .toc-scrollbar,
+    .reading-progress,
+    button,
+    .no-print {
+      display: none !important;
+    }
+
+    /* Optimize content for printing */
+    .doc-content {
+      font-family: Georgia, 'Times New Roman', serif;
+      line-height: 1.6;
+      color: black !important;
+    }
+
+    /* Ensure headings are visible */
+    h1, h2, h3, h4, h5, h6 {
+      color: black !important;
+      page-break-after: avoid;
+    }
+
+    /* Improve code blocks for print */
+    pre {
+      background: #f5f5f5 !important;
+      border: 1px solid #ccc !important;
+      page-break-inside: avoid;
+    }
+
+    /* Links should be visible in print */
+    a {
+      color: black !important;
+      text-decoration: underline !important;
+    }
+
+    /* Tables should not break across pages */
+    table {
+      page-break-inside: avoid;
+    }
+
+    /* Add page margins */
+    @page {
+      margin: 1in;
+    }
+  }
+
   /* Focus styles with brand colors */
   .focus-ring {
     outline: none;
@@ -1121,5 +1170,24 @@ code.hljs {
   to {
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+/* Video tutorial synchronized highlighting */
+.highlight-active {
+  background-color: rgba(34, 197, 94, 0.2) !important;
+  border: 2px solid rgb(34, 197, 94) !important;
+  border-radius: 4px;
+  padding: 2px 4px;
+  transition: all 0.3s ease;
+  animation: highlightPulse 2s ease-in-out;
+}
+
+@keyframes highlightPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
   }
 }

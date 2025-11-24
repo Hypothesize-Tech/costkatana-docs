@@ -3,6 +3,28 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
+import { useReading } from '../contexts/ReadingContext';
+import StepByStepGuide from './StepByStepGuide';
+import VideoTutorial from './VideoTutorial';
+import SmartCodeCopy from './SmartCodeCopy';
+import APITester from './APITester';
+
+// Helper to parse JSON with better error handling
+const safeJsonParse = (str: string): any => {
+    try {
+        // Remove control characters that break JSON parsing
+        const cleaned = str
+            .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters
+            .replace(/\\n/g, '\n')
+            .replace(/\\'/g, "'")
+            .replace(/\\"/g, '"')
+            .replace(/\\`/g, '`');
+        return JSON.parse(cleaned);
+    } catch (e) {
+        console.error('JSON parse error:', e, 'String:', str);
+        return null;
+    }
+};
 import {
     Copy,
     Check,
@@ -82,6 +104,7 @@ const slugify = (text: string): string => {
 const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
     const idCountsRef = React.useRef<Record<string, number>>({});
+    const { settings } = useReading();
 
     // Reset ID counts when content changes
     React.useEffect(() => {
@@ -542,15 +565,250 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         },
     };
 
+    // Apply reading settings to content
+    const getFontSizeClass = () => {
+        switch (settings.fontSize) {
+            case 'small': return 'text-sm';
+            case 'large': return 'text-lg';
+            case 'xlarge': return 'text-xl';
+            default: return 'text-base';
+        }
+    };
+
+    const getFontFamilyClass = () => {
+        switch (settings.fontFamily) {
+            case 'serif': return 'font-serif';
+            case 'mono': return 'font-mono';
+            default: return 'font-body';
+        }
+    };
+
+    const getLineSpacingClass = () => {
+        switch (settings.lineSpacing) {
+            case 'tight': return 'leading-tight';
+            case 'relaxed': return 'leading-relaxed';
+            default: return 'leading-normal';
+        }
+    };
+
+    // Process content to extract and render interactive components
+    const processInteractiveComponents = (markdownContent: string): React.ReactNode => {
+        // Check if content contains interactive component markers
+        const hasSteps = /(?:```|\\`\\`\\`)steps:/.test(markdownContent);
+        const hasSmartCode = /(?:```|\\`\\`\\`)smart:/.test(markdownContent);
+        const hasVideo = /(?:```|\\`\\`\\`)video:/.test(markdownContent);
+        const hasAPI = /(?:```|\\`\\`\\`)api:/.test(markdownContent);
+
+        if (!hasSteps && !hasSmartCode && !hasVideo && !hasAPI) {
+            // No interactive components, render normally
+            return (
+                <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                    components={components}
+                >
+                    {markdownContent}
+                </ReactMarkdown>
+            );
+        }
+
+        // Split content and process interactive components
+        const parts: React.ReactNode[] = [];
+        let processedContent = markdownContent;
+        let keyCounter = 0;
+
+        // Convert interactive code blocks to smart code blocks
+        // ```interactive:language:title becomes ```smart:language with context
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)interactive:(\w+)(?::([^\n]+?))?\n([\s\S]*?)(?:```|\\`\\`\\`)/g,
+            (match, language, title, code) => {
+                // Convert to smart code format
+                const cleanCode = code.trim()
+                    .replace(/\\`/g, '`')
+                    .replace(/\\n/g, '\n')
+                    .replace(/\\'/g, "'")
+                    .replace(/\\"/g, '"');
+
+                // Create context with imports based on language
+                let imports: string[] = [];
+                if (language === 'javascript' || language === 'typescript') {
+                    imports = ['import { ai, OPENAI } from \'cost-katana\';'];
+                } else if (language === 'python') {
+                    imports = ['from cost_katana import ai, openai'];
+                }
+
+                const contextStr = JSON.stringify({
+                    imports: imports,
+                    dependencies: ['cost-katana'],
+                    description: title ? title.trim() : 'Interactive code example'
+                });
+
+                // Return as smart code block
+                return `\`\`\`smart:${language}:${contextStr}\n${cleanCode}\n\`\`\``;
+            }
+        );
+
+        // Process SmartCodeCopy: ```smart:language:context
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)smart:(\w+)(?::([^\n]+?))?\n([\s\S]*?)(?:```|\\`\\`\\`)/g,
+            (match, language, contextStr, code) => {
+                const componentKey = `smart-${keyCounter++}`;
+                let context;
+                try {
+                    if (contextStr) {
+                        // Clean up escaped characters in JSON string
+                        const cleanContextStr = contextStr
+                            .replace(/\\"/g, '"')
+                            .replace(/\\'/g, "'")
+                            .replace(/\\\\/g, '\\');
+                        context = JSON.parse(cleanContextStr);
+                    }
+                } catch {
+                    context = undefined;
+                }
+                // Clean up escaped backticks and other escape sequences in code
+                let cleanCode = code.trim()
+                    .replace(/\\`/g, '`')
+                    .replace(/\\n/g, '\n')
+                    .replace(/\\'/g, "'")
+                    .replace(/\\"/g, '"');
+
+                parts.push(
+                    <SmartCodeCopy
+                        key={componentKey}
+                        code={cleanCode}
+                        language={language || 'javascript'}
+                        context={context}
+                    />
+                );
+                return `__SMART_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Process StepByStepGuide: ```steps:title\n{...json...}
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)steps:([^\n]+?)\n([\s\S]*?)(?:```|\\`\\`\\`)/g,
+            (match, title, stepsContent) => {
+                const componentKey = `steps-${keyCounter++}`;
+                const steps = safeJsonParse(stepsContent.trim());
+                if (steps && Array.isArray(steps)) {
+                    parts.push(
+                        <StepByStepGuide
+                            key={componentKey}
+                            title={title.trim()}
+                            steps={steps}
+                        />
+                    );
+                    return `__STEPS_COMPONENT_${componentKey}__`;
+                } else {
+                    console.error('Failed to parse steps JSON or not an array');
+                    // If JSON parsing fails, keep original markdown
+                    return match;
+                }
+            }
+        );
+
+        // Process VideoTutorial: ```video:url:title:description
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)video:([^\n:]+):([^\n:]*):([^\n]*)\n(?:```|\\`\\`\\`)/g,
+            (match, videoUrl, videoTitle, videoDescription) => {
+                const componentKey = `video-${keyCounter++}`;
+                parts.push(
+                    <VideoTutorial
+                        key={componentKey}
+                        videoUrl={videoUrl.trim()}
+                        title={videoTitle || undefined}
+                        description={videoDescription || undefined}
+                    />
+                );
+                return `__VIDEO_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Process APITester: ```api:method:path:description:headers:body:response
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)api:([A-Z]+):([^\n:]+):([^\n:]*):([^\n:]*):([^\n:]*):([^\n]*)\n(?:```|\\`\\`\\`)/g,
+            (match, method, path, description, headersStr, bodyStr, responseStr) => {
+                const componentKey = `api-${keyCounter++}`;
+                let headers, body, exampleResponse;
+                try {
+                    headers = headersStr ? safeJsonParse(headersStr) : undefined;
+                    body = bodyStr ? safeJsonParse(bodyStr) : undefined;
+                    exampleResponse = responseStr ? safeJsonParse(responseStr) : undefined;
+                } catch (e) {
+                    console.error('Failed to parse API tester JSON:', e);
+                }
+
+                parts.push(
+                    <APITester
+                        key={componentKey}
+                        endpoint={{
+                            method: method as 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH',
+                            path: path.trim(),
+                            description: description || undefined,
+                            headers: headers,
+                            body: body,
+                            exampleResponse: exampleResponse,
+                        }}
+                        title={`${method} ${path}`}
+                        description={description || undefined}
+                    />
+                );
+                return `__API_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Create a map of component markers to components for easier lookup
+        const componentMap = new Map<string, React.ReactNode>();
+        parts.forEach((part: any) => {
+            if (part && typeof part === 'object' && 'key' in part) {
+                const key = String(part.key);
+                // Create marker string that matches what we generated
+                const keyMatch = key.match(/(\w+)-(\d+)/);
+                if (keyMatch) {
+                    const [, componentType, componentIndex] = keyMatch;
+                    const marker = `__${componentType.toUpperCase()}_COMPONENT_${componentType}-${componentIndex}__`;
+                    componentMap.set(marker, part);
+                }
+            }
+        });
+
+        // Split by component markers and render
+        const sections = processedContent.split(/(__\w+_COMPONENT_\w+-\d+__)/);
+        const finalParts: React.ReactNode[] = [];
+        let partIndex = 0;
+
+        sections.forEach((section, index) => {
+            if (section.match(/^__\w+_COMPONENT_\w+-\d+__$/)) {
+                // This is a component marker, find the corresponding component
+                const component = componentMap.get(section);
+                if (component) {
+                    finalParts.push(component);
+                } else {
+                    // Component not found - this shouldn't happen, but handle gracefully
+                    console.warn('Component not found for marker:', section, 'Available markers:', Array.from(componentMap.keys()));
+                }
+            } else if (section.trim()) {
+                // Regular markdown content
+                finalParts.push(
+                    <ReactMarkdown
+                        key={`md-section-${partIndex++}`}
+                        remarkPlugins={[remarkGfm]}
+                        rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                        components={components}
+                    >
+                        {section}
+                    </ReactMarkdown>
+                );
+            }
+        });
+
+        return <>{finalParts}</>;
+    };
+
     return (
-        <div className={`doc-content ${className}`}>
-            <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeHighlight, rehypeRaw]}
-                components={components}
-            >
-                {content}
-            </ReactMarkdown>
+        <div className={`doc-content ${getFontSizeClass()} ${getFontFamilyClass()} ${getLineSpacingClass()} ${className}`}>
+            {processInteractiveComponents(content)}
         </div>
     );
 };

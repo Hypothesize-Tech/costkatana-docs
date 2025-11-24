@@ -41,10 +41,15 @@ import {
     Globe,
     Film,
     FileText,
-    Eye
+    Eye,
+    Book,
+    Settings,
+    Type
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
+import { useReading } from '../contexts/ReadingContext';
 import SearchModal from './SearchModal';
+import ReadingSettings from './ReadingSettings';
 import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
@@ -60,8 +65,10 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const { theme, toggleTheme } = useTheme();
+    const { settings, toggleReadingMode } = useReading();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
+    const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
     const location = useLocation();
 
@@ -210,7 +217,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 flex items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel">
+            <header className={`fixed top-0 left-0 right-0 z-50 flex items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel transition-all duration-300 ${settings.isReadingMode ? 'bg-transparent backdrop-blur-sm' : ''
+                }`}>
                 {/* Left section - Logo and mobile menu */}
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                     <button
@@ -259,12 +267,34 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         type="button"
                         onClick={toggleTheme}
                         className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 hover:rotate-12"
+                        title="Toggle theme"
                     >
                         {theme === "light" ? (
                             <Moon className="w-5 h-5" />
                         ) : (
                             <Sun className="w-5 h-5" />
                         )}
+                    </button>
+
+                    {/* Reading Mode */}
+                    <button
+                        type="button"
+                        onClick={toggleReadingMode}
+                        className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${settings.isReadingMode ? 'bg-primary-500/20 text-primary-500' : ''
+                            }`}
+                        title="Toggle reading mode"
+                    >
+                        <Book className="w-5 h-5" />
+                    </button>
+
+                    {/* Reading Settings */}
+                    <button
+                        type="button"
+                        onClick={() => setReadingSettingsOpen(!readingSettingsOpen)}
+                        className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                        title="Reading settings"
+                    >
+                        <Type className="w-5 h-5" />
                     </button>
 
                     {/* GitHub */}
@@ -281,7 +311,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+                className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${settings.isReadingMode
+                    ? '-translate-x-full'
+                    : sidebarOpen
+                        ? 'translate-x-0'
+                        : '-translate-x-full lg:translate-x-0'
                     }`}
             >
                 <nav className="p-4 space-y-1">
@@ -379,7 +413,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 overflow-y-auto transition-all duration-300 lg:ml-72 relative z-10">
+            <main className={`flex-1 overflow-y-auto transition-all duration-300 relative z-10 ${settings.isReadingMode ? 'lg:ml-0' : 'lg:ml-72'
+                }`}>
                 <div className="pt-24 pb-8">
                     <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
                         {children}
@@ -436,6 +471,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Search Modal */}
             <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+            <ReadingSettings isOpen={readingSettingsOpen} onClose={() => setReadingSettingsOpen(false)} />
 
             {/* Mobile Menu Overlay */}
             {sidebarOpen && (
