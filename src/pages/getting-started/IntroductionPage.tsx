@@ -23,7 +23,7 @@ Cost Katana transforms how you manage AI costs by providing:
   - Google AI (Gemini 2.5 Pro, Gemini 2.0 Flash, Imagen 4, Veo 3)
   - AWS Bedrock (Amazon Nova, Claude on Bedrock, Llama 3.3)
   - xAI (Grok-2, Grok Vision)
-  - DeepSeek, Mistral AI, Cohere, Groq, Meta Llama
+  - DeepSeek, Mistral AI, Cohere, Grok, Meta Llama
 - **🔮 Predictive Analytics**: AI forecasts spending trends and prevents limit overruns
 - **⚡ Smart Optimization**: Automated prompt optimization and model recommendations
 - **🎯 Project Management**: Organize usage by projects with budget tracking

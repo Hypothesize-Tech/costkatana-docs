@@ -174,7 +174,7 @@ const SupportedModelsPage: React.FC = () => {
         },
         {
             id: 'groq',
-            name: 'Groq',
+            name: 'Grok',
             logo: '/assets/grokai.png',
             logoFallback: Lightning,
             description: 'Ultra-fast Llama, Mixtral, and Gemma models',
@@ -259,7 +259,7 @@ const SupportedModelsPage: React.FC = () => {
         <>
             <Helmet>
                 <title>Supported AI Models - Cost Katana Documentation</title>
-                <meta name="description" content="Complete list of 400+ supported AI models across OpenAI, Anthropic, Google AI, AWS Bedrock, xAI, DeepSeek, Mistral, Cohere, Groq, and Meta." />
+                <meta name="description" content="Complete list of 400+ supported AI models across OpenAI, Anthropic, Google AI, AWS Bedrock, xAI, DeepSeek, Mistral, Cohere, Grok, and Meta." />
             </Helmet>
 
             <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50 to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">

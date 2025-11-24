@@ -8,7 +8,7 @@ export const InstallationPage = () => (
     prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }}
     fallbackContent={`# Installation Guide
 
-Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 70-95% token reduction with LISP-based optimization.
+Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 40-75% token reduction with LISP-based optimization.
 
 ## 🚀 CLI Installation
 
@@ -1950,7 +1950,7 @@ Deep dive into your AI spending with advanced analytics and optimization recomme
 ## 🚀 Advanced Features
 
 ### 🧠 Cortex Meta-Language (Revolutionary)
-The world's first AI meta-language achieving **70-95% token reduction** through LISP-based answer generation.
+The world's first AI meta-language achieving **40-75% token reduction** through LISP-based answer generation.
 
 **Cortex Features:**
 - **3-Stage Pipeline** - Encoder → Core Processor → Decoder optimization
