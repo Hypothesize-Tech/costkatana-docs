@@ -168,7 +168,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                                 />
                                 <button
                                     onClick={onClose}
-                                    className="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors"
+                                    className="btn p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors"
                                 >
                                     <X size={20} />
                                 </button>
@@ -183,7 +183,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                                                 key={result.path}
                                                 onClick={() => handleResultClick(result.path)}
                                                 onMouseEnter={() => setSelectedIndex(index)}
-                                                className={`w-full px-4 py-3 flex items-start space-x-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${selectedIndex === index ? 'bg-gray-50 dark:bg-gray-800' : ''
+                                                className={`btn w-full px-4 py-3 flex items-start space-x-3 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${selectedIndex === index ? 'bg-gray-50 dark:bg-gray-800' : ''
                                                     }`}
                                             >
                                                 <div className="mt-0.5 text-gray-400">

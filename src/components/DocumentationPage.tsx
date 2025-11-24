@@ -48,28 +48,28 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                 className="max-w-4xl mx-auto"
             >
                 {error && !content ? (
-                    <div className="card p-12 text-center">
+                    <div className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-12 text-center">
                         <div className="flex justify-center mb-6">
-                            <div className="w-20 h-20 bg-orange-100 dark:bg-orange-900/20 rounded-full flex items-center justify-center">
-                                <AlertCircle className="text-orange-600 dark:text-orange-400" size={40} />
+                            <div className="w-20 h-20 rounded-full flex items-center justify-center glass border border-warning-200/30 dark:border-warning-700/30 bg-gradient-warning/10">
+                                <AlertCircle className="text-warning-600 dark:text-warning-400" size={40} />
                             </div>
                         </div>
 
-                        <h1 className="text-3xl font-bold mb-4">{title}</h1>
+                        <h1 className="text-3xl font-display font-bold mb-4 text-light-text-primary dark:text-dark-text-primary">{title}</h1>
                         {description && (
-                            <p className="text-gray-600 dark:text-gray-400 mb-6">{description}</p>
+                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">{description}</p>
                         )}
 
-                        <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 max-w-md mx-auto">
-                            <FileText className="text-gray-400 mb-3 mx-auto" size={24} />
-                            <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <div className="rounded-xl p-6 max-w-md mx-auto glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel">
+                            <FileText className="text-light-text-muted dark:text-dark-text-muted mb-3 mx-auto" size={24} />
+                            <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                                 {error}
                             </p>
                         </div>
                     </div>
                 ) : (
                     <>
-                        <div className="card p-8 mb-8">
+                        <div className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-8 mb-8">
                             <MarkdownContent content={content} />
                         </div>
 
@@ -78,10 +78,10 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                 {prevPage ? (
                                     <Link
                                         to={prevPage.path}
-                                        className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:underline"
+                                        className="card-hover flex items-center space-x-2 px-4 py-2 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-300"
                                     >
                                         <ChevronLeft size={20} />
-                                        <span>{prevPage.label}</span>
+                                        <span className="font-semibold">{prevPage.label}</span>
                                     </Link>
                                 ) : (
                                     <div />
@@ -90,9 +90,9 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                 {nextPage && (
                                     <Link
                                         to={nextPage.path}
-                                        className="flex items-center space-x-2 text-primary-600 dark:text-primary-400 hover:underline"
+                                        className="card-hover flex items-center space-x-2 px-4 py-2 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 transition-all duration-300"
                                     >
-                                        <span>{nextPage.label}</span>
+                                        <span className="font-semibold">{nextPage.label}</span>
                                         <ChevronRight size={20} />
                                     </Link>
                                 )}

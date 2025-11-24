@@ -34,15 +34,22 @@ import {
     BookMarked,
     Heart
 } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
+
+interface NavigationItem {
+    path: string;
+    label: string;
+    icon: React.ReactNode;
+    external?: boolean;
+}
 
 interface LayoutProps {
     children: React.ReactNode;
-    darkMode: boolean;
-    toggleDarkMode: () => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) => {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+    const { theme, toggleTheme } = useTheme();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
@@ -148,60 +155,80 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
     ];
 
     return (
-        <div className="min-h-screen bg-light-bg dark:bg-dark-bg-100">
+        <div className="min-h-screen light:bg-gradient-light-ambient dark:bg-gradient-dark-ambient relative overflow-hidden">
+            {/* Ambient glow effects */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/8 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-success-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
+                <div className="absolute top-3/4 left-1/2 w-64 h-64 bg-accent-500/8 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '4s' }} />
+                <div className="absolute top-1/2 right-1/3 w-72 h-72 bg-highlight-500/6 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '6s' }} />
+            </div>
+
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-lg bg-light-card/80 dark:bg-dark-card/80 border-b border-gray-200 dark:border-gray-700">
-                <div className="flex items-center justify-between px-4 py-3">
-                    <div className="flex items-center space-x-4">
-                        <button
-                            onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="lg:hidden p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
-                        >
-                            {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
-                        </button>
+            <header className="fixed top-0 left-0 right-0 z-50 flex gap-x-4 items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:gap-x-6 sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel">
+                <button
+                    type="button"
+                    className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
+                    onClick={() => setSidebarOpen(!sidebarOpen)}
+                >
+                    <span className="sr-only">Open sidebar</span>
+                    {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+                </button>
 
-                        <Link to="/" className="flex items-center space-x-2">
-                            <div className="w-10 h-10 bg-gradient-primary rounded-lg flex items-center justify-center">
-                                <Zap className="text-white" size={24} />
-                            </div>
-                            <span className="text-xl font-bold text-gradient">Cost Katana</span>
-                        </Link>
-                    </div>
+                {/* Logo */}
+                <div className="flex flex-1 gap-x-4 items-center lg:gap-x-6">
+                    <Link to="/" className="flex gap-x-3 items-center group">
+                        <div className="flex justify-center items-center w-12 h-12 rounded-xl shadow-lg bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300">
+                            <Zap className="text-white w-8 h-8" />
+                        </div>
+                        <span className="hidden font-display font-bold text-xl gradient-text sm:block group-hover:scale-105 transition-transform duration-300">
+                            Cost Katana
+                        </span>
+                    </Link>
+                </div>
 
-                    <div className="flex items-center space-x-2">
-                        <button
-                            onClick={() => setSearchOpen(true)}
-                            className="flex items-center space-x-2 px-4 py-2 bg-light-panel dark:bg-gray-800 rounded-lg hover:bg-light-card dark:hover:bg-gray-700 transition-colors"
-                        >
-                            <Search size={18} />
-                            <span className="hidden sm:inline text-sm">Search</span>
-                            <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600">
-                                ⌘K
-                            </kbd>
-                        </button>
+                <div className="flex gap-x-2 items-center lg:gap-x-4">
+                    {/* Search */}
+                    <button
+                        type="button"
+                        onClick={() => setSearchOpen(true)}
+                        className="btn flex items-center gap-x-2 px-4 py-2 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 rounded-xl"
+                    >
+                        <Search className="w-5 h-5" />
+                        <span className="hidden sm:inline text-sm">Search</span>
+                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600">
+                            ⌘K
+                        </kbd>
+                    </button>
 
-                        <button
-                            onClick={toggleDarkMode}
-                            className="p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
-                        >
-                            {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                        </button>
+                    {/* Theme toggle */}
+                    <button
+                        type="button"
+                        onClick={toggleTheme}
+                        className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 hover:rotate-12"
+                    >
+                        {theme === "light" ? (
+                            <Moon className="w-5 h-5" />
+                        ) : (
+                            <Sun className="w-5 h-5" />
+                        )}
+                    </button>
 
-                        <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-backend"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-2 rounded-lg hover:bg-light-panel dark:hover:bg-gray-800 transition-colors"
-                        >
-                            <Github size={20} />
-                        </a>
-                    </div>
+                    {/* GitHub */}
+                    <a
+                        href="https://github.com/Hypothesize-Tech/costkatana-backend"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                    >
+                        <Github className="w-5 h-5" />
+                    </a>
                 </div>
             </header>
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-16 bottom-0 w-72 bg-light-card dark:bg-dark-card border-r border-gray-200 dark:border-gray-700 overflow-y-auto transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+                className={`fixed left-0 top-16 bottom-0 w-72 glass border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                     }`}
             >
                 <nav className="p-4 space-y-2">
@@ -209,7 +236,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                         <div key={section.id} className="mb-4">
                             <button
                                 onClick={() => toggleSection(section.id)}
-                                className="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-light-text-primary dark:text-dark-text-primary hover:bg-light-panel dark:hover:bg-gray-800 rounded-lg transition-colors"
+                                className="btn w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-light-text-primary dark:text-dark-text-primary hover:bg-light-panel dark:hover:bg-gray-800 rounded-lg transition-colors"
                             >
                                 <div className="flex items-center space-x-2">
                                     {section.icon}
@@ -232,7 +259,7 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
                                         className="overflow-hidden"
                                     >
                                         <div className="ml-2 mt-1 space-y-1">
-                                            {section.items.map((item: any) => (
+                                            {section.items.map((item: NavigationItem) => (
                                                 item.external ? (
                                                     <a
                                                         key={item.path}
@@ -268,43 +295,45 @@ const Layout: React.FC<LayoutProps> = ({ children, darkMode, toggleDarkMode }) =
             </aside>
 
             {/* Main Content */}
-            <main className={`pt-16 transition-all duration-300 ${sidebarOpen ? 'lg:ml-72' : 'lg:ml-72'}`}>
-                <div className="max-w-6xl mx-auto p-6">
-                    {children}
-                </div>
+            <main className="flex-1 overflow-y-auto transition-all duration-300 lg:ml-72 relative z-10">
+                <div className="py-8">
+                    <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
+                        {children}
+                    </div>
 
-                {/* Footer */}
-                <footer className="mt-16 border-t border-gray-200 dark:border-gray-700">
-                    <div className="max-w-6xl mx-auto px-6 py-8">
-                        <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                            <div className="text-center md:text-left">
-                                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                                    © 2025 Cost Katana. All rights reserved.
-                                </p>
-                                <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
-                                    Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
-                                </p>
-                            </div>
+                    {/* Footer */}
+                    <footer className="mt-16 border-t border-gray-200 dark:border-gray-700">
+                        <div className="max-w-6xl mx-auto px-6 py-8">
+                            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                                <div className="text-center md:text-left">
+                                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                        © 2025 Cost Katana. All rights reserved.
+                                    </p>
+                                    <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
+                                        Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
+                                    </p>
+                                </div>
 
-                            <div className="flex space-x-6">
-                                <a
-                                    href="https://github.com/Hypothesize-Tech"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                                >
-                                    <Github size={20} />
-                                </a>
-                                <a
-                                    href="mailto:support@costkatana.com"
-                                    className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                                >
-                                    <MessageCircle size={20} />
-                                </a>
+                                <div className="flex space-x-6">
+                                    <a
+                                        href="https://github.com/Hypothesize-Tech"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                                    >
+                                        <Github size={20} />
+                                    </a>
+                                    <a
+                                        href="mailto:support@costkatana.com"
+                                        className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                                    >
+                                        <MessageCircle size={20} />
+                                    </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </footer>
+                    </footer>
+                </div>
             </main>
 
             {/* Search Modal */}

@@ -188,35 +188,35 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
     // Custom components for markdown rendering
     const components = {
-        // Code blocks with copy button
+        // Code blocks with copy button and green accent
         pre: ({ children, ...props }: any) => {
             const codeContent = children?.props?.children?.toString() || '';
 
             return (
                 <div className="relative group my-4">
-                    <pre className="bg-gray-900 dark:bg-black text-gray-100 rounded-lg p-4 overflow-x-auto" {...props}>
+                    <pre className="bg-gray-900 dark:bg-black text-gray-100 rounded-xl p-4 overflow-x-auto border border-primary-500/20 shadow-lg" {...props}>
                         {children}
                     </pre>
                     <button
                         onClick={() => copyToClipboard(codeContent)}
-                        className="absolute top-2 right-2 p-2 bg-gray-800 hover:bg-gray-700 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                        className="btn absolute top-2 right-2 p-2 bg-primary-600/80 hover:bg-primary-600 dark:bg-primary-500/80 dark:hover:bg-primary-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
                         title="Copy code"
                     >
                         {copiedCode === codeContent ? (
-                            <Check size={16} className="text-green-400" />
+                            <Check size={16} className="text-white" />
                         ) : (
-                            <Copy size={16} className="text-gray-400" />
+                            <Copy size={16} className="text-white" />
                         )}
                     </button>
                 </div>
             );
         },
 
-        // Inline code
+        // Inline code with green accent
         code: ({ inline, className, children, ...props }: any) => {
             if (inline) {
                 return (
-                    <code className="bg-gray-100 dark:bg-gray-800 text-red-600 dark:text-red-400 px-2 py-1 rounded text-sm font-mono" {...props}>
+                    <code className="bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-700/50 px-2 py-1 rounded text-sm font-mono" {...props}>
                         {children}
                     </code>
                 );
@@ -228,9 +228,9 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             );
         },
 
-        // Tables
+        // Tables with green accents
         table: ({ children, ...props }: any) => (
-            <div className="overflow-x-auto my-6">
+            <div className="overflow-x-auto my-6 rounded-xl border border-primary-200/30 dark:border-primary-700/30 shadow-lg">
                 <table className="w-full border-collapse" {...props}>
                     {children}
                 </table>
@@ -238,31 +238,31 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         ),
 
         thead: ({ children, ...props }: any) => (
-            <thead className="bg-gray-50 dark:bg-gray-800" {...props}>
+            <thead className="bg-gradient-primary/10 dark:bg-gradient-primary/20" {...props}>
                 {children}
             </thead>
         ),
 
         th: ({ children, ...props }: any) => (
-            <th className="text-left p-3 font-semibold border border-gray-200 dark:border-gray-700" {...props}>
-                {children}
+            <th className="text-left p-3 font-display font-semibold border border-primary-200/30 dark:border-primary-700/30 text-primary-700 dark:text-primary-300" {...props}>
+                {processChildrenRecursively(children)}
             </th>
         ),
 
         td: ({ children, ...props }: any) => (
-            <td className="p-3 border border-gray-200 dark:border-gray-700" {...props}>
-                {children}
+            <td className="p-3 border border-primary-200/30 dark:border-primary-700/30 text-light-text-secondary dark:text-dark-text-secondary" {...props}>
+                {processChildrenRecursively(children)}
             </td>
         ),
 
-        // Blockquotes
+        // Blockquotes with green accent
         blockquote: ({ children, ...props }: any) => (
-            <blockquote className="border-l-4 border-primary-500 bg-primary-50 dark:bg-primary-900/20 p-4 my-4 rounded-r-lg" {...props}>
+            <blockquote className="border-l-4 border-primary-500 dark:border-primary-400 bg-gradient-light-panel dark:bg-gradient-dark-panel glass border border-primary-200/30 dark:border-primary-700/30 p-4 my-4 rounded-r-lg shadow-sm" {...props}>
                 {processChildrenRecursively(children)}
             </blockquote>
         ),
 
-        // Links
+        // Links with green accent
         a: ({ href, children, ...props }: any) => {
             const isExternal = href?.startsWith('http');
             return (
@@ -270,7 +270,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                     href={href}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="text-primary-600 dark:text-primary-400 hover:underline"
+                    className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-semibold hover:underline transition-colors duration-200"
                     {...props}
                 >
                     {processChildrenRecursively(children)}
@@ -292,46 +292,46 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         ),
 
         li: ({ children, ...props }: any) => (
-            <li className="text-gray-600 dark:text-gray-300" {...props}>
+            <li className="text-light-text-secondary dark:text-dark-text-secondary" {...props}>
                 {processChildrenRecursively(children)}
             </li>
         ),
 
-        // Headings
+        // Headings with green gradient
         h1: ({ children, ...props }: any) => (
-            <h1 className="text-4xl font-bold mb-6 text-gray-900 dark:text-white" {...props}>
+            <h1 className="text-4xl font-display font-bold mb-6 gradient-text" {...props}>
                 {processChildrenRecursively(children)}
             </h1>
         ),
 
         h2: ({ children, ...props }: any) => (
-            <h2 className="text-3xl font-semibold mt-8 mb-4 text-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-700 pb-2" {...props}>
+            <h2 className="text-3xl font-display font-semibold mt-8 mb-4 gradient-text border-b border-primary-200/30 dark:border-primary-700/30 pb-2" {...props}>
                 {processChildrenRecursively(children)}
             </h2>
         ),
 
         h3: ({ children, ...props }: any) => (
-            <h3 className="text-2xl font-semibold mt-6 mb-3 text-gray-800 dark:text-gray-100" {...props}>
+            <h3 className="text-2xl font-display font-semibold mt-6 mb-3 gradient-text" {...props}>
                 {processChildrenRecursively(children)}
             </h3>
         ),
 
         h4: ({ children, ...props }: any) => (
-            <h4 className="text-xl font-medium mt-4 mb-2 text-gray-700 dark:text-gray-200" {...props}>
+            <h4 className="text-xl font-display font-medium mt-4 mb-2 text-primary-600 dark:text-primary-400" {...props}>
                 {processChildrenRecursively(children)}
             </h4>
         ),
 
         // Paragraphs
         p: ({ children, ...props }: any) => (
-            <p className="mb-4 leading-relaxed text-gray-600 dark:text-gray-300" {...props}>
+            <p className="mb-4 leading-relaxed text-light-text-secondary dark:text-dark-text-secondary" {...props}>
                 {processChildrenRecursively(children)}
             </p>
         ),
 
-        // Horizontal rules
+        // Horizontal rules with green accent
         hr: ({ ...props }: any) => (
-            <hr className="my-8 border-gray-200 dark:border-gray-700" {...props} />
+            <hr className="my-8 border-primary-200/50 dark:border-primary-700/50" {...props} />
         ),
 
         // Images

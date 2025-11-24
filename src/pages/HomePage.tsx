@@ -99,8 +99,8 @@ const HomePage: React.FC = () => {
 
             <div className="min-h-screen">
                 {/* Hero Section */}
-                <section className="relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 opacity-50" />
+                <section className="relative overflow-hidden rounded-3xl mx-4 mt-4 mb-8">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 opacity-50 rounded-3xl" />
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ const HomePage: React.FC = () => {
                         </p>
 
                         <div className="flex flex-wrap justify-center gap-4 mb-12">
-                            <Link to="/getting-started/quick-start" className="btn-primary flex items-center space-x-2">
+                            <Link to="/getting-started/quick-start" className="btn btn-primary flex items-center space-x-2">
                                 <BookOpen size={20} />
                                 <span>Get Started</span>
                                 <ArrowRight size={20} />
@@ -134,7 +134,7 @@ const HomePage: React.FC = () => {
                                 href="https://github.com/Hypothesize-Tech/costkatana-backend"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="btn-secondary flex items-center space-x-2"
+                                className="btn btn-secondary flex items-center space-x-2"
                             >
                                 <Github size={20} />
                                 <span>View on GitHub</span>
@@ -199,7 +199,7 @@ const HomePage: React.FC = () => {
                 </section>
 
                 {/* Features Grid */}
-                <section className="py-16 px-4 bg-gray-50 dark:bg-gray-900/50">
+                <section className="py-16 px-4 bg-gray-50 dark:bg-gray-900/50 rounded-3xl mx-4 mb-8">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -267,7 +267,7 @@ const HomePage: React.FC = () => {
                             </div>
                         </div>
 
-                        <Link to="/integrations" className="btn-primary inline-flex items-center space-x-2">
+                        <Link to="/integrations" className="btn btn-primary inline-flex items-center space-x-2">
                             <span>View All Integrations</span>
                             <ArrowRight size={20} />
                         </Link>
@@ -275,7 +275,7 @@ const HomePage: React.FC = () => {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 px-4 bg-gradient-to-br from-primary-600 to-blue-600 text-white">
+                <section className="py-16 px-4 bg-gradient-to-br from-primary-600 to-blue-600 text-white rounded-3xl mx-4 mb-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

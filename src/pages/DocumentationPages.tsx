@@ -3448,6 +3448,192 @@ export const APIOverviewPage = () => (
   <DocumentationPage
     title="API Overview"
     description="Complete API reference for Cost Katana"
+    nextPage={{ path: '/api/authentication', label: 'Next: Authentication' }}
+    fallbackContent={`# API Overview
+
+Complete REST API reference for Cost Katana. All endpoints use JSON for request and response bodies.
+
+![API Overview](/assets/api_overview.png)
+
+## Base URL
+
+All API requests should be made to:
+
+\`\`\`
+https://cost-katana-backend.store
+\`\`\`
+
+## Authentication
+
+Cost Katana uses API key authentication. Include your API key in the request header:
+
+\`\`\`bash
+Authorization: Bearer ck_your_api_key_here
+\`\`\`
+
+[Learn more about authentication →](/api/authentication)
+
+## API Versioning
+
+The API is versioned. Current version: **v1**
+
+\`\`\`
+https://cost-katana-backend.store/v1/...
+\`\`\`
+
+## Response Format
+
+All API responses follow a consistent format:
+
+### Success Response
+
+\`\`\`json
+{
+  "success": true,
+  "data": {
+    // Response data here
+  }
+}
+\`\`\`
+
+### Error Response
+
+\`\`\`json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message",
+    "details": {}
+  }
+}
+\`\`\`
+
+## Rate Limits
+
+API rate limits vary by plan:
+
+- **Free Tier**: 100 requests/minute
+- **Pro**: 1,000 requests/minute
+- **Enterprise**: 10,000+ requests/minute
+
+Rate limit information is included in response headers:
+
+\`\`\`
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 950
+X-RateLimit-Reset: 1642075200
+\`\`\`
+
+[View rate limit details →](/api/rate-limits)
+
+## Endpoints Overview
+
+### Authentication & Authorization
+- **POST** \`/v1/auth/login\` - User login
+- **POST** \`/v1/auth/refresh\` - Refresh access token
+- **GET** \`/v1/auth/me\` - Get current user
+
+### Usage Tracking
+- **POST** \`/v1/usage/track\` - Track AI API usage
+- **GET** \`/v1/usage/stats\` - Get usage statistics
+- **GET** \`/v1/usage/project/:projectId\` - Get project usage
+
+[View Usage API →](/api/usage)
+
+### Analytics
+- **GET** \`/v1/analytics\` - Get analytics data
+- **GET** \`/v1/analytics/dashboard\` - Dashboard analytics
+- **GET** \`/v1/analytics/insights\` - AI-powered insights
+
+[View Analytics API →](/api/analytics)
+
+### Projects
+- **GET** \`/v1/projects\` - List projects
+- **POST** \`/v1/projects\` - Create project
+- **GET** \`/v1/projects/:id\` - Get project details
+- **PUT** \`/v1/projects/:id\` - Update project
+
+[View Projects API →](/api/projects)
+
+### Optimization
+- **POST** \`/v1/optimizations/prompt\` - Optimize prompt
+- **GET** \`/v1/optimizations/opportunities\` - Get opportunities
+- **POST** \`/v1/optimizations/:id/apply\` - Apply optimization
+
+[View Optimization API →](/api/optimization)
+
+### Webhooks
+- **GET** \`/v1/webhooks\` - List webhooks
+- **POST** \`/v1/webhooks\` - Create webhook
+- **PUT** \`/v1/webhooks/:id\` - Update webhook
+
+[View Webhooks →](/api/webhooks)
+
+## HTTP Status Codes
+
+| Code | Description |
+|------|-------------|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Not Found |
+| 429 | Rate Limit Exceeded |
+| 500 | Internal Server Error |
+
+## Error Codes
+
+Common error codes:
+
+- \`INVALID_API_KEY\` - API key is invalid or expired
+- \`RATE_LIMIT_EXCEEDED\` - Too many requests
+- \`VALIDATION_ERROR\` - Request validation failed
+- \`NOT_FOUND\` - Resource not found
+- \`PERMISSION_DENIED\` - Insufficient permissions
+
+## SDKs & Libraries
+
+We provide official SDKs for popular languages:
+
+### Node.js/TypeScript
+\`\`\`bash
+npm install cost-katana
+\`\`\`
+
+### Python
+\`\`\`bash
+pip install cost-katana
+\`\`\`
+
+[View all integrations →](/integrations)
+
+## Getting Started
+
+1. **Get Your API Key**: Sign up and generate an API key from the dashboard
+2. **Make Your First Request**: Try the authentication endpoint
+3. **Explore Endpoints**: Use the interactive API documentation
+4. **Integrate**: Use our SDKs or make direct HTTP requests
+
+## Interactive API Documentation
+
+Try our interactive API explorer:
+
+- **Postman Collection**: [Download Postman Collection](https://api.costkatana.com/postman)
+- **OpenAPI Spec**: [View OpenAPI Specification](https://api.costkatana.com/openapi.json)
+- **GraphQL Playground**: Available for Enterprise plans
+
+## Support
+
+Need help with the API?
+
+- 📖 **Documentation**: Browse detailed endpoint documentation
+- 💬 **Community**: Join our [Discord](https://discord.gg/D8nDArmKbY)
+- 📧 **Email**: support@costkatana.com
+- 🐛 **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/costkatana-backend/issues)
+
+Ready to start? Begin with [Authentication →](/api/authentication)`}
   />
 );
 

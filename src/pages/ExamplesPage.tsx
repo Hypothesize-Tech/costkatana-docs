@@ -4,343 +4,351 @@ import { ExternalLink, Github, Code, Terminal, FileCode, Layers, BookOpen, Rocke
 
 const ExamplesPage: React.FC = () => {
     return (
-        <div className="max-w-6xl mx-auto px-4 py-8">
-            {/* Hero Section */}
-            <div className="mb-12">
-                <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-white">
-                    Code Examples
-                </h1>
-                <p className="text-xl text-gray-600 dark:text-gray-300 mb-6">
-                    Production-ready examples for every Cost Katana feature. Over 300+ code samples across TypeScript, Python, and HTTP APIs.
-                </p>
-                <a
-                    href="https://github.com/Hypothesize-Tech/costkatana-examples"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg hover:shadow-lg transition-all"
-                >
-                    <Github className="mr-2" size={20} />
-                    Browse Examples on GitHub
-                    <ExternalLink className="ml-2" size={16} />
-                </a>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">300+</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Code Examples</div>
-                </div>
-                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">44</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Features Covered</div>
-                </div>
-                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Languages</div>
-                </div>
-                <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                    <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Frameworks</div>
-                </div>
-            </div>
-
-            {/* Languages & Methods */}
-            <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Available in Multiple Languages</h2>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                        <Code className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">TypeScript/Node.js</h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            Complete SDK examples with full type safety and production-ready patterns.
-                        </p>
-                        <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/npm-package"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
-                        >
-                            View TypeScript Examples
-                            <ExternalLink className="ml-1" size={14} />
-                        </a>
-                    </div>
-
-                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                        <Terminal className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Python SDK</h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            Pythonic examples with the Cost Katana SDK and FastAPI integrations.
-                        </p>
-                        <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/8-python-sdk"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
-                        >
-                            View Python Examples
-                            <ExternalLink className="ml-1" size={14} />
-                        </a>
-                    </div>
-
-                    <div className="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm">
-                        <FileCode className="text-blue-600 dark:text-blue-400 mb-4" size={32} />
-                        <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">HTTP REST APIs</h3>
-                        <p className="text-gray-600 dark:text-gray-400 mb-4">
-                            Direct API calls you can test immediately with REST Client for VS Code.
-                        </p>
-                        <a
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/http-headers"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-blue-600 dark:text-blue-400 hover:underline flex items-center"
-                        >
-                            View HTTP Examples
-                            <ExternalLink className="ml-1" size={14} />
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            {/* Popular Examples by Category */}
-            <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">Popular Examples by Category</h2>
-
-                {/* Cost Management */}
-                <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <DollarSign className="mr-2" size={24} />
-                        Cost Management
-                    </h3>
-                    <div className="space-y-3">
-                        <ExampleLink
-                            title="Cost Tracking"
-                            description="Monitor costs across all AI providers with automatic tracking"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking"
-                        />
-                        <ExampleLink
-                            title="Budget Management"
-                            description="Set spending limits and get alerts when approaching budgets"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/19-budgets"
-                        />
-                        <ExampleLink
-                            title="Cost Analytics"
-                            description="Analyze spending patterns and trends with detailed analytics"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/5-analytics"
-                        />
-                    </div>
-                </div>
-
-                {/* Performance & Optimization */}
-                <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <Rocket className="mr-2" size={24} />
-                        Performance & Optimization
-                    </h3>
-                    <div className="space-y-3">
-                        <ExampleLink
-                            title="Semantic Caching"
-                            description="Cache similar requests with semantic matching (30-40% cost savings)"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/14-cache"
-                            badge="70-90% hit rate"
-                        />
-                        <ExampleLink
-                            title="Cortex Optimization"
-                            description="AI-powered prompt compression with the Cortex meta-language"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/4-cortex"
-                            badge="30-40% savings"
-                        />
-                        <ExampleLink
-                            title="Model Routing"
-                            description="Automatically route to optimal models based on request characteristics"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/40-model-routing"
-                        />
-                        <ExampleLink
-                            title="Model Comparison & Selection"
-                            description="Compare costs and performance across 400+ AI models from 10 providers"
-                            href="/models"
-                            badge="400+ models"
-                        />
-                        <ExampleLink
-                            title="Type-Safe Model Constants"
-                            description="Use type-safe constants to prevent typos and get autocomplete support"
-                            href="/getting-started/quick-start#option-4-using-type-safe-constants-recommended-for-typescript"
-                            badge="TypeScript/Python"
-                        />
-                    </div>
-                </div>
-
-                {/* Monitoring & Alerts */}
-                <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <Bell className="mr-2" size={24} />
-                        Monitoring & Alerts
-                    </h3>
-                    <div className="space-y-3">
-                        <ExampleLink
-                            title="Webhooks"
-                            description="Real-time event notifications for 65+ event types"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/10-webhooks"
-                            badge="65+ events"
-                        />
-                        <ExampleLink
-                            title="OpenTelemetry"
-                            description="Distributed tracing and metrics export with full observability"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/11-observability"
-                        />
-                        <ExampleLink
-                            title="Custom Alerts"
-                            description="Configure custom alert rules for costs, performance, and security"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/42-alerts"
-                        />
-                    </div>
-                </div>
-
-                {/* AI Orchestration */}
-                <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <Bot className="mr-2" size={24} />
-                        AI Orchestration
-                    </h3>
-                    <div className="space-y-3">
-                        <ExampleLink
-                            title="Workflows"
-                            description="Multi-step AI orchestration with parallel execution and error handling"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows"
-                        />
-                        <ExampleLink
-                            title="AI Agents"
-                            description="Create and manage AI agents with persistent context"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/27-agents"
-                        />
-                        <ExampleLink
-                            title="Agent Memory"
-                            description="Persistent memory storage for AI agents across conversations"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/20-memory"
-                        />
-                    </div>
-                </div>
-
-                {/* Security & Compliance */}
-                <div className="mb-8">
-                    <h3 className="text-xl font-semibold mb-4 flex items-center text-gray-900 dark:text-white">
-                        <Lock className="mr-2" size={24} />
-                        Security & Compliance
-                    </h3>
-                    <div className="space-y-3">
-                        <ExampleLink
-                            title="Key Vault"
-                            description="Secure API key management with proxy keys and rate limiting"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/15-key-vault"
-                        />
-                        <ExampleLink
-                            title="Guardrails"
-                            description="Content moderation, PII detection, and policy enforcement"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/12-guardrails"
-                        />
-                        <ExampleLink
-                            title="Audit Logs"
-                            description="Complete audit trail for compliance and security monitoring"
-                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/37-audit-logs"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            {/* Framework Integrations */}
-            <div className="mb-12">
-                <h2 className="text-2xl font-bold mb-6 flex items-center text-gray-900 dark:text-white">
-                    <Layers className="mr-2 text-blue-600 dark:text-blue-400" size={28} />
-                    Framework Integrations
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FrameworkCard
-                        name="Express.js"
-                        description="REST API server with middleware integration"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/express"
-                    />
-                    <FrameworkCard
-                        name="Next.js"
-                        description="API routes and server components"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nextjs"
-                    />
-                    <FrameworkCard
-                        name="Fastify"
-                        description="High-performance web framework integration"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/fastify"
-                    />
-                    <FrameworkCard
-                        name="NestJS"
-                        description="Enterprise-grade application framework"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nestjs"
-                    />
-                    <FrameworkCard
-                        name="FastAPI"
-                        description="Modern Python web framework"
-                        href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks"
-                    />
-                </div>
-            </div>
-
-            {/* Complete Feature List */}
-            <div className="mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                <h2 className="text-2xl font-bold mb-4 flex items-center text-gray-900 dark:text-white">
-                    <BookOpen className="mr-2 text-blue-600 dark:text-blue-400" size={28} />
-                    Complete Feature Index
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 mb-6">
-                    Browse all 44 features with examples in HTTP, TypeScript, Python, and framework integrations.
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                    {features.map((feature, index) => (
-                        <a
-                            key={index}
-                            href={`https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/${feature.folder}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center p-3 bg-white dark:bg-gray-700 rounded border border-gray-200 dark:border-gray-600 hover:border-blue-600 dark:hover:border-blue-400 transition-colors"
-                        >
-                            <span className="font-mono text-sm text-gray-500 dark:text-gray-400 mr-3 w-8">{feature.number}</span>
-                            <span className="text-sm flex-1 text-gray-900 dark:text-white">{feature.name}</span>
-                            <ExternalLink className="text-gray-400 dark:text-gray-500" size={14} />
-                        </a>
-                    ))}
-                </div>
-            </div>
-
-            {/* Getting Started */}
-            <div className="p-8 bg-blue-600 rounded-lg text-white">
-                <h2 className="text-2xl font-bold mb-4 text-white">Ready to Get Started?</h2>
-                <p className="mb-6 text-white/90">
-                    Clone the examples repository and start building with Cost Katana in minutes.
-                </p>
-                <div className="space-y-2 bg-black/20 p-4 rounded font-mono text-sm mb-6">
-                    <div># Clone the repository</div>
-                    <div>git clone https://github.com/Hypothesize-Tech/costkatana-examples.git</div>
-                    <div className="mt-2"># Install dependencies</div>
-                    <div>cd costkatana-examples</div>
-                    <div>npm install</div>
-                    <div className="mt-2"># Set your API key</div>
-                    <div>export COST_KATANA_API_KEY=your_key_here</div>
-                    <div className="mt-2"># Run an example</div>
-                    <div>npx ts-node 1-cost-tracking/npm-package/openai.ts</div>
-                </div>
-                <div className="flex flex-wrap gap-4">
+        <div className="min-h-screen light:bg-gradient-light-ambient dark:bg-gradient-dark-ambient relative">
+            <div className="max-w-6xl mx-auto px-4 py-8">
+                {/* Hero Section */}
+                <div className="mb-12">
+                    <h1 className="text-4xl md:text-5xl font-display font-bold mb-4 gradient-text">
+                        Code Examples
+                    </h1>
+                    <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary mb-6">
+                        Production-ready examples for every Cost Katana feature. Over 300+ code samples across TypeScript, Python, and HTTP APIs.
+                    </p>
                     <a
                         href="https://github.com/Hypothesize-Tech/costkatana-examples"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center px-6 py-3 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+                        className="btn btn-primary inline-flex items-center px-6 py-3"
                     >
                         <Github className="mr-2" size={20} />
-                        View on GitHub
+                        Browse Examples on GitHub
+                        <ExternalLink className="ml-2" size={16} />
                     </a>
-                    <Link
-                        to="/getting-started/quick-start"
-                        className="inline-flex items-center px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors font-semibold border-2 border-white"
-                    >
-                        Read Quick Start Guide
-                    </Link>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+                    <div className="p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="text-3xl font-display font-bold gradient-text mb-2">300+</div>
+                        <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Code Examples</div>
+                    </div>
+                    <div className="p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="text-3xl font-display font-bold gradient-text mb-2">44</div>
+                        <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Features Covered</div>
+                    </div>
+                    <div className="p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="text-3xl font-display font-bold gradient-text mb-2">3</div>
+                        <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Languages</div>
+                    </div>
+                    <div className="p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div className="text-3xl font-display font-bold gradient-text mb-2">5</div>
+                        <div className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Frameworks</div>
+                    </div>
+                </div>
+
+                {/* Languages & Methods */}
+                <div className="mb-12">
+                    <h2 className="text-2xl font-display font-bold mb-6 text-light-text-primary dark:text-dark-text-primary">Available in Multiple Languages</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="card-hover p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="p-3 rounded-xl bg-gradient-primary/10 inline-block mb-4">
+                                <Code className="text-primary-600 dark:text-primary-400" size={32} />
+                            </div>
+                            <h3 className="text-xl font-display font-semibold mb-2 text-light-text-primary dark:text-dark-text-primary">TypeScript/Node.js</h3>
+                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-4">
+                                Complete SDK examples with full type safety and production-ready patterns.
+                            </p>
+                            <a
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/npm-package"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary-600 dark:text-primary-400 hover:underline flex items-center font-semibold"
+                            >
+                                View TypeScript Examples
+                                <ExternalLink className="ml-1" size={14} />
+                            </a>
+                        </div>
+
+                        <div className="card-hover p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="p-3 rounded-xl bg-gradient-primary/10 inline-block mb-4">
+                                <Terminal className="text-primary-600 dark:text-primary-400" size={32} />
+                            </div>
+                            <h3 className="text-xl font-display font-semibold mb-2 text-light-text-primary dark:text-dark-text-primary">Python SDK</h3>
+                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-4">
+                                Pythonic examples with the Cost Katana SDK and FastAPI integrations.
+                            </p>
+                            <a
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/8-python-sdk"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary-600 dark:text-primary-400 hover:underline flex items-center font-semibold"
+                            >
+                                View Python Examples
+                                <ExternalLink className="ml-1" size={14} />
+                            </a>
+                        </div>
+
+                        <div className="card-hover p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg hover:shadow-xl transition-all duration-300">
+                            <div className="p-3 rounded-xl bg-gradient-primary/10 inline-block mb-4">
+                                <FileCode className="text-primary-600 dark:text-primary-400" size={32} />
+                            </div>
+                            <h3 className="text-xl font-display font-semibold mb-2 text-light-text-primary dark:text-dark-text-primary">HTTP REST APIs</h3>
+                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-4">
+                                Direct API calls you can test immediately with REST Client for VS Code.
+                            </p>
+                            <a
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking/http-headers"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-primary-600 dark:text-primary-400 hover:underline flex items-center font-semibold"
+                            >
+                                View HTTP Examples
+                                <ExternalLink className="ml-1" size={14} />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Popular Examples by Category */}
+                <div className="mb-12">
+                    <h2 className="text-2xl font-display font-bold mb-6 text-light-text-primary dark:text-dark-text-primary">Popular Examples by Category</h2>
+
+                    {/* Cost Management */}
+                    <div className="mb-8">
+                        <h3 className="text-xl font-display font-semibold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                            <DollarSign className="mr-2 text-primary-600 dark:text-primary-400" size={24} />
+                            Cost Management
+                        </h3>
+                        <div className="space-y-3">
+                            <ExampleLink
+                                title="Cost Tracking"
+                                description="Monitor costs across all AI providers with automatic tracking"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/1-cost-tracking"
+                            />
+                            <ExampleLink
+                                title="Budget Management"
+                                description="Set spending limits and get alerts when approaching budgets"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/19-budgets"
+                            />
+                            <ExampleLink
+                                title="Cost Analytics"
+                                description="Analyze spending patterns and trends with detailed analytics"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/5-analytics"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Performance & Optimization */}
+                    <div className="mb-8">
+                        <h3 className="text-xl font-display font-semibold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                            <Rocket className="mr-2 text-primary-600 dark:text-primary-400" size={24} />
+                            Performance & Optimization
+                        </h3>
+                        <div className="space-y-3">
+                            <ExampleLink
+                                title="Semantic Caching"
+                                description="Cache similar requests with semantic matching (30-40% cost savings)"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/14-cache"
+                                badge="70-90% hit rate"
+                            />
+                            <ExampleLink
+                                title="Cortex Optimization"
+                                description="AI-powered prompt compression with the Cortex meta-language"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/4-cortex"
+                                badge="30-40% savings"
+                            />
+                            <ExampleLink
+                                title="Model Routing"
+                                description="Automatically route to optimal models based on request characteristics"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/40-model-routing"
+                            />
+                            <ExampleLink
+                                title="Model Comparison & Selection"
+                                description="Compare costs and performance across 400+ AI models from 10 providers"
+                                href="/models"
+                                badge="400+ models"
+                            />
+                            <ExampleLink
+                                title="Type-Safe Model Constants"
+                                description="Use type-safe constants to prevent typos and get autocomplete support"
+                                href="/getting-started/quick-start#option-4-using-type-safe-constants-recommended-for-typescript"
+                                badge="TypeScript/Python"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Monitoring & Alerts */}
+                    <div className="mb-8">
+                        <h3 className="text-xl font-display font-semibold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                            <Bell className="mr-2 text-primary-600 dark:text-primary-400" size={24} />
+                            Monitoring & Alerts
+                        </h3>
+                        <div className="space-y-3">
+                            <ExampleLink
+                                title="Webhooks"
+                                description="Real-time event notifications for 65+ event types"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/10-webhooks"
+                                badge="65+ events"
+                            />
+                            <ExampleLink
+                                title="OpenTelemetry"
+                                description="Distributed tracing and metrics export with full observability"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/11-observability"
+                            />
+                            <ExampleLink
+                                title="Custom Alerts"
+                                description="Configure custom alert rules for costs, performance, and security"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/42-alerts"
+                            />
+                        </div>
+                    </div>
+
+                    {/* AI Orchestration */}
+                    <div className="mb-8">
+                        <h3 className="text-xl font-display font-semibold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                            <Bot className="mr-2 text-primary-600 dark:text-primary-400" size={24} />
+                            AI Orchestration
+                        </h3>
+                        <div className="space-y-3">
+                            <ExampleLink
+                                title="Workflows"
+                                description="Multi-step AI orchestration with parallel execution and error handling"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows"
+                            />
+                            <ExampleLink
+                                title="AI Agents"
+                                description="Create and manage AI agents with persistent context"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/27-agents"
+                            />
+                            <ExampleLink
+                                title="Agent Memory"
+                                description="Persistent memory storage for AI agents across conversations"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/20-memory"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Security & Compliance */}
+                    <div className="mb-8">
+                        <h3 className="text-xl font-display font-semibold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                            <Lock className="mr-2 text-primary-600 dark:text-primary-400" size={24} />
+                            Security & Compliance
+                        </h3>
+                        <div className="space-y-3">
+                            <ExampleLink
+                                title="Key Vault"
+                                description="Secure API key management with proxy keys and rate limiting"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/15-key-vault"
+                            />
+                            <ExampleLink
+                                title="Guardrails"
+                                description="Content moderation, PII detection, and policy enforcement"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/12-guardrails"
+                            />
+                            <ExampleLink
+                                title="Audit Logs"
+                                description="Complete audit trail for compliance and security monitoring"
+                                href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/37-audit-logs"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Framework Integrations */}
+                <div className="mb-12">
+                    <h2 className="text-2xl font-display font-bold mb-6 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                        <Layers className="mr-2 text-primary-600 dark:text-primary-400" size={28} />
+                        Framework Integrations
+                    </h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <FrameworkCard
+                            name="Express.js"
+                            description="REST API server with middleware integration"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/express"
+                        />
+                        <FrameworkCard
+                            name="Next.js"
+                            description="API routes and server components"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nextjs"
+                        />
+                        <FrameworkCard
+                            name="Fastify"
+                            description="High-performance web framework integration"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/fastify"
+                        />
+                        <FrameworkCard
+                            name="NestJS"
+                            description="Enterprise-grade application framework"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks/nestjs"
+                        />
+                        <FrameworkCard
+                            name="FastAPI"
+                            description="Modern Python web framework"
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/7-frameworks"
+                        />
+                    </div>
+                </div>
+
+                {/* Complete Feature List */}
+                <div className="mb-12 p-6 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-lg">
+                    <h2 className="text-2xl font-display font-bold mb-4 flex items-center text-light-text-primary dark:text-dark-text-primary">
+                        <BookOpen className="mr-2 text-primary-600 dark:text-primary-400" size={28} />
+                        Complete Feature Index
+                    </h2>
+                    <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">
+                        Browse all 44 features with examples in HTTP, TypeScript, Python, and framework integrations.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        {features.map((feature, index) => (
+                            <a
+                                key={index}
+                                href={`https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/${feature.folder}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="card-hover flex items-center p-3 rounded-lg glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel hover:border-primary-400/50 dark:hover:border-primary-500/50 transition-all duration-300"
+                            >
+                                <span className="font-mono text-sm text-light-text-muted dark:text-dark-text-muted mr-3 w-8">{feature.number}</span>
+                                <span className="text-sm flex-1 text-light-text-primary dark:text-dark-text-primary">{feature.name}</span>
+                                <ExternalLink className="text-light-text-muted dark:text-dark-text-muted" size={14} />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Getting Started */}
+                <div className="p-8 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-primary shadow-xl">
+                    <h2 className="text-2xl font-display font-bold mb-4 text-white">Ready to Get Started?</h2>
+                    <p className="mb-6 text-white/90">
+                        Clone the examples repository and start building with Cost Katana in minutes.
+                    </p>
+                    <div className="space-y-2 bg-black/20 p-4 rounded-lg font-mono text-sm mb-6 backdrop-blur-sm border border-white/10">
+                        <div className="text-white/90"># Clone the repository</div>
+                        <div className="text-white">git clone https://github.com/Hypothesize-Tech/costkatana-examples.git</div>
+                        <div className="mt-2 text-white/90"># Install dependencies</div>
+                        <div className="text-white">cd costkatana-examples</div>
+                        <div className="text-white">npm install</div>
+                        <div className="mt-2 text-white/90"># Set your API key</div>
+                        <div className="text-white">export COST_KATANA_API_KEY=your_key_here</div>
+                        <div className="mt-2 text-white/90"># Run an example</div>
+                        <div className="text-white">npx ts-node 1-cost-tracking/npm-package/openai.ts</div>
+                    </div>
+                    <div className="flex flex-wrap gap-4">
+                        <a
+                            href="https://github.com/Hypothesize-Tech/costkatana-examples"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn inline-flex items-center px-6 py-3 bg-white text-primary-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
+                        >
+                            <Github className="mr-2" size={20} />
+                            View on GitHub
+                        </a>
+                        <Link
+                            to="/getting-started/quick-start"
+                            className="btn btn-outline inline-flex items-center px-6 py-3 text-white border-white hover:bg-white hover:text-primary-600 transition-colors font-semibold"
+                        >
+                            Read Quick Start Guide
+                        </Link>
+                    </div>
                 </div>
             </div>
         </div>
@@ -353,18 +361,18 @@ const ExampleLink: React.FC<{ title: string; description: string; href: string; 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="block p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 transition-all shadow-sm"
+        className="card-hover block p-4 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel hover:border-primary-400/50 dark:hover:border-primary-500/50 transition-all duration-300 shadow-sm hover:shadow-lg"
     >
         <div className="flex items-start justify-between mb-2">
-            <h4 className="font-semibold text-blue-600 dark:text-blue-400">{title}</h4>
+            <h4 className="font-display font-semibold text-primary-600 dark:text-primary-400">{title}</h4>
             {badge && (
-                <span className="px-2 py-1 text-xs bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400 rounded">
+                <span className="px-2 py-1 text-xs rounded-lg glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-primary/10 text-primary-700 dark:text-primary-300">
                     {badge}
                 </span>
             )}
         </div>
-        <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{description}</p>
-        <span className="text-xs text-blue-600 dark:text-blue-400 flex items-center">
+        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mb-2">{description}</p>
+        <span className="text-xs text-primary-600 dark:text-primary-400 flex items-center font-semibold">
             View Examples <ExternalLink className="ml-1" size={12} />
         </span>
     </a>
@@ -375,13 +383,13 @@ const FrameworkCard: React.FC<{ name: string; description: string; href: string 
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 transition-all shadow-sm"
+        className="card-hover p-4 rounded-xl glass border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel hover:border-primary-400/50 dark:hover:border-primary-500/50 transition-all duration-300 shadow-sm hover:shadow-lg"
     >
-        <h4 className="font-semibold mb-2 flex items-center justify-between text-gray-900 dark:text-white">
+        <h4 className="font-display font-semibold mb-2 flex items-center justify-between text-light-text-primary dark:text-dark-text-primary">
             {name}
-            <ExternalLink className="text-gray-400 dark:text-gray-500" size={16} />
+            <ExternalLink className="text-light-text-muted dark:text-dark-text-muted" size={16} />
         </h4>
-        <p className="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">{description}</p>
     </a>
 );
 
