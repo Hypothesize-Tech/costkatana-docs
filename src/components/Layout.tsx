@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -8,7 +8,6 @@ import {
     Moon,
     Sun,
     ChevronDown,
-    ChevronRight,
     Home,
     BookOpen,
     Plug,
@@ -19,20 +18,30 @@ import {
     Github,
     ExternalLink,
     Zap,
-    Database,
     Shield,
     TrendingUp,
     Terminal,
-    Cloud,
     Key,
     Bell,
     Brain,
-    Settings,
-    FileText,
     Package,
     Cpu,
-    BookMarked,
-    Heart
+    Heart,
+    LayoutDashboard,
+    BarChart3,
+    Sparkles,
+    Folder,
+    FileCode,
+    GitBranch,
+    Webhook,
+    Bot,
+    Activity,
+    LineChart,
+    Network,
+    Globe,
+    Film,
+    FileText,
+    Eye
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
@@ -63,6 +72,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         );
     };
 
+    // Handle keyboard shortcut to open/close search modal
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Cmd+K (Mac) or Ctrl+K (Windows/Linux)
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                setSearchOpen(prev => !prev);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     const navigation = [
         {
             title: 'Quick Links',
@@ -81,11 +104,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             id: 'getting-started',
             icon: <BookOpen size={18} />,
             items: [
-                { path: '/getting-started/introduction', label: 'Introduction', icon: <FileText size={16} /> },
+                { path: '/getting-started/introduction', label: 'Introduction', icon: <BookOpen size={16} /> },
                 { path: '/getting-started/quick-start', label: 'Quick Start', icon: <Zap size={16} /> },
                 { path: '/getting-started/installation', label: 'Installation', icon: <Package size={16} /> },
                 { path: '/models', label: 'Supported Models', icon: <Cpu size={16} /> },
-                { path: '/examples', label: 'Code Examples', icon: <BookMarked size={16} /> },
+                { path: '/examples', label: 'Code Examples', icon: <Code size={16} /> },
             ],
         },
         {
@@ -95,37 +118,49 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             items: [
                 { path: '/integrations/cli', label: 'CLI Tool', icon: <Terminal size={16} /> },
                 { path: '/integrations/nodejs', label: 'Node.js SDK', icon: <Code size={16} /> },
-                { path: '/integrations/python', label: 'Python SDK', icon: <Cpu size={16} /> },
-                { path: '/integrations/chatgpt', label: 'ChatGPT Integration', icon: <MessageCircle size={16} /> },
+                { path: '/integrations/python', label: 'Python SDK', icon: <Code size={16} /> },
+                { path: '/integrations/chatgpt', label: 'ChatGPT Integration', icon: <Bot size={16} /> },
             ],
         },
         {
             title: 'Features',
             id: 'features',
-            icon: <Layers size={18} />,
+            icon: <Sparkles size={18} />,
             items: [
                 { path: '/features', label: 'Overview', icon: <Layers size={16} /> },
-                { path: '/features/dashboard', label: 'Dashboard', icon: <Home size={16} /> },
+                { path: '/features/dashboard', label: 'Dashboard', icon: <LayoutDashboard size={16} /> },
                 { path: '/features/usage-tracking', label: 'Usage Tracking', icon: <TrendingUp size={16} /> },
-                { path: '/features/analytics', label: 'Cost Analytics', icon: <Database size={16} /> },
-                { path: '/features/optimization', label: 'AI Optimization', icon: <Cpu size={16} /> },
+                { path: '/features/analytics', label: 'Cost Analytics', icon: <BarChart3 size={16} /> },
+                { path: '/features/optimization', label: 'AI Optimization', icon: <Sparkles size={16} /> },
                 { path: '/features/sast', label: 'SAST Optimization', icon: <Brain size={16} /> },
-                { path: '/features/predictive-intelligence', label: 'Predictive Intelligence', icon: <Brain size={16} /> },
-                { path: '/features/projects', label: 'Projects', icon: <Layers size={16} /> },
-                { path: '/features/templates', label: 'Prompt Templates', icon: <FileText size={16} /> },
-                { path: '/features/workflows', label: 'Workflows', icon: <Settings size={16} /> },
-                { path: '/features/gateway', label: 'Gateway & Proxy', icon: <Cloud size={16} /> },
+                { path: '/features/predictive-intelligence', label: 'Predictive Intelligence', icon: <LineChart size={16} /> },
+                { path: '/features/projects', label: 'Projects', icon: <Folder size={16} /> },
+                { path: '/features/templates', label: 'Prompt Templates', icon: <FileCode size={16} /> },
+                { path: '/features/workflows', label: 'Workflows', icon: <GitBranch size={16} /> },
+                { path: '/features/gateway', label: 'Gateway & Proxy', icon: <Globe size={16} /> },
                 { path: '/features/key-vault', label: 'Key Vault', icon: <Key size={16} /> },
                 { path: '/features/alerts', label: 'Alerts', icon: <Bell size={16} /> },
-                { path: '/features/tracing', label: 'Distributed Tracing', icon: <Zap size={16} /> },
+                { path: '/features/tracing', label: 'Distributed Tracing', icon: <Network size={16} /> },
+                { path: '/features/telemetry', label: 'Telemetry Dashboard', icon: <Activity size={16} /> },
+                { path: '/features/sessions', label: 'Sessions & Replay', icon: <Film size={16} /> },
+                { path: '/features/logs', label: 'Logs Management', icon: <FileText size={16} /> },
+                { path: '/features/cache', label: 'Cache Management', icon: <Cpu size={16} /> },
+                { path: '/features/advanced-monitoring', label: 'Advanced Monitoring', icon: <Eye size={16} /> },
+                { path: '/features/unexplained-costs', label: 'Unexplained Costs', icon: <TrendingUp size={16} /> },
+                { path: '/features/experimentation', label: 'Experimentation', icon: <Sparkles size={16} /> },
+                { path: '/features/moderation', label: 'Moderation', icon: <Shield size={16} /> },
+                { path: '/features/security', label: 'Security', icon: <Shield size={16} /> },
+                { path: '/features/memory', label: 'Memory', icon: <Brain size={16} /> },
+                { path: '/features/cost-lake', label: 'Cost Lake', icon: <BarChart3 size={16} /> },
+                { path: '/features/github-integrations', label: 'GitHub Integrations', icon: <GitBranch size={16} /> },
             ],
         },
         {
             title: 'Observability',
             id: 'observability',
-            icon: <Zap size={18} />,
+            icon: <Activity size={18} />,
             items: [
-                { path: '/observability/opentelemetry', label: 'OpenTelemetry & Vendors', icon: <Database size={16} /> },
+                { path: '/observability/opentelemetry', label: 'OpenTelemetry & Vendors', icon: <Activity size={16} /> },
             ],
         },
         {
@@ -136,11 +171,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 { path: '/api', label: 'Overview', icon: <Code size={16} /> },
                 { path: '/api/authentication', label: 'Authentication', icon: <Shield size={16} /> },
                 { path: '/api/usage', label: 'Usage API', icon: <TrendingUp size={16} /> },
-                { path: '/api/analytics', label: 'Analytics API', icon: <Database size={16} /> },
-                { path: '/api/projects', label: 'Projects API', icon: <Layers size={16} /> },
-                { path: '/api/optimization', label: 'Optimization API', icon: <Cpu size={16} /> },
-                { path: '/api/webhooks', label: 'Webhooks', icon: <Bell size={16} /> },
+                { path: '/api/analytics', label: 'Analytics API', icon: <BarChart3 size={16} /> },
+                { path: '/api/projects', label: 'Projects API', icon: <Folder size={16} /> },
+                { path: '/api/optimization', label: 'Optimization API', icon: <Sparkles size={16} /> },
+                { path: '/api/webhooks', label: 'Webhooks', icon: <Webhook size={16} /> },
                 { path: '/api/rate-limits', label: 'Rate Limits', icon: <Shield size={16} /> },
+                { path: '/api/chat', label: 'Chat API', icon: <MessageCircle size={16} /> },
+                { path: '/api/agent', label: 'Agent API', icon: <Bot size={16} /> },
+                { path: '/api/memory', label: 'Memory API', icon: <Brain size={16} /> },
+                { path: '/api/cache', label: 'Cache API', icon: <Cpu size={16} /> },
+                { path: '/api/telemetry', label: 'Telemetry API', icon: <Activity size={16} /> },
+                { path: '/api/logs', label: 'Logs API', icon: <FileText size={16} /> },
+                { path: '/api/budget', label: 'Budget API', icon: <TrendingUp size={16} /> },
+                { path: '/api/session-replay', label: 'Session Replay API', icon: <Film size={16} /> },
+                { path: '/api/trace', label: 'Trace API', icon: <Network size={16} /> },
             ],
         },
         {
@@ -228,25 +272,47 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Sidebar */}
             <aside
-                className={`fixed left-0 top-16 bottom-0 w-72 glass border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+                className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
                     }`}
             >
-                <nav className="p-4 space-y-2">
+                <nav className="p-4 space-y-1">
                     {navigation.map((section) => (
-                        <div key={section.id} className="mb-4">
+                        <div key={section.id} className="mb-3">
                             <button
                                 onClick={() => toggleSection(section.id)}
-                                className="btn w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-light-text-primary dark:text-dark-text-primary hover:bg-light-panel dark:hover:bg-gray-800 rounded-lg transition-colors"
+                                className="btn w-full flex items-center justify-between px-4 py-3 text-sm font-display font-semibold rounded-xl transition-all duration-300 group"
+                                style={{
+                                    background: expandedSections.includes(section.id)
+                                        ? 'linear-gradient(135deg, rgba(6, 236, 158, 0.1), rgba(0, 148, 84, 0.1))'
+                                        : 'transparent',
+                                    color: expandedSections.includes(section.id)
+                                        ? 'rgb(6, 236, 158)'
+                                        : 'inherit'
+                                }}
                             >
-                                <div className="flex items-center space-x-2">
-                                    {section.icon}
-                                    <span>{section.title}</span>
+                                <div className="flex items-center gap-x-3">
+                                    <div
+                                        className={`transition-colors duration-300 ${expandedSections.includes(section.id)
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 dark:group-hover:text-primary-400'
+                                            }`}
+                                    >
+                                        {section.icon}
+                                    </div>
+                                    <span className="text-light-text-primary dark:text-dark-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                                        {section.title}
+                                    </span>
                                 </div>
-                                {expandedSections.includes(section.id) ? (
-                                    <ChevronDown size={16} />
-                                ) : (
-                                    <ChevronRight size={16} />
-                                )}
+                                <div className={`transition-transform duration-300 ${expandedSections.includes(section.id) ? 'rotate-0' : '-rotate-90'
+                                    }`}>
+                                    <ChevronDown
+                                        size={18}
+                                        className={`transition-colors duration-300 ${expandedSections.includes(section.id)
+                                            ? 'text-primary-500 dark:text-primary-400'
+                                            : 'text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400'
+                                            }`}
+                                    />
+                                </div>
                             </button>
 
                             <AnimatePresence>
@@ -255,10 +321,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.2 }}
+                                        transition={{ duration: 0.25, ease: 'easeInOut' }}
                                         className="overflow-hidden"
                                     >
-                                        <div className="ml-2 mt-1 space-y-1">
+                                        <div className="ml-1 mt-2 space-y-1 pl-3 border-l-2 border-primary-200/30 dark:border-primary-700/30">
                                             {section.items.map((item: NavigationItem) => (
                                                 item.external ? (
                                                     <a
@@ -266,21 +332,30 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                                         href={item.path}
                                                         target="_blank"
                                                         rel="noopener noreferrer"
-                                                        className="sidebar-link flex items-center"
+                                                        className="sidebar-link group"
                                                     >
-                                                        {item.icon}
-                                                        <span className="ml-2 flex-1">{item.label}</span>
-                                                        <ExternalLink size={14} className="ml-1 opacity-50" />
+                                                        <div className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                                                            {item.icon}
+                                                        </div>
+                                                        <span className="flex-1">{item.label}</span>
+                                                        <ExternalLink
+                                                            size={14}
+                                                            className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors opacity-60 group-hover:opacity-100"
+                                                        />
                                                     </a>
                                                 ) : (
                                                     <Link
                                                         key={item.path}
                                                         to={item.path}
-                                                        className={`sidebar-link ${location.pathname === item.path ? 'active' : ''
-                                                            }`}
+                                                        className={`sidebar-link group ${location.pathname === item.path ? 'active' : ''}`}
                                                     >
-                                                        {item.icon}
-                                                        <span className="ml-2">{item.label}</span>
+                                                        <div className={location.pathname === item.path
+                                                            ? 'text-white'
+                                                            : 'text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors'
+                                                        }>
+                                                            {item.icon}
+                                                        </div>
+                                                        <span>{item.label}</span>
                                                     </Link>
                                                 )
                                             ))}

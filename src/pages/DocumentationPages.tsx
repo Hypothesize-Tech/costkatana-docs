@@ -3616,14 +3616,6 @@ pip install cost-katana
 3. **Explore Endpoints**: Use the interactive API documentation
 4. **Integrate**: Use our SDKs or make direct HTTP requests
 
-## Interactive API Documentation
-
-Try our interactive API explorer:
-
-- **Postman Collection**: [Download Postman Collection](https://api.costkatana.com/postman)
-- **OpenAPI Spec**: [View OpenAPI Specification](https://api.costkatana.com/openapi.json)
-- **GraphQL Playground**: Available for Enterprise plans
-
 ## Support
 
 Need help with the API?
@@ -5847,6 +5839,2801 @@ Use SAST through REST API endpoints:
 ---
 
 *SAST represents the cutting edge of semantic optimization. Experience 30-40% token reductions while achieving unprecedented semantic clarity and cross-lingual compatibility.*`}
+  />
+);
+
+// Telemetry Dashboard Feature Page
+export const TelemetryDashboardPage = () => (
+  <DocumentationPage
+    title="Telemetry Dashboard"
+    description="AI-powered telemetry dashboard with real-time insights and analytics"
+    prevPage={{ path: '/observability/opentelemetry', label: 'Previous: OpenTelemetry & Vendors' }}
+    nextPage={{ path: '/features/sessions', label: 'Next: Sessions & Session Replay' }}
+    fallbackContent={`# Telemetry Dashboard
+
+The Telemetry Dashboard provides comprehensive AI-powered insights into your application's performance, costs, and operations with real-time analytics and intelligent recommendations.
+
+![Telemetry Dashboard](/assets/telemetry_1.png)
+
+## Overview
+
+The Telemetry Dashboard is a unified observability platform that combines traditional telemetry data with AI-powered analysis to provide actionable insights and optimization recommendations.
+
+### Key Features
+
+- **Real-time Performance Monitoring** - Track requests per minute, error rates, and latency metrics
+- **AI-Powered Insights** - Get intelligent recommendations for cost optimization and performance improvements
+- **Cost Analytics** - Monitor AI costs by model, operation, and time period
+- **Error Monitoring** - Track and analyze errors with automatic categorization
+- **Trace Viewer** - Visualize distributed traces and service dependencies
+- **Telemetry Explorer** - Advanced querying and filtering of telemetry data
+- **Service Dependency Graph** - Visualize service relationships and dependencies
+
+## Dashboard Components
+
+### Performance Overview
+
+Monitor key performance indicators in real-time:
+
+- **Requests Per Minute (RPM)** - Current request throughput
+- **Error Rate** - Percentage of failed requests
+- **Average Latency** - Mean response time across all operations
+- **P95 Latency** - 95th percentile response time
+
+\`\`\`javascript
+// Example: Fetching performance metrics
+const response = await fetch('/api/telemetry/dashboard/enhanced', {
+  headers: {
+    'Authorization': \`Bearer \${apiKey}\`
+  }
+});
+
+const data = await response.json();
+console.log('RPM:', data.enhanced_dashboard.current.requests_per_minute);
+console.log('Error Rate:', data.enhanced_dashboard.current.error_rate);
+\`\`\`
+
+### Cost Analytics
+
+Track AI costs with detailed breakdowns:
+
+- **Cost by Model** - See which models are consuming the most budget
+- **Cost Trends** - Historical cost analysis and forecasting
+- **Cost by Operation** - Identify expensive operations
+- **Cost Optimization Recommendations** - AI-suggested ways to reduce costs
+
+### Error Monitor
+
+Comprehensive error tracking and analysis:
+
+- **Error Rate Trends** - Track error rates over time
+- **Top Errors** - Most frequent error types
+- **Error Details** - Full error context and stack traces
+- **Error Correlation** - Link errors to specific operations or models
+
+### Trace Viewer
+
+Visualize distributed traces with interactive timeline:
+
+- **Span Timeline** - See all operations in chronological order
+- **Service Dependencies** - Understand service relationships
+- **Performance Bottlenecks** - Identify slow operations
+- **Cost Attribution** - See costs at each span level
+
+### Telemetry Explorer
+
+Advanced querying and filtering:
+
+- **Custom Queries** - Filter by service, operation, model, or time range
+- **Span Explorer** - Deep dive into individual spans
+- **Export Data** - Download telemetry data for analysis
+- **Real-time Updates** - Live streaming of telemetry events
+
+## Getting Started
+
+### 1. Enable Telemetry Collection
+
+Configure your application to send telemetry data:
+
+\`\`\`javascript
+import { CostKatana } from 'cost-katana';
+
+const client = new CostKatana({
+  apiKey: 'your-api-key',
+  telemetry: {
+    enabled: true,
+    endpoint: 'https://cost-katana-backend.store/api/telemetry'
+  }
+});
+\`\`\`
+
+### 2. Access the Dashboard
+
+Navigate to the Telemetry Dashboard in the web app:
+
+1. Go to **Telemetry** in the sidebar
+2. View the **Overview** tab for real-time metrics
+3. Explore **AI Insights** for recommendations
+4. Use **Explorer** for advanced queries
+
+### 3. Configure Telemetry
+
+Customize telemetry collection settings:
+
+\`\`\`javascript
+// Configure telemetry settings
+await client.telemetry.configure({
+  sampleRate: 1.0, // 100% sampling
+  batchSize: 100,
+  flushInterval: 5000, // 5 seconds
+  includeMetadata: true
+});
+\`\`\`
+
+## AI-Powered Insights
+
+The dashboard includes AI-powered analysis that provides:
+
+### Cost Optimization Recommendations
+
+- Model selection suggestions based on cost/performance trade-offs
+- Token usage optimization opportunities
+- Caching recommendations for repeated operations
+- Batch processing suggestions
+
+### Performance Recommendations
+
+- Latency optimization opportunities
+- Error rate reduction strategies
+- Resource allocation suggestions
+- Scaling recommendations
+
+### Example AI Recommendation
+
+\`\`\`json
+{
+  "trace_id": "trace_123",
+  "operation": "text_generation",
+  "insight": "Switching from GPT-4 to GPT-4o-mini would reduce costs by 75% with minimal quality impact",
+  "cost_impact": -0.15,
+  "routing_decision": "gpt-4o-mini",
+  "priority": "high"
+}
+\`\`\`
+
+## Advanced Features
+
+### Service Dependency Graph
+
+Visualize how services interact:
+
+- **Service Relationships** - See which services call which
+- **Call Patterns** - Understand request flows
+- **Bottleneck Identification** - Find services causing delays
+- **Cost Flow** - Track costs through service calls
+
+### Top Operations
+
+Identify your most important operations:
+
+- **Request Volume** - Most frequently called operations
+- **Cost Impact** - Operations with highest costs
+- **Error Rate** - Operations with most errors
+- **Performance** - Slowest operations
+
+### Configuration
+
+Customize dashboard settings:
+
+- **Time Range** - Select time periods for analysis
+- **Filters** - Filter by service, operation, or model
+- **Refresh Rate** - Set auto-refresh interval
+- **Alerts** - Configure threshold-based alerts
+
+## API Integration
+
+### Fetch Enhanced Dashboard Data
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/telemetry/dashboard/enhanced \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### Query Telemetry Data
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/telemetry/query \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "query": "service:api AND operation:chat",
+    "timeRange": "1h",
+    "limit": 100
+  }'
+\`\`\`
+
+## Best Practices
+
+1. **Enable Full Sampling** - For accurate insights, enable 100% sampling in development
+2. **Set Up Alerts** - Configure alerts for error rates and cost thresholds
+3. **Regular Review** - Check AI insights weekly for optimization opportunities
+4. **Export Data** - Regularly export data for long-term analysis
+5. **Use Filters** - Leverage filters to focus on specific services or operations
+
+## Related Documentation
+
+- [OpenTelemetry & Vendors](/observability/opentelemetry) - Vendor integrations
+- [Distributed Tracing](/features/tracing) - Trace collection and analysis
+- [Telemetry API](/api/telemetry) - API reference
+- [Cost Analytics](/features/analytics) - Cost analysis features`}
+  />
+);
+
+// Sessions & Session Replay Feature Page
+export const SessionsPage = () => (
+  <DocumentationPage
+    title="Sessions & Session Replay"
+    description="Record and replay AI interactions with complete context for debugging and analysis"
+    prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }}
+    nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }}
+    fallbackContent={`# Sessions & Session Replay
+
+Record and replay AI interactions with complete context, including prompts, responses, costs, and user actions for comprehensive debugging and analysis.
+
+![Sessions Overview](/assets/sessions_1.png)
+
+## Overview
+
+Sessions provide two powerful capabilities for monitoring and debugging your AI applications:
+
+1. **Session Replay** - Record and replay in-app AI interactions with full context
+2. **Debug Traces** - Distributed tracing for API-level debugging
+
+## Session Replay
+
+Session Replay captures complete AI interaction sessions with rich context for playback and analysis.
+
+### Features
+
+#### Automatic Recording
+
+Sessions are automatically recorded for:
+
+- **Chat Sessions** - Conversational AI interactions
+- **Experimentation** - A/B tests and experiments
+- **Workflows** - Multi-step AI pipelines
+- **Agents** - Autonomous AI agent actions
+- **Notebooks** - Jupyter/notebook interactions
+
+#### Rich Context Capture
+
+Each session includes:
+
+- **AI Interactions** - Full prompts, responses, tokens, costs, and latency
+- **User Actions** - Button clicks, form submissions, navigation
+- **Code Context** - Active file, cursor position, code snippets
+- **System Metrics** - CPU, memory, active requests
+- **Workspace State** - Full environment snapshot
+
+#### Advanced Filtering
+
+Filter sessions by:
+
+- **Feature Type** - Chat, experimentation, workflow, agent, notebook
+- **Date Range** - Time-based filtering
+- **Cost Range** - Filter by cost thresholds
+- **Token Usage** - Filter by token consumption
+- **AI Model** - Filter by specific models
+- **Status** - Active, completed, error
+- **Custom Metadata** - User-defined tags and properties
+
+#### Export & Sharing
+
+- **JSON Export** - Download session data for analysis
+- **CSV Export** - Export for analysis in Excel
+- **Shareable Links** - Generate temporary viewing links
+- **API Access** - Programmatic access to replays
+
+## Debug Traces
+
+Distributed tracing for API-level debugging with hierarchical trace visualization.
+
+### Features
+
+#### Hierarchical Traces
+
+- **Automatic Span Relationships** - Parent-child trace relationships
+- **Trace Trees** - Visualize complex workflows
+- **Session Grouping** - Group related operations
+- **Depth Tracking** - Understand call stack depth
+
+#### Zero-Code Instrumentation
+
+- **Express Middleware** - One line to add tracing
+- **Auto-instrumentation** - Automatic for all requests
+- **Context Propagation** - Seamless trace context flow
+- **Session Management** - Automatic session creation
+
+#### Cost Attribution
+
+- **Per-Span Costs** - Track cost at every level
+- **Token Counting** - Input/output token metrics
+- **Model Attribution** - Cost by model and provider
+- **Budget Tracking** - Real-time budget monitoring
+
+#### Visual Timeline
+
+- **Interactive Visualization** - Drag, zoom, filter
+- **Gantt Charts** - See parallel operations
+- **Latency Analysis** - Identify bottlenecks
+- **Critical Path** - Find optimization opportunities
+
+## Getting Started
+
+### 1. Enable Session Recording
+
+\`\`\`javascript
+import { CostKatana } from 'cost-katana';
+
+const client = new CostKatana({
+  apiKey: 'your-api-key',
+  sessions: {
+    enabled: true,
+    recordReplays: true,
+    recordTraces: true
+  }
+});
+\`\`\`
+
+### 2. View Sessions
+
+Navigate to **Sessions** in the sidebar:
+
+1. **Session Replays** tab - View recorded replays
+2. **Debug Traces** tab - View distributed traces
+3. Use filters to find specific sessions
+4. Click on a session to view details
+
+### 3. Replay a Session
+
+\`\`\`javascript
+// Get session replay data
+const session = await client.sessions.getReplay(sessionId);
+
+// Playback session
+session.replay({
+  speed: 1.0, // Playback speed
+  onEvent: (event) => {
+    console.log('Event:', event);
+  }
+});
+\`\`\`
+
+## Session Replay Player
+
+The Session Replay Player provides:
+
+### Timeline View
+
+- **Chronological Events** - All events in order
+- **Event Types** - AI calls, user actions, errors
+- **Cost Indicators** - Visual cost markers
+- **Performance Metrics** - Latency visualization
+
+### Event Details
+
+- **Full Context** - Complete event data
+- **Request/Response** - Full API request and response
+- **Cost Breakdown** - Detailed cost analysis
+- **Performance Metrics** - Latency and timing
+
+### Navigation
+
+- **Play/Pause** - Control playback
+- **Speed Control** - Adjust playback speed
+- **Jump to Event** - Navigate to specific events
+- **Search** - Find events by content
+
+## Debug Traces
+
+### View Trace Tree
+
+\`\`\`javascript
+// Get trace details
+const trace = await client.sessions.getTrace(traceId);
+
+// Visualize trace tree
+trace.visualize({
+  showCosts: true,
+  showLatency: true,
+  groupByService: true
+});
+\`\`\`
+
+### Trace Analysis
+
+- **Span Details** - View individual span information
+- **Cost Attribution** - See costs at each level
+- **Performance Analysis** - Identify slow operations
+- **Error Tracking** - Find and debug errors
+
+## API Integration
+
+### List Sessions
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/session-replay/sessions \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "feature=chat&status=completed&limit=50"
+\`\`\`
+
+### Get Session Replay
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/session-replay/sessions/SESSION_ID \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### Get Trace Details
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+## Best Practices
+
+1. **Enable Recording** - Enable session recording for all production environments
+2. **Filter Strategically** - Use filters to focus on relevant sessions
+3. **Review Regularly** - Check sessions for errors and optimization opportunities
+4. **Export Important Sessions** - Save critical sessions for analysis
+5. **Use Traces for Debugging** - Leverage traces to debug complex workflows
+
+## Related Documentation
+
+- [Distributed Tracing](/features/tracing) - Trace collection and analysis
+- [Telemetry Dashboard](/features/telemetry) - Telemetry insights
+- [Logs Management](/features/logs) - Log analysis
+- [Session Replay API](/api/session-replay) - API reference`}
+  />
+);
+
+// Logs Management Feature Page
+export const LogsPage = () => (
+  <DocumentationPage
+    title="Logs Management"
+    description="Comprehensive log management with AI-powered querying, filtering, and analysis"
+    prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }}
+    nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }}
+    fallbackContent={`# Logs Management
+
+Comprehensive log management system with AI-powered querying, real-time streaming, advanced filtering, and intelligent analysis for all your AI operations.
+
+![Logs Dashboard](/assets/logs_1.png)
+
+## Overview
+
+The Logs Management system provides a unified interface for viewing, searching, and analyzing logs from all your AI operations with powerful filtering, real-time streaming, and AI-powered insights.
+
+### Key Features
+
+- **Real-time Log Streaming** - Live log updates as they happen
+- **AI-Powered Querying** - Natural language log queries
+- **Advanced Filtering** - Filter by service, model, status, time range, and more
+- **Multiple View Modes** - Table, timeline, JSON, and dashboard views
+- **Export Capabilities** - Export logs in JSON, CSV, or JSONL formats
+- **Log Statistics** - Real-time statistics and analytics
+- **Log Details** - Full context for each log entry
+- **Chat Widget** - Interactive AI assistant for log analysis
+
+## Dashboard View
+
+The dashboard view provides an overview of your logs with:
+
+- **Log Statistics** - Total logs, error rate, success rate
+- **Time Series Charts** - Log volume over time
+- **Error Distribution** - Errors by type and service
+- **Top Services** - Most active services
+- **Recent Logs** - Latest log entries
+
+## Table View
+
+The table view displays logs in a structured format:
+
+- **Sortable Columns** - Sort by timestamp, service, model, status, cost
+- **Search** - Quick search across all log fields
+- **Filters** - Advanced filtering options
+- **Pagination** - Navigate through large log sets
+- **Row Selection** - Select logs for bulk operations
+
+## Timeline View
+
+Visual timeline of log events:
+
+- **Chronological Order** - Events displayed in time order
+- **Event Types** - Color-coded by log level
+- **Zoom Controls** - Zoom in/out on timeline
+- **Event Details** - Click to view full event details
+- **Grouping** - Group events by service or type
+
+## JSON View
+
+Raw JSON view for developers:
+
+- **Formatted JSON** - Pretty-printed JSON
+- **Syntax Highlighting** - Color-coded JSON syntax
+- **Expandable Objects** - Expand/collapse nested objects
+- **Copy to Clipboard** - Quick copy functionality
+- **Search in JSON** - Search within JSON content
+
+## Real-time Streaming
+
+Enable real-time log streaming for live monitoring:
+
+\`\`\`javascript
+// Enable real-time streaming
+const logStream = client.logs.stream({
+  filters: {
+    level: 'error',
+    service: 'api'
+  },
+  onLog: (log) => {
+    console.log('New log:', log);
+  }
+});
+
+// Stop streaming
+logStream.stop();
+\`\`\`
+
+## AI-Powered Querying
+
+Query logs using natural language:
+
+\`\`\`javascript
+// Natural language query
+const results = await client.logs.query(
+  "Show me all errors from the last hour related to GPT-4"
+);
+
+// Results include:
+// - Matching logs
+// - AI-generated insights
+// - Suggested filters
+// - Related logs
+\`\`\`
+
+### Example Queries
+
+- "Show me all errors from the last hour"
+- "Find logs with costs over $0.10"
+- "What are the slowest API calls?"
+- "Show me all GPT-4 failures"
+- "Find logs from the chat service"
+
+## Advanced Filtering
+
+Filter logs by multiple criteria:
+
+### Filter Options
+
+- **Service** - Filter by service name
+- **Model** - Filter by AI model
+- **Status** - Success, error, pending
+- **Log Level** - Debug, info, warning, error
+- **Time Range** - Custom date/time ranges
+- **Cost Range** - Filter by cost thresholds
+- **Token Range** - Filter by token usage
+- **User** - Filter by user ID
+- **Project** - Filter by project ID
+- **Custom Fields** - Filter by any log field
+
+### Filter Examples
+
+\`\`\`javascript
+// Filter by service and error level
+const logs = await client.logs.list({
+  filters: {
+    service: 'api',
+    level: 'error',
+    timeRange: '1h'
+  }
+});
+
+// Filter by cost threshold
+const expensiveLogs = await client.logs.list({
+  filters: {
+    minCost: 0.10,
+    timeRange: '24h'
+  }
+});
+\`\`\`
+
+## Log Statistics
+
+Get real-time statistics about your logs:
+
+\`\`\`javascript
+const stats = await client.logs.getStats({
+  timeRange: '24h',
+  groupBy: ['service', 'model']
+});
+
+console.log('Total logs:', stats.total);
+console.log('Error rate:', stats.errorRate);
+console.log('Average cost:', stats.avgCost);
+\`\`\`
+
+## Export Logs
+
+Export logs in multiple formats:
+
+\`\`\`javascript
+// Export as JSON
+const jsonBlob = await client.logs.export({
+  format: 'json',
+  filters: { service: 'api' }
+});
+
+// Export as CSV
+const csvBlob = await client.logs.export({
+  format: 'csv',
+  filters: { timeRange: '7d' }
+});
+
+// Export as JSONL
+const jsonlBlob = await client.logs.export({
+  format: 'jsonl',
+  filters: { level: 'error' }
+});
+\`\`\`
+
+## Log Details
+
+View full details for any log entry:
+
+- **Full Context** - Complete log data
+- **Request/Response** - Full API request and response
+- **Cost Breakdown** - Detailed cost analysis
+- **Performance Metrics** - Latency and timing
+- **Related Logs** - Logs from the same trace
+- **User Context** - User information and session
+
+## API Integration
+
+### List Logs
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/logs/ai \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "service=api&level=error&limit=100"
+\`\`\`
+
+### Get Log by ID
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/logs/ai/LOG_ID \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### Natural Language Query
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/logs/ai/chat \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "query": "Show me all errors from the last hour",
+    "context": {
+      "timeRange": "1h"
+    }
+  }'
+\`\`\`
+
+### Export Logs
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "format=json&service=api&timeRange=24h" \\
+  --output logs.json
+\`\`\`
+
+## Best Practices
+
+1. **Use Filters** - Leverage filters to focus on relevant logs
+2. **Set Up Alerts** - Configure alerts for error thresholds
+3. **Regular Review** - Review logs regularly for issues
+4. **Export Important Logs** - Save critical logs for analysis
+5. **Use AI Queries** - Leverage natural language queries for complex searches
+6. **Monitor Real-time** - Enable streaming for critical services
+
+## Related Documentation
+
+- [Sessions & Session Replay](/features/sessions) - Session recording
+- [Telemetry Dashboard](/features/telemetry) - Telemetry insights
+- [Logs API](/api/logs) - API reference`}
+  />
+);
+
+// Cache Management Feature Page
+export const CachePage = () => (
+  <DocumentationPage
+    title="Cache Management"
+    description="Redis cache dashboard and management for optimizing AI costs through intelligent caching"
+    prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }}
+    nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }}
+    fallbackContent={`# Cache Management
+
+Redis cache dashboard and management system for optimizing AI costs through intelligent caching of prompts, responses, and intermediate results.
+
+![Cache Dashboard](/assets/cache_1.png)
+
+## Overview
+
+The Cache Management system provides a comprehensive interface for managing Redis caches, monitoring cache performance, and optimizing AI costs through intelligent caching strategies.
+
+### Key Features
+
+- **Cache Dashboard** - Real-time cache statistics and metrics
+- **Cache Keys Management** - View, search, and manage cache keys
+- **Cache Analytics** - Hit rate, miss rate, and cost savings analysis
+- **Cache Configuration** - Configure TTL, eviction policies, and more
+- **Cache Warming** - Pre-populate cache with frequently used data
+- **Cache Invalidation** - Manual and automatic cache invalidation
+- **Multi-Cache Support** - Manage multiple cache instances
+- **Cost Savings Tracking** - Track cost savings from caching
+
+## Cache Dashboard
+
+The dashboard provides an overview of your cache performance:
+
+### Statistics
+
+- **Total Keys** - Number of cached items
+- **Cache Size** - Memory usage
+- **Hit Rate** - Percentage of cache hits
+- **Miss Rate** - Percentage of cache misses
+- **Cost Savings** - Estimated cost savings from caching
+- **Evictions** - Number of evicted keys
+
+### Performance Metrics
+
+- **Average Response Time** - Cache lookup latency
+- **Throughput** - Requests per second
+- **Memory Usage** - Current memory consumption
+- **Memory Limit** - Configured memory limit
+
+## Cache Keys
+
+View and manage individual cache keys:
+
+### Key Information
+
+- **Key Name** - Cache key identifier
+- **Value Preview** - Preview of cached value
+- **TTL** - Time to live remaining
+- **Size** - Memory size of cached item
+- **Hit Count** - Number of times accessed
+- **Last Accessed** - Last access timestamp
+- **Created At** - Cache entry creation time
+
+### Key Operations
+
+- **View Full Value** - See complete cached data
+- **Delete Key** - Remove specific cache entry
+- **Refresh TTL** - Extend time to live
+- **Copy Key** - Duplicate cache entry
+
+## Cache Analytics
+
+Analyze cache performance and cost savings:
+
+### Hit Rate Analysis
+
+- **Hit Rate Trends** - Historical hit rate over time
+- **Hit Rate by Key Pattern** - Hit rates by key prefix
+- **Hit Rate by Service** - Hit rates by service
+- **Peak Hit Times** - Times with highest hit rates
+
+### Cost Savings
+
+- **Estimated Savings** - Total cost savings from caching
+- **Savings by Service** - Savings breakdown by service
+- **Savings Trends** - Historical savings over time
+- **ROI Analysis** - Return on investment from caching
+
+## Cache Configuration
+
+Configure cache settings:
+
+### TTL Configuration
+
+\`\`\`javascript
+// Set default TTL
+client.cache.configure({
+  defaultTTL: 3600, // 1 hour
+  maxTTL: 86400, // 24 hours
+  minTTL: 60 // 1 minute
+});
+\`\`\`
+
+### Eviction Policy
+
+\`\`\`javascript
+// Configure eviction policy
+client.cache.configure({
+  evictionPolicy: 'lru', // Least Recently Used
+  maxMemory: '512mb',
+  maxKeys: 100000
+});
+\`\`\`
+
+### Cache Strategies
+
+- **LRU (Least Recently Used)** - Evict least recently used items
+- **LFU (Least Frequently Used)** - Evict least frequently used items
+- **TTL-based** - Evict expired items
+- **Size-based** - Evict largest items
+
+## Cache Operations
+
+### Get from Cache
+
+\`\`\`javascript
+// Get cached value
+const cached = await client.cache.get('prompt:user:123');
+
+if (cached) {
+  return cached; // Cache hit
+} else {
+  // Cache miss - fetch and cache
+  const result = await ai.generate(prompt);
+  await client.cache.set('prompt:user:123', result, { ttl: 3600 });
+  return result;
+}
+\`\`\`
+
+### Set Cache
+
+\`\`\`javascript
+// Set cache with TTL
+await client.cache.set('key', value, {
+  ttl: 3600, // 1 hour
+  tags: ['user', 'prompt']
+});
+\`\`\`
+
+### Delete Cache
+
+\`\`\`javascript
+// Delete specific key
+await client.cache.delete('key');
+
+// Delete by pattern
+await client.cache.deletePattern('prompt:*');
+
+// Delete by tags
+await client.cache.deleteByTags(['user', 'prompt']);
+\`\`\`
+
+### Cache Warming
+
+\`\`\`javascript
+// Pre-populate cache
+await client.cache.warm({
+  keys: [
+    { key: 'prompt:common:1', value: commonPrompt1 },
+    { key: 'prompt:common:2', value: commonPrompt2 }
+  ],
+  ttl: 86400 // 24 hours
+});
+\`\`\`
+
+## Intelligent Caching
+
+Cost Katana automatically caches:
+
+- **Identical Prompts** - Same prompts return cached results
+- **Similar Prompts** - Semantically similar prompts (with Cortex)
+- **Intermediate Results** - Partial computation results
+- **Model Responses** - AI model responses
+
+### Semantic Caching
+
+With Cortex enabled, semantically similar prompts share cache entries:
+
+\`\`\`javascript
+// These prompts share the same cache entry
+const prompt1 = "What is the weather today?";
+const prompt2 = "Tell me today's weather";
+const prompt3 = "How's the weather?";
+
+// All three use the same cached response
+\`\`\`
+
+## API Integration
+
+### Get Cache Statistics
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/cache/stats \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### List Cache Keys
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/cache/keys \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "pattern=prompt:*&limit=100"
+\`\`\`
+
+### Get Cache Key
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### Delete Cache Key
+
+\`\`\`bash
+curl -X DELETE https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+### Clear Cache
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/cache/clear \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "pattern": "prompt:*",
+    "tags": ["user"]
+  }'
+\`\`\`
+
+## Best Practices
+
+1. **Set Appropriate TTLs** - Balance freshness with cache efficiency
+2. **Monitor Hit Rates** - Aim for 70%+ hit rates
+3. **Use Semantic Caching** - Enable Cortex for better cache utilization
+4. **Tag Cache Keys** - Use tags for organized invalidation
+5. **Warm Critical Caches** - Pre-populate frequently used data
+6. **Monitor Memory Usage** - Prevent memory exhaustion
+7. **Use Cache Patterns** - Consistent key naming for easier management
+
+## Related Documentation
+
+- [Gateway & Proxy](/features/gateway) - Gateway caching
+- [Cortex Optimization](/features/sast) - Semantic caching
+- [Cache API](/api/cache) - API reference`}
+  />
+);
+
+// Advanced Monitoring Feature Page
+export const AdvancedMonitoringPage = () => (
+  <DocumentationPage
+    title="Advanced Monitoring"
+    description="Advanced monitoring tools for comprehensive AI operation tracking and analysis"
+    prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }}
+    nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }}
+    fallbackContent={`# Advanced Monitoring
+
+Advanced monitoring tools for comprehensive tracking, analysis, and optimization of AI operations with real-time insights and intelligent alerts.
+
+![Advanced Monitoring](/assets/monitoring_1.png)
+
+## Overview
+
+Advanced Monitoring provides enterprise-grade observability for AI operations with comprehensive metrics, custom dashboards, intelligent alerting, and deep analysis capabilities.
+
+### Key Features
+
+- **Custom Dashboards** - Build personalized monitoring dashboards
+- **Real-time Metrics** - Live metrics and performance indicators
+- **Intelligent Alerts** - AI-powered alerting with anomaly detection
+- **Performance Analysis** - Deep dive into performance bottlenecks
+- **Cost Monitoring** - Track costs with detailed breakdowns
+- **Error Tracking** - Comprehensive error monitoring and analysis
+- **Custom Metrics** - Define and track custom metrics
+- **Export & Reporting** - Export data and generate reports
+
+## Custom Dashboards
+
+Create personalized dashboards with:
+
+- **Widget Library** - Pre-built widgets for common metrics
+- **Custom Widgets** - Build custom visualization widgets
+- **Layout Management** - Drag-and-drop dashboard layout
+- **Dashboard Sharing** - Share dashboards with team members
+- **Dashboard Templates** - Start from pre-built templates
+
+## Real-time Metrics
+
+Monitor key metrics in real-time:
+
+- **Request Rate** - Requests per second/minute
+- **Error Rate** - Error percentage and trends
+- **Latency** - P50, P95, P99 latency metrics
+- **Cost Rate** - Cost per hour/day
+- **Token Usage** - Input/output token rates
+- **Model Performance** - Model-specific metrics
+
+## Intelligent Alerts
+
+AI-powered alerting system:
+
+- **Anomaly Detection** - Automatic anomaly detection
+- **Threshold Alerts** - Set custom thresholds
+- **Trend Alerts** - Alert on trend changes
+- **Cost Alerts** - Budget and cost threshold alerts
+- **Performance Alerts** - Latency and error alerts
+- **Smart Notifications** - Intelligent notification routing
+
+## Performance Analysis
+
+Deep performance analysis tools:
+
+- **Bottleneck Identification** - Find performance bottlenecks
+- **Slow Query Analysis** - Analyze slow operations
+- **Resource Usage** - Monitor resource consumption
+- **Scaling Recommendations** - AI-suggested scaling strategies
+
+## API Integration
+
+### Get Monitoring Metrics
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/monitoring/metrics \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "timeRange=1h&groupBy=service"
+\`\`\`
+
+### Create Alert
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/monitoring/alerts \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "name": "High Error Rate",
+    "condition": "error_rate > 0.05",
+    "threshold": 0.05,
+    "notificationChannels": ["email", "slack"]
+  }'
+\`\`\`
+
+## Related Documentation
+
+- [Telemetry Dashboard](/features/telemetry) - Telemetry insights
+- [Logs Management](/features/logs) - Log analysis
+- [Monitoring API](/api/monitoring) - API reference`}
+  />
+);
+
+// Unexplained Costs Feature Page
+export const UnexplainedCostsPage = () => (
+  <DocumentationPage
+    title="Unexplained Costs"
+    description="Cost attribution analysis to identify and explain unexpected AI costs"
+    prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }}
+    nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }}
+    fallbackContent={`# Unexplained Costs
+
+Cost attribution analysis system to identify, explain, and optimize unexpected AI costs with intelligent root cause analysis.
+
+![Unexplained Costs](/assets/unexplained-costs_1.png)
+
+## Overview
+
+Unexplained Costs helps you identify and understand costs that don't have clear attribution, providing insights into hidden expenses and optimization opportunities.
+
+### Key Features
+
+- **Cost Attribution** - Automatically attribute costs to sources
+- **Anomaly Detection** - Identify unusual cost patterns
+- **Root Cause Analysis** - AI-powered root cause identification
+- **Cost Breakdown** - Detailed cost breakdowns by dimension
+- **Optimization Recommendations** - Suggestions to reduce costs
+- **Trend Analysis** - Historical cost trend analysis
+- **Alerting** - Alerts for unexplained cost spikes
+
+## Cost Attribution
+
+Automatically attribute costs to:
+
+- **Projects** - Costs by project
+- **Users** - Costs by user
+- **Services** - Costs by service
+- **Models** - Costs by AI model
+- **Operations** - Costs by operation type
+- **Time Periods** - Costs by time period
+
+## Anomaly Detection
+
+Identify unusual cost patterns:
+
+- **Cost Spikes** - Sudden cost increases
+- **Unusual Patterns** - Deviations from normal patterns
+- **Hidden Costs** - Costs without clear attribution
+- **Inefficient Usage** - Inefficient resource usage
+
+## Root Cause Analysis
+
+AI-powered analysis to identify:
+
+- **Cost Drivers** - What's driving costs
+- **Inefficiencies** - Inefficient operations
+- **Optimization Opportunities** - Areas for improvement
+- **Best Practices** - Recommended practices
+
+## API Integration
+
+### Get Unexplained Costs
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/unexplained-costs \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "timeRange=7d&threshold=0.10"
+\`\`\`
+
+### Analyze Cost
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/unexplained-costs/analyze \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "costId": "cost_123",
+    "includeRecommendations": true
+  }'
+\`\`\`
+
+## Related Documentation
+
+- [Cost Analytics](/features/analytics) - Cost analysis
+- [Optimization](/features/optimization) - Cost optimization
+- [Unexplained Costs API](/api/unexplained-costs) - API reference`}
+  />
+);
+
+// Experimentation Feature Page
+export const ExperimentationPage = () => (
+  <DocumentationPage
+    title="Experimentation"
+    description="A/B testing and experimentation platform for optimizing AI model selection and costs"
+    prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }}
+    nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }}
+    fallbackContent={`# Experimentation
+
+A/B testing and experimentation platform for optimizing AI model selection, prompt strategies, and costs through systematic testing and comparison.
+
+![Experimentation](/assets/experimentation_1.png)
+
+## Overview
+
+Experimentation provides tools for running A/B tests, comparing models, simulating scenarios, and identifying optimal configurations for your AI operations.
+
+### Key Features
+
+- **Cost Simulator** - Real-time prompt optimization with instant cost savings
+- **Model Comparison** - Compare different AI models based on actual usage
+- **What-If Scenarios** - Analyze potential cost impacts of optimization strategies
+- **Leaderboard** - Top optimization wins and cost savings champions
+- **Real-time Testing** - Live model comparison and testing
+- **Statistical Analysis** - Statistical significance testing
+- **Recommendations** - AI-powered optimization recommendations
+
+## Cost Simulator
+
+Real-time prompt optimization:
+
+- **Instant Optimization** - See cost savings up to 95%
+- **Model Suggestions** - AI-suggested model alternatives
+- **Token Reduction** - Optimize token usage
+- **Quality Preservation** - Maintain quality while reducing costs
+
+\`\`\`javascript
+// Simulate cost optimization
+const simulation = await client.experimentation.simulate({
+  prompt: "Your prompt here",
+  currentModel: "gpt-4",
+  targetModels: ["gpt-4o-mini", "gpt-3.5-turbo"]
+});
+
+console.log('Potential savings:', simulation.savings);
+console.log('Recommended model:', simulation.recommendedModel);
+\`\`\`
+
+## Model Comparison
+
+Compare different AI models:
+
+- **Side-by-Side Comparison** - Compare multiple models
+- **Performance Metrics** - Latency, quality, cost comparison
+- **Cost Analysis** - Detailed cost breakdowns
+- **Quality Metrics** - Quality scores and metrics
+- **Recommendations** - Best model recommendations
+
+\`\`\`javascript
+// Compare models
+const comparison = await client.experimentation.compare({
+  prompt: "Your prompt",
+  models: ["gpt-4", "gpt-4o-mini", "claude-3-opus"],
+  metrics: ["cost", "latency", "quality"]
+});
+
+console.log('Best model:', comparison.bestModel);
+console.log('Savings:', comparison.savings);
+\`\`\`
+
+## What-If Scenarios
+
+Analyze potential impacts:
+
+- **Cost Projections** - Project future costs
+- **Optimization Impact** - Impact of optimization strategies
+- **Scaling Scenarios** - Cost impact of scaling
+- **Model Migration** - Cost of migrating models
+
+## Leaderboard
+
+Track optimization wins:
+
+- **Top Savings** - Highest cost savings
+- **Best Optimizations** - Most effective optimizations
+- **Champions** - Top performers
+- **Trends** - Optimization trends over time
+
+## API Integration
+
+### Run Experiment
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/experimentation/model-comparison \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "prompt": "Your prompt",
+    "models": ["gpt-4", "gpt-4o-mini"],
+    "metrics": ["cost", "quality"]
+  }'
+\`\`\`
+
+### Simulate Cost
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/experimentation/real-time-simulation \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "prompt": "Your prompt",
+    "currentModel": "gpt-4",
+    "targetModels": ["gpt-4o-mini"]
+  }'
+\`\`\`
+
+## Related Documentation
+
+- [AI Optimization](/features/optimization) - Optimization features
+- [Cost Analytics](/features/analytics) - Cost analysis
+- [Experimentation API](/api/experimentation) - API reference`}
+  />
+);
+
+// Moderation Feature Page
+export const ModerationPage = () => (
+  <DocumentationPage
+    title="Moderation"
+    description="Content moderation and safety features for AI-generated content"
+    prevPage={{ path: '/features/experimentation', label: 'Previous: Experimentation' }}
+    nextPage={{ path: '/features/security', label: 'Next: Security' }}
+    fallbackContent={`# Moderation
+
+Content moderation and safety features for AI-generated content with automated filtering, policy enforcement, and compliance monitoring.
+
+![Moderation](/assets/moderation_1.png)
+
+## Overview
+
+Moderation provides comprehensive content safety features including automated content filtering, policy enforcement, compliance monitoring, and safety reporting.
+
+### Key Features
+
+- **Content Filtering** - Automated content filtering
+- **Policy Enforcement** - Custom policy enforcement
+- **Compliance Monitoring** - Compliance tracking and reporting
+- **Safety Scoring** - Content safety scoring
+- **Blocklist Management** - Manage blocklists and allowlists
+- **Audit Logs** - Complete audit trail
+- **Real-time Moderation** - Real-time content moderation
+- **Custom Rules** - Define custom moderation rules
+
+## Content Filtering
+
+Automated content filtering:
+
+- **Toxicity Detection** - Detect toxic content
+- **Profanity Filtering** - Filter profanity
+- **PII Detection** - Detect personally identifiable information
+- **Sensitive Content** - Identify sensitive content
+- **Custom Filters** - Custom filtering rules
+
+\`\`\`javascript
+// Moderate content
+const result = await client.moderation.moderate({
+  content: "User content here",
+  policies: ["toxicity", "profanity", "pii"]
+});
+
+if (result.isSafe) {
+  // Content is safe
+} else {
+  // Handle unsafe content
+  console.log('Violations:', result.violations);
+}
+\`\`\`
+
+## Policy Enforcement
+
+Enforce custom policies:
+
+- **Policy Definition** - Define custom policies
+- **Policy Application** - Apply policies to content
+- **Policy Violations** - Track policy violations
+- **Policy Reports** - Generate policy reports
+
+## Compliance Monitoring
+
+Track compliance:
+
+- **Compliance Status** - Current compliance status
+- **Compliance Reports** - Generate compliance reports
+- **Audit Trail** - Complete audit trail
+- **Compliance Alerts** - Alerts for compliance issues
+
+## API Integration
+
+### Moderate Content
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/moderation/moderate \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "content": "Content to moderate",
+    "policies": ["toxicity", "profanity"]
+  }'
+\`\`\`
+
+## Related Documentation
+
+- [Security](/features/security) - Security features
+- [Moderation API](/api/moderation) - API reference`}
+  />
+);
+
+// Security Feature Page
+export const SecurityPage = () => (
+  <DocumentationPage
+    title="Security"
+    description="Security and compliance features for protecting AI operations and data"
+    prevPage={{ path: '/features/moderation', label: 'Previous: Moderation' }}
+    nextPage={{ path: '/features/memory', label: 'Next: Memory' }}
+    fallbackContent={`# Security
+
+Comprehensive security and compliance features for protecting AI operations, data, and ensuring regulatory compliance.
+
+![Security](/assets/security_1.png)
+
+## Overview
+
+Security provides enterprise-grade security features including authentication, authorization, encryption, compliance monitoring, and security auditing.
+
+### Key Features
+
+- **Authentication** - Multi-factor authentication and SSO
+- **Authorization** - Role-based access control
+- **Encryption** - End-to-end encryption
+- **Compliance** - GDPR, CCPA, SOC 2 compliance
+- **Audit Logs** - Complete security audit trail
+- **Threat Detection** - Automated threat detection
+- **Security Policies** - Custom security policies
+- **Vulnerability Scanning** - Automated vulnerability scanning
+
+## Authentication
+
+Secure authentication:
+
+- **Multi-Factor Authentication** - MFA support
+- **Single Sign-On** - SSO integration
+- **API Key Management** - Secure API key management
+- **Session Management** - Secure session handling
+
+## Authorization
+
+Role-based access control:
+
+- **Roles & Permissions** - Define roles and permissions
+- **Resource Access** - Control resource access
+- **Team Management** - Team and user management
+- **Access Logs** - Track access attempts
+
+## Encryption
+
+Data encryption:
+
+- **Encryption at Rest** - Encrypt stored data
+- **Encryption in Transit** - Encrypt data in transit
+- **Key Management** - Secure key management
+- **Compliance** - Encryption compliance
+
+## Compliance
+
+Regulatory compliance:
+
+- **GDPR** - GDPR compliance
+- **CCPA** - CCPA compliance
+- **SOC 2** - SOC 2 compliance
+- **HIPAA** - HIPAA compliance (if applicable)
+
+## API Integration
+
+### Get Security Status
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/security/status \\
+  -H "Authorization: Bearer YOUR_API_KEY"
+\`\`\`
+
+## Related Documentation
+
+- [Key Vault](/features/key-vault) - Key management
+- [Moderation](/features/moderation) - Content moderation
+- [Security API](/api/security) - API reference`}
+  />
+);
+
+// Memory Feature Page
+export const MemoryPage = () => (
+  <DocumentationPage
+    title="Memory"
+    description="Memory management and context preservation for AI conversations and operations"
+    prevPage={{ path: '/features/security', label: 'Previous: Security' }}
+    nextPage={{ path: '/features/cost-lake', label: 'Next: Cost Lake' }}
+    fallbackContent={`# Memory
+
+Memory management system for preserving context across AI conversations and operations with intelligent context retrieval and management.
+
+![Memory](/assets/memory_1.png)
+
+## Overview
+
+Memory provides intelligent context management for AI operations, preserving conversation history, user preferences, and operational context across sessions.
+
+### Key Features
+
+- **Context Preservation** - Preserve context across sessions
+- **Memory Storage** - Store and retrieve memories
+- **Context Retrieval** - Intelligent context retrieval
+- **Memory Search** - Search through memories
+- **Memory Management** - Manage and organize memories
+- **Context Injection** - Inject context into conversations
+- **Memory Analytics** - Analyze memory usage
+
+## Context Preservation
+
+Preserve context across:
+
+- **Conversations** - Maintain conversation context
+- **Sessions** - Preserve session context
+- **Operations** - Maintain operational context
+- **Users** - Preserve user preferences
+
+\`\`\`javascript
+// Store memory
+await client.memory.store({
+  key: "user_preference",
+  value: { theme: "dark", language: "en" },
+  context: { userId: "user_123" }
+});
+
+// Retrieve memory
+const memory = await client.memory.retrieve({
+  key: "user_preference",
+  context: { userId: "user_123" }
+});
+\`\`\`
+
+## Memory Storage
+
+Store different types of memories:
+
+- **Conversation History** - Store conversation history
+- **User Preferences** - Store user preferences
+- **Operational Context** - Store operational context
+- **Custom Memories** - Store custom memories
+
+## Context Retrieval
+
+Intelligent context retrieval:
+
+- **Semantic Search** - Search memories semantically
+- **Context Matching** - Match relevant context
+- **Context Ranking** - Rank context by relevance
+- **Context Injection** - Inject context into prompts
+
+## API Integration
+
+### Store Memory
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/memory/store \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "key": "user_preference",
+    "value": {"theme": "dark"},
+    "context": {"userId": "user_123"}
+  }'
+\`\`\`
+
+### Retrieve Memory
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/memory/retrieve \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "key=user_preference&userId=user_123"
+\`\`\`
+
+## Related Documentation
+
+- [Chat API](/api/chat) - Chat with memory
+- [Memory API](/api/memory) - API reference`}
+  />
+);
+
+// Cost Lake Feature Page
+export const CostLakePage = () => (
+  <DocumentationPage
+    title="Cost Lake"
+    description="Data warehouse for comprehensive cost data analysis and reporting"
+    prevPage={{ path: '/features/memory', label: 'Previous: Memory' }}
+    nextPage={{ path: '/features/github-integrations', label: 'Next: GitHub Integrations' }}
+    fallbackContent={`# Cost Lake
+
+Data warehouse for comprehensive cost data analysis, reporting, and business intelligence with historical data retention and advanced analytics.
+
+![Cost Lake](/assets/cost-lake_1.png)
+
+## Overview
+
+Cost Lake is a comprehensive data warehouse that stores all cost-related data for long-term analysis, reporting, and business intelligence.
+
+### Key Features
+
+- **Data Warehouse** - Centralized cost data storage
+- **Historical Data** - Long-term data retention
+- **Data Analytics** - Advanced analytics capabilities
+- **Data Export** - Export data for external analysis
+- **Data Integration** - Integrate with BI tools
+- **Custom Reports** - Generate custom reports
+- **Data Visualization** - Visualize cost data
+- **Data Querying** - Query cost data
+
+## Data Warehouse
+
+Centralized storage for:
+
+- **Cost Data** - All cost-related data
+- **Usage Data** - Usage metrics and statistics
+- **Performance Data** - Performance metrics
+- **Metadata** - Operational metadata
+
+## Historical Data
+
+Long-term data retention:
+
+- **Data Retention** - Retain data for extended periods
+- **Data Archival** - Archive old data
+- **Data Retrieval** - Retrieve historical data
+- **Data Analysis** - Analyze historical trends
+
+## Data Analytics
+
+Advanced analytics:
+
+- **Trend Analysis** - Analyze cost trends
+- **Forecasting** - Forecast future costs
+- **Anomaly Detection** - Detect anomalies
+- **Correlation Analysis** - Find correlations
+
+## API Integration
+
+### Query Cost Lake
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/cost-lake/query \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "query": "SELECT * FROM costs WHERE date >= '2024-01-01'",
+    "format": "json"
+  }'
+\`\`\`
+
+## Related Documentation
+
+- [Cost Analytics](/features/analytics) - Cost analysis
+- [Cost Lake API](/api/cost-lake) - API reference`}
+  />
+);
+
+// GitHub Integrations Feature Page
+export const GitHubIntegrationsPage = () => (
+  <DocumentationPage
+    title="GitHub Integrations"
+    description="Integrate Cost Katana with GitHub for code-aware AI operations and context"
+    prevPage={{ path: '/features/cost-lake', label: 'Previous: Cost Lake' }}
+    nextPage={{ path: '/api', label: 'Next: API Reference' }}
+    fallbackContent={`# GitHub Integrations
+
+Integrate Cost Katana with GitHub to enable code-aware AI operations, repository context, and intelligent code analysis.
+
+![GitHub Integration](/assets/github_1.png)
+
+## Overview
+
+GitHub Integrations allow you to connect your GitHub repositories with Cost Katana, enabling AI operations with full code context and repository awareness.
+
+### Key Features
+
+- **Repository Connection** - Connect GitHub repositories
+- **Code Context** - Use code as context in AI operations
+- **PR Analysis** - Analyze pull requests with AI
+- **Code Generation** - Generate code with repository context
+- **Integration Management** - Manage GitHub integrations
+- **Webhook Support** - GitHub webhook integration
+- **Code Search** - Search code across repositories
+
+## Repository Connection
+
+Connect GitHub repositories:
+
+1. Navigate to **Integrations** → **GitHub**
+2. Click **Connect Repository**
+3. Authorize Cost Katana access
+4. Select repositories to connect
+5. Configure integration settings
+
+## Code Context
+
+Use code as context:
+
+\`\`\`javascript
+// Use repository context in chat
+const response = await client.chat.send({
+  message: "Explain this function",
+  context: {
+    repository: "my-repo",
+    file: "src/utils.ts",
+    function: "processData"
+  }
+});
+\`\`\`
+
+## PR Analysis
+
+Analyze pull requests:
+
+- **Code Review** - AI-powered code review
+- **Cost Analysis** - Analyze cost impact of changes
+- **Quality Assessment** - Assess code quality
+- **Suggestions** - Provide improvement suggestions
+
+## API Integration
+
+### Connect Repository
+
+\`\`\`bash
+curl -X POST https://cost-katana-backend.store/api/github/connect \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "repository": "owner/repo",
+    "accessToken": "github_token"
+  }'
+\`\`\`
+
+### Get Repository Context
+
+\`\`\`bash
+curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/context \\
+  -H "Authorization: Bearer YOUR_API_KEY" \\
+  -G -d "file=src/utils.ts&function=processData"
+\`\`\`
+
+## Related Documentation
+
+- [Integrations](/features/integrations) - Other integrations
+- [GitHub API](/api/github) - API reference`}
+  />
+);
+
+// ============================================
+// API REFERENCE PAGES
+// ============================================
+
+// Chat API Page
+export const ChatAPIPage = () => (
+  <DocumentationPage
+    title="Chat API"
+    description="Complete API reference for chat endpoints and message handling"
+    prevPage={{ path: '/api/rate-limits', label: 'Previous: Rate Limits' }}
+    nextPage={{ path: '/api/agent', label: 'Next: Agent API' }}
+    fallbackContent={`# Chat API
+
+Complete API reference for chat endpoints, message handling, conversation management, and integration commands.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/chat\`
+
+## Authentication
+
+All endpoints except \`GET /models\` require authentication via Bearer token:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Available Models
+
+Get list of available AI models for chat.
+
+\`\`\`http
+GET /api/chat/models
+\`\`\`
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "models": [
+    {
+      "id": "gpt-4",
+      "name": "GPT-4",
+      "provider": "openai",
+      "maxTokens": 8192,
+      "supportsStreaming": true
+    }
+  ]
+}
+\`\`\`
+
+### Send Message
+
+Send a message to an AI model.
+
+\`\`\`http
+POST /api/chat/message
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "message": "Hello, how are you?",
+  "modelId": "gpt-4",
+  "conversationId": "optional_conversation_id",
+  "temperature": 0.7,
+  "maxTokens": 1000,
+  "documentIds": ["doc1", "doc2"],
+  "templateId": "optional_template_id",
+  "templateVariables": {
+    "variable1": "value1"
+  }
+}
+\`\`\`
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "message": {
+    "id": "msg_123",
+    "content": "I'm doing well, thank you!",
+    "model": "gpt-4",
+    "cost": 0.002,
+    "tokens": {
+      "input": 10,
+      "output": 15
+    },
+    "timestamp": "2024-01-01T00:00:00Z"
+  },
+  "conversationId": "conv_123"
+}
+\`\`\`
+
+### Create Conversation
+
+Create a new conversation.
+
+\`\`\`http
+POST /api/chat/conversations
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "title": "My Conversation",
+  "metadata": {
+    "projectId": "project_123"
+  }
+}
+\`\`\`
+
+### Get Conversations
+
+Get all conversations for the authenticated user.
+
+\`\`\`http
+GET /api/chat/conversations
+\`\`\`
+
+**Query Parameters:**
+
+- \`limit\` (optional): Number of conversations to return (default: 50)
+- \`page\` (optional): Page number (default: 1)
+- \`includeArchived\` (optional): Include archived conversations (default: false)
+
+### Get Conversation History
+
+Get message history for a conversation.
+
+\`\`\`http
+GET /api/chat/conversations/:conversationId/history
+\`\`\`
+
+**Path Parameters:**
+
+- \`conversationId\`: The conversation ID
+
+**Query Parameters:**
+
+- \`limit\` (optional): Number of messages to return (default: 50)
+- \`before\` (optional): Get messages before this timestamp
+
+### Update Conversation GitHub Context
+
+Update GitHub context for a conversation.
+
+\`\`\`http
+PATCH /api/chat/conversations/:conversationId/github-context
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "repository": "owner/repo",
+  "file": "src/utils.ts",
+  "function": "processData"
+}
+\`\`\`
+
+### Delete Conversation
+
+Delete a conversation.
+
+\`\`\`http
+DELETE /api/chat/conversations/:conversationId
+\`\`\`
+
+### Integration Commands
+
+Execute integration commands via @ mentions.
+
+\`\`\`http
+POST /api/chat/integrations/execute
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "command": "@slack list channels",
+  "integrationType": "slack"
+}
+\`\`\`
+
+### Get Autocomplete Suggestions
+
+Get autocomplete suggestions for integration commands.
+
+\`\`\`http
+GET /api/chat/integrations/autocomplete
+\`\`\`
+
+**Query Parameters:**
+
+- \`query\`: Partial command query
+- \`integrationType\`: Type of integration
+
+## Error Responses
+
+All endpoints may return the following error responses:
+
+\`\`\`json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Error message",
+    "details": {}
+  }
+}
+\`\`\`
+
+## Rate Limits
+
+- **Message Endpoint**: 60 requests per minute
+- **Other Endpoints**: 120 requests per minute
+
+## Related Documentation
+
+- [Agent API](/api/agent) - AI agent endpoints
+- [Memory API](/api/memory) - Memory management
+- [Chat Feature](/features/dashboard) - Chat features`}
+  />
+);
+
+// Agent API Page
+export const AgentAPIPage = () => (
+  <DocumentationPage
+    title="Agent API"
+    description="Complete API reference for AI agent query and analysis endpoints"
+    prevPage={{ path: '/api/chat', label: 'Previous: Chat API' }}
+    nextPage={{ path: '/api/gateway', label: 'Next: Gateway API' }}
+    fallbackContent={`# Agent API
+
+Complete API reference for AI agent endpoints including query processing, streaming, feedback, and project wizard functionality.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/agent\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Query Agent
+
+Send a query to the AI agent.
+
+\`\`\`http
+POST /api/agent/query
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "query": "Analyze my cost trends",
+  "context": {
+    "projectId": "project_123",
+    "conversationId": "conv_123",
+    "previousMessages": []
+  }
+}
+\`\`\`
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "response": "Based on your usage data...",
+  "insights": [],
+  "recommendations": []
+}
+\`\`\`
+
+### Stream Agent Response
+
+Stream agent response for real-time interaction.
+
+\`\`\`http
+POST /api/agent/stream
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "query": "Your query here",
+  "context": {}
+}
+\`\`\`
+
+**Response:** Server-Sent Events (SSE) stream
+
+### Get Agent Status
+
+Get agent status and statistics.
+
+\`\`\`http
+GET /api/agent/status
+\`\`\`
+
+### Add Feedback
+
+Add feedback/learning to the agent.
+
+\`\`\`http
+POST /api/agent/feedback
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "insight": "This response was helpful",
+  "rating": 5,
+  "metadata": {
+    "conversationId": "conv_123"
+  }
+}
+\`\`\`
+
+### Get Conversation History
+
+Get conversation history with the agent.
+
+\`\`\`http
+GET /api/agent/conversations
+\`\`\`
+
+**Query Parameters:**
+
+- \`conversationId\` (optional): Specific conversation ID
+- \`limit\` (optional): Number of conversations (1-100, default: 50)
+
+### Get Suggested Queries
+
+Get suggested queries for the user.
+
+\`\`\`http
+GET /api/agent/suggestions
+\`\`\`
+
+### Start Project Wizard
+
+Start conversational project creation wizard.
+
+\`\`\`http
+POST /api/agent/wizard/start
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "projectType": "web-app",
+  "quickStart": true
+}
+\`\`\`
+
+### Continue Project Wizard
+
+Continue project creation wizard conversation.
+
+\`\`\`http
+POST /api/agent/wizard/continue
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "response": "I want to build a chat app",
+  "wizardState": {
+    "step": 1,
+    "data": {}
+  }
+}
+\`\`\`
+
+## Related Documentation
+
+- [Chat API](/api/chat) - Chat endpoints
+- [Gateway API](/api/gateway) - Gateway endpoints`}
+  />
+);
+
+// Memory API Page
+export const MemoryAPIPage = () => (
+  <DocumentationPage
+    title="Memory API"
+    description="Complete API reference for memory management endpoints"
+    prevPage={{ path: '/api/gateway', label: 'Previous: Gateway API' }}
+    nextPage={{ path: '/api/cache', label: 'Next: Cache API' }}
+    fallbackContent={`# Memory API
+
+Complete API reference for memory management endpoints including user preferences, conversation history, and memory insights.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/memory\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Memory Insights
+
+Get user memory insights.
+
+\`\`\`http
+GET /api/memory/:userId/insights
+\`\`\`
+
+**Path Parameters:**
+
+- \`userId\`: User ID
+
+### Get User Preferences
+
+Get user preferences.
+
+\`\`\`http
+GET /api/memory/:userId/preferences
+\`\`\`
+
+### Update User Preferences
+
+Update user preferences.
+
+\`\`\`http
+PUT /api/memory/:userId/preferences
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "preferredModel": "gpt-4",
+  "preferredChatMode": "balanced",
+  "preferredStyle": "professional",
+  "responseLength": "detailed",
+  "technicalLevel": "intermediate",
+  "commonTopics": ["coding", "ai"],
+  "costPreference": "balanced"
+}
+\`\`\`
+
+### Get Conversation History
+
+Get conversation history with memory context.
+
+\`\`\`http
+GET /api/memory/:userId/conversations
+\`\`\`
+
+**Query Parameters:**
+
+- \`limit\` (optional): Number of conversations (1-100, default: 50)
+- \`page\` (optional): Page number (default: 1)
+- \`includeArchived\` (optional): Include archived conversations (default: false)
+
+### Get Similar Conversations
+
+Get similar conversations.
+
+\`\`\`http
+GET /api/memory/:userId/similar
+\`\`\`
+
+**Query Parameters:**
+
+- \`query\`: Search query (required)
+- \`limit\` (optional): Number of results (1-20, default: 10)
+
+### Get Personalized Recommendations
+
+Get personalized recommendations.
+
+\`\`\`http
+GET /api/memory/:userId/recommendations
+\`\`\`
+
+**Query Parameters:**
+
+- \`query\`: Query for recommendations (required)
+
+### Archive Conversation
+
+Archive a conversation.
+
+\`\`\`http
+PUT /api/memory/conversations/:conversationId/archive
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "userId": "user_123"
+}
+\`\`\`
+
+### Delete Conversation
+
+Delete a conversation.
+
+\`\`\`http
+DELETE /api/memory/conversations/:conversationId
+Content-Type: application/json
+\`\`\`
+
+### Reset Preferences
+
+Reset user preferences.
+
+\`\`\`http
+DELETE /api/memory/:userId/preferences
+\`\`\`
+
+### Clear User Memory
+
+Clear all user memory (GDPR compliance).
+
+\`\`\`http
+DELETE /api/memory/:userId/clear
+\`\`\`
+
+### Export User Data
+
+Export user memory data (GDPR compliance).
+
+\`\`\`http
+GET /api/memory/:userId/export
+\`\`\`
+
+### Get Storage Stats
+
+Get memory storage statistics.
+
+\`\`\`http
+GET /api/memory/:userId/stats
+\`\`\`
+
+## Related Documentation
+
+- [Memory Feature](/features/memory) - Memory features
+- [Chat API](/api/chat) - Chat endpoints`}
+  />
+);
+
+// Cache API Page
+export const CacheAPIPage = () => (
+  <DocumentationPage
+    title="Cache API"
+    description="Complete API reference for cache management endpoints"
+    prevPage={{ path: '/api/memory', label: 'Previous: Memory API' }}
+    nextPage={{ path: '/api/telemetry', label: 'Next: Telemetry API' }}
+    fallbackContent={`# Cache API
+
+Complete API reference for cache management endpoints including statistics, clearing, export, import, and warmup operations.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/cache\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Cache Statistics
+
+Get cache statistics and metrics.
+
+\`\`\`http
+GET /api/cache/stats
+\`\`\`
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "stats": {
+    "totalKeys": 1000,
+    "cacheSize": "50MB",
+    "hitRate": 0.85,
+    "missRate": 0.15,
+    "costSavings": 150.50,
+    "evictions": 10
+  }
+}
+\`\`\`
+
+### Clear Cache
+
+Clear cache entries.
+
+\`\`\`http
+DELETE /api/cache/clear
+Content-Type: application/json
+\`\`\`
+
+**Request Body (optional):**
+
+\`\`\`json
+{
+  "pattern": "prompt:*",
+  "tags": ["user"]
+}
+\`\`\`
+
+### Export Cache Data
+
+Export cache data.
+
+\`\`\`http
+GET /api/cache/export
+\`\`\`
+
+**Query Parameters:**
+
+- \`format\` (optional): Export format (json, csv, default: json)
+- \`pattern\` (optional): Key pattern filter
+
+### Import Cache Data
+
+Import cache data.
+
+\`\`\`http
+POST /api/cache/import
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "data": [
+    {
+      "key": "prompt:1",
+      "value": "cached_response",
+      "ttl": 3600
+    }
+  ]
+}
+\`\`\`
+
+### Warmup Cache
+
+Pre-populate cache with frequently used data.
+
+\`\`\`http
+POST /api/cache/warmup
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "keys": [
+    {
+      "key": "prompt:common:1",
+      "value": "common_response",
+      "ttl": 86400
+    }
+  ]
+}
+\`\`\`
+
+## Related Documentation
+
+- [Cache Feature](/features/cache) - Cache features
+- [Gateway API](/api/gateway) - Gateway caching`}
+  />
+);
+
+// Telemetry API Page
+export const TelemetryAPIPage = () => (
+  <DocumentationPage
+    title="Telemetry API"
+    description="Complete API reference for telemetry data endpoints"
+    prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }}
+    nextPage={{ path: '/api/logs', label: 'Next: Logs API' }}
+    fallbackContent={`# Telemetry API
+
+Complete API reference for telemetry data endpoints including dashboard data, querying, and analytics.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/telemetry\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Enhanced Dashboard
+
+Get enhanced dashboard data with AI insights.
+
+\`\`\`http
+GET /api/telemetry/dashboard/enhanced
+\`\`\`
+
+**Query Parameters:**
+
+- \`timeRange\` (optional): Time range (1h, 24h, 7d, 30d, default: 24h)
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "enhanced_dashboard": {
+    "current": {
+      "requests_per_minute": 100,
+      "error_rate": 0.02,
+      "avg_latency_ms": 250,
+      "p95_latency_ms": 500
+    },
+    "enrichment": {
+      "stats": {
+        "total_spans": 10000,
+        "enriched_spans": 9500,
+        "enrichment_rate": 0.95
+      },
+      "ai_recommendations": []
+    }
+  }
+}
+\`\`\`
+
+### Query Telemetry Data
+
+Query telemetry data.
+
+\`\`\`http
+POST /api/telemetry/query
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "query": "service:api AND operation:chat",
+  "timeRange": "1h",
+  "limit": 100
+}
+\`\`\`
+
+## Related Documentation
+
+- [Telemetry Dashboard](/features/telemetry) - Telemetry features
+- [Distributed Tracing](/features/tracing) - Trace collection`}
+  />
+);
+
+// Logs API Page
+export const LogsAPIPage = () => (
+  <DocumentationPage
+    title="Logs API"
+    description="Complete API reference for logs query endpoints"
+    prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }}
+    nextPage={{ path: '/api/budget', label: 'Next: Budget API' }}
+    fallbackContent={`# Logs API
+
+Complete API reference for logs query endpoints including listing, filtering, natural language queries, and export.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/logs\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### List AI Logs
+
+Get list of AI logs with filtering.
+
+\`\`\`http
+GET /api/logs/ai
+\`\`\`
+
+**Query Parameters:**
+
+- \`service\` (optional): Filter by service
+- \`model\` (optional): Filter by model
+- \`level\` (optional): Filter by log level (debug, info, warning, error)
+- \`status\` (optional): Filter by status (success, error, pending)
+- \`timeRange\` (optional): Time range filter
+- \`minCost\` (optional): Minimum cost filter
+- \`maxCost\` (optional): Maximum cost filter
+- \`limit\` (optional): Number of logs to return (default: 100)
+- \`page\` (optional): Page number (default: 1)
+
+### Get Log by ID
+
+Get a specific log by ID.
+
+\`\`\`http
+GET /api/logs/ai/:logId
+\`\`\`
+
+**Path Parameters:**
+
+- \`logId\`: Log ID
+
+### Natural Language Query
+
+Query logs using natural language.
+
+\`\`\`http
+POST /api/logs/ai/chat
+Content-Type: application/json
+\`\`\`
+
+**Request Body:**
+
+\`\`\`json
+{
+  "query": "Show me all errors from the last hour",
+  "context": {
+    "timeRange": "1h"
+  }
+}
+\`\`\`
+
+**Rate Limit:** 30 requests per minute
+
+### Export Logs
+
+Export logs in various formats.
+
+\`\`\`http
+GET /api/logs/ai/export
+\`\`\`
+
+**Query Parameters:**
+
+- \`format\` (optional): Export format (json, csv, jsonl, default: json)
+- \`service\` (optional): Filter by service
+- \`timeRange\` (optional): Time range filter
+
+## Related Documentation
+
+- [Logs Feature](/features/logs) - Logs management
+- [Telemetry API](/api/telemetry) - Telemetry endpoints`}
+  />
+);
+
+// Budget API Page
+export const BudgetAPIPage = () => (
+  <DocumentationPage
+    title="Budget API"
+    description="Complete API reference for budget management endpoints"
+    prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }}
+    nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }}
+    fallbackContent={`# Budget API
+
+Complete API reference for budget management endpoints.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/budget\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Budget Status
+
+Get current budget status and usage.
+
+\`\`\`http
+GET /api/budget/status
+\`\`\`
+
+**Response:**
+
+\`\`\`json
+{
+  "success": true,
+  "budget": {
+    "total": 1000.00,
+    "used": 750.50,
+    "remaining": 249.50,
+    "percentage": 75.05,
+    "period": "monthly"
+  }
+}
+\`\`\`
+
+## Related Documentation
+
+- [Alerts](/features/alerts) - Budget alerts
+- [Cost Analytics](/features/analytics) - Cost analysis`}
+  />
+);
+
+// Session Replay API Page
+export const SessionReplayAPIPage = () => (
+  <DocumentationPage
+    title="Session Replay API"
+    description="Complete API reference for session replay endpoints"
+    prevPage={{ path: '/api/budget', label: 'Previous: Budget API' }}
+    nextPage={{ path: '/api/trace', label: 'Next: Trace API' }}
+    fallbackContent={`# Session Replay API
+
+Complete API reference for session replay endpoints.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/session-replay\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### List Sessions
+
+Get list of sessions with filtering.
+
+\`\`\`http
+GET /api/session-replay/sessions
+\`\`\`
+
+**Query Parameters:**
+
+- \`feature\` (optional): Filter by feature type
+- \`status\` (optional): Filter by status
+- \`from\` (optional): Start date
+- \`to\` (optional): End date
+- \`limit\` (optional): Number of sessions (default: 50)
+
+### Get Session Replay
+
+Get session replay data.
+
+\`\`\`http
+GET /api/session-replay/sessions/:sessionId
+\`\`\`
+
+## Related Documentation
+
+- [Sessions Feature](/features/sessions) - Session features
+- [Distributed Tracing](/features/tracing) - Trace collection`}
+  />
+);
+
+// Trace API Page
+export const TraceAPIPage = () => (
+  <DocumentationPage
+    title="Trace API"
+    description="Complete API reference for distributed tracing endpoints"
+    prevPage={{ path: '/api/session-replay', label: 'Previous: Session Replay API' }}
+    nextPage={{ path: '/api', label: 'Next: API Overview' }}
+    fallbackContent={`# Trace API
+
+Complete API reference for distributed tracing endpoints.
+
+## Base URL
+
+\`https://cost-katana-backend.store/api/v1\`
+
+## Authentication
+
+All endpoints require authentication:
+
+\`\`\`http
+Authorization: Bearer YOUR_API_KEY
+\`\`\`
+
+## Endpoints
+
+### Get Trace
+
+Get trace details by trace ID.
+
+\`\`\`http
+GET /api/v1/traces/:traceId
+\`\`\`
+
+**Path Parameters:**
+
+- \`traceId\`: Trace ID
+
+### List Traces
+
+Get list of traces with filtering.
+
+\`\`\`http
+GET /api/v1/traces
+\`\`\`
+
+**Query Parameters:**
+
+- \`service\` (optional): Filter by service
+- \`operation\` (optional): Filter by operation
+- \`from\` (optional): Start timestamp
+- \`to\` (optional): End timestamp
+- \`limit\` (optional): Number of traces (default: 100)
+
+## Related Documentation
+
+- [Distributed Tracing](/features/tracing) - Trace features
+- [Sessions](/features/sessions) - Session replay`}
   />
 );
 

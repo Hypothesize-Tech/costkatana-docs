@@ -36,6 +36,18 @@ import {
   AlertsPage,
   TracingPage,
   SastPage,
+  TelemetryDashboardPage,
+  SessionsPage,
+  LogsPage,
+  CachePage,
+  AdvancedMonitoringPage,
+  UnexplainedCostsPage,
+  ExperimentationPage,
+  ModerationPage,
+  SecurityPage,
+  MemoryPage,
+  CostLakePage,
+  GitHubIntegrationsPage,
   APIOverviewPage,
   AuthenticationPage,
   UsageAPIPage,
@@ -44,6 +56,15 @@ import {
   OptimizationAPIPage,
   WebhooksPage,
   RateLimitsPage,
+  ChatAPIPage,
+  AgentAPIPage,
+  MemoryAPIPage,
+  CacheAPIPage,
+  TelemetryAPIPage,
+  LogsAPIPage,
+  BudgetAPIPage,
+  SessionReplayAPIPage,
+  TraceAPIPage,
   FAQPage,
   SupportPage,
   OpenTelemetryVendorsPage
@@ -94,6 +115,18 @@ const App: React.FC = () => {
                   <Route path="/features/key-vault" element={<KeyVaultPage />} />
                   <Route path="/features/alerts" element={<AlertsPage />} />
                   <Route path="/features/tracing" element={<TracingPage />} />
+                  <Route path="/features/telemetry" element={<TelemetryDashboardPage />} />
+                  <Route path="/features/sessions" element={<SessionsPage />} />
+                  <Route path="/features/logs" element={<LogsPage />} />
+                  <Route path="/features/cache" element={<CachePage />} />
+                  <Route path="/features/advanced-monitoring" element={<AdvancedMonitoringPage />} />
+                  <Route path="/features/unexplained-costs" element={<UnexplainedCostsPage />} />
+                  <Route path="/features/experimentation" element={<ExperimentationPage />} />
+                  <Route path="/features/moderation" element={<ModerationPage />} />
+                  <Route path="/features/security" element={<SecurityPage />} />
+                  <Route path="/features/memory" element={<MemoryPage />} />
+                  <Route path="/features/cost-lake" element={<CostLakePage />} />
+                  <Route path="/features/github-integrations" element={<GitHubIntegrationsPage />} />
 
                   {/* Observability */}
                   <Route path="/observability/opentelemetry" element={<OpenTelemetryVendorsPage />} />
@@ -107,6 +140,15 @@ const App: React.FC = () => {
                   <Route path="/api/optimization" element={<OptimizationAPIPage />} />
                   <Route path="/api/webhooks" element={<WebhooksPage />} />
                   <Route path="/api/rate-limits" element={<RateLimitsPage />} />
+                  <Route path="/api/chat" element={<ChatAPIPage />} />
+                  <Route path="/api/agent" element={<AgentAPIPage />} />
+                  <Route path="/api/memory" element={<MemoryAPIPage />} />
+                  <Route path="/api/cache" element={<CacheAPIPage />} />
+                  <Route path="/api/telemetry" element={<TelemetryAPIPage />} />
+                  <Route path="/api/logs" element={<LogsAPIPage />} />
+                  <Route path="/api/budget" element={<BudgetAPIPage />} />
+                  <Route path="/api/session-replay" element={<SessionReplayAPIPage />} />
+                  <Route path="/api/trace" element={<TraceAPIPage />} />
 
                   {/* Support */}
                   <Route path="/faq" element={<FAQPage />} />

@@ -551,15 +551,66 @@
 
   /* Sidebar link styles */
   .sidebar-link {
-    @apply flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 text-light-text-secondary dark:text-dark-text-secondary;
+    @apply relative flex items-center gap-x-3 px-4 py-3 text-sm font-medium rounded-xl transition-all duration-300 min-h-[44px];
+    @apply text-light-text-secondary dark:text-dark-text-secondary;
+    @apply hover:bg-primary-500/10 dark:hover:bg-primary-500/20;
+    @apply hover:text-primary-600 dark:hover:text-primary-400;
+    position: relative;
   }
 
-  .sidebar-link:hover {
-    @apply bg-light-panel dark:bg-gray-800 text-primary-500 dark:text-primary-400;
+  .sidebar-link:active {
+    background-color: rgba(6, 236, 158, 0.15);
+  }
+
+  .dark .sidebar-link:active {
+    background-color: rgba(6, 236, 158, 0.25);
+  }
+
+  .sidebar-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 0.75rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+
+  .sidebar-link:hover::before {
+    background: linear-gradient(135deg, rgba(6, 236, 158, 0.05), rgba(0, 148, 84, 0.05));
   }
 
   .sidebar-link.active {
-    @apply bg-primary-50 dark:bg-primary-900/20 text-primary-500 dark:text-primary-400 border-l-4 border-primary-500;
+    @apply bg-gradient-to-r from-[#06ec9e] via-emerald-500 to-[#009454];
+    @apply text-white shadow-xl;
+    box-shadow: 0 4px 15px rgba(6, 236, 158, 0.3);
+  }
+
+  .sidebar-link.active::before {
+    background: linear-gradient(135deg, rgba(6, 236, 158, 0.2), rgba(34, 197, 94, 0.2), rgba(0, 148, 84, 0.2));
+    filter: blur(4px);
+  }
+
+  .sidebar-link.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: linear-gradient(180deg, #06ec9e, #009454);
+    border-radius: 0 2px 2px 0;
+    box-shadow: 0 0 8px rgba(6, 236, 158, 0.5);
+  }
+
+  .sidebar-link svg {
+    @apply flex-shrink-0;
+    width: 18px;
+    height: 18px;
+  }
+
+  .sidebar-link.active svg {
+    @apply text-white;
   }
 
   /* Documentation content styles */
