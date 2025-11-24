@@ -10,9 +10,51 @@ export const InstallationPage = () => (
 
 Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 40-75% token reduction with LISP-based optimization.
 
-## 🚀 CLI Installation
+## 🎯 Primary Package: Core SDK (Recommended)
 
-### Global Installation (Recommended)
+### Node.js/TypeScript Core Package
+
+**#1 Priority Package** - The core Cost Katana SDK for Node.js and TypeScript applications:
+
+\`\`\`bash
+# Install the core package
+npm install cost-katana
+\`\`\`
+
+### Package Information
+
+[![npm version](https://badge.fury.io/js/cost-katana.svg)](https://www.npmjs.com/package/cost-katana)
+
+- **Package Name**: \`cost-katana\` ⭐ **Primary Package**
+- **Latest Version**: 2.1.3
+- **Repository**: [GitHub](https://github.com/Hypothesize-Tech/costkatana-core)
+- **License**: MIT
+- **TypeScript**: ✅ Built-in type declarations
+
+### Quick Start Example
+
+\`\`\`javascript
+import { ai, OPENAI } from 'cost-katana';
+
+// Simple AI call with automatic cost tracking
+const response = await ai(OPENAI.GPT_4O, 'Hello, world!');
+console.log(response.text);
+console.log(\`Cost: $\${response.cost}\`);
+\`\`\`
+
+### Why Choose the Core Package?
+
+- ✅ **Type-safe model constants** with IDE autocomplete
+- ✅ **Automatic cost tracking** for all AI providers
+- ✅ **Zero configuration** required
+- ✅ **Full TypeScript support** with complete type definitions
+- ✅ **Production-ready** with enterprise features
+
+---
+
+## 🚀 Alternative: CLI Installation
+
+### Global Installation
 
 Install the Cost Katana CLI globally using npm:
 
@@ -41,7 +83,7 @@ yarn global add cost-katana-cli
 cost-katana --version
 \`\`\`
 
-### Package Information
+### CLI Package Information
 
 [![npm version](https://badge.fury.io/js/cost-katana-cli.svg)](https://www.npmjs.com/package/cost-katana-cli)
 
@@ -135,20 +177,7 @@ cost-katana --help
 cost-katana test
 \`\`\`
 
-## 📦 SDK Installation
-
-### Node.js SDK
-\`\`\`bash
-npm install @cost-katana/node-sdk
-\`\`\`
-
-\`\`\`javascript
-import { CostKatana } from '@cost-katana/node-sdk';
-
-const ck = new CostKatana({
-  apiKey: 'your-api-key'
-});
-\`\`\`
+## 📦 Additional SDK Options
 
 ### Python SDK
 \`\`\`bash

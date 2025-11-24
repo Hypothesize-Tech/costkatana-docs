@@ -64,12 +64,14 @@ Once logged in, you'll need an API key to start tracking usage:
 
 ## Step 3: Choose Your Integration Method
 
-### Option 1: Node.js SDK (Core Package)
-For JavaScript/TypeScript developers - the most powerful way to integrate:
+### ⭐ Option 1: Core Package (Primary/Recommended)
+**#1 Priority Package** - For JavaScript/TypeScript developers - the most powerful and recommended way to integrate:
 
 \`\`\`bash
 npm install cost-katana
 \`\`\`
+
+> **🎯 Primary Package**: \`cost-katana\` is our #1 priority package. This is the core SDK that provides the most features and best developer experience.
 
 \`\`\`javascript
 import { ai, OPENAI, ANTHROPIC, GOOGLE } from 'cost-katana';
@@ -101,7 +103,7 @@ const chatSession = chat(ANTHROPIC.CLAUDE_SONNET_4_5, 'You are a helpful assista
 await chatSession.send('What is machine learning?');
 \`\`\`
 
-### Option 2: Python SDK
+### Option 2: Python SDK (Alternative)
 For Python developers - with type-safe model constants:
 
 \`\`\`bash
@@ -136,8 +138,8 @@ chat_session = chat(anthropic.claude_sonnet_4_5, "You are a helpful assistant")
 chat_session.send("What is machine learning?")
 \`\`\`
 
-### Option 3: CLI Tool
-For terminal enthusiasts - the fastest way to get started:
+### Option 3: CLI Tool (Alternative)
+For terminal enthusiasts - an alternative way to get started:
 
 \`\`\`bash
 npm install -g cost-katana-cli
@@ -160,7 +162,7 @@ cost-katana models
 cost-katana usage
 \`\`\`
 
-### Option 4: ChatGPT Custom GPT
+### Option 4: ChatGPT Custom GPT (Alternative)
 Perfect for ChatGPT Plus users - get instant AI-powered optimization tips:
 
 1. **Visit our Custom GPT**: [chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence](https://chatgpt.com/g/g-68804444e5e48191a5a7ae35a268e1dc-cost-katana-ai-cost-intelligence?model=gpt-4o)

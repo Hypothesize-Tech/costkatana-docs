@@ -44,11 +44,12 @@ Cost Katana transforms how you manage AI costs by providing:
 - **Usage Intelligence**: Deep insights into spending patterns and efficiency
 
 ### 🔗 Universal Integration
+- **Primary Package**: \`cost-katana\` ⭐ - Our #1 priority npm package for Node.js/TypeScript with type-safe model constants
 - **Multi-Provider Support**: 400+ models across 10 providers
   - Latest models: GPT-5, Claude Sonnet 4.5, Gemini 2.5 Pro
   - All major providers: OpenAI, Anthropic, Google, AWS, xAI, and more
+- **Additional Tools**: CLI tools, Python SDK, VSCode/Cursor extensions
 - **ChatGPT Custom GPT**: Direct integration with personalized AI tips
-- **Development Tools**: VSCode/Cursor extensions, CLI tools, SDKs with type-safe constants
 - **API Gateway**: Unified proxy with caching, retries, and optimization
 
 ### 🚨 Proactive Monitoring
@@ -83,7 +84,7 @@ Unlike traditional monitoring tools, Cost Katana uses AI to actively optimize yo
 Our customers typically save **30-70%** on their AI costs while maintaining or improving quality through intelligent optimization.
 
 ### 🚀 **Zero Friction Integration**
-Start tracking in minutes with our ChatGPT Custom GPT, browser extensions, or simple SDK integration. No complex setup required.
+Start tracking in minutes with our primary \`cost-katana\` npm package, ChatGPT Custom GPT, browser extensions, or simple SDK integration. No complex setup required.
 
 ### 🔮 **Predictive Intelligence**
 Don't just react to problems - prevent them. Our AI predicts usage spikes, limit overruns, and budget issues before they happen.
@@ -104,7 +105,7 @@ SOC 2 Type II compliant, GDPR ready, with enterprise SSO, role-based access cont
 Ready to start optimizing your AI costs? Here's how to proceed:
 
 1. **[Quick Start Guide](/getting-started/quick-start)** - Get up and running in 5 minutes
-2. **[Installation](/getting-started/installation)** - Detailed setup instructions
+2. **[Installation](/getting-started/installation)** - Install our primary \`cost-katana\` package (#1 priority) or explore alternative options
 3. **[API Documentation](/api)** - Complete API reference
 4. **[Integrations](/integrations)** - Connect with your tools
 
