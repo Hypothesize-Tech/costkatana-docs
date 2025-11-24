@@ -117,9 +117,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             id: 'integrations',
             icon: <Plug size={18} />,
             items: [
-                { path: '/integrations/cli', label: 'CLI Tool', icon: <Terminal size={16} /> },
                 { path: '/integrations/nodejs', label: 'Node.js SDK', icon: <Code size={16} /> },
                 { path: '/integrations/python', label: 'Python SDK', icon: <Code size={16} /> },
+                { path: '/integrations/cli', label: 'CLI Tool', icon: <Terminal size={16} /> },
                 { path: '/integrations/chatgpt', label: 'ChatGPT Integration', icon: <Bot size={16} /> },
             ],
         },

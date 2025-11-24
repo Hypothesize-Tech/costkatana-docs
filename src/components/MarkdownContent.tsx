@@ -261,21 +261,87 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         });
     };
 
-    // Custom components for markdown rendering
-    const components = {
-        // Code blocks with copy button and green accent
-        pre: ({ children, ...props }: any) => {
-            const codeContent = children?.props?.children?.toString() || '';
+    // Function to extract text content from React children recursively
+    const extractTextContent = (node: any): string => {
+        if (typeof node === 'string') {
+            return node;
+        }
+        if (typeof node === 'number') {
+            return String(node);
+        }
+        if (Array.isArray(node)) {
+            return node.map(extractTextContent).join('');
+        }
+        if (React.isValidElement(node)) {
+            const props = node.props as any;
+            if (props?.children) {
+                return extractTextContent(props.children);
+            }
+            if (props?.className && props.className.includes('hljs')) {
+                // For syntax-highlighted code, try to get the raw text
+                return extractTextContent(props.children);
+            }
+        }
+        return '';
+    };
 
-            return (
-                <div className="relative group my-4">
-                    <pre className="bg-gray-900 dark:bg-black text-gray-100 rounded-xl p-4 overflow-x-auto border border-primary-500/20 shadow-lg" {...props}>
-                        {children}
-                    </pre>
+    // Component for code blocks with copy button
+    const CodeBlock: React.FC<{ children?: any;[key: string]: any }> = ({ children, ...props }) => {
+        const preRef = React.useRef<HTMLPreElement>(null);
+        const [codeContent, setCodeContent] = React.useState('');
+
+        // Extract code content on mount and when children change
+        React.useEffect(() => {
+            let extracted = '';
+
+            // Try multiple extraction strategies
+            if (React.isValidElement(children)) {
+                const codeElement = children;
+                // Strategy 1: Direct children prop (most common case)
+                if (codeElement.props?.children) {
+                    extracted = extractTextContent(codeElement.props.children);
+                }
+                // Strategy 2: If no children, try to extract from element itself
+                if (!extracted && codeElement.props) {
+                    extracted = extractTextContent(codeElement);
+                }
+            } else if (Array.isArray(children)) {
+                // Handle array of children
+                extracted = extractTextContent(children);
+            } else if (typeof children === 'string') {
+                extracted = children;
+            } else if (children != null) {
+                // Fallback: try to extract from any structure
+                extracted = extractTextContent(children);
+            }
+
+            // Clean up the code content
+            extracted = extracted.trim();
+
+            // If extraction failed, try to get from DOM as fallback
+            if (!extracted && preRef.current) {
+                const text = preRef.current.textContent || preRef.current.innerText || '';
+                extracted = text.trim();
+            }
+
+            setCodeContent(extracted);
+        }, [children]);
+
+        return (
+            <div className="relative group my-4">
+                <pre
+                    ref={preRef}
+                    className="bg-gray-900 dark:bg-black text-gray-100 rounded-xl p-4 overflow-x-auto border border-primary-500/20 shadow-lg"
+                    {...props}
+                >
+                    {children}
+                </pre>
+                {codeContent && (
                     <button
                         onClick={() => copyToClipboard(codeContent)}
-                        className="btn absolute top-2 right-2 p-2 bg-primary-600/80 hover:bg-primary-600 dark:bg-primary-500/80 dark:hover:bg-primary-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg"
+                        className="btn absolute top-2 right-2 p-2 bg-primary-600/80 hover:bg-primary-600 dark:bg-primary-500/80 dark:hover:bg-primary-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
                         title="Copy code"
+                        aria-label="Copy code to clipboard"
                     >
                         {copiedCode === codeContent ? (
                             <Check size={16} className="text-white" />
@@ -283,9 +349,15 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                             <Copy size={16} className="text-white" />
                         )}
                     </button>
-                </div>
-            );
-        },
+                )}
+            </div>
+        );
+    };
+
+    // Custom components for markdown rendering
+    const components = {
+        // Code blocks with copy button and green accent
+        pre: CodeBlock,
 
         // Inline code with green accent
         code: ({ inline, className, children, ...props }: any) => {

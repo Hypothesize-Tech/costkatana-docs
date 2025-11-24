@@ -244,7 +244,8 @@ export const CLIPage = () => (
   <DocumentationPage
     title="CLI Tool"
     description="Powerful command-line interface for AI cost optimization"
-    nextPage={{ path: '/integrations/nodejs', label: 'Next: Node.js SDK' }}
+    prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }}
+    nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }}
     fallbackContent={`# Cost Katana CLI
 
 The most powerful command-line interface for AI cost optimization and management.
@@ -537,7 +538,6 @@ export const NodeJSPage = () => (
   <DocumentationPage
     title="Node.js SDK"
     description="Integrate Cost Katana with your Node.js applications"
-    prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }}
     nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }}
     fallbackContent={`# Node.js SDK Integration
 
@@ -552,17 +552,19 @@ For programmatic integration in your Node.js applications.
 ### Installation
 
 \`\`\`bash
-npm install @cost-katana/node-sdk
+npm install cost-katana
 \`\`\`
 
 ### Quick Start
 
 \`\`\`javascript
-import { CostKatana } from '@cost-katana/node-sdk';
+import { AICostTracker } from 'cost-katana';
 
-const ck = new CostKatana({
-  apiKey: 'your-cost-katana-api-key',
-  baseUrl: 'https://cost-katana-backend.store' // optional
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: 'your-openai-api-key' }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 // Make AI requests with automatic cost tracking
@@ -639,11 +641,14 @@ await ck.budget.setAlert({
 
 \`\`\`javascript
 const express = require('express');
-const { CostKatana } = require('@cost-katana/node-sdk');
+const { AICostTracker } = require('cost-katana');
 
 const app = express();
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 app.use(express.json());
@@ -677,11 +682,13 @@ app.listen(3000);
 
 \`\`\`javascript
 // pages/api/chat.js
-import { CostKatana } from '@cost-katana/node-sdk';
+import { AICostTracker } from 'cost-katana';
 
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY,
-  project: 'nextjs-chat-app'
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 export default async function handler(req, res) {
@@ -717,16 +724,18 @@ export default async function handler(req, res) {
 \`\`\`typescript
 // chat.service.ts
 import { Injectable } from '@nestjs/common';
-import { CostKatana } from '@cost-katana/node-sdk';
+import { AICostTracker } from 'cost-katana';
 
 @Injectable()
 export class ChatService {
-  private readonly ck: CostKatana;
+  private readonly tracker: AICostTracker;
 
   constructor() {
-    this.ck = new CostKatana({
-      apiKey: process.env.API_KEY,
-      project: 'nestjs-app'
+    this.tracker = await AICostTracker.create({
+      providers: [
+        { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+      ],
+      tracking: { enableAutoTracking: true }
     });
   }
 
@@ -756,11 +765,13 @@ export class ChatService {
 ### AWS Lambda
 
 \`\`\`javascript
-const { CostKatana } = require('@cost-katana/node-sdk');
+const { AICostTracker } = require('cost-katana');
 
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY,
-  project: 'lambda-function'
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 exports.handler = async (event) => {
@@ -800,11 +811,13 @@ exports.handler = async (event) => {
 
 \`\`\`javascript
 // api/chat.js
-import { CostKatana } from '@cost-katana/node-sdk';
+import { AICostTracker } from 'cost-katana';
 
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY,
-  project: 'vercel-app'
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 export default async function handler(req, res) {
@@ -899,10 +912,13 @@ CMD ["npm", "start"]
 
 \`\`\`javascript
 // monitor.js
-const { CostKatana } = require('@cost-katana/node-sdk');
+const { AICostTracker } = require('cost-katana');
 
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 // Monitor costs in real-time
@@ -924,11 +940,14 @@ setInterval(async () => {
 \`\`\`javascript
 // dashboard-data.js
 const express = require('express');
-const { CostKatana } = require('@cost-katana/node-sdk');
+const { AICostTracker } = require('cost-katana');
 
 const app = express();
-const ck = new CostKatana({
-  apiKey: process.env.API_KEY
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 // Dashboard API endpoint
@@ -1031,7 +1050,7 @@ async function chatWithCaching(messages) {
 
 1. **Install CLI**: \`npm install -g cost-katana-cli\`
 2. **Initialize**: \`cost-katana init\`
-3. **Install SDK**: \`npm install @cost-katana/node-sdk\`
+3. **Install SDK**: \`npm install cost-katana\`
 4. **Start Tracking**: Begin monitoring your AI costs
 5. **Optimize**: Use insights to reduce expenses
 
@@ -1044,7 +1063,7 @@ export const PythonPage = () => (
     title="Python SDK"
     description="Integrate Cost Katana with your Python applications"
     prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }}
-    nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }}
+    nextPage={{ path: '/integrations/cli', label: 'Next: CLI Tool' }}
     fallbackContent={`# Python SDK Integration
 
 Complete guide to integrating Cost Katana with your Python applications for AI cost optimization.
@@ -1652,7 +1671,7 @@ export const ChatGPTPage = () => (
   <DocumentationPage
     title="ChatGPT Integration"
     description="Direct ChatGPT custom GPT integration for instant optimization"
-    prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }}
+    prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }}
     fallbackContent={`# ChatGPT Integration
 
 Direct integration with ChatGPT through custom GPT for instant AI cost optimization and analysis.
@@ -4243,10 +4262,13 @@ Query parameters:
 ### JavaScript/TypeScript
 
 \`\`\`typescript
-import { CostKatanaClient } from '@costkatana/sdk';
+import { AICostTracker } from 'cost-katana';
 
-const client = new CostKatanaClient({
-  apiKey: process.env.API_KEY
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 
 // Track usage
@@ -5607,12 +5629,17 @@ cost-katana sast stats
 
 ### Node.js SDK
 \`\`\`javascript
-import { SastOptimizer } from '@cost-katana/core';
+import { PromptOptimizer } from 'cost-katana';
 
-const sastOptimizer = new SastOptimizer();
+const tracker = await AICostTracker.create({
+  providers: [{ provider: 'openai', apiKey: process.env.OPENAI_API_KEY }],
+  tracking: { enableAutoTracking: true }
+});
 
-// Basic SAST optimization
-const result = await sastOptimizer.optimize(
+const optimizer = tracker.getOptimizer();
+
+// Basic optimization
+const result = await optimizer.optimizePrompt(
   "I saw a man on the hill with a telescope",
   {
     language: 'en',
@@ -5629,7 +5656,7 @@ console.log('Token Reduction:', result.optimizationMetrics.tokenReduction);
 
 ### Gateway Integration
 \`\`\`javascript
-import { GatewayClient } from '@cost-katana/core';
+import { GatewayClient } from 'cost-katana';
 
 const client = new GatewayClient({ 
   baseUrl: 'https://cost-katana-backend.store',
@@ -5790,7 +5817,7 @@ Navigate to \`/sast\` in your Cost Katana dashboard to explore SAST features int
 ### 2. **CLI Quick Start**
 \`\`\`bash
 # Install CLI
-npm install -g @cost-katana/cli
+npm install -g cost-katana-cli
 
 # Run SAST optimization
 cost-katana sast optimize "Your text here"
@@ -5936,14 +5963,13 @@ Advanced querying and filtering:
 Configure your application to send telemetry data:
 
 \`\`\`javascript
-import { CostKatana } from 'cost-katana';
+import { AICostTracker } from 'cost-katana';
 
-const client = new CostKatana({
-  apiKey: 'your-api-key',
-  telemetry: {
-    enabled: true,
-    endpoint: 'https://cost-katana-backend.store/api/telemetry'
-  }
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 \`\`\`
 
@@ -6173,15 +6199,13 @@ Distributed tracing for API-level debugging with hierarchical trace visualizatio
 ### 1. Enable Session Recording
 
 \`\`\`javascript
-import { CostKatana } from 'cost-katana';
+import { AICostTracker } from 'cost-katana';
 
-const client = new CostKatana({
-  apiKey: 'your-api-key',
-  sessions: {
-    enabled: true,
-    recordReplays: true,
-    recordTraces: true
-  }
+const tracker = await AICostTracker.create({
+  providers: [
+    { provider: 'openai', apiKey: process.env.OPENAI_API_KEY }
+  ],
+  tracking: { enableAutoTracking: true }
 });
 \`\`\`
 
