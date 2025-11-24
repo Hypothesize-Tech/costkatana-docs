@@ -66,8 +66,27 @@ interface MarkdownContentProps {
     className?: string;
 }
 
+// Function to slugify text for IDs
+const slugify = (text: string): string => {
+    return text
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, '-')
+        .replace(/[^\w-]+/g, '')
+        .replace(/--+/g, '-')
+        .replace(/^-+/, '')
+        .replace(/-+$/, '');
+};
+
 const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
+    const idCountsRef = React.useRef<Record<string, number>>({});
+
+    // Reset ID counts when content changes
+    React.useEffect(() => {
+        idCountsRef.current = {};
+    }, [content]);
 
     const copyToClipboard = async (code: string) => {
         try {
@@ -78,6 +97,62 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         } catch {
             toast.error('Failed to copy code');
         }
+    };
+
+    // Function to remove emojis (must match TableOfContents exactly)
+    const removeEmojis = (text: string): string => {
+        return text
+            .replace(/[\u{1F300}-\u{1F9FF}]/gu, '') // Emoticons & Symbols
+            .replace(/[\u{2600}-\u{26FF}]/gu, '') // Misc symbols
+            .replace(/[\u{2700}-\u{27BF}]/gu, '') // Dingbats
+            .replace(/[\u{1F600}-\u{1F64F}]/gu, '') // Emoticons
+            .replace(/[\u{1F680}-\u{1F6FF}]/gu, '') // Transport & Map
+            .replace(/[\u{1F1E0}-\u{1F1FF}]/gu, '') // Flags
+            .replace(/[\u{1F900}-\u{1F9FF}]/gu, '') // Supplemental Symbols
+            .replace(/[\u{FE00}-\u{FE0F}]/gu, '') // Variation Selectors
+            .trim();
+    };
+
+    // Function to generate unique ID from heading text (React nodes)
+    // Must match the logic in TableOfContents extractHeadings exactly
+    const generateHeadingId = (children: React.ReactNode): string => {
+        // Extract text from React nodes
+        const extractText = (node: React.ReactNode): string => {
+            if (typeof node === 'string') return node;
+            if (typeof node === 'number') return String(node);
+            if (Array.isArray(node)) return node.map(extractText).join('');
+            if (React.isValidElement(node) && node.props?.children) {
+                return extractText(node.props.children);
+            }
+            return '';
+        };
+
+        const textContent = extractText(children);
+        // Remove markdown formatting (must match TableOfContents order)
+        let cleanText = textContent
+            .replace(/\*\*(.+?)\*\*/g, '$1')
+            .replace(/\*(.+?)\*/g, '$1')
+            .replace(/\[(.+?)\]\(.+?\)/g, '$1')
+            .replace(/`(.+?)`/g, '$1')
+            .trim();
+
+        // Remove emojis using the same function as TableOfContents
+        cleanText = removeEmojis(cleanText);
+
+        let baseId = slugify(cleanText);
+        if (!baseId) {
+            baseId = `heading-${Object.keys(idCountsRef.current).length + 1}`;
+        }
+
+        // Ensure unique IDs
+        if (idCountsRef.current[baseId]) {
+            idCountsRef.current[baseId]++;
+            baseId = `${baseId}-${idCountsRef.current[baseId]}`;
+        } else {
+            idCountsRef.current[baseId] = 1;
+        }
+
+        return baseId;
     };
 
     // Emoji to icon mapping
@@ -297,30 +372,58 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             </li>
         ),
 
-        // Headings with green gradient
-        h1: ({ children, ...props }: any) => (
-            <h1 className="text-4xl font-display font-bold mb-6 gradient-text" {...props}>
-                {processChildrenRecursively(children)}
-            </h1>
-        ),
+        // Headings with green gradient and IDs for TOC
+        h1: ({ children, ...props }: any) => {
+            const id = generateHeadingId(children);
+            return (
+                <h1
+                    id={id}
+                    className="text-4xl font-display font-bold mb-6 gradient-text scroll-mt-24"
+                    {...props}
+                >
+                    {processChildrenRecursively(children)}
+                </h1>
+            );
+        },
 
-        h2: ({ children, ...props }: any) => (
-            <h2 className="text-3xl font-display font-semibold mt-8 mb-4 gradient-text border-b border-primary-200/30 dark:border-primary-700/30 pb-2" {...props}>
-                {processChildrenRecursively(children)}
-            </h2>
-        ),
+        h2: ({ children, ...props }: any) => {
+            const id = generateHeadingId(children);
+            return (
+                <h2
+                    id={id}
+                    className="text-3xl font-display font-semibold mt-8 mb-4 gradient-text border-b border-primary-200/30 dark:border-primary-700/30 pb-2 scroll-mt-24"
+                    {...props}
+                >
+                    {processChildrenRecursively(children)}
+                </h2>
+            );
+        },
 
-        h3: ({ children, ...props }: any) => (
-            <h3 className="text-2xl font-display font-semibold mt-6 mb-3 gradient-text" {...props}>
-                {processChildrenRecursively(children)}
-            </h3>
-        ),
+        h3: ({ children, ...props }: any) => {
+            const id = generateHeadingId(children);
+            return (
+                <h3
+                    id={id}
+                    className="text-2xl font-display font-semibold mt-6 mb-3 gradient-text scroll-mt-24"
+                    {...props}
+                >
+                    {processChildrenRecursively(children)}
+                </h3>
+            );
+        },
 
-        h4: ({ children, ...props }: any) => (
-            <h4 className="text-xl font-display font-medium mt-4 mb-2 text-primary-600 dark:text-primary-400" {...props}>
-                {processChildrenRecursively(children)}
-            </h4>
-        ),
+        h4: ({ children, ...props }: any) => {
+            const id = generateHeadingId(children);
+            return (
+                <h4
+                    id={id}
+                    className="text-xl font-display font-medium mt-4 mb-2 text-primary-600 dark:text-primary-400 scroll-mt-24"
+                    {...props}
+                >
+                    {processChildrenRecursively(children)}
+                </h4>
+            );
+        },
 
         // Paragraphs
         p: ({ children, ...props }: any) => (

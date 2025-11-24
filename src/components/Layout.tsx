@@ -45,6 +45,7 @@ import {
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import SearchModal from './SearchModal';
+import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
     path: string;
@@ -222,8 +223,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 {/* Logo */}
                 <div className="flex flex-1 gap-x-4 items-center lg:gap-x-6">
                     <Link to="/" className="flex gap-x-3 items-center group">
-                        <div className="flex justify-center items-center w-12 h-12 rounded-xl shadow-lg bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300">
-                            <Zap className="text-white w-8 h-8" />
+                        <div className="flex justify-center items-center w-12 h-12 rounded-xl shadow-lg bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300 overflow-hidden">
+                            <img
+                                src={logoImage}
+                                alt="Cost Katana"
+                                className="w-full h-full object-contain p-1.5"
+                            />
                         </div>
                         <span className="hidden font-display font-bold text-xl gradient-text sm:block group-hover:scale-105 transition-transform duration-300">
                             Cost Katana
@@ -371,7 +376,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Main Content */}
             <main className="flex-1 overflow-y-auto transition-all duration-300 lg:ml-72 relative z-10">
-                <div className="py-8">
+                <div className="pt-24 pb-8">
                     <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
                         {children}
                     </div>
@@ -380,13 +385,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <footer className="mt-16 border-t border-gray-200 dark:border-gray-700">
                         <div className="max-w-6xl mx-auto px-6 py-8">
                             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                <div className="text-center md:text-left">
-                                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                                        © 2025 Cost Katana. All rights reserved.
-                                    </p>
-                                    <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
-                                        Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
-                                    </p>
+                                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 text-center md:text-left">
+                                    <Link to="/" className="flex items-center gap-2 group">
+                                        <div className="flex justify-center items-center w-10 h-10 rounded-lg shadow-md bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300 overflow-hidden">
+                                            <img
+                                                src={logoImage}
+                                                alt="Cost Katana"
+                                                className="w-full h-full object-contain p-1.5"
+                                            />
+                                        </div>
+                                        <span className="font-display font-bold text-lg gradient-text">
+                                            Cost Katana
+                                        </span>
+                                    </Link>
+                                    <div>
+                                        <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                            © 2025 Cost Katana. All rights reserved.
+                                        </p>
+                                        <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
+                                            Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
+                                        </p>
+                                    </div>
                                 </div>
 
                                 <div className="flex space-x-6">

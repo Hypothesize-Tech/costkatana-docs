@@ -7,6 +7,7 @@ import {
     ArrowRight, BarChart3, Cpu, Database, Terminal, Package,
     Github, BookOpen, Activity, Network
 } from 'lucide-react';
+import logoImage from '../assets/logo.jpg';
 
 const HomePage: React.FC = () => {
     const features = [
@@ -109,8 +110,12 @@ const HomePage: React.FC = () => {
                         className="relative z-10 text-center py-20 px-4"
                     >
                         <div className="flex justify-center mb-6">
-                            <div className="w-24 h-24 bg-gradient-to-br from-primary-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-2xl animate-float">
-                                <Zap className="text-white" size={48} />
+                            <div className="w-24 h-24 bg-gradient-to-br from-primary-600 to-blue-600 rounded-2xl flex items-center justify-center shadow-2xl animate-float overflow-hidden p-3">
+                                <img
+                                    src={logoImage}
+                                    alt="Cost Katana"
+                                    className="w-full h-full object-contain"
+                                />
                             </div>
                         </div>
 

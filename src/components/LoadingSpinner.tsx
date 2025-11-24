@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap } from 'lucide-react';
+import logoImage from '../assets/logo.jpg';
 
 const LoadingSpinner: React.FC = () => {
     return (
@@ -24,8 +24,12 @@ const LoadingSpinner: React.FC = () => {
                 }}
                 className="mb-4"
             >
-                <div className="w-16 h-16 bg-gradient-primary glow-primary rounded-xl flex items-center justify-center shadow-lg">
-                    <Zap className="text-white" size={32} />
+                <div className="w-16 h-16 bg-gradient-primary glow-primary rounded-xl flex items-center justify-center shadow-lg overflow-hidden p-2">
+                    <img
+                        src={logoImage}
+                        alt="Cost Katana"
+                        className="w-full h-full object-contain"
+                    />
                 </div>
             </motion.div>
 

@@ -99,6 +99,33 @@
     box-shadow: 0 0 8px rgba(6, 236, 158, 0.4);
   }
 
+  /* Table of Contents scrollbar */
+  .toc-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-track {
+    background: rgba(6, 236, 158, 0.1);
+    border-radius: 3px;
+    margin: 4px 0;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #06ec9e, #009454);
+    border-radius: 3px;
+  }
+
+  .toc-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #05d68a, #008048);
+    box-shadow: 0 0 4px rgba(6, 236, 158, 0.3);
+  }
+
+  /* Firefox scrollbar for TOC */
+  .toc-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #06ec9e rgba(6, 236, 158, 0.1);
+  }
+
   /* Focus styles with brand colors */
   .focus-ring {
     outline: none;
