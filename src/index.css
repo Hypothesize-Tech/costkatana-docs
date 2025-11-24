@@ -126,6 +126,15 @@
     scrollbar-color: #06ec9e rgba(6, 236, 158, 0.1);
   }
 
+  /* Hide scrollbar while keeping scroll functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+  }
+
   /* Focus styles with brand colors */
   .focus-ring {
     outline: none;

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, FileText, AlertCircle } from 'lucide-react';
 import MarkdownContent from './MarkdownContent';
+import TableOfContents from './TableOfContents';
 import LoadingSpinner from './LoadingSpinner';
 import { useMarkdownContent } from '../hooks/useMarkdownContent';
 
@@ -30,6 +31,84 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
     const location = useLocation();
     const { content, loading, error } = useMarkdownContent(location.pathname, fallbackContent);
 
+    // Handle hash navigation on mount and when hash changes
+    useEffect(() => {
+        if (loading || !content) return;
+
+        const hash = location.hash.slice(1); // Remove the '#'
+        if (hash) {
+            // Wait for content to render, then scroll to hash in content container
+            const timer = setTimeout(() => {
+                let element = document.getElementById(hash);
+
+                // If exact ID not found, try to find elements with suffix (e.g., quick-setup-2)
+                if (!element) {
+                    const headings = document.querySelectorAll('h1, h2, h3, h4');
+                    const suffixMatches = Array.from(headings).filter(h => h.id.startsWith(hash + '-'));
+                    if (suffixMatches.length > 0) {
+                        element = suffixMatches[0];
+                    }
+                }
+
+                if (element) {
+                    const contentContainer = document.getElementById('main-content');
+                    if (contentContainer) {
+                        const elementTop = element.offsetTop;
+                        contentContainer.scrollTo({
+                            top: elementTop - 32, // Add some padding from top
+                            behavior: 'smooth',
+                        });
+                    } else {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                        });
+                    }
+                }
+            }, 100); // Reduced delay for faster response
+
+            return () => clearTimeout(timer);
+        }
+    }, [location.hash, content, loading]);
+
+    // Listen for hash changes
+    useEffect(() => {
+        const handleHashChange = () => {
+            const hash = window.location.hash.slice(1);
+            if (hash) {
+                let element = document.getElementById(hash);
+
+                // If exact ID not found, try to find elements with suffix (e.g., quick-setup-2)
+                if (!element) {
+                    const headings = document.querySelectorAll('h1, h2, h3, h4');
+                    const suffixMatches = Array.from(headings).filter(h => h.id.startsWith(hash + '-'));
+                    if (suffixMatches.length > 0) {
+                        element = suffixMatches[0];
+                    }
+                }
+
+                if (element) {
+                    const contentContainer = document.getElementById('main-content');
+                    if (contentContainer) {
+                        const elementTop = element.offsetTop;
+                        contentContainer.scrollTo({
+                            top: elementTop - 32, // Add some padding from top
+                            behavior: 'smooth',
+                        });
+                    } else {
+                        element.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start',
+                        });
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('hashchange', handleHashChange);
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
+
     if (loading) {
         return <LoadingSpinner />;
     }
@@ -47,9 +126,9 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                 transition={{ duration: 0.5 }}
                 className="max-w-7xl mx-auto"
             >
-                <div className="flex gap-8 items-start">
-                    {/* Main Content */}
-                    <div className="flex-1 min-w-0 max-w-4xl">
+                <div className="flex gap-8 items-start relative">
+                    {/* Main Content - Scrollable */}
+                    <div className="flex-1 min-w-0 max-w-4xl max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide" id="main-content">
                         {error && !content ? (
                             <div className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-12 text-center">
                                 <div className="flex justify-center mb-6">
@@ -104,6 +183,9 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                             </>
                         )}
                     </div>
+
+                    {/* Table of Contents */}
+                    {content && !error && <TableOfContents content={content} />}
                 </div>
             </motion.div>
         </>
