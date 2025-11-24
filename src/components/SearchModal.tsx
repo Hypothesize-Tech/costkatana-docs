@@ -59,6 +59,8 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
     const [results, setResults] = useState<SearchResult[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
     const navigate = useNavigate();
+    const inputRef = React.useRef<HTMLInputElement>(null);
+    const modalRef = React.useRef<HTMLDivElement>(null);
 
     // Initialize Fuse.js for fuzzy search
     const fuse = React.useMemo(() => new Fuse(searchData, {
@@ -110,12 +112,51 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [handleKeyDown]);
 
-    // Reset query when modal opens
+    // Reset query when modal opens and focus input
     useEffect(() => {
         if (isOpen) {
             setQuery('');
             setSelectedIndex(0);
+            // Focus input after a short delay to ensure modal is rendered
+            setTimeout(() => {
+                inputRef.current?.focus();
+            }, 100);
         }
+    }, [isOpen]);
+
+    // Focus trap
+    useEffect(() => {
+        if (!isOpen || !modalRef.current) return;
+
+        const focusableElements = modalRef.current.querySelectorAll(
+            'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        const firstElement = focusableElements[0] as HTMLElement;
+        const lastElement = focusableElements[
+            focusableElements.length - 1
+        ] as HTMLElement;
+
+        const handleTabKey = (e: KeyboardEvent) => {
+            if (e.key !== 'Tab') return;
+
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement?.focus();
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement?.focus();
+                }
+            }
+        };
+
+        window.addEventListener('keydown', handleTabKey);
+
+        return () => {
+            window.removeEventListener('keydown', handleTabKey);
+        };
     }, [isOpen]);
 
     const handleResultClick = (path: string) => {
@@ -140,42 +181,65 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                     {/* Modal */}
                     <div className="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none sm:p-4 md:p-8">
                         <motion.div
+                            ref={modalRef}
                             initial={{ opacity: 0, scale: 0.95, y: -20 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
                             exit={{ opacity: 0, scale: 0.95, y: -20 }}
                             transition={{ duration: 0.2 }}
                             className="w-full max-w-4xl pointer-events-auto h-full sm:h-auto sm:max-h-[85vh] flex flex-col"
                             onClick={(e) => e.stopPropagation()}
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="search-title"
                         >
                             <div className="glass rounded-2xl sm:rounded-2xl rounded-b-none sm:rounded-b-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-2xl overflow-hidden backdrop-blur-xl h-full sm:h-auto flex flex-col">
                                 {/* Search Input */}
                                 <div className="flex items-center px-6 sm:px-4 py-4 sm:py-3 border-b border-primary-200/30 dark:border-primary-700/30 flex-shrink-0">
-                                    <Search className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0" size={20} />
+                                    <Search className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0" size={20} aria-hidden="true" />
+                                    <label htmlFor="search-input" className="sr-only">
+                                        Search documentation
+                                    </label>
                                     <input
+                                        ref={inputRef}
+                                        id="search-input"
                                         type="text"
                                         value={query}
                                         onChange={(e) => setQuery(e.target.value)}
                                         placeholder="Search documentation..."
                                         className="flex-1 bg-transparent outline-none text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500/50 rounded-lg px-2 py-2 sm:py-1 text-base sm:text-sm min-h-[44px] sm:min-h-auto"
                                         autoFocus
+                                        aria-label="Search documentation"
+                                        aria-describedby="search-results-count"
+                                        aria-controls="search-results"
                                     />
                                     <button
                                         onClick={onClose}
                                         className="btn p-2 sm:p-1 hover:bg-primary-100/50 dark:hover:bg-primary-900/30 rounded-lg transition-colors text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-600 dark:hover:text-primary-400 min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center flex-shrink-0"
+                                        aria-label="Close search"
                                     >
-                                        <X size={20} />
+                                        <X size={20} aria-hidden="true" />
                                     </button>
                                 </div>
 
                                 {/* Search Results */}
-                                <div className="flex-1 overflow-y-auto min-h-0">
+                                <div
+                                    id="search-results"
+                                    className="flex-1 overflow-y-auto min-h-0"
+                                    role="listbox"
+                                    aria-label="Search results"
+                                >
                                     {results.length > 0 ? (
-                                        <div className="py-2">
+                                        <div className="py-2" role="group">
+                                            <div id="search-results-count" className="sr-only">
+                                                {results.length} {results.length === 1 ? 'result' : 'results'} found
+                                            </div>
                                             {results.map((result, index) => (
                                                 <button
                                                     key={result.path}
                                                     onClick={() => handleResultClick(result.path)}
                                                     onMouseEnter={() => setSelectedIndex(index)}
+                                                    role="option"
+                                                    aria-selected={selectedIndex === index}
                                                     className={`btn w-full px-6 sm:px-4 py-4 sm:py-3 flex items-start space-x-3 transition-all duration-200 min-h-[64px] sm:min-h-[56px] ${selectedIndex === index
                                                         ? 'bg-gradient-primary/10 dark:bg-gradient-primary/20 border-l-4 border-primary-500 dark:border-primary-400'
                                                         : 'hover:bg-primary-50/50 dark:hover:bg-primary-900/20'

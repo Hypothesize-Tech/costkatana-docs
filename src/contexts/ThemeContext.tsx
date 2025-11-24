@@ -7,6 +7,8 @@ interface ThemeContextType {
     theme: Theme;
     toggleTheme: () => void;
     setTheme: (theme: Theme) => void;
+    highContrast: boolean;
+    toggleHighContrast: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -35,6 +37,15 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         return "light";
     });
 
+    const [highContrast, setHighContrast] = useState<boolean>(() => {
+        // Get high contrast preference from localStorage
+        const saved = localStorage.getItem("highContrast");
+        if (saved !== null) return saved === "true";
+
+        // Check system preference
+        return window.matchMedia("(prefers-contrast: high)").matches;
+    });
+
     useEffect(() => {
         const root = window.document.documentElement;
         root.classList.remove("light", "dark");
@@ -42,14 +53,30 @@ export const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         localStorage.setItem("theme", theme);
     }, [theme]);
 
+    useEffect(() => {
+        const root = window.document.documentElement;
+        if (highContrast) {
+            root.classList.add("high-contrast");
+        } else {
+            root.classList.remove("high-contrast");
+        }
+        localStorage.setItem("highContrast", String(highContrast));
+    }, [highContrast]);
+
     const toggleTheme = () => {
         setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    };
+
+    const toggleHighContrast = () => {
+        setHighContrast((prev) => !prev);
     };
 
     const value = {
         theme,
         toggleTheme,
         setTheme,
+        highContrast,
+        toggleHighContrast,
     };
 
     return (

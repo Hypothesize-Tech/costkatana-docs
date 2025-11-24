@@ -101,7 +101,7 @@ const HomePage: React.FC = () => {
             <div className="min-h-screen">
                 {/* Hero Section */}
                 <section className="relative overflow-hidden rounded-3xl mx-4 mt-4 mb-8">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 opacity-50 rounded-3xl" />
+                    <div className="absolute inset-0 bg-gradient-light-ambient dark:bg-gradient-dark-ambient opacity-50 rounded-3xl" />
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -204,7 +204,7 @@ const HomePage: React.FC = () => {
                 </section>
 
                 {/* Features Grid */}
-                <section className="py-16 px-4 bg-gray-50 dark:bg-gray-900/50 rounded-3xl mx-4 mb-8">
+                <section className="py-16 px-4 bg-gradient-light-panel dark:bg-gradient-dark-panel rounded-3xl mx-4 mb-8">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -280,7 +280,7 @@ const HomePage: React.FC = () => {
                 </section>
 
                 {/* CTA Section */}
-                <section className="py-16 px-4 bg-gradient-to-br from-primary-600 to-blue-600 text-white rounded-3xl mx-4 mb-4">
+                <section className="py-16 px-4 bg-gradient-primary text-white rounded-3xl mx-4 mb-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

@@ -49,10 +49,12 @@ import {
 import { useTheme } from '../contexts/ThemeContext';
 import { useReading } from '../contexts/ReadingContext';
 import { useTOC } from '../contexts/TOCContext';
+import { useKeyboardNavigation } from '../hooks/useKeyboardNavigation';
 import SearchModal from './SearchModal';
 import ReadingSettings from './ReadingSettings';
 import MobileTOC from './MobileTOC';
 import OfflineIndicator from './OfflineIndicator';
+import KeyboardShortcutsModal from './KeyboardShortcutsModal';
 import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
@@ -67,13 +69,14 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
-    const { theme, toggleTheme } = useTheme();
+    const { theme, toggleTheme, highContrast, toggleHighContrast } = useTheme();
     const { settings, toggleReadingMode } = useReading();
     const { content: tocContent } = useTOC();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
     const [mobileTOCOpen, setMobileTOCOpen] = useState(false);
+    const [shortcutsOpen, setShortcutsOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
     const location = useLocation();
 
@@ -98,6 +101,27 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, []);
+
+    // Setup keyboard navigation
+    useKeyboardNavigation({
+        enabled: true,
+        callbacks: {
+            onToggleSidebar: () => setSidebarOpen(prev => !prev),
+            onToggleTOC: () => {
+                // Toggle TOC visibility (if we add this feature)
+                // For now, this can be used for future TOC toggle
+            },
+            onToggleMobileTOC: () => setMobileTOCOpen(prev => !prev),
+            onOpenSearch: () => setSearchOpen(true),
+            onCloseModals: () => {
+                setSearchOpen(false);
+                setReadingSettingsOpen(false);
+                setMobileTOCOpen(false);
+                setShortcutsOpen(false);
+            },
+            onShowShortcuts: () => setShortcutsOpen(true),
+        },
+    });
 
     const navigation = [
         {
@@ -213,6 +237,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
     return (
         <div className="min-h-screen light:bg-gradient-light-ambient dark:bg-gradient-dark-ambient relative overflow-hidden">
+            {/* Skip to main content link for accessibility */}
+            <a
+                href="#main-content"
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-primary-600 focus:text-white focus:rounded-lg focus:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+            >
+                Skip to main content
+            </a>
+
             {/* Ambient glow effects */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
                 <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/8 rounded-full blur-3xl animate-pulse" />
@@ -222,16 +254,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Header */}
-            <header className={`fixed top-0 left-0 right-0 z-50 flex items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel transition-all duration-300 ${settings.isReadingMode ? 'bg-transparent backdrop-blur-sm' : ''
-                }`}>
+            <header
+                className={`fixed top-0 left-0 right-0 z-50 flex items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel transition-all duration-300 ${settings.isReadingMode ? 'bg-transparent backdrop-blur-sm' : ''
+                    }`}
+                role="banner"
+            >
                 {/* Left section - Logo and mobile menu */}
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
                     <button
                         type="button"
                         className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
                         onClick={() => setSidebarOpen(!sidebarOpen)}
+                        aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+                        aria-expanded={sidebarOpen}
+                        aria-controls="sidebar-navigation"
                     >
-                        <span className="sr-only">Open sidebar</span>
+                        <span className="sr-only">{sidebarOpen ? 'Close sidebar' : 'Open sidebar'}</span>
                         {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
                     </button>
 
@@ -256,10 +294,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         type="button"
                         onClick={() => setSearchOpen(true)}
                         className="btn flex items-center gap-x-3 px-6 py-2.5 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-105 rounded-xl min-w-[200px] max-w-[400px] justify-center"
+                        aria-label="Open search"
                     >
-                        <Search className="w-5 h-5" />
+                        <Search className="w-5 h-5" aria-hidden="true" />
                         <span className="hidden sm:inline text-sm">Search documentation...</span>
-                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600 ml-2">
+                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600 ml-2" aria-label="Press Command K to search">
                             ⌘K
                         </kbd>
                     </button>
@@ -273,9 +312,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             type="button"
                             onClick={() => setMobileTOCOpen(true)}
                             className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
-                            title="Table of Contents"
+                            aria-label="Open table of contents"
+                            aria-expanded={mobileTOCOpen}
                         >
-                            <List size={20} />
+                            <List size={20} aria-hidden="true" />
                         </button>
                     )}
                     {/* Theme toggle */}
@@ -283,12 +323,12 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         type="button"
                         onClick={toggleTheme}
                         className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 hover:rotate-12"
-                        title="Toggle theme"
+                        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
                     >
                         {theme === "light" ? (
-                            <Moon className="w-5 h-5" />
+                            <Moon className="w-5 h-5" aria-hidden="true" />
                         ) : (
-                            <Sun className="w-5 h-5" />
+                            <Sun className="w-5 h-5" aria-hidden="true" />
                         )}
                     </button>
 
@@ -298,9 +338,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         onClick={toggleReadingMode}
                         className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${settings.isReadingMode ? 'bg-primary-500/20 text-primary-500' : ''
                             }`}
-                        title="Toggle reading mode"
+                        aria-label={settings.isReadingMode ? 'Disable reading mode' : 'Enable reading mode'}
+                        aria-pressed={settings.isReadingMode}
                     >
-                        <Book className="w-5 h-5" />
+                        <Book className="w-5 h-5" aria-hidden="true" />
                     </button>
 
                     {/* Reading Settings */}
@@ -308,9 +349,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         type="button"
                         onClick={() => setReadingSettingsOpen(!readingSettingsOpen)}
                         className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
-                        title="Reading settings"
+                        aria-label="Open reading settings"
+                        aria-expanded={readingSettingsOpen}
                     >
-                        <Type className="w-5 h-5" />
+                        <Type className="w-5 h-5" aria-hidden="true" />
+                    </button>
+
+                    {/* High Contrast Toggle */}
+                    <button
+                        type="button"
+                        onClick={toggleHighContrast}
+                        className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${highContrast ? 'bg-primary-500/20 text-primary-500' : ''
+                            }`}
+                        aria-label={highContrast ? 'Disable high contrast mode' : 'Enable high contrast mode'}
+                        aria-pressed={highContrast}
+                        title={highContrast ? 'Disable high contrast' : 'Enable high contrast'}
+                    >
+                        <Eye className="w-5 h-5" aria-hidden="true" />
                     </button>
 
                     {/* GitHub */}
@@ -319,27 +374,32 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                        aria-label="Visit Cost Katana GitHub repository (opens in new tab)"
                     >
-                        <Github className="w-5 h-5" />
+                        <Github className="w-5 h-5" aria-hidden="true" />
                     </a>
                 </div>
             </header>
 
             {/* Sidebar */}
             <aside
+                id="sidebar-navigation"
                 className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${settings.isReadingMode
                     ? '-translate-x-full'
                     : sidebarOpen
                         ? 'translate-x-0'
                         : '-translate-x-full lg:translate-x-0'
                     }`}
+                aria-label="Main navigation"
             >
-                <nav className="p-4 space-y-1">
+                <nav className="p-4 space-y-1" aria-label="Documentation navigation">
                     {navigation.map((section) => (
                         <div key={section.id} className="mb-3">
                             <button
                                 onClick={() => toggleSection(section.id)}
                                 className="btn w-full flex items-center justify-between px-4 py-3 text-sm font-display font-semibold rounded-xl transition-all duration-300 group"
+                                aria-expanded={expandedSections.includes(section.id)}
+                                aria-controls={`section-${section.id}`}
                                 style={{
                                     background: expandedSections.includes(section.id)
                                         ? 'linear-gradient(135deg, rgba(6, 236, 158, 0.1), rgba(0, 148, 84, 0.1))'
@@ -377,13 +437,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             <AnimatePresence>
                                 {expandedSections.includes(section.id) && (
                                     <motion.div
+                                        id={`section-${section.id}`}
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: 'auto', opacity: 1 }}
                                         exit={{ height: 0, opacity: 0 }}
                                         transition={{ duration: 0.25, ease: 'easeInOut' }}
                                         className="overflow-hidden"
                                     >
-                                        <div className="ml-1 mt-2 space-y-1 pl-3 border-l-2 border-primary-200/30 dark:border-primary-700/30">
+                                        <div className="ml-1 mt-2 space-y-1 pl-3 border-l-2 border-primary-200/30 dark:border-primary-700/30" role="list">
                                             {section.items.map((item: NavigationItem) => (
                                                 item.external ? (
                                                     <a
@@ -407,6 +468,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                                         key={item.path}
                                                         to={item.path}
                                                         className={`sidebar-link group ${location.pathname === item.path ? 'active' : ''}`}
+                                                        aria-current={location.pathname === item.path ? 'page' : undefined}
                                                     >
                                                         <div className={location.pathname === item.path
                                                             ? 'text-white'
@@ -429,15 +491,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </aside>
 
             {/* Main Content */}
-            <main className={`flex-1 overflow-y-auto transition-all duration-300 relative z-10 ${settings.isReadingMode ? 'lg:ml-0' : 'lg:ml-72'
-                }`}>
+            <main
+                id="main-content"
+                className={`flex-1 overflow-y-auto transition-all duration-300 relative z-10 ${settings.isReadingMode ? 'lg:ml-0' : 'lg:ml-72'
+                    }`}
+                tabIndex={-1}
+            >
                 <div className="pt-24 pb-8">
                     <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
                         {children}
                     </div>
 
                     {/* Footer */}
-                    <footer className="mt-16 border-t border-gray-200 dark:border-gray-700">
+                    <footer className="mt-16 border-t border-gray-200 dark:border-gray-700" role="contentinfo">
                         <div className="max-w-6xl mx-auto px-6 py-8">
                             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                                 <div className="flex flex-col md:flex-row items-center md:items-start gap-4 text-center md:text-left">
@@ -488,6 +554,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Search Modal */}
             <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
             <ReadingSettings isOpen={readingSettingsOpen} onClose={() => setReadingSettingsOpen(false)} />
+            <KeyboardShortcutsModal isOpen={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
 
             {/* Mobile TOC */}
             {tocContent && (

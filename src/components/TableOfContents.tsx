@@ -257,6 +257,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
                                 ? 'bg-primary-500/20 text-primary-600 dark:text-primary-400 font-semibold border-l-2 border-primary-500'
                                 : 'text-light-text-secondary dark:text-dark-text-secondary hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400'
                                 }`}
+                            aria-current={isActive ? 'location' : undefined}
                         >
                             {item.text}
                         </a>
@@ -281,20 +282,20 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
     };
 
     return (
-        <div className="hidden lg:block w-64 flex-shrink-0">
+        <aside className="hidden lg:block w-64 flex-shrink-0" aria-label="Table of contents">
             <div className="fixed top-24 right-8 w-64 max-h-[70vh] overflow-y-auto toc-scrollbar">
                 <div className="card glass rounded-xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel p-4">
                     <h3 className="text-sm font-display font-semibold text-light-text-primary dark:text-dark-text-primary mb-3 gradient-text">
                         Table of Contents
                     </h3>
-                    <nav>
-                        <ul className="space-y-0.5">
+                    <nav aria-label="Table of contents navigation">
+                        <ul className="space-y-0.5" role="list">
                             {renderTOCItems(headings).elements}
                         </ul>
                     </nav>
                 </div>
             </div>
-        </div>
+        </aside>
     );
 };
 

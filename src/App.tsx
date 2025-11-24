@@ -8,69 +8,67 @@ import { TOCProvider } from './contexts/TOCContext';
 import Layout from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorBoundary from './components/ErrorBoundary';
-import NotFoundPage from './pages/NotFoundPage';
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
-// Lazy load pages for better performance
+// Lazy load all pages for better performance and code splitting
 const HomePage = lazy(() => import('./pages/HomePage'));
 const IntroductionPage = lazy(() => import('./pages/getting-started/IntroductionPage'));
 const QuickStartPage = lazy(() => import('./pages/getting-started/QuickStartPage'));
 const ExamplesPage = lazy(() => import('./pages/ExamplesPage'));
 const SupportedModelsPage = lazy(() => import('./pages/SupportedModelsPage'));
 
-// Import documentation pages with real content
-import {
-  InstallationPage,
-  CLIPage,
-  NodeJSPage,
-  PythonPage,
-  ChatGPTPage,
-  FeaturesOverviewPage,
-  DashboardPage,
-  UsageTrackingPage,
-  CostAnalyticsPage,
-  OptimizationPage,
-  PredictiveIntelligencePage,
-  ProjectsPage,
-  TemplatesPage,
-  WorkflowsPage,
-  GatewayPage,
-  KeyVaultPage,
-  AlertsPage,
-  TracingPage,
-  SastPage,
-  TelemetryDashboardPage,
-  SessionsPage,
-  LogsPage,
-  CachePage,
-  AdvancedMonitoringPage,
-  UnexplainedCostsPage,
-  ExperimentationPage,
-  ModerationPage,
-  SecurityPage,
-  MemoryPage,
-  CostLakePage,
-  GitHubIntegrationsPage,
-  APIOverviewPage,
-  AuthenticationPage,
-  UsageAPIPage,
-  AnalyticsAPIPage,
-  ProjectsAPIPage,
-  OptimizationAPIPage,
-  WebhooksPage,
-  RateLimitsPage,
-  ChatAPIPage,
-  AgentAPIPage,
-  MemoryAPIPage,
-  CacheAPIPage,
-  TelemetryAPIPage,
-  LogsAPIPage,
-  BudgetAPIPage,
-  SessionReplayAPIPage,
-  TraceAPIPage,
-  FAQPage,
-  SupportPage,
-  OpenTelemetryVendorsPage
-} from './pages/DocumentationPages';
+// Lazy load documentation pages
+const InstallationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.InstallationPage })));
+const CLIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CLIPage })));
+const NodeJSPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.NodeJSPage })));
+const PythonPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.PythonPage })));
+const ChatGPTPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ChatGPTPage })));
+const FeaturesOverviewPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.FeaturesOverviewPage })));
+const DashboardPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.DashboardPage })));
+const UsageTrackingPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.UsageTrackingPage })));
+const CostAnalyticsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CostAnalyticsPage })));
+const OptimizationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.OptimizationPage })));
+const PredictiveIntelligencePage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.PredictiveIntelligencePage })));
+const ProjectsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ProjectsPage })));
+const TemplatesPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TemplatesPage })));
+const WorkflowsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.WorkflowsPage })));
+const GatewayPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.GatewayPage })));
+const KeyVaultPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.KeyVaultPage })));
+const AlertsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AlertsPage })));
+const TracingPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TracingPage })));
+const SastPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SastPage })));
+const TelemetryDashboardPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TelemetryDashboardPage })));
+const SessionsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SessionsPage })));
+const LogsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.LogsPage })));
+const CachePage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CachePage })));
+const AdvancedMonitoringPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AdvancedMonitoringPage })));
+const UnexplainedCostsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.UnexplainedCostsPage })));
+const ExperimentationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ExperimentationPage })));
+const ModerationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ModerationPage })));
+const SecurityPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SecurityPage })));
+const MemoryPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.MemoryPage })));
+const CostLakePage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CostLakePage })));
+const GitHubIntegrationsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.GitHubIntegrationsPage })));
+const APIOverviewPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.APIOverviewPage })));
+const AuthenticationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AuthenticationPage })));
+const UsageAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.UsageAPIPage })));
+const AnalyticsAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AnalyticsAPIPage })));
+const ProjectsAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ProjectsAPIPage })));
+const OptimizationAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.OptimizationAPIPage })));
+const WebhooksPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.WebhooksPage })));
+const RateLimitsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.RateLimitsPage })));
+const ChatAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ChatAPIPage })));
+const AgentAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AgentAPIPage })));
+const MemoryAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.MemoryAPIPage })));
+const CacheAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CacheAPIPage })));
+const TelemetryAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TelemetryAPIPage })));
+const LogsAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.LogsAPIPage })));
+const BudgetAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.BudgetAPIPage })));
+const SessionReplayAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SessionReplayAPIPage })));
+const TraceAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TraceAPIPage })));
+const FAQPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.FAQPage })));
+const SupportPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SupportPage })));
+const OpenTelemetryVendorsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.OpenTelemetryVendorsPage })));
 
 const App: React.FC = () => {
   return (

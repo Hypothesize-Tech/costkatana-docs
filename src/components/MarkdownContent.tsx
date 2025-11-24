@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
@@ -532,36 +532,89 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             <hr className="my-8 border-primary-200/50 dark:border-primary-700/50" {...props} />
         ),
 
-        // Images
-        img: ({ src, alt, ...props }: any) => {
-            const handleError = (e: any) => {
-                console.error('Image failed to load:', src);
-                e.target.style.display = 'none';
+        // Lazy-loaded Images with Intersection Observer
+        img: (props: React.ImgHTMLAttributes<HTMLImageElement> & { src?: string; alt?: string }) => {
+            // Create a proper component for lazy loading
+            const LazyImage: React.FC<React.ImgHTMLAttributes<HTMLImageElement> & { src?: string; alt?: string }> = ({ src, alt, ...imgProps }) => {
+                const imgRef = useRef<HTMLImageElement>(null);
+                const [isLoaded, setIsLoaded] = useState(false);
+                const [isInView, setIsInView] = useState(false);
+                const [hasError, setHasError] = useState(false);
+
+                useEffect(() => {
+                    const imgElement = imgRef.current;
+                    if (!imgElement) return;
+
+                    // Create Intersection Observer for lazy loading
+                    const observer = new IntersectionObserver(
+                        (entries) => {
+                            entries.forEach((entry) => {
+                                if (entry.isIntersecting) {
+                                    setIsInView(true);
+                                    observer.disconnect();
+                                }
+                            });
+                        },
+                        {
+                            rootMargin: '50px', // Start loading 50px before image enters viewport
+                        }
+                    );
+
+                    observer.observe(imgElement);
+
+                    return () => {
+                        observer.disconnect();
+                    };
+                }, []);
+
+                const handleError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                    console.error('Image failed to load:', src);
+                    setHasError(true);
+                    const target = e.target as HTMLImageElement;
+                    if (target) {
+                        target.style.display = 'none';
+                    }
+                };
+
+                const handleLoad = () => {
+                    setIsLoaded(true);
+                };
+
+                return (
+                    <div className="my-6 text-center">
+                        {!hasError && (
+                            <img
+                                ref={imgRef}
+                                src={isInView ? src : undefined}
+                                alt={alt || ''}
+                                loading="lazy"
+                                onLoad={handleLoad}
+                                onError={handleError}
+                                className={`max-w-full h-auto rounded-xl shadow-lg transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
+                                    }`}
+                                style={{
+                                    backgroundColor: 'rgba(0, 0, 0, 0.05)',
+                                    minHeight: isLoaded ? 'auto' : '200px',
+                                }}
+                                {...imgProps}
+                            />
+                        )}
+                        {!isInView && !hasError && (
+                            <div
+                                className="inline-block w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-xl animate-pulse"
+                                aria-hidden="true"
+                            />
+                        )}
+                        {alt && (
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 italic">
+                                {alt}
+                            </p>
+                        )}
+                    </div>
+                );
             };
 
-            const handleLoad = () => {
-                console.log('Image loaded successfully:', src);
-            };
-
-            return (
-                <div className="my-6 text-center">
-                    <img
-                        src={src}
-                        alt={alt}
-                        className="rounded-lg shadow-lg max-w-full h-auto mx-auto block"
-                        style={{ maxHeight: '600px', width: 'auto' }}
-                        loading="lazy"
-                        onError={handleError}
-                        onLoad={handleLoad}
-                        {...props}
-                    />
-                    {alt && (
-                        <p className="text-sm text-gray-600 dark:text-gray-400 mt-2 italic">
-                            {alt}
-                        </p>
-                    )}
-                </div>
-            );
+            return <LazyImage {...props} />;
         },
     };
 

@@ -231,6 +231,8 @@ const MobileTOC: React.FC<MobileTOCProps> = ({ isOpen, onClose, content }) => {
                                 : 'text-light-text-secondary dark:text-dark-text-secondary hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400'
                                 }`}
                             style={{ paddingLeft: `${(item.level - 1) * 16 + 16}px` }}
+                            aria-current={isActive ? 'location' : undefined}
+                            aria-label={`Jump to ${item.text}`}
                         >
                             {item.text}
                         </a>
@@ -284,6 +286,9 @@ const MobileTOC: React.FC<MobileTOCProps> = ({ isOpen, onClose, content }) => {
                         onDragEnd={handleDragEnd}
                         style={{ y, opacity }}
                         className="fixed bottom-0 left-0 right-0 z-50 lg:hidden bg-gradient-light-panel dark:bg-gradient-dark-panel rounded-t-3xl shadow-2xl border-t border-primary-200/30 dark:border-primary-700/30 max-h-[85vh] flex flex-col"
+                        role="dialog"
+                        aria-modal="true"
+                        aria-labelledby="mobile-toc-title"
                     >
                         {/* Drag Handle */}
                         <div className="flex justify-center pt-3 pb-2">
@@ -293,7 +298,7 @@ const MobileTOC: React.FC<MobileTOCProps> = ({ isOpen, onClose, content }) => {
                         {/* Header */}
                         <div className="flex items-center justify-between px-6 py-4 border-b border-primary-200/30 dark:border-primary-700/30">
                             <div className="flex items-center gap-3">
-                                <List className="text-primary-600 dark:text-primary-400" size={20} />
+                                <List className="text-primary-600 dark:text-primary-400" size={20} aria-hidden="true" />
                                 <h3 className="text-lg font-display font-semibold text-light-text-primary dark:text-dark-text-primary">
                                     Table of Contents
                                 </h3>
@@ -301,15 +306,16 @@ const MobileTOC: React.FC<MobileTOCProps> = ({ isOpen, onClose, content }) => {
                             <button
                                 onClick={onClose}
                                 className="btn p-2 rounded-lg hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                                aria-label="Close table of contents"
                             >
-                                <X size={20} />
+                                <X size={20} aria-hidden="true" />
                             </button>
                         </div>
 
                         {/* TOC Content */}
                         <div className="flex-1 overflow-y-auto px-4 py-4 toc-scrollbar">
-                            <nav>
-                                <ul className="space-y-0.5">
+                            <nav aria-label="Table of contents navigation">
+                                <ul className="space-y-0.5" role="list">
                                     {renderTOCItems(headings).elements}
                                 </ul>
                             </nav>

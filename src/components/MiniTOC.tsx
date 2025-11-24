@@ -109,23 +109,25 @@ const MiniTOC: React.FC<MiniTOCProps> = ({ content, className = '' }) => {
     if (headings.length === 0) return null;
 
     return (
-        <div className={`border-t border-b border-primary-200/20 dark:border-primary-700/20 py-7 ${className}`}>
+        <nav className={`border-t border-b border-primary-200/20 dark:border-primary-700/20 py-7 ${className}`} aria-label="On this page">
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="flex items-center justify-between w-full text-left group"
+                aria-expanded={isExpanded}
+                aria-controls="mini-toc-list"
             >
                 <span className="text-sm font-medium text-light-text-primary dark:text-dark-text-primary">
                     On this page
                 </span>
                 {isExpanded ? (
-                    <ChevronUp size={16} className="text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 transition-colors" />
+                    <ChevronUp size={16} className="text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 transition-colors" aria-hidden="true" />
                 ) : (
-                    <ChevronDown size={16} className="text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 transition-colors" />
+                    <ChevronDown size={16} className="text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 transition-colors" aria-hidden="true" />
                 )}
             </button>
 
             {isExpanded && (
-                <div className="mt-3 space-y-1">
+                <div id="mini-toc-list" className="mt-3 space-y-1" role="list">
                     {headings.slice(0, 8).map((heading) => (
                         <button
                             key={heading.id}
@@ -136,18 +138,19 @@ const MiniTOC: React.FC<MiniTOCProps> = ({ content, className = '' }) => {
                                     ? 'text-light-text-secondary dark:text-dark-text-secondary ml-2'
                                     : 'text-light-text-muted dark:text-dark-text-muted ml-4'
                                 }`}
+                            aria-label={`Jump to ${heading.text}`}
                         >
                             {heading.text}
                         </button>
                     ))}
                     {headings.length > 8 && (
-                        <div className="px-2 py-1 text-xs text-light-text-muted dark:text-dark-text-muted">
+                        <div className="px-2 py-1 text-xs text-light-text-muted dark:text-dark-text-muted" aria-label={`${headings.length - 8} more sections available`}>
                             +{headings.length - 8} more sections
                         </div>
                     )}
                 </div>
             )}
-        </div>
+        </nav>
     );
 };
 

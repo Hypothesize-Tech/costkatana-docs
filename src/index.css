@@ -1191,3 +1191,220 @@ code.hljs {
     box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
   }
 }
+
+/* High Contrast Mode Support - WCAG AAA Compliance */
+@media (prefers-contrast: high) {
+  /* Ensure minimum contrast ratio of 7:1 for normal text and 4.5:1 for large text */
+  .light {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .dark {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+
+  /* High contrast borders */
+  * {
+    border-color: currentColor !important;
+  }
+
+  /* Increase border widths for better visibility */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    border-width: 2px !important;
+  }
+
+  /* High contrast text colors - use direct color instead of utility classes to avoid circular dependency */
+  [class*="text-light-text-primary"],
+  [class*="text-dark-text-primary"] {
+    color: #000000 !important;
+  }
+
+  .dark [class*="text-light-text-primary"],
+  .dark [class*="text-dark-text-primary"] {
+    color: #ffffff !important;
+  }
+
+  [class*="text-light-text-secondary"],
+  [class*="text-dark-text-secondary"] {
+    color: #000000 !important;
+    opacity: 0.9 !important;
+  }
+
+  .dark [class*="text-light-text-secondary"],
+  .dark [class*="text-dark-text-secondary"] {
+    color: #ffffff !important;
+    opacity: 0.9 !important;
+  }
+
+  /* High contrast links */
+  a {
+    color: #0000ff !important;
+    text-decoration: underline !important;
+  }
+
+  .dark a {
+    color: #66b3ff !important;
+  }
+
+  a:focus,
+  a:hover {
+    outline: 3px solid currentColor !important;
+    outline-offset: 2px !important;
+  }
+
+  /* High contrast buttons */
+  button {
+    border: 2px solid currentColor !important;
+    background: transparent !important;
+  }
+
+  button:focus {
+    outline: 3px solid currentColor !important;
+    outline-offset: 2px !important;
+  }
+
+  /* High contrast code blocks */
+  pre,
+  code {
+    border: 2px solid currentColor !important;
+    background: transparent !important;
+  }
+
+  /* High contrast headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000000 !important;
+    border-bottom: 2px solid currentColor !important;
+  }
+
+  .dark h1,
+  .dark h2,
+  .dark h3,
+  .dark h4,
+  .dark h5,
+  .dark h6 {
+    color: #ffffff !important;
+  }
+
+  /* High contrast focus indicators */
+  *:focus {
+    outline: 3px solid currentColor !important;
+    outline-offset: 2px !important;
+  }
+
+  /* High contrast tables */
+  table {
+    border: 2px solid currentColor !important;
+  }
+
+  th,
+  td {
+    border: 1px solid currentColor !important;
+  }
+
+  /* Remove transparency for better contrast */
+  .glass,
+  .bg-gradient-light-panel,
+  .bg-gradient-dark-panel {
+    background: #ffffff !important;
+    opacity: 1 !important;
+  }
+
+  .dark .glass,
+  .dark .bg-gradient-light-panel,
+  .dark .bg-gradient-dark-panel {
+    background: #000000 !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Disable parallax and transform animations */
+  [style*="transform"],
+  [style*="translate"] {
+    transform: none !important;
+  }
+
+  /* Disable fade animations */
+  .animate-fade-in,
+  .fade-in {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Disable slide animations */
+  .animate-slide-up,
+  .slide-in-left,
+  .slide-in-right {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  /* Disable pulse animations */
+  .animate-pulse {
+    animation: none !important;
+  }
+
+  /* Disable hover transitions */
+  .hover\:scale-110:hover,
+  .hover\:scale-105:hover {
+    transform: none !important;
+  }
+
+  /* Ensure smooth scrolling is disabled */
+  html {
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode class (for manual toggle) */
+.high-contrast {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+.high-contrast.dark {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.high-contrast * {
+  border-color: currentColor !important;
+}
+
+.high-contrast button,
+.high-contrast a,
+.high-contrast input,
+.high-contrast select,
+.high-contrast textarea {
+  border-width: 2px !important;
+}
+
+.high-contrast a {
+  color: #0000ff !important;
+  text-decoration: underline !important;
+}
+
+.high-contrast.dark a {
+  color: #66b3ff !important;
+}
+
+.high-contrast *:focus {
+  outline: 3px solid currentColor !important;
+  outline-offset: 2px !important;
+}

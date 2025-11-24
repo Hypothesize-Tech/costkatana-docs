@@ -171,7 +171,7 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
             >
                 <div className="flex gap-8 items-start relative">
                     {/* Main Content - Scrollable */}
-                    <div
+                    <article
                         className="flex-1 min-w-0 max-w-4xl max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide relative"
                         id="main-content"
                         style={{
@@ -251,9 +251,9 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                             </div>
                         ) : (
                             <>
-                                <div className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-8 mb-8">
+                                <section className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-8 mb-8">
                                     <MarkdownContent content={content} />
-                                </div>
+                                </section>
 
                                 {(prevPage || nextPage) && (
                                     <div className="flex justify-between mb-8">
@@ -282,7 +282,7 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                 )}
                             </>
                         )}
-                    </div>
+                    </article>
 
                     {/* Table of Contents */}
                     {content && !error && <TableOfContents content={content} />}
