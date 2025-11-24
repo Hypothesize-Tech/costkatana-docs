@@ -109,7 +109,7 @@ const MiniTOC: React.FC<MiniTOCProps> = ({ content, className = '' }) => {
     if (headings.length === 0) return null;
 
     return (
-        <div className={`border-t border-b border-primary-200/20 dark:border-primary-700/20 py-3 ${className}`}>
+        <div className={`border-t border-b border-primary-200/20 dark:border-primary-700/20 py-7 ${className}`}>
             <button
                 onClick={() => setIsExpanded(!isExpanded)}
                 className="flex items-center justify-between w-full text-left group"
@@ -130,13 +130,12 @@ const MiniTOC: React.FC<MiniTOCProps> = ({ content, className = '' }) => {
                         <button
                             key={heading.id}
                             onClick={() => handleHeadingClick(heading.id)}
-                            className={`block text-left w-full px-2 py-1 rounded text-sm transition-all duration-200 hover:bg-primary-500/10 ${
-                                heading.level === 1
-                                    ? 'font-semibold text-light-text-primary dark:text-dark-text-primary ml-0'
-                                    : heading.level === 2
+                            className={`block text-left w-full px-2 py-1 rounded text-sm transition-all duration-200 hover:bg-primary-500/10 ${heading.level === 1
+                                ? 'font-semibold text-light-text-primary dark:text-dark-text-primary ml-0'
+                                : heading.level === 2
                                     ? 'text-light-text-secondary dark:text-dark-text-secondary ml-2'
                                     : 'text-light-text-muted dark:text-dark-text-muted ml-4'
-                            }`}
+                                }`}
                         >
                             {heading.text}
                         </button>

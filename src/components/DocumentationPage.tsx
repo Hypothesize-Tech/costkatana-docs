@@ -11,6 +11,8 @@ import MiniTOC from './MiniTOC';
 import LoadingSpinner from './LoadingSpinner';
 import { useMarkdownContent } from '../hooks/useMarkdownContent';
 import { useReading } from '../contexts/ReadingContext';
+import { useTOC } from '../contexts/TOCContext';
+import { useSwipeNavigation } from '../hooks/useSwipeNavigation';
 
 interface NavigationLink {
     path: string;
@@ -35,6 +37,15 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
     const location = useLocation();
     const { content, loading, error } = useMarkdownContent(location.pathname, fallbackContent);
     const { settings, estimateReadingTime, getReadingPosition, saveReadingPosition } = useReading();
+    const { setContent } = useTOC();
+    const { swipeState } = useSwipeNavigation({ enabled: true });
+
+    // Update TOC content when content changes
+    useEffect(() => {
+        if (content) {
+            setContent(content);
+        }
+    }, [content, setContent]);
 
     // Handle hash navigation on mount and when hash changes
     useEffect(() => {
@@ -160,7 +171,45 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
             >
                 <div className="flex gap-8 items-start relative">
                     {/* Main Content - Scrollable */}
-                    <div className="flex-1 min-w-0 max-w-4xl max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide" id="main-content">
+                    <div
+                        className="flex-1 min-w-0 max-w-4xl max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-hide relative"
+                        id="main-content"
+                        style={{
+                            transform: swipeState.isSwiping
+                                ? `translateX(${swipeState.direction === 'left' ? swipeState.progress * 20 : swipeState.progress * -20}px)`
+                                : 'translateX(0)',
+                            transition: swipeState.isSwiping ? 'none' : 'transform 0.3s ease-out',
+                        }}
+                    >
+                        {/* Swipe Indicators */}
+                        {swipeState.isSwiping && (
+                            <>
+                                {swipeState.direction === 'right' && (
+                                    <div
+                                        className="fixed left-0 top-1/2 -translate-y-1/2 z-40 lg:hidden pointer-events-none"
+                                        style={{
+                                            opacity: swipeState.progress,
+                                        }}
+                                    >
+                                        <div className="bg-primary-500/20 backdrop-blur-sm rounded-r-full px-4 py-8 border-r-2 border-primary-500">
+                                            <ChevronLeft className="text-primary-600 dark:text-primary-400" size={24} />
+                                        </div>
+                                    </div>
+                                )}
+                                {swipeState.direction === 'left' && (
+                                    <div
+                                        className="fixed right-0 top-1/2 -translate-y-1/2 z-40 lg:hidden pointer-events-none"
+                                        style={{
+                                            opacity: swipeState.progress,
+                                        }}
+                                    >
+                                        <div className="bg-primary-500/20 backdrop-blur-sm rounded-l-full px-4 py-8 border-l-2 border-primary-500">
+                                            <ChevronRight className="text-primary-600 dark:text-primary-400" size={24} />
+                                        </div>
+                                    </div>
+                                )}
+                            </>
+                        )}
                         {/* Breadcrumb Navigation and Reading Info */}
                         <div className="mb-6">
                             <div className="flex items-center justify-between mb-4">

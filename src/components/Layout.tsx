@@ -43,13 +43,16 @@ import {
     FileText,
     Eye,
     Book,
-    Settings,
-    Type
+    Type,
+    List
 } from 'lucide-react';
 import { useTheme } from '../contexts/ThemeContext';
 import { useReading } from '../contexts/ReadingContext';
+import { useTOC } from '../contexts/TOCContext';
 import SearchModal from './SearchModal';
 import ReadingSettings from './ReadingSettings';
+import MobileTOC from './MobileTOC';
+import OfflineIndicator from './OfflineIndicator';
 import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
@@ -66,9 +69,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
     const { theme, toggleTheme } = useTheme();
     const { settings, toggleReadingMode } = useReading();
+    const { content: tocContent } = useTOC();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
     const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
+    const [mobileTOCOpen, setMobileTOCOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
     const location = useLocation();
 
@@ -262,6 +267,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
                 {/* Right section - Theme toggle and GitHub */}
                 <div className="flex items-center gap-x-2 lg:gap-x-4">
+                    {/* Mobile TOC Button */}
+                    {tocContent && (
+                        <button
+                            type="button"
+                            onClick={() => setMobileTOCOpen(true)}
+                            className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
+                            title="Table of Contents"
+                        >
+                            <List size={20} />
+                        </button>
+                    )}
                     {/* Theme toggle */}
                     <button
                         type="button"
@@ -472,6 +488,18 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             {/* Search Modal */}
             <SearchModal isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
             <ReadingSettings isOpen={readingSettingsOpen} onClose={() => setReadingSettingsOpen(false)} />
+
+            {/* Mobile TOC */}
+            {tocContent && (
+                <MobileTOC
+                    isOpen={mobileTOCOpen}
+                    onClose={() => setMobileTOCOpen(false)}
+                    content={tocContent}
+                />
+            )}
+
+            {/* Offline Indicator */}
+            <OfflineIndicator />
 
             {/* Mobile Menu Overlay */}
             {sidebarOpen && (
