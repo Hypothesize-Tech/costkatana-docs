@@ -210,18 +210,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Header */}
-            <header className="fixed top-0 left-0 right-0 z-50 flex gap-x-4 items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:gap-x-6 sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel">
-                <button
-                    type="button"
-                    className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
-                    onClick={() => setSidebarOpen(!sidebarOpen)}
-                >
-                    <span className="sr-only">Open sidebar</span>
-                    {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-                </button>
+            <header className="fixed top-0 left-0 right-0 z-50 flex items-center px-4 h-16 glass border-b border-primary-200/30 dark:border-primary-700/30 shadow-lg shrink-0 backdrop-blur-xl sm:px-6 lg:px-8 light:bg-gradient-light-panel dark:bg-gradient-dark-panel">
+                {/* Left section - Logo and mobile menu */}
+                <div className="flex items-center gap-x-4 lg:gap-x-6">
+                    <button
+                        type="button"
+                        className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
+                        onClick={() => setSidebarOpen(!sidebarOpen)}
+                    >
+                        <span className="sr-only">Open sidebar</span>
+                        {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+                    </button>
 
-                {/* Logo */}
-                <div className="flex flex-1 gap-x-4 items-center lg:gap-x-6">
+                    {/* Logo */}
                     <Link to="/" className="flex gap-x-3 items-center group">
                         <div className="flex justify-center items-center w-12 h-12 rounded-xl shadow-lg bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300 overflow-hidden">
                             <img
@@ -236,20 +237,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     </Link>
                 </div>
 
-                <div className="flex gap-x-2 items-center lg:gap-x-4">
-                    {/* Search */}
+                {/* Center section - Search bar */}
+                <div className="flex-1 flex justify-center mx-4 lg:mx-8">
                     <button
                         type="button"
                         onClick={() => setSearchOpen(true)}
-                        className="btn flex items-center gap-x-2 px-4 py-2 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 rounded-xl"
+                        className="btn flex items-center gap-x-3 px-6 py-2.5 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-105 rounded-xl min-w-[200px] max-w-[400px] justify-center"
                     >
                         <Search className="w-5 h-5" />
-                        <span className="hidden sm:inline text-sm">Search</span>
-                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600">
+                        <span className="hidden sm:inline text-sm">Search documentation...</span>
+                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600 ml-2">
                             ⌘K
                         </kbd>
                     </button>
+                </div>
 
+                {/* Right section - Theme toggle and GitHub */}
+                <div className="flex items-center gap-x-2 lg:gap-x-4">
                     {/* Theme toggle */}
                     <button
                         type="button"
