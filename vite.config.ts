@@ -7,6 +7,11 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
+const hmrHost = 'localhost'
+const hmrPort = Number(3000)
+const hmrClientPort = Number(hmrPort)
+const hmrProtocol = 'ws'
+
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',  // Explicitly set base path
@@ -17,7 +22,7 @@ export default defineConfig({
     {
       name: 'copy-service-worker',
       closeBundle() {
-        // Copy service worker to dist folder
+        // Copy service worker to dist API reference need to use the smart copy codefolder
         try {
           copyFileSync(
             join(__dirname, 'public/sw.js'),
@@ -50,8 +55,10 @@ export default defineConfig({
     port: 3000,
     host: '0.0.0.0',
     hmr: {
-      port: 3000,
-      clientPort: 3000,
+      host: hmrHost,
+      port: hmrPort,
+      clientPort: hmrClientPort,
+      protocol: hmrProtocol
     },
     watch: {
       usePolling: false
