@@ -58,7 +58,7 @@ const getSandboxUrl = (method: string, sandboxApi: keyof typeof SANDBOX_APIS, pa
             default: return `${base}/users`;
         }
     }
-    return `${SANDBOX_APIS.httpbin}/get`;
+    return `${SANDBOX_APIS.costkatana}/api/health`;
 };
 
 const APITester: React.FC<APITesterProps> = ({

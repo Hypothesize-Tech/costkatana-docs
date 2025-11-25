@@ -8,24 +8,6 @@ import StepByStepGuide from './StepByStepGuide';
 import VideoTutorial from './VideoTutorial';
 import SmartCodeCopy from './SmartCodeCopy';
 import APITester from './APITester';
-
-// Helper to parse JSON with better error handling
-const safeJsonParse = (str: string): unknown => {
-    try {
-        // Remove control characters that break JSON parsing
-        const cleaned = str
-            // eslint-disable-next-line no-control-regex
-            .replace(/[\x00-\x1f\x7f]/g, '') // Remove control characters
-            .replace(/\\n/g, '\n')
-            .replace(/\\'/g, "'")
-            .replace(/\\"/g, '"')
-            .replace(/\\`/g, '`');
-        return JSON.parse(cleaned);
-    } catch (e) {
-        console.error('JSON parse error:', e, 'String:', str);
-        return null;
-    }
-};
 import {
     Copy,
     Check,
@@ -84,6 +66,24 @@ import {
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
+// Helper to parse JSON with better error handling
+const safeJsonParse = (str: string): unknown => {
+    try {
+        // Remove control characters that break JSON parsing
+        const cleaned = str
+            // eslint-disable-next-line no-control-regex
+            .replace(/[\x00-\x1f\x7f]/g, '') // Remove control characters
+            .replace(/\\n/g, '\n')
+            .replace(/\\'/g, "'")
+            .replace(/\\"/g, '"')
+            .replace(/\\`/g, '`');
+        return JSON.parse(cleaned);
+    } catch (e) {
+        console.error('JSON parse error:', e, 'String:', str);
+        return null;
+    }
+};
+
 interface MarkdownContentProps {
     content: string;
     className?: string;
@@ -116,11 +116,11 @@ const BlinkingCursor: React.FC = () => (
 
 const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
-    const idCountsRef = React.useRef<Record<string, number>>({});
+    const idCountsRef = useRef<Record<string, number>>({});
     const { settings } = useReading();
 
     // Reset ID counts when content changes
-    React.useEffect(() => {
+    useEffect(() => {
         idCountsRef.current = {};
     }, [content]);
 
@@ -191,8 +191,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         return baseId;
     };
 
-    // Emoji to icon mapping
-    const emojiToIcon: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+    // Emoji to icon mapping - using typeof to properly type Lucide icons
+    const emojiToIcon: Record<string, typeof Zap> = {
         '✅': CheckCircle2,
         '❌': X,
         '⚠️': AlertTriangle,
@@ -334,13 +334,13 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
     // Component for code blocks with MacBook-style terminal
     const CodeBlock: React.FC<{ children?: React.ReactNode }> = ({ children, ...props }) => {
-        const preRef = React.useRef<HTMLPreElement>(null);
-        const [codeContent, setCodeContent] = React.useState('');
+        const preRef = useRef<HTMLPreElement>(null);
+        const [codeContent, setCodeContent] = useState('');
         const language = detectLanguage(children);
         const isTerminal = ['bash', 'sh', 'shell', 'zsh', 'terminal'].includes(language);
 
         // Extract code content on mount and when children change
-        React.useEffect(() => {
+        useEffect(() => {
             let extracted = '';
 
             // Try multiple extraction strategies
@@ -382,10 +382,10 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return lines.map((line, index) => {
                 const isLastLine = index === lines.length - 1;
                 const trimmedLine = line.trim();
-                
+
                 // Check if line starts with a command (not a comment or output)
                 const isCommand = trimmedLine && !trimmedLine.startsWith('#') && !trimmedLine.startsWith('//');
-                
+
                 return (
                     <div key={index} className="flex items-start">
                         {isCommand && (
@@ -787,7 +787,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // ```interactive:language:title becomes ```smart:language with context
         processedContent = processedContent.replace(
             /```interactive:(\w+)(?::([^\n]+?))?\n([\s\S]*?)```/g,
-            (match, language, title, code) => {
+            (_match, language, title, code) => {
                 // Convert to smart code format
                 const cleanCode = code.trim()
                     .replace(/\\`/g, '`')
@@ -817,7 +817,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // Process SmartCodeCopy: ```smart:language:context
         processedContent = processedContent.replace(
             /(?:```|\\`\\`\\`)smart:(\w+)(?::([^\n]+?))?\n([\s\S]*?)(?:```|\\`\\`\\`)/g,
-            (match, language, contextStr, code) => {
+            (_match, language, contextStr, code) => {
                 const componentKey = `smart-${keyCounter++}`;
                 let context;
                 try {
@@ -877,7 +877,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // Process VideoTutorial: ```video:url:title:description
         processedContent = processedContent.replace(
             /(?:```|\\`\\`\\`)video:([^\n:]+):([^\n:]*):([^\n]*)\n(?:```|\\`\\`\\`)/g,
-            (match, videoUrl, videoTitle, videoDescription) => {
+            (_match, videoUrl, videoTitle, videoDescription) => {
                 const componentKey = `video-${keyCounter++}`;
                 parts.push(
                     <VideoTutorial
@@ -894,7 +894,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // Process APITester: ```api:method:path:description:headers:body:response
         processedContent = processedContent.replace(
             /(?:```|\\`\\`\\`)api:([A-Z]+):([^\n:]+):([^\n:]*):([^\n:]*):([^\n:]*):([^\n]*)\n(?:```|\\`\\`\\`)/g,
-            (match, method, path, description, headersStr, bodyStr, responseStr) => {
+            (_match, method, path, description, headersStr, bodyStr, responseStr) => {
                 const componentKey = `api-${keyCounter++}`;
                 let headers, body, exampleResponse;
                 try {
