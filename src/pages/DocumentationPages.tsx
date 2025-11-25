@@ -1,7 +1,7 @@
 import DocumentationPage from "../components/DocumentationPage";
 
 // Getting Started Pages
-export const InstallationPage = () => ( <DocumentationPage title="Installation" description="Detailed installation instructions for Cost Katana" prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }} fallbackContent={`# Installation Guide
+export const InstallationPage = () => (<DocumentationPage title="Installation" description="Detailed installation instructions for Cost Katana" prevPage={{ path: '/getting-started/quick-start', label: 'Previous: Quick Start' }} fallbackContent={`# Installation Guide
 
 Get started with Cost Katana and revolutionary **Cortex Meta-Language** in minutes. Achieve 40-75% token reduction with LISP-based optimization.
 
@@ -226,7 +226,7 @@ Ready to start saving on AI costs? Let's go! `} />
 );
 
 // Integrations Pages
-export const CLIPage = () => ( <DocumentationPage title="CLI Tool" description="Powerful command-line interface for AI cost optimization" prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }} nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }} fallbackContent={`# Cost Katana CLI
+export const CLIPage = () => (<DocumentationPage title="CLI Tool" description="Powerful command-line interface for AI cost optimization" prevPage={{ path: '/integrations/python', label: 'Previous: Python SDK' }} nextPage={{ path: '/integrations/chatgpt', label: 'Next: ChatGPT Integration' }} fallbackContent={`# Cost Katana CLI
 
 The most powerful command-line interface for AI cost optimization and management.
 
@@ -509,7 +509,7 @@ cost-katana analytics --verbose
 The CLI is your command center for AI cost optimization. Get started today! `} />
 );
 
-export const NodeJSPage = () => ( <DocumentationPage title="Node.js SDK" description="Integrate Cost Katana with your Node.js applications" nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }} fallbackContent={`# Node.js SDK Integration
+export const NodeJSPage = () => (<DocumentationPage title="Node.js SDK" description="Integrate Cost Katana with your Node.js applications" nextPage={{ path: '/integrations/python', label: 'Next: Python SDK' }} fallbackContent={`# Node.js SDK Integration
 
 Complete guide to integrating the Cost Katana SDK with your Node.js applications for programmatic AI cost optimization.
 
@@ -753,7 +753,7 @@ async function chatWithCaching(messages) { const cacheKey = JSON.stringify(messa
 Ready to optimize your Node.js AI costs? Get started today! `} />
 );
 
-export const PythonPage = () => ( <DocumentationPage title="Python SDK" description="Integrate Cost Katana with your Python applications" prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }} nextPage={{ path: '/integrations/cli', label: 'Next: CLI Tool' }} fallbackContent={`# Python SDK Integration
+export const PythonPage = () => (<DocumentationPage title="Python SDK" description="Integrate Cost Katana with your Python applications" prevPage={{ path: '/integrations/nodejs', label: 'Previous: Node.js SDK' }} nextPage={{ path: '/integrations/cli', label: 'Next: CLI Tool' }} fallbackContent={`# Python SDK Integration
 
 Complete guide to integrating Cost Katana with your Python applications for AI cost optimization.
 
@@ -1028,7 +1028,7 @@ def chat_with_caching(messages, model='gpt-3.5-turbo'): messages_str = json.dump
 Ready to optimize your Python AI costs? Get started today! `} />
 );
 
-export const ChatGPTPage = () => ( <DocumentationPage title="ChatGPT Integration" description="Direct ChatGPT custom GPT integration for instant optimization" prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }} fallbackContent={`# ChatGPT Integration
+export const ChatGPTPage = () => (<DocumentationPage title="ChatGPT Integration" description="Direct ChatGPT custom GPT integration for instant optimization" prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }} fallbackContent={`# ChatGPT Integration
 
 Direct integration with ChatGPT through custom GPT for instant AI cost optimization and analysis.
 
@@ -1303,7 +1303,7 @@ Start optimizing your AI costs directly in ChatGPT today! `} />
 );
 
 // Features Pages
-export const FeaturesOverviewPage = () => ( <DocumentationPage title="Features Overview" description="Explore all Cost Katana features for AI cost optimization" nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }} fallbackContent={`# Cost Katana Features Overview
+export const FeaturesOverviewPage = () => (<DocumentationPage title="Features Overview" description="Explore all Cost Katana features for AI cost optimization" nextPage={{ path: '/features/dashboard', label: 'Next: Dashboard' }} fallbackContent={`# Cost Katana Features Overview
 
 Comprehensive AI cost optimization platform powered by revolutionary **Cortex Meta-Language** to reduce your AI spending by up to **95%** through LISP-based answer generation.
 
@@ -1541,7 +1541,7 @@ Choose your path to AI cost optimization:
 Transform your AI costs today with Cost Katana! `} />
 );
 
-export const DashboardPage = () => ( <DocumentationPage title="Dashboard" description="Real-time monitoring and insights dashboard" prevPage={{ path: '/features', label: 'Back to Features' }} nextPage={{ path: '/features/usage-tracking', label: 'Next: Usage Tracking' }} fallbackContent={`# Dashboard
+export const DashboardPage = () => (<DocumentationPage title="Dashboard" description="Real-time monitoring and insights dashboard" prevPage={{ path: '/features', label: 'Back to Features' }} nextPage={{ path: '/features/usage-tracking', label: 'Next: Usage Tracking' }} fallbackContent={`# Dashboard
 
 Real-time monitoring and insights dashboard for comprehensive AI cost tracking.
 
@@ -1612,7 +1612,7 @@ Test the dashboard API to get real-time metrics:
 - Performance improvements`} />
 );
 
-export const UsageTrackingPage = () => ( <DocumentationPage title="Usage Tracking" description="Track your AI usage across all providers" prevPage={{ path: '/features/dashboard', label: 'Previous: Dashboard' }} nextPage={{ path: '/features/analytics', label: 'Next: Cost Analytics' }} fallbackContent={`# Usage Tracking
+export const UsageTrackingPage = () => (<DocumentationPage title="Usage Tracking" description="Track your AI usage across all providers" prevPage={{ path: '/features/dashboard', label: 'Previous: Dashboard' }} nextPage={{ path: '/features/analytics', label: 'Next: Cost Analytics' }} fallbackContent={`# Usage Tracking
 
 Track your AI API usage across all providers with detailed insights and real-time monitoring.
 
@@ -1678,7 +1678,7 @@ Set up usage alerts to prevent overages:
 - Rate limit warnings`} />
 );
 
-export const CostAnalyticsPage = () => ( <DocumentationPage title="Cost Analytics" description="Advanced cost analysis and reporting" prevPage={{ path: '/features/usage-tracking', label: 'Previous: Usage Tracking' }} nextPage={{ path: '/features/optimization', label: 'Next: AI Optimization' }} fallbackContent={`# Cost Analytics
+export const CostAnalyticsPage = () => (<DocumentationPage title="Cost Analytics" description="Advanced cost analysis and reporting" prevPage={{ path: '/features/usage-tracking', label: 'Previous: Usage Tracking' }} nextPage={{ path: '/features/optimization', label: 'Next: AI Optimization' }} fallbackContent={`# Cost Analytics
 
 Get deep insights into your AI spending with advanced analytics and reporting.
 
@@ -1738,7 +1738,7 @@ Our AI analyzes your usage and provides:
 - **Caching Strategies**: Reduce redundant API calls`} />
 );
 
-export const OptimizationPage = () => ( <DocumentationPage title="AI Optimization" description="Intelligent cost reduction strategies powered by AI" prevPage={{ path: '/features/analytics', label: 'Previous: Cost Analytics' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# AI-Powered Optimization
+export const OptimizationPage = () => (<DocumentationPage title="AI Optimization" description="Intelligent cost reduction strategies powered by AI" prevPage={{ path: '/features/analytics', label: 'Previous: Cost Analytics' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# AI-Powered Optimization
 
 Reduce your AI costs by up to 70% with intelligent optimization strategies.
 
@@ -1835,7 +1835,7 @@ Monitor optimization impact:
 - **ROI Tracking**: Measure optimization effectiveness`} />
 );
 
-export const PredictiveIntelligencePage = () => ( <DocumentationPage title="Predictive Intelligence" description="AI-powered forecasting and predictive analytics" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/projects', label: 'Next: Projects' }} fallbackContent={`# Predictive Intelligence
+export const PredictiveIntelligencePage = () => (<DocumentationPage title="Predictive Intelligence" description="AI-powered forecasting and predictive analytics" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/projects', label: 'Next: Projects' }} fallbackContent={`# Predictive Intelligence
 
 Leverage AI to forecast costs, predict usage patterns, and prevent budget overruns.
 
@@ -1921,7 +1921,7 @@ The Predictive Intelligence dashboard shows:
 - **What-If Scenarios**: Test different strategies`} />
 );
 
-export const ProjectsPage = () => ( <DocumentationPage title="Project Management" description="Organize and track AI usage by projects" prevPage={{ path: '/features/predictive-intelligence', label: 'Previous: Predictive Intelligence' }} nextPage={{ path: '/features/templates', label: 'Next: Prompt Templates' }} fallbackContent={`# Project Management
+export const ProjectsPage = () => (<DocumentationPage title="Project Management" description="Organize and track AI usage by projects" prevPage={{ path: '/features/predictive-intelligence', label: 'Previous: Predictive Intelligence' }} nextPage={{ path: '/features/templates', label: 'Next: Prompt Templates' }} fallbackContent={`# Project Management
 
 Organize your AI usage by projects for better cost tracking and team collaboration.
 
@@ -2026,7 +2026,7 @@ const project = await ck.projects.create({ name: 'Customer Support Bot', budget:
 - Document best practices`} />
 );
 
-export const TemplatesPage = () => ( <DocumentationPage title="Prompt Templates" description="Create and manage reusable optimized prompts" prevPage={{ path: '/features/projects', label: 'Previous: Projects' }} nextPage={{ path: '/features/workflows', label: 'Next: Workflows' }} fallbackContent={`# Prompt Templates
+export const TemplatesPage = () => (<DocumentationPage title="Prompt Templates" description="Create and manage reusable optimized prompts" prevPage={{ path: '/features/projects', label: 'Previous: Projects' }} nextPage={{ path: '/features/workflows', label: 'Next: Workflows' }} fallbackContent={`# Prompt Templates
 
 Create, manage, and share optimized prompt templates to reduce costs and improve consistency.
 
@@ -2156,7 +2156,7 @@ Tools for fine-tuning:
 - Optimize regularly`} />
 );
 
-export const WorkflowsPage = () => ( <DocumentationPage title="Workflows" description="Multi-step AI operation monitoring and optimization" prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }} nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }} fallbackContent={`# Workflow Management
+export const WorkflowsPage = () => (<DocumentationPage title="Workflows" description="Multi-step AI operation monitoring and optimization" prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }} nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }} fallbackContent={`# Workflow Management
 
 Design, monitor, and optimize multi-step AI workflows for complex operations.
 
@@ -2253,7 +2253,7 @@ const workflow = await ck.workflows.create({ name: 'Document Processing', steps:
 - **Staging**: Test before production`} />
 );
 
-export const GatewayPage = () => ( <DocumentationPage title="Gateway & Proxy" description="Unified API gateway for all AI providers" prevPage={{ path: '/features/workflows', label: 'Previous: Workflows' }} nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }} fallbackContent={`# Gateway & Proxy
+export const GatewayPage = () => (<DocumentationPage title="Gateway & Proxy" description="Unified API gateway for all AI providers" prevPage={{ path: '/features/workflows', label: 'Previous: Workflows' }} nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }} fallbackContent={`# Gateway & Proxy
 
 Use Cost Katana as a unified gateway for all your AI providers with built-in optimization.
 
@@ -2382,7 +2382,7 @@ Define your own routing logic:
 - **Compliance**: GDPR, SOC2 compliant`} />
 );
 
-export const KeyVaultPage = () => ( <DocumentationPage title="Key Vault" description="Secure API key management and rotation" prevPage={{ path: '/features/gateway', label: 'Previous: Gateway & Proxy' }} nextPage={{ path: '/features/alerts', label: 'Next: Alerts' }} fallbackContent={`# Key Vault
+export const KeyVaultPage = () => (<DocumentationPage title="Key Vault" description="Secure API key management and rotation" prevPage={{ path: '/features/gateway', label: 'Previous: Gateway & Proxy' }} nextPage={{ path: '/features/alerts', label: 'Next: Alerts' }} fallbackContent={`# Key Vault
 
 Securely manage, rotate, and audit your AI provider API keys.
 
@@ -2527,7 +2527,7 @@ await ck.vault.grantAccess({ key_id: keyId, team_id: 'engineering', permissions:
 - Review unused keys`} />
 );
 
-export const AlertsPage = () => ( <DocumentationPage title="Alerts & Notifications" description="Proactive monitoring and intelligent alerting" prevPage={{ path: '/features/key-vault', label: 'Previous: Key Vault' }} nextPage={{ path: '/features/training', label: 'Next: Training' }} fallbackContent={`# Alerts & Notifications
+export const AlertsPage = () => (<DocumentationPage title="Alerts & Notifications" description="Proactive monitoring and intelligent alerting" prevPage={{ path: '/features/key-vault', label: 'Previous: Key Vault' }} nextPage={{ path: '/features/training', label: 'Next: Training' }} fallbackContent={`# Alerts & Notifications
 
 Set up intelligent alerts to monitor costs, usage, and performance.
 
@@ -2665,7 +2665,7 @@ Define automated actions when alerts trigger:
 - Set up escalation paths
 - Regular alert reviews`} />
 ); // API Documentation Pages
-export const APIOverviewPage = () => ( <DocumentationPage title="API Overview" description="Complete API reference for Cost Katana" nextPage={{ path: '/api/authentication', label: 'Next: Authentication' }} fallbackContent={`# API Overview
+export const APIOverviewPage = () => (<DocumentationPage title="API Overview" description="Complete API reference for Cost Katana" nextPage={{ path: '/api/authentication', label: 'Next: Authentication' }} fallbackContent={`# API Overview
 
 Complete REST API reference for Cost Katana. All endpoints use JSON for request and response bodies.
 
@@ -2691,8 +2691,10 @@ Authorization: Bearer ck_your_api_key_here
 
 ## API Versioning
 
-The API is versioned. Current version: **v1** \`\`\`
-https://cost-katana-backend.store/v1/...
+The API is versioned. Current version: 
+
+\`\`\`
+https://cost-katana-backend.store/...
 \`\`\`
 
 ## Response Format
@@ -2844,7 +2846,7 @@ Need help with the API?
 Ready to start? Begin with [Authentication →](/api/authentication)`} />
 );
 
-export const AuthenticationPage = () => ( <DocumentationPage title="Authentication" description="JWT and API key authentication methods" prevPage={{ path: '/api', label: 'Back to API Overview' }} nextPage={{ path: '/api/usage', label: 'Next: Usage API' }} fallbackContent={`# Authentication
+export const AuthenticationPage = () => (<DocumentationPage title="Authentication" description="JWT and API key authentication methods" prevPage={{ path: '/api', label: 'Back to API Overview' }} nextPage={{ path: '/api/usage', label: 'Next: Usage API' }} fallbackContent={`# Authentication
 
 Cost Katana supports multiple authentication methods for secure API access.
 
@@ -2933,7 +2935,7 @@ await ck.security.addWhitelist({ ips: ['192.168.1.1', '10.0.0.0/24'], keys: ['ck
 );
 
 // Tracing Feature Page
-export const TracingPage = () => ( <DocumentationPage title="Distributed Tracing" description="Enterprise-grade distributed tracing for AI operations" prevPage={{ path: '/features/training', label: 'Previous: Training & Fine-tuning' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# Distributed Tracing
+export const TracingPage = () => (<DocumentationPage title="Distributed Tracing" description="Enterprise-grade distributed tracing for AI operations" prevPage={{ path: '/features/training', label: 'Previous: Training & Fine-tuning' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# Distributed Tracing
 
 Cost Katana provides enterprise-grade distributed tracing and session replay for all your AI operations. Track every LLM call, tool execution, and API request with automatic parent-child relationships, latency metrics, and cost attribution.
 
@@ -3255,7 +3257,7 @@ Tracing adds minimal overhead:
 - Enable audit logging for compliance`} />
 );
 
-export const UsageAPIPage = () => ( <DocumentationPage title="Usage API" description="Track AI usage programmatically" prevPage={{ path: '/api/authentication', label: 'Previous: Authentication' }} nextPage={{ path: '/api/analytics', label: 'Next: Analytics API' }} fallbackContent={`# Usage API
+export const UsageAPIPage = () => (<DocumentationPage title="Usage API" description="Track AI usage programmatically" prevPage={{ path: '/api/authentication', label: 'Previous: Authentication' }} nextPage={{ path: '/api/analytics', label: 'Next: Analytics API' }} fallbackContent={`# Usage API
 
 The Usage API allows you to track and manage AI API usage across all providers programmatically.
 
@@ -3394,7 +3396,7 @@ stats = client.usage.get_stats( start_date='2025-01-01', end_date='2025-01-31', 
 | 500 | Internal server error |`} />
 );
 
-export const AnalyticsAPIPage = () => ( <DocumentationPage title="Analytics API" description="Retrieve analytics data via API" prevPage={{ path: '/api/usage', label: 'Previous: Usage API' }} nextPage={{ path: '/api/projects', label: 'Next: Projects API' }} fallbackContent={`# Analytics API
+export const AnalyticsAPIPage = () => (<DocumentationPage title="Analytics API" description="Retrieve analytics data via API" prevPage={{ path: '/api/usage', label: 'Previous: Usage API' }} nextPage={{ path: '/api/projects', label: 'Next: Projects API' }} fallbackContent={`# Analytics API
 
 Access comprehensive analytics data for AI usage, costs, and performance metrics.
 
@@ -3496,7 +3498,7 @@ costs = client.analytics.get_costs( start_date='2025-01-01', end_date='2025-01-3
 \`\`\``} />
 );
 
-export const ProjectsAPIPage = () => ( <DocumentationPage title="Projects API" description="Manage projects programmatically" prevPage={{ path: '/api/analytics', label: 'Previous: Analytics API' }} nextPage={{ path: '/api/optimization', label: 'Next: Optimization API' }} fallbackContent={`# Projects API
+export const ProjectsAPIPage = () => (<DocumentationPage title="Projects API" description="Manage projects programmatically" prevPage={{ path: '/api/analytics', label: 'Previous: Analytics API' }} nextPage={{ path: '/api/optimization', label: 'Next: Optimization API' }} fallbackContent={`# Projects API
 
 Create and manage projects for organizing AI usage and costs.
 
@@ -3609,7 +3611,7 @@ client.projects.add_member( project.id, email='team@example.com', role='editor'
 \`\`\``} />
 );
 
-export const OptimizationAPIPage = () => ( <DocumentationPage title="Optimization API" description="Access AI optimization features via API" prevPage={{ path: '/api/projects', label: 'Previous: Projects API' }} nextPage={{ path: '/api/webhooks', label: 'Next: Webhooks' }} fallbackContent={`# Optimization API
+export const OptimizationAPIPage = () => (<DocumentationPage title="Optimization API" description="Access AI optimization features via API" prevPage={{ path: '/api/projects', label: 'Previous: Projects API' }} nextPage={{ path: '/api/webhooks', label: 'Next: Webhooks' }} fallbackContent={`# Optimization API
 
 Programmatically access Cost Katana's AI optimization features.
 
@@ -3730,7 +3732,7 @@ recommendation = client.optimization.recommend_model( task='summarization', requ
 \`\`\``} />
 );
 
-export const WebhooksPage = () => ( <DocumentationPage title="Webhooks" description="Real-time event notifications" prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }} nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }} fallbackContent={`# Alerts & Notifications API
+export const WebhooksPage = () => (<DocumentationPage title="Webhooks" description="Real-time event notifications" prevPage={{ path: '/api/optimization', label: 'Previous: Optimization API' }} nextPage={{ path: '/api/rate-limits', label: 'Next: Rate Limits' }} fallbackContent={`# Alerts & Notifications API
 
 Configure alerts and notifications for important events.
 
@@ -3870,7 +3872,7 @@ function verifyWebhook(payload, signature, secret) { const hash = crypto .create
 Send a test event to verify configuration.`} />
 );
 
-export const RateLimitsPage = () => ( <DocumentationPage title="Rate Limits" description="API usage limits and quotas" prevPage={{ path: '/api/webhooks', label: 'Previous: Webhooks' }} fallbackContent={`# Rate Limits
+export const RateLimitsPage = () => (<DocumentationPage title="Rate Limits" description="API usage limits and quotas" prevPage={{ path: '/api/webhooks', label: 'Previous: Webhooks' }} fallbackContent={`# Rate Limits
 
 Understanding and managing API rate limits for optimal performance.
 
@@ -3965,7 +3967,7 @@ Track your API usage in real-time:
 );
 
 // Support Pages
-export const FAQPage = () => ( <DocumentationPage title="Frequently Asked Questions" description="Common questions about Cost Katana" fallbackContent={`# Frequently Asked Questions
+export const FAQPage = () => (<DocumentationPage title="Frequently Asked Questions" description="Common questions about Cost Katana" fallbackContent={`# Frequently Asked Questions
 
 ## General Questions
 
@@ -4193,7 +4195,7 @@ We provide migration assistance:
 Still have questions? [Contact our support team](mailto:support@costkatana.com) or [join our Discord community](https://discord.gg/D8nDArmKbY) for real-time help!`} />
 );
 
-export const SupportPage = () => ( <DocumentationPage title="Support & Contact" description="Get help with Cost Katana" fallbackContent={`# Support & Contact
+export const SupportPage = () => (<DocumentationPage title="Support & Contact" description="Get help with Cost Katana" fallbackContent={`# Support & Contact
 
 ## Get Help with Cost Katana
 
@@ -4337,7 +4339,7 @@ For large organizations:
 **Need immediate help?** Start a live chat on our website or email support@costkatana.com. We typically respond within 2 hours during business hours.`} />
 );
 
-export const OpenTelemetryVendorsPage = () => ( <DocumentationPage title="OpenTelemetry & Vendor Support" description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic" fallbackContent={`# OpenTelemetry & Vendor Support
+export const OpenTelemetryVendorsPage = () => (<DocumentationPage title="OpenTelemetry & Vendor Support" description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic" fallbackContent={`# OpenTelemetry & Vendor Support
 
 Cost Katana ships with native OpenTelemetry (OTel) integration for traces and metrics.
 
@@ -4364,7 +4366,7 @@ See backend OBSERVABILITY.md for vendor examples and local collector instruction
 );
 
 // SAST Features Page
-export const SastPage = () => ( <DocumentationPage title="SAST (Semantic Abstract Syntax Tree) Optimization" description="Advanced semantic optimization using SAST for unambiguous, cross-lingual AI processing" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# SAST (Semantic Abstract Syntax Tree) Optimization
+export const SastPage = () => (<DocumentationPage title="SAST (Semantic Abstract Syntax Tree) Optimization" description="Advanced semantic optimization using SAST for unambiguous, cross-lingual AI processing" prevPage={{ path: '/features/optimization', label: 'Previous: AI Optimization' }} nextPage={{ path: '/features/predictive-intelligence', label: 'Next: Predictive Intelligence' }} fallbackContent={`# SAST (Semantic Abstract Syntax Tree) Optimization
 
 SAST represents the next evolution in AI optimization, transforming natural language into unambiguous semantic primitives for superior token efficiency and cross-lingual compatibility.
 
@@ -4655,7 +4657,7 @@ Use SAST through REST API endpoints:
 );
 
 // Telemetry Dashboard Feature Page
-export const TelemetryDashboardPage = () => ( <DocumentationPage title="Telemetry Dashboard" description="AI-powered telemetry dashboard with real-time insights and analytics" prevPage={{ path: '/observability/opentelemetry', label: 'Previous: OpenTelemetry & Vendors' }} nextPage={{ path: '/features/sessions', label: 'Next: Sessions & Session Replay' }} fallbackContent={`# Telemetry Dashboard
+export const TelemetryDashboardPage = () => (<DocumentationPage title="Telemetry Dashboard" description="AI-powered telemetry dashboard with real-time insights and analytics" prevPage={{ path: '/observability/opentelemetry', label: 'Previous: OpenTelemetry & Vendors' }} nextPage={{ path: '/features/sessions', label: 'Next: Sessions & Session Replay' }} fallbackContent={`# Telemetry Dashboard
 
 The Telemetry Dashboard provides comprehensive AI-powered insights into your application's performance, costs, and operations with real-time analytics and intelligent recommendations.
 
@@ -4847,7 +4849,7 @@ curl -X POST https://cost-katana-backend.store/api/telemetry/query \\ -H "Author
 );
 
 // Sessions & Session Replay Feature Page
-export const SessionsPage = () => ( <DocumentationPage title="Sessions & Session Replay" description="Record and replay AI interactions with complete context for debugging and analysis" prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }} nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }} fallbackContent={`# Sessions & Session Replay
+export const SessionsPage = () => (<DocumentationPage title="Sessions & Session Replay" description="Record and replay AI interactions with complete context for debugging and analysis" prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }} nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }} fallbackContent={`# Sessions & Session Replay
 
 Record and replay AI interactions with complete context, including prompts, responses, costs, and user actions for comprehensive debugging and analysis.
 
@@ -5050,7 +5052,7 @@ curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\ -H "Auth
 );
 
 // Logs Management Feature Page
-export const LogsPage = () => ( <DocumentationPage title="Logs Management" description="Comprehensive log management with AI-powered querying, filtering, and analysis" prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }} nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }} fallbackContent={`# Logs Management
+export const LogsPage = () => (<DocumentationPage title="Logs Management" description="Comprehensive log management with AI-powered querying, filtering, and analysis" prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }} nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }} fallbackContent={`# Logs Management
 
 Comprehensive log management system with AI-powered querying, real-time streaming, advanced filtering, and intelligent analysis for all your AI operations.
 
@@ -5262,7 +5264,7 @@ curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\ -H "Authoriz
 );
 
 // Cache Management Feature Page
-export const CachePage = () => ( <DocumentationPage title="Cache Management" description="Redis cache dashboard and management for optimizing AI costs through intelligent caching" prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }} nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }} fallbackContent={`# Cache Management
+export const CachePage = () => (<DocumentationPage title="Cache Management" description="Redis cache dashboard and management for optimizing AI costs through intelligent caching" prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }} nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }} fallbackContent={`# Cache Management
 
 Redis cache dashboard and management system for optimizing AI costs through intelligent caching of prompts, responses, and intermediate results.
 
@@ -5483,7 +5485,7 @@ curl -X POST https://cost-katana-backend.store/api/cache/clear \\ -H "Authorizat
 );
 
 // Advanced Monitoring Feature Page
-export const AdvancedMonitoringPage = () => ( <DocumentationPage title="Advanced Monitoring" description="Advanced monitoring tools for comprehensive AI operation tracking and analysis" prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }} nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }} fallbackContent={`# Advanced Monitoring
+export const AdvancedMonitoringPage = () => (<DocumentationPage title="Advanced Monitoring" description="Advanced monitoring tools for comprehensive AI operation tracking and analysis" prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }} nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }} fallbackContent={`# Advanced Monitoring
 
 Advanced monitoring tools for comprehensive tracking, analysis, and optimization of AI operations with real-time insights and intelligent alerts.
 
@@ -5567,7 +5569,7 @@ curl -X POST https://cost-katana-backend.store/api/monitoring/alerts \\ -H "Auth
 );
 
 // Unexplained Costs Feature Page
-export const UnexplainedCostsPage = () => ( <DocumentationPage title="Unexplained Costs" description="Cost attribution analysis to identify and explain unexpected AI costs" prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }} nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }} fallbackContent={`# Unexplained Costs
+export const UnexplainedCostsPage = () => (<DocumentationPage title="Unexplained Costs" description="Cost attribution analysis to identify and explain unexpected AI costs" prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }} nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }} fallbackContent={`# Unexplained Costs
 
 Cost attribution analysis system to identify, explain, and optimize unexpected AI costs with intelligent root cause analysis.
 
@@ -5638,7 +5640,7 @@ curl -X POST https://cost-katana-backend.store/api/unexplained-costs/analyze \\ 
 );
 
 // Experimentation Feature Page
-export const ExperimentationPage = () => ( <DocumentationPage title="Experimentation" description="A/B testing and experimentation platform for optimizing AI model selection and costs" prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }} nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }} fallbackContent={`# Experimentation
+export const ExperimentationPage = () => (<DocumentationPage title="Experimentation" description="A/B testing and experimentation platform for optimizing AI model selection and costs" prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }} nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }} fallbackContent={`# Experimentation
 
 A/B testing and experimentation platform for optimizing AI model selection, prompt strategies, and costs through systematic testing and comparison.
 
@@ -5737,7 +5739,7 @@ curl -X POST https://cost-katana-backend.store/api/experimentation/real-time-sim
 );
 
 // Moderation Feature Page
-export const ModerationPage = () => ( <DocumentationPage title="Moderation" description="Content moderation and safety features for AI-generated content" prevPage={{ path: '/features/experimentation', label: 'Previous: Experimentation' }} nextPage={{ path: '/features/security', label: 'Next: Security' }} fallbackContent={`# Moderation
+export const ModerationPage = () => (<DocumentationPage title="Moderation" description="Content moderation and safety features for AI-generated content" prevPage={{ path: '/features/experimentation', label: 'Previous: Experimentation' }} nextPage={{ path: '/features/security', label: 'Next: Security' }} fallbackContent={`# Moderation
 
 Content moderation and safety features for AI-generated content with automated filtering, policy enforcement, and compliance monitoring.
 
@@ -5812,7 +5814,7 @@ curl -X POST https://cost-katana-backend.store/api/moderation/moderate \\ -H "Au
 );
 
 // Security Feature Page
-export const SecurityPage = () => ( <DocumentationPage title="Security" description="Security and compliance features for protecting AI operations and data" prevPage={{ path: '/features/moderation', label: 'Previous: Moderation' }} nextPage={{ path: '/features/memory', label: 'Next: Memory' }} fallbackContent={`# Security
+export const SecurityPage = () => (<DocumentationPage title="Security" description="Security and compliance features for protecting AI operations and data" prevPage={{ path: '/features/moderation', label: 'Previous: Moderation' }} nextPage={{ path: '/features/memory', label: 'Next: Memory' }} fallbackContent={`# Security
 
 Comprehensive security and compliance features for protecting AI operations, data, and ensuring regulatory compliance.
 
@@ -5885,7 +5887,7 @@ curl -X GET https://cost-katana-backend.store/api/security/status \\ -H "Authori
 );
 
 // Memory Feature Page
-export const MemoryPage = () => ( <DocumentationPage title="Memory" description="Memory management and context preservation for AI conversations and operations" prevPage={{ path: '/features/security', label: 'Previous: Security' }} nextPage={{ path: '/features/cost-lake', label: 'Next: Cost Lake' }} fallbackContent={`# Memory
+export const MemoryPage = () => (<DocumentationPage title="Memory" description="Memory management and context preservation for AI conversations and operations" prevPage={{ path: '/features/security', label: 'Previous: Security' }} nextPage={{ path: '/features/cost-lake', label: 'Next: Cost Lake' }} fallbackContent={`# Memory
 
 Memory management system for preserving context across AI conversations and operations with intelligent context retrieval and management.
 
@@ -5964,7 +5966,7 @@ curl -X GET https://cost-katana-backend.store/api/memory/retrieve \\ -H "Authori
 );
 
 // Cost Lake Feature Page
-export const CostLakePage = () => ( <DocumentationPage title="Cost Lake" description="Data warehouse for comprehensive cost data analysis and reporting" prevPage={{ path: '/features/memory', label: 'Previous: Memory' }} nextPage={{ path: '/features/github-integrations', label: 'Next: GitHub Integrations' }} fallbackContent={`# Cost Lake
+export const CostLakePage = () => (<DocumentationPage title="Cost Lake" description="Data warehouse for comprehensive cost data analysis and reporting" prevPage={{ path: '/features/memory', label: 'Previous: Memory' }} nextPage={{ path: '/features/github-integrations', label: 'Next: GitHub Integrations' }} fallbackContent={`# Cost Lake
 
 Data warehouse for comprehensive cost data analysis, reporting, and business intelligence with historical data retention and advanced analytics.
 
@@ -6027,7 +6029,7 @@ curl -X POST https://cost-katana-backend.store/api/cost-lake/query \\ -H "Author
 );
 
 // GitHub Integrations Feature Page
-export const GitHubIntegrationsPage = () => ( <DocumentationPage title="GitHub Integrations" description="Integrate Cost Katana with GitHub for code-aware AI operations and context" prevPage={{ path: '/features/cost-lake', label: 'Previous: Cost Lake' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# GitHub Integrations
+export const GitHubIntegrationsPage = () => (<DocumentationPage title="GitHub Integrations" description="Integrate Cost Katana with GitHub for code-aware AI operations and context" prevPage={{ path: '/features/cost-lake', label: 'Previous: Cost Lake' }} nextPage={{ path: '/api', label: 'Next: API Reference' }} fallbackContent={`# GitHub Integrations
 
 Integrate Cost Katana with GitHub to enable code-aware AI operations, repository context, and intelligent code analysis.
 
@@ -6102,7 +6104,7 @@ curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/contex
 // ============================================
 
 // Chat API Page
-export const ChatAPIPage = () => ( <DocumentationPage title="Chat API" description="Complete API reference for chat endpoints and message handling" prevPage={{ path: '/api/rate-limits', label: 'Previous: Rate Limits' }} nextPage={{ path: '/api/agent', label: 'Next: Agent API' }} fallbackContent={`# Chat API
+export const ChatAPIPage = () => (<DocumentationPage title="Chat API" description="Complete API reference for chat endpoints and message handling" prevPage={{ path: '/api/rate-limits', label: 'Previous: Rate Limits' }} nextPage={{ path: '/api/agent', label: 'Next: Agent API' }} fallbackContent={`# Chat API
 
 Complete API reference for chat endpoints, message handling, conversation management, and integration commands.
 
@@ -6260,7 +6262,7 @@ All endpoints may return the following error responses:
 );
 
 // Agent API Page
-export const AgentAPIPage = () => ( <DocumentationPage title="Agent API" description="Complete API reference for AI agent query and analysis endpoints" prevPage={{ path: '/api/chat', label: 'Previous: Chat API' }} nextPage={{ path: '/api/gateway', label: 'Next: Gateway API' }} fallbackContent={`# Agent API
+export const AgentAPIPage = () => (<DocumentationPage title="Agent API" description="Complete API reference for AI agent query and analysis endpoints" prevPage={{ path: '/api/chat', label: 'Previous: Chat API' }} nextPage={{ path: '/api/gateway', label: 'Next: Gateway API' }} fallbackContent={`# Agent API
 
 Complete API reference for AI agent endpoints including query processing, streaming, feedback, and project wizard functionality.
 
@@ -6389,7 +6391,7 @@ Content-Type: application/json
 );
 
 // Memory API Page
-export const MemoryAPIPage = () => ( <DocumentationPage title="Memory API" description="Complete API reference for memory management endpoints" prevPage={{ path: '/api/gateway', label: 'Previous: Gateway API' }} nextPage={{ path: '/api/cache', label: 'Next: Cache API' }} fallbackContent={`# Memory API
+export const MemoryAPIPage = () => (<DocumentationPage title="Memory API" description="Complete API reference for memory management endpoints" prevPage={{ path: '/api/gateway', label: 'Previous: Gateway API' }} nextPage={{ path: '/api/cache', label: 'Next: Cache API' }} fallbackContent={`# Memory API
 
 Complete API reference for memory management endpoints including user preferences, conversation history, and memory insights.
 
@@ -6534,7 +6536,7 @@ GET /api/memory/:userId/stats
 );
 
 // Cache API Page
-export const CacheAPIPage = () => ( <DocumentationPage title="Cache API" description="Complete API reference for cache management endpoints" prevPage={{ path: '/api/memory', label: 'Previous: Memory API' }} nextPage={{ path: '/api/telemetry', label: 'Next: Telemetry API' }} fallbackContent={`# Cache API
+export const CacheAPIPage = () => (<DocumentationPage title="Cache API" description="Complete API reference for cache management endpoints" prevPage={{ path: '/api/memory', label: 'Previous: Memory API' }} nextPage={{ path: '/api/telemetry', label: 'Next: Telemetry API' }} fallbackContent={`# Cache API
 
 Complete API reference for cache management endpoints including statistics, clearing, export, import, and warmup operations.
 
@@ -6625,7 +6627,7 @@ Content-Type: application/json
 );
 
 // Telemetry API Page
-export const TelemetryAPIPage = () => ( <DocumentationPage title="Telemetry API" description="Complete API reference for telemetry data endpoints" prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }} nextPage={{ path: '/api/logs', label: 'Next: Logs API' }} fallbackContent={`# Telemetry API
+export const TelemetryAPIPage = () => (<DocumentationPage title="Telemetry API" description="Complete API reference for telemetry data endpoints" prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }} nextPage={{ path: '/api/logs', label: 'Next: Logs API' }} fallbackContent={`# Telemetry API
 
 Complete API reference for telemetry data endpoints including dashboard data, querying, and analytics.
 
@@ -6679,7 +6681,7 @@ Content-Type: application/json
 );
 
 // Logs API Page
-export const LogsAPIPage = () => ( <DocumentationPage title="Logs API" description="Complete API reference for logs query endpoints" prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }} nextPage={{ path: '/api/budget', label: 'Next: Budget API' }} fallbackContent={`# Logs API
+export const LogsAPIPage = () => (<DocumentationPage title="Logs API" description="Complete API reference for logs query endpoints" prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }} nextPage={{ path: '/api/budget', label: 'Next: Budget API' }} fallbackContent={`# Logs API
 
 Complete API reference for logs query endpoints including listing, filtering, natural language queries, and export.
 
@@ -6760,7 +6762,7 @@ GET /api/logs/ai/export
 );
 
 // Budget API Page
-export const BudgetAPIPage = () => ( <DocumentationPage title="Budget API" description="Complete API reference for budget management endpoints" prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }} nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }} fallbackContent={`# Budget API
+export const BudgetAPIPage = () => (<DocumentationPage title="Budget API" description="Complete API reference for budget management endpoints" prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }} nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }} fallbackContent={`# Budget API
 
 Complete API reference for budget management endpoints.
 
@@ -6798,7 +6800,7 @@ GET /api/budget/status
 );
 
 // Session Replay API Page
-export const SessionReplayAPIPage = () => ( <DocumentationPage title="Session Replay API" description="Complete API reference for session replay endpoints" prevPage={{ path: '/api/budget', label: 'Previous: Budget API' }} nextPage={{ path: '/api/trace', label: 'Next: Trace API' }} fallbackContent={`# Session Replay API
+export const SessionReplayAPIPage = () => (<DocumentationPage title="Session Replay API" description="Complete API reference for session replay endpoints" prevPage={{ path: '/api/budget', label: 'Previous: Budget API' }} nextPage={{ path: '/api/trace', label: 'Next: Trace API' }} fallbackContent={`# Session Replay API
 
 Complete API reference for session replay endpoints.
 
@@ -6845,7 +6847,7 @@ GET /api/session-replay/sessions/:sessionId
 );
 
 // Trace API Page
-export const TraceAPIPage = () => ( <DocumentationPage title="Trace API" description="Complete API reference for distributed tracing endpoints" prevPage={{ path: '/api/session-replay', label: 'Previous: Session Replay API' }} nextPage={{ path: '/api', label: 'Next: API Overview' }} fallbackContent={`# Trace API
+export const TraceAPIPage = () => (<DocumentationPage title="Trace API" description="Complete API reference for distributed tracing endpoints" prevPage={{ path: '/api/session-replay', label: 'Previous: Session Replay API' }} nextPage={{ path: '/api', label: 'Next: API Overview' }} fallbackContent={`# Trace API
 
 Complete API reference for distributed tracing endpoints.
 

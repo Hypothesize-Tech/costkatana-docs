@@ -647,10 +647,10 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
     // Process content to extract and render interactive components
     const processInteractiveComponents = (markdownContent: string): React.ReactNode => {
         // Check if content contains interactive component markers
-        const hasSteps = /(?:```|\\`\\`\\`)steps:/.test(markdownContent);
-        const hasSmartCode = /(?:```|\\`\\`\\`)smart:/.test(markdownContent);
-        const hasVideo = /(?:```|\\`\\`\\`)video:/.test(markdownContent);
-        const hasAPI = /(?:```|\\`\\`\\`)api:/.test(markdownContent);
+        const hasSteps = /```steps:/.test(markdownContent);
+        const hasSmartCode = /```smart:/.test(markdownContent);
+        const hasVideo = /```video:/.test(markdownContent);
+        const hasAPI = /```api:/.test(markdownContent);
 
         if (!hasSteps && !hasSmartCode && !hasVideo && !hasAPI) {
             // No interactive components, render normally
@@ -673,7 +673,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // Convert interactive code blocks to smart code blocks
         // ```interactive:language:title becomes ```smart:language with context
         processedContent = processedContent.replace(
-            /(?:```|\\`\\`\\`)interactive:(\w+)(?::([^\n]+?))?\n([\s\S]*?)(?:```|\\`\\`\\`)/g,
+            /```interactive:(\w+)(?::([^\n]+?))?\n([\s\S]*?)```/g,
             (match, language, title, code) => {
                 // Convert to smart code format
                 const cleanCode = code.trim()
