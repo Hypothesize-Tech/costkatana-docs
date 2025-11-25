@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Play, Copy, Check, RotateCcw, AlertCircle, CheckCircle, XCircle, Loader } from 'lucide-react';
+import { Play, Copy, Check, RotateCcw, AlertCircle, CheckCircle, XCircle, Loader, Shield } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 interface APIEndpoint {
@@ -16,19 +16,41 @@ interface APITesterProps {
     baseUrl?: string;
     title?: string;
     description?: string;
+    sandboxMode?: boolean;
 }
+
+// HTTPBin.org endpoint mapping for sandbox mode
+const getHttpBinUrl = (method: string, path: string): string => {
+    const baseHttpBin = 'https://httpbin.org';
+    switch (method) {
+        case 'GET':
+            return `${baseHttpBin}/get`;
+        case 'POST':
+            return `${baseHttpBin}/post`;
+        case 'PUT':
+            return `${baseHttpBin}/put`;
+        case 'DELETE':
+            return `${baseHttpBin}/delete`;
+        case 'PATCH':
+            return `${baseHttpBin}/patch`;
+        default:
+            return `${baseHttpBin}/get`;
+    }
+};
 
 const APITester: React.FC<APITesterProps> = ({
     endpoint,
     baseUrl = 'https://costkatana-backend.store',
     title,
     description,
+    sandboxMode: initialSandboxMode = false,
 }) => {
+    const [sandboxMode, setSandboxMode] = useState(initialSandboxMode);
     const [requestBody, setRequestBody] = useState<string>(
-        endpoint.body ? JSON.stringify(endpoint.body, null, 2) : ''
+        endpoint.body ? JSON.stringify(endpoint.body, null, 2) : '{\n  "message": "Hello from Cost Katana!",\n  "timestamp": "2024-01-01T00:00:00Z"\n}'
     );
     const [customHeaders, setCustomHeaders] = useState<Record<string, string>>(
-        endpoint.headers || {}
+        endpoint.headers || { 'X-Custom-Header': 'Cost-Katana-Test' }
     );
     const [response, setResponse] = useState<{
         status: number;
@@ -39,8 +61,12 @@ const APITester: React.FC<APITesterProps> = ({
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [copied, setCopied] = useState(false);
+    const [copiedResponse, setCopiedResponse] = useState(false);
 
-    const fullUrl = `${baseUrl}${endpoint.path}`;
+    // Use HTTPBin in sandbox mode, otherwise use the provided URL
+    const fullUrl = sandboxMode
+        ? getHttpBinUrl(endpoint.method, endpoint.path)
+        : `${baseUrl}${endpoint.path}`;
 
     const handleTest = async () => {
         setIsLoading(true);
@@ -60,7 +86,8 @@ const APITester: React.FC<APITesterProps> = ({
 
             if (endpoint.method !== 'GET' && requestBody) {
                 try {
-                    options.body = JSON.parse(requestBody);
+                    JSON.parse(requestBody); // Validate JSON
+                    options.body = requestBody;
                 } catch {
                     setError('Invalid JSON in request body');
                     setIsLoading(false);
@@ -85,135 +112,165 @@ const APITester: React.FC<APITesterProps> = ({
         }
     };
 
-    const handleCopy = async (text: string) => {
+    const handleCopy = async (text: string, isResponse = false) => {
         try {
             await navigator.clipboard.writeText(text);
-            setCopied(true);
+            if (isResponse) {
+                setCopiedResponse(true);
+                setTimeout(() => setCopiedResponse(false), 2000);
+            } else {
+                setCopied(true);
+                setTimeout(() => setCopied(false), 2000);
+            }
             toast.success('Copied to clipboard!');
-            setTimeout(() => setCopied(false), 2000);
         } catch {
             toast.error('Failed to copy');
         }
     };
 
     const handleReset = () => {
-        setRequestBody(endpoint.body ? JSON.stringify(endpoint.body, null, 2) : '');
-        setCustomHeaders(endpoint.headers || {});
+        setRequestBody(endpoint.body ? JSON.stringify(endpoint.body, null, 2) : '{\n  "message": "Hello from Cost Katana!",\n  "timestamp": "2024-01-01T00:00:00Z"\n}');
+        setCustomHeaders(endpoint.headers || { 'X-Custom-Header': 'Cost-Katana-Test' });
         setResponse(null);
         setError(null);
     };
 
     const getStatusColor = (status?: number) => {
         if (!status) return '';
-        if (status >= 200 && status < 300) return 'text-success-500';
-        if (status >= 400 && status < 500) return 'text-warning-500';
-        if (status >= 500) return 'text-error-500';
-        return 'text-gray-500';
+        if (status >= 200 && status < 300) return 'text-primary-400';
+        if (status >= 400 && status < 500) return 'text-yellow-400';
+        if (status >= 500) return 'text-red-400';
+        return 'text-gray-400';
+    };
+
+    const getMethodColor = (method: string) => {
+        switch (method) {
+            case 'GET': return 'bg-blue-500/20 text-blue-400 border-blue-500/30';
+            case 'POST': return 'bg-primary-500/20 text-primary-400 border-primary-500/30';
+            case 'PUT': return 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30';
+            case 'DELETE': return 'bg-red-500/20 text-red-400 border-red-500/30';
+            case 'PATCH': return 'bg-purple-500/20 text-purple-400 border-purple-500/30';
+            default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+        }
     };
 
     return (
-        <div className="my-8 rounded-xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl overflow-hidden">
-            {/* Header */}
+        <div className="my-8 rounded-2xl overflow-hidden bg-dark-panel dark:bg-dark-bg-100 border border-primary-500/30 shadow-2xl shadow-primary-500/10">
+            {/* MacBook-style Terminal Header */}
+            <div className="flex justify-between items-center px-4 py-3 bg-gray-800 dark:bg-dark-bg-200 border-b border-primary-500/20">
+                <div className="flex gap-2 items-center">
+                    <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg hover:bg-red-400 transition-colors cursor-pointer"></div>
+                    <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg hover:bg-yellow-400 transition-colors cursor-pointer"></div>
+                    <div className="w-3 h-3 bg-primary-500 rounded-full shadow-lg shadow-primary-500/50 hover:bg-primary-400 transition-colors cursor-pointer"></div>
+                </div>
+                <div className="flex gap-3 items-center">
+                    <span className="font-mono text-xs text-primary-400/70">API Tester</span>
+                    {/* Sandbox/Live Toggle */}
+                    <button
+                        onClick={() => setSandboxMode(!sandboxMode)}
+                        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-all ${sandboxMode
+                            ? 'bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/30'
+                            : 'bg-primary-500/20 border border-primary-500/30 text-primary-400 hover:bg-primary-500/30 shadow-sm shadow-primary-500/20'
+                            }`}
+                        title={sandboxMode ? 'Click to test your real API' : 'Click to use sandbox mode'}
+                    >
+                        <Shield size={12} />
+                        {sandboxMode ? 'Sandbox' : 'Live API'}
+                    </button>
+                </div>
+            </div>
+
+            {/* Title & Description */}
             {(title || description) && (
-                <div className="px-6 py-4 border-b border-primary-200/30 dark:border-primary-700/30">
+                <div className="px-6 py-4 border-b border-primary-500/20 bg-dark-panel dark:bg-dark-bg-100">
                     {title && (
-                        <h3 className="text-2xl font-display font-bold gradient-text mb-2">{title}</h3>
+                        <h3 className="text-xl font-bold text-primary-400 mb-1">{title}</h3>
                     )}
                     {description && (
-                        <p className="text-light-text-secondary dark:text-dark-text-secondary">
-                            {description}
-                        </p>
+                        <p className="text-sm text-dark-text-secondary">{description}</p>
                     )}
                 </div>
             )}
 
             {/* Endpoint Info */}
-            <div className="px-6 py-4 bg-light-bg-100 dark:bg-dark-bg-200 border-b border-primary-200/30 dark:border-primary-700/30">
-                <div className="flex items-center gap-3 mb-2">
-                    <span
-                        className={`px-3 py-1 rounded-lg text-sm font-semibold ${endpoint.method === 'GET'
-                            ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
-                            : endpoint.method === 'POST'
-                                ? 'bg-green-500/20 text-green-600 dark:text-green-400'
-                                : endpoint.method === 'PUT'
-                                    ? 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400'
-                                    : endpoint.method === 'DELETE'
-                                        ? 'bg-red-500/20 text-red-600 dark:text-red-400'
-                                        : 'bg-purple-500/20 text-purple-600 dark:text-purple-400'
-                            }`}
-                    >
+            <div className="px-6 py-4 bg-dark-bg-200 dark:bg-black border-b border-primary-500/20">
+                <div className="flex items-center gap-3">
+                    <span className={`px-3 py-1.5 rounded-lg text-sm font-bold border ${getMethodColor(endpoint.method)}`}>
                         {endpoint.method}
                     </span>
-                    <code className="flex-1 text-sm font-mono text-light-text-primary dark:text-dark-text-primary">
+                    <code className="flex-1 text-sm font-mono text-primary-400 truncate">
                         {fullUrl}
                     </code>
                     <button
                         onClick={() => handleCopy(fullUrl)}
-                        className="p-1.5 rounded-lg hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-colors"
+                        className="p-2 rounded-lg hover:bg-primary-500/10 text-dark-text-muted hover:text-primary-400 transition-colors"
                         title="Copy URL"
                     >
-                        {copied ? <Check size={16} /> : <Copy size={16} />}
+                        {copied ? <Check size={16} className="text-primary-400" /> : <Copy size={16} />}
                     </button>
                 </div>
                 {endpoint.description && (
-                    <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary mt-2">
-                        {endpoint.description}
-                    </p>
+                    <p className="text-xs text-dark-text-muted mt-2">{endpoint.description}</p>
                 )}
+                <p className={`text-xs mt-2 flex items-center gap-1 ${sandboxMode ? 'text-yellow-500/70' : 'text-primary-500'}`}>
+                    <Shield size={10} />
+                    {sandboxMode
+                        ? 'Sandbox Mode - Using HTTPBin.org for safe testing'
+                        : `Live Mode - Testing against ${baseUrl}`
+                    }
+                </p>
             </div>
 
             {/* Request Configuration */}
-            <div className="p-6 space-y-4">
+            <div className="p-6 space-y-4 bg-dark-panel dark:bg-dark-bg-100">
                 {/* Headers */}
-                {Object.keys(customHeaders).length > 0 && (
-                    <div>
-                        <label className="block text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
-                            Headers
-                        </label>
-                        <div className="space-y-2">
-                            {Object.entries(customHeaders).map(([key, value]) => (
-                                <div key={key} className="flex items-center gap-2">
-                                    <input
-                                        type="text"
-                                        value={key}
-                                        readOnly
-                                        className="flex-1 px-3 py-2 rounded-lg bg-light-bg-200 dark:bg-dark-bg-300 border border-primary-200/30 dark:border-primary-700/30 text-sm font-mono"
-                                    />
-                                    <input
-                                        type="text"
-                                        value={value}
-                                        onChange={(e) =>
-                                            setCustomHeaders({ ...customHeaders, [key]: e.target.value })
-                                        }
-                                        className="flex-1 px-3 py-2 rounded-lg bg-light-bg-200 dark:bg-dark-bg-300 border border-primary-200/30 dark:border-primary-700/30 text-sm"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                <div>
+                    <label className="block text-sm font-semibold text-dark-text-primary mb-2">
+                        Headers
+                    </label>
+                    <div className="space-y-2">
+                        {Object.entries(customHeaders).map(([key, value]) => (
+                            <div key={key} className="flex items-center gap-2">
+                                <input
+                                    type="text"
+                                    value={key}
+                                    readOnly
+                                    className="flex-1 px-3 py-2 rounded-lg bg-dark-bg-200 dark:bg-black border border-primary-500/20 text-sm font-mono text-dark-text-secondary focus:outline-none focus:border-primary-500"
+                                />
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={(e) =>
+                                        setCustomHeaders({ ...customHeaders, [key]: e.target.value })
+                                    }
+                                    className="flex-1 px-3 py-2 rounded-lg bg-dark-bg-200 dark:bg-black border border-primary-500/20 text-sm text-primary-400 focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50"
+                                />
+                            </div>
+                        ))}
                     </div>
-                )}
+                </div>
 
                 {/* Request Body */}
                 {endpoint.method !== 'GET' && (
                     <div>
-                        <label className="block text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
-                            Request Body
+                        <label className="block text-sm font-semibold text-dark-text-primary mb-2">
+                            Request Body (JSON)
                         </label>
                         <textarea
                             value={requestBody}
                             onChange={(e) => setRequestBody(e.target.value)}
-                            className="w-full h-32 px-3 py-2 rounded-lg bg-gray-900 dark:bg-black border border-primary-200/30 dark:border-primary-700/30 text-gray-100 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                            className="w-full h-32 px-4 py-3 rounded-lg bg-dark-bg-200 dark:bg-black border border-primary-500/20 text-primary-400 font-mono text-sm focus:outline-none focus:border-primary-500 focus:ring-1 focus:ring-primary-500/50 resize-none"
                             placeholder="Enter JSON request body..."
                         />
                     </div>
                 )}
 
                 {/* Actions */}
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 pt-2">
                     <button
                         onClick={handleTest}
                         disabled={isLoading}
-                        className="px-4 py-2 rounded-lg bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2"
+                        className="px-5 py-2.5 rounded-xl bg-primary-500 hover:bg-primary-600 text-white font-semibold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center gap-2 shadow-lg shadow-primary-500/30"
                     >
                         {isLoading ? (
                             <>
@@ -223,14 +280,14 @@ const APITester: React.FC<APITesterProps> = ({
                         ) : (
                             <>
                                 <Play size={18} />
-                                Test Request
+                                Send Request
                             </>
                         )}
                     </button>
 
                     <button
                         onClick={handleReset}
-                        className="px-4 py-2 rounded-lg border border-primary-200 dark:border-primary-700 bg-transparent hover:bg-primary-500/10 text-primary-600 dark:text-primary-400 transition-all duration-200 flex items-center gap-2"
+                        className="px-4 py-2.5 rounded-xl border border-primary-500/30 bg-transparent hover:bg-primary-500/10 text-primary-400 transition-all duration-200 flex items-center gap-2"
                     >
                         <RotateCcw size={18} />
                         Reset
@@ -238,76 +295,90 @@ const APITester: React.FC<APITesterProps> = ({
                 </div>
             </div>
 
-            {/* Response */}
+            {/* Response Section */}
             {(response || error) && (
-                <div className="border-t border-primary-200/30 dark:border-primary-700/30">
-                    <div className="px-6 py-3 bg-gray-900 dark:bg-black border-b border-gray-700 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
+                <div className="border-t border-primary-500/20">
+                    {/* Response Header with Traffic Lights */}
+                    <div className="flex justify-between items-center px-4 py-3 bg-gray-800 dark:bg-dark-bg-200 border-b border-primary-500/20">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+                            <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                            <div className="w-3 h-3 bg-primary-500 rounded-full shadow-lg shadow-primary-500/50"></div>
+                        </div>
+                        <div className="flex gap-3 items-center">
+                            <span className="font-mono text-xs text-primary-400/70">Response</span>
                             {error ? (
                                 <>
-                                    <XCircle size={18} className="text-error-500" />
-                                    <span className="text-sm font-semibold text-error-500">Error</span>
+                                    <XCircle size={16} className="text-red-400" />
+                                    <span className="text-sm font-semibold text-red-400">Error</span>
                                 </>
                             ) : (
                                 <>
-                                    <CheckCircle
-                                        size={18}
-                                        className={getStatusColor(response?.status)}
-                                    />
-                                    <span
-                                        className={`text-sm font-semibold ${getStatusColor(
-                                            response?.status
-                                        )}`}
-                                    >
+                                    <CheckCircle size={16} className={getStatusColor(response?.status)} />
+                                    <span className={`text-sm font-semibold ${getStatusColor(response?.status)}`}>
                                         {response?.status} {response?.statusText}
                                     </span>
                                 </>
                             )}
+                            {response && (
+                                <button
+                                    onClick={() => handleCopy(JSON.stringify(response.data, null, 2), true)}
+                                    className="p-1.5 rounded-md hover:bg-primary-500/10 text-dark-text-muted hover:text-primary-400 transition-colors"
+                                    title="Copy response"
+                                >
+                                    {copiedResponse ? <Check size={14} className="text-primary-400" /> : <Copy size={14} />}
+                                </button>
+                            )}
                         </div>
-                        {response && (
-                            <button
-                                onClick={() => handleCopy(JSON.stringify(response, null, 2))}
-                                className="p-1.5 rounded-lg hover:bg-gray-800 text-gray-400 hover:text-white transition-colors"
-                                title="Copy response"
-                            >
-                                <Copy size={16} />
-                            </button>
+                    </div>
+
+                    {/* Response Content */}
+                    <div className="p-4 bg-dark-bg-200 dark:bg-black min-h-[120px] overflow-x-auto font-mono text-sm">
+                        {error ? (
+                            <div className="flex items-start gap-2 text-red-400">
+                                <AlertCircle size={18} className="mt-0.5 flex-shrink-0" />
+                                <p>{error}</p>
+                            </div>
+                        ) : (
+                            <pre className="text-primary-400 whitespace-pre-wrap">
+                                {JSON.stringify(response?.data, null, 2)}
+                            </pre>
                         )}
                     </div>
 
-                    <div className="p-6 bg-gray-950 dark:bg-gray-900">
-                        {error ? (
-                            <div className="flex items-start gap-2 text-error-500">
-                                <AlertCircle size={18} className="mt-0.5 flex-shrink-0" />
-                                <p className="text-sm">{error}</p>
-                            </div>
-                        ) : (
-                            <pre className="text-sm font-mono text-gray-100 whitespace-pre-wrap overflow-x-auto">
-                                {JSON.stringify(response, null, 2)}
-                            </pre>
-                        )}
+                    {/* Terminal Glow Effect */}
+                    <div className="relative pointer-events-none">
+                        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/70 to-transparent"></div>
                     </div>
                 </div>
             )}
 
-            {/* Example Response */}
+            {/* Example Response (when no actual response) */}
             {endpoint.exampleResponse && !response && !error && (
-                <div className="border-t border-primary-200/30 dark:border-primary-700/30">
-                    <div className="px-6 py-3 bg-gray-900 dark:bg-black border-b border-gray-700">
-                        <span className="text-xs font-mono text-gray-400 uppercase">
-                            Example Response
-                        </span>
+                <div className="border-t border-primary-500/20">
+                    <div className="flex justify-between items-center px-4 py-3 bg-gray-800 dark:bg-dark-bg-200 border-b border-primary-500/20">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-3 h-3 bg-red-500/50 rounded-full"></div>
+                            <div className="w-3 h-3 bg-yellow-500/50 rounded-full"></div>
+                            <div className="w-3 h-3 bg-primary-500/50 rounded-full"></div>
+                        </div>
+                        <span className="text-xs font-mono text-primary-400/50 uppercase">Example Response</span>
                     </div>
-                    <div className="p-6 bg-gray-950 dark:bg-gray-900">
-                        <pre className="text-sm font-mono text-gray-400 whitespace-pre-wrap overflow-x-auto">
+                    <div className="p-4 bg-dark-bg-200 dark:bg-black min-h-[80px] overflow-x-auto">
+                        <pre className="text-sm font-mono text-dark-text-muted whitespace-pre-wrap">
                             {JSON.stringify(endpoint.exampleResponse, null, 2)}
                         </pre>
                     </div>
                 </div>
             )}
+
+            {/* Bottom Glow Effect */}
+            <div className="relative pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent to-transparent animate-pulse via-primary-500/5"></div>
+                <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary-500/70 to-transparent"></div>
+            </div>
         </div>
     );
 };
 
 export default APITester;
-

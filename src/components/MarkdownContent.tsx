@@ -10,11 +10,12 @@ import SmartCodeCopy from './SmartCodeCopy';
 import APITester from './APITester';
 
 // Helper to parse JSON with better error handling
-const safeJsonParse = (str: string): any => {
+const safeJsonParse = (str: string): unknown => {
     try {
         // Remove control characters that break JSON parsing
         const cleaned = str
-            .replace(/[\x00-\x1F\x7F]/g, '') // Remove control characters
+            // eslint-disable-next-line no-control-regex
+            .replace(/[\x00-\x1f\x7f]/g, '') // Remove control characters
             .replace(/\\n/g, '\n')
             .replace(/\\'/g, "'")
             .replace(/\\"/g, '"')
@@ -101,6 +102,18 @@ const slugify = (text: string): string => {
         .replace(/-+$/, '');
 };
 
+// Blinking cursor component for terminal
+const BlinkingCursor: React.FC = () => (
+    <span className="inline-block w-2 h-4 bg-green-400 ml-0.5 animate-pulse" style={{ animation: 'blink 1s step-end infinite' }}>
+        <style>{`
+            @keyframes blink {
+                0%, 50% { opacity: 1; }
+                51%, 100% { opacity: 0; }
+            }
+        `}</style>
+    </span>
+);
+
 const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = '' }) => {
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
     const idCountsRef = React.useRef<Record<string, number>>({});
@@ -179,7 +192,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
     };
 
     // Emoji to icon mapping
-    const emojiToIcon: Record<string, React.ComponentType<any>> = {
+    const emojiToIcon: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
         '✅': CheckCircle2,
         '❌': X,
         '⚠️': AlertTriangle,
@@ -260,8 +273,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
     };
 
     // Recursive function to process all children including nested elements
-    const processChildrenRecursively = (children: any): any => {
-        return React.Children.map(children, (child: any) => {
+    const processChildrenRecursively = (children: React.ReactNode): React.ReactNode => {
+        return React.Children.map(children, (child) => {
             // If it's a string, replace emojis
             if (typeof child === 'string') {
                 return replaceEmojisWithIcons(child);
@@ -269,7 +282,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
             // If it's a React element with children, process recursively
             if (React.isValidElement(child)) {
-                const props = child.props as any;
+                const props = child.props as { children?: React.ReactNode };
                 if (props && props.children) {
                     return React.cloneElement(
                         child,
@@ -285,7 +298,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
     };
 
     // Function to extract text content from React children recursively
-    const extractTextContent = (node: any): string => {
+    const extractTextContent = (node: React.ReactNode): string => {
         if (typeof node === 'string') {
             return node;
         }
@@ -296,7 +309,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return node.map(extractTextContent).join('');
         }
         if (React.isValidElement(node)) {
-            const props = node.props as any;
+            const props = node.props as { children?: React.ReactNode; className?: string };
             if (props?.children) {
                 return extractTextContent(props.children);
             }
@@ -308,10 +321,23 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         return '';
     };
 
-    // Component for code blocks with copy button
-    const CodeBlock: React.FC<{ children?: any;[key: string]: any }> = ({ children, ...props }) => {
+    // Detect language from code element className
+    const detectLanguage = (children: React.ReactNode): string => {
+        if (React.isValidElement(children)) {
+            const codeElement = children as React.ReactElement<{ className?: string }>;
+            const className = codeElement.props?.className || '';
+            const match = className.match(/language-(\w+)/);
+            if (match) return match[1];
+        }
+        return 'bash';
+    };
+
+    // Component for code blocks with MacBook-style terminal
+    const CodeBlock: React.FC<{ children?: React.ReactNode }> = ({ children, ...props }) => {
         const preRef = React.useRef<HTMLPreElement>(null);
         const [codeContent, setCodeContent] = React.useState('');
+        const language = detectLanguage(children);
+        const isTerminal = ['bash', 'sh', 'shell', 'zsh', 'terminal'].includes(language);
 
         // Extract code content on mount and when children change
         React.useEffect(() => {
@@ -319,7 +345,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
             // Try multiple extraction strategies
             if (React.isValidElement(children)) {
-                const codeElement = children as React.ReactElement<any>;
+                const codeElement = children as React.ReactElement<{ children?: React.ReactNode }>;
                 // Strategy 1: Direct children prop (most common case)
                 if (codeElement.props?.children) {
                     extracted = extractTextContent(codeElement.props.children);
@@ -350,29 +376,116 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             setCodeContent(extracted);
         }, [children]);
 
+        // Format terminal content with prompt and cursor
+        const formatTerminalContent = (code: string): React.ReactNode => {
+            const lines = code.split('\n');
+            return lines.map((line, index) => {
+                const isLastLine = index === lines.length - 1;
+                const trimmedLine = line.trim();
+                
+                // Check if line starts with a command (not a comment or output)
+                const isCommand = trimmedLine && !trimmedLine.startsWith('#') && !trimmedLine.startsWith('//');
+                
+                return (
+                    <div key={index} className="flex items-start">
+                        {isCommand && (
+                            <span className="text-blue-400 mr-2 select-none flex-shrink-0">
+                                <span className="text-green-400">user@costkatana</span>
+                                <span className="text-gray-400">:</span>
+                                <span className="text-blue-400">~</span>
+                                <span className="text-gray-400">$</span>
+                            </span>
+                        )}
+                        <span className={isCommand ? 'text-green-400' : 'text-gray-400'}>
+                            {line}
+                            {isLastLine && isCommand && <BlinkingCursor />}
+                        </span>
+                    </div>
+                );
+            });
+        };
+
+        // MacBook-style terminal for bash/shell commands
+        if (isTerminal) {
+            return (
+                <div className="relative group my-4 overflow-hidden bg-gray-900 rounded-xl border border-primary-500/20 shadow-2xl">
+                    {/* Terminal header with traffic lights */}
+                    <div className="flex justify-between items-center px-4 py-3 bg-gray-800 border-b border-gray-700">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg hover:bg-red-400 transition-colors"></div>
+                            <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg hover:bg-yellow-400 transition-colors"></div>
+                            <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg hover:bg-green-400 transition-colors"></div>
+                        </div>
+                        <div className="flex gap-3 items-center">
+                            <span className="font-mono text-xs text-gray-400">user@costkatana: ~</span>
+                            {codeContent && (
+                                <button
+                                    onClick={() => copyToClipboard(codeContent)}
+                                    className="p-1.5 rounded-md hover:bg-gray-700 transition-colors group/btn"
+                                    title="Copy commands"
+                                >
+                                    {copiedCode === codeContent ? (
+                                        <Check size={16} className="text-primary-400" />
+                                    ) : (
+                                        <Copy size={16} className="text-gray-400 group-hover/btn:text-white transition-colors" />
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    {/* Terminal content */}
+                    <div className="p-4 font-mono text-sm leading-relaxed bg-black min-h-[60px] overflow-x-auto">
+                        <pre ref={preRef} className="whitespace-pre-wrap hidden" {...props}>
+                            {children}
+                        </pre>
+                        <div className="terminal-output">
+                            {formatTerminalContent(codeContent)}
+                        </div>
+                    </div>
+                    {/* Terminal glow effect */}
+                    <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-transparent animate-pulse via-primary-500/3"></div>
+                        <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent via-primary-500/50"></div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Regular code block for other languages
         return (
-            <div className="relative group my-4">
+            <div className="relative group my-4 overflow-hidden bg-gray-900 rounded-xl border border-primary-500/20 shadow-2xl">
+                {/* Code block header with traffic lights */}
+                <div className="flex justify-between items-center px-4 py-3 bg-gray-800 border-b border-gray-700">
+                    <div className="flex gap-2 items-center">
+                        <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+                        <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                        <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
+                    </div>
+                    <div className="flex gap-3 items-center">
+                        <span className="font-mono text-xs text-gray-400 capitalize">{language}</span>
+                        {codeContent && (
+                            <button
+                                onClick={() => copyToClipboard(codeContent)}
+                                className="p-1.5 rounded-md hover:bg-gray-700 transition-colors group/btn"
+                                title="Copy code"
+                            >
+                                {copiedCode === codeContent ? (
+                                    <Check size={16} className="text-primary-400" />
+                                ) : (
+                                    <Copy size={16} className="text-gray-400 group-hover/btn:text-white transition-colors" />
+                                )}
+                            </button>
+                        )}
+                    </div>
+                </div>
+                {/* Code content */}
                 <pre
                     ref={preRef}
-                    className="bg-gray-900 dark:bg-black text-gray-100 rounded-xl p-4 overflow-x-auto border border-primary-500/20 shadow-lg"
+                    className="p-4 overflow-x-auto text-gray-100 bg-black"
                     {...props}
                 >
                     {children}
                 </pre>
-                {codeContent && (
-                    <button
-                        onClick={() => copyToClipboard(codeContent)}
-                        className="btn absolute top-2 right-2 p-2 bg-primary-600/80 hover:bg-primary-600 dark:bg-primary-500/80 dark:hover:bg-primary-500 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity shadow-lg z-10"
-                        title="Copy code"
-                        aria-label="Copy code to clipboard"
-                    >
-                        {copiedCode === codeContent ? (
-                            <Check size={16} className="text-white" />
-                        ) : (
-                            <Copy size={16} className="text-white" />
-                        )}
-                    </button>
-                )}
             </div>
         );
     };
@@ -383,7 +496,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         pre: CodeBlock,
 
         // Inline code with green accent
-        code: ({ inline, className, children, ...props }: any) => {
+        code: ({ inline, className, children, ...props }: { inline?: boolean; className?: string; children?: React.ReactNode }) => {
             if (inline) {
                 return (
                     <code className="bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 border border-primary-200/50 dark:border-primary-700/50 px-2 py-1 rounded text-sm font-mono" {...props}>
@@ -399,7 +512,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         },
 
         // Tables with green accents
-        table: ({ children, ...props }: any) => (
+        table: ({ children, ...props }: { children?: React.ReactNode }) => (
             <div className="overflow-x-auto my-6 rounded-xl border border-primary-200/30 dark:border-primary-700/30 shadow-lg">
                 <table className="w-full border-collapse" {...props}>
                     {children}
@@ -407,33 +520,33 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             </div>
         ),
 
-        thead: ({ children, ...props }: any) => (
+        thead: ({ children, ...props }: { children?: React.ReactNode }) => (
             <thead className="bg-gradient-primary/10 dark:bg-gradient-primary/20" {...props}>
                 {children}
             </thead>
         ),
 
-        th: ({ children, ...props }: any) => (
+        th: ({ children, ...props }: { children?: React.ReactNode }) => (
             <th className="text-left p-3 font-display font-semibold border border-primary-200/30 dark:border-primary-700/30 text-primary-700 dark:text-primary-300" {...props}>
                 {processChildrenRecursively(children)}
             </th>
         ),
 
-        td: ({ children, ...props }: any) => (
+        td: ({ children, ...props }: { children?: React.ReactNode }) => (
             <td className="p-3 border border-primary-200/30 dark:border-primary-700/30 text-light-text-secondary dark:text-dark-text-secondary" {...props}>
                 {processChildrenRecursively(children)}
             </td>
         ),
 
         // Blockquotes with green accent
-        blockquote: ({ children, ...props }: any) => (
+        blockquote: ({ children, ...props }: { children?: React.ReactNode }) => (
             <blockquote className="border-l-4 border-primary-500 dark:border-primary-400 bg-gradient-light-panel dark:bg-gradient-dark-panel glass border border-primary-200/30 dark:border-primary-700/30 p-4 my-4 rounded-r-lg shadow-sm" {...props}>
                 {processChildrenRecursively(children)}
             </blockquote>
         ),
 
         // Links with green accent
-        a: ({ href, children, ...props }: any) => {
+        a: ({ href, children, ...props }: { href?: string; children?: React.ReactNode }) => {
             const isExternal = href?.startsWith('http');
             return (
                 <a
@@ -449,26 +562,26 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         },
 
         // Lists
-        ul: ({ children, ...props }: any) => (
+        ul: ({ children, ...props }: { children?: React.ReactNode }) => (
             <ul className="list-disc list-inside mb-4 space-y-2" {...props}>
                 {children}
             </ul>
         ),
 
-        ol: ({ children, ...props }: any) => (
+        ol: ({ children, ...props }: { children?: React.ReactNode }) => (
             <ol className="list-decimal list-inside mb-4 space-y-2" {...props}>
                 {children}
             </ol>
         ),
 
-        li: ({ children, ...props }: any) => (
+        li: ({ children, ...props }: { children?: React.ReactNode }) => (
             <li className="text-light-text-secondary dark:text-dark-text-secondary" {...props}>
                 {processChildrenRecursively(children)}
             </li>
         ),
 
         // Headings with green gradient and IDs for TOC
-        h1: ({ children, ...props }: any) => {
+        h1: ({ children, ...props }: { children?: React.ReactNode }) => {
             const id = generateHeadingId(children);
             return (
                 <h1
@@ -481,7 +594,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             );
         },
 
-        h2: ({ children, ...props }: any) => {
+        h2: ({ children, ...props }: { children?: React.ReactNode }) => {
             const id = generateHeadingId(children);
             return (
                 <h2
@@ -494,7 +607,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             );
         },
 
-        h3: ({ children, ...props }: any) => {
+        h3: ({ children, ...props }: { children?: React.ReactNode }) => {
             const id = generateHeadingId(children);
             return (
                 <h3
@@ -507,7 +620,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             );
         },
 
-        h4: ({ children, ...props }: any) => {
+        h4: ({ children, ...props }: { children?: React.ReactNode }) => {
             const id = generateHeadingId(children);
             return (
                 <h4
@@ -521,14 +634,14 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         },
 
         // Paragraphs
-        p: ({ children, ...props }: any) => (
+        p: ({ children, ...props }: { children?: React.ReactNode }) => (
             <p className="mb-4 leading-relaxed text-light-text-secondary dark:text-dark-text-secondary" {...props}>
                 {processChildrenRecursively(children)}
             </p>
         ),
 
         // Horizontal rules with green accent
-        hr: ({ ...props }: any) => (
+        hr: ({ ...props }) => (
             <hr className="my-8 border-primary-200/50 dark:border-primary-700/50" {...props} />
         ),
 
@@ -714,13 +827,13 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                             .replace(/\\"/g, '"')
                             .replace(/\\'/g, "'")
                             .replace(/\\\\/g, '\\');
-                        context = JSON.parse(cleanContextStr);
+                        context = safeJsonParse(cleanContextStr) as Record<string, unknown> | undefined;
                     }
                 } catch {
                     context = undefined;
                 }
                 // Clean up escaped backticks and other escape sequences in code
-                let cleanCode = code.trim()
+                const cleanCode = code.trim()
                     .replace(/\\`/g, '`')
                     .replace(/\\n/g, '\n')
                     .replace(/\\'/g, "'")
@@ -785,9 +898,9 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                 const componentKey = `api-${keyCounter++}`;
                 let headers, body, exampleResponse;
                 try {
-                    headers = headersStr ? safeJsonParse(headersStr) : undefined;
-                    body = bodyStr ? safeJsonParse(bodyStr) : undefined;
-                    exampleResponse = responseStr ? safeJsonParse(responseStr) : undefined;
+                    headers = headersStr ? safeJsonParse(headersStr) as Record<string, string> | undefined : undefined;
+                    body = bodyStr ? safeJsonParse(bodyStr) as Record<string, unknown> | undefined : undefined;
+                    exampleResponse = responseStr ? safeJsonParse(responseStr) as Record<string, unknown> | undefined : undefined;
                 } catch (e) {
                     console.error('Failed to parse API tester JSON:', e);
                 }
@@ -813,9 +926,9 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
         // Create a map of component markers to components for easier lookup
         const componentMap = new Map<string, React.ReactNode>();
-        parts.forEach((part: any) => {
+        parts.forEach((part) => {
             if (part && typeof part === 'object' && 'key' in part) {
-                const key = String(part.key);
+                const key = String((part as { key: string }).key);
                 // Create marker string that matches what we generated
                 const keyMatch = key.match(/(\w+)-(\d+)/);
                 if (keyMatch) {
@@ -831,7 +944,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         const finalParts: React.ReactNode[] = [];
         let partIndex = 0;
 
-        sections.forEach((section, index) => {
+        sections.forEach((section) => {
             if (section.match(/^__\w+_COMPONENT_\w+-\d+__$/)) {
                 // This is a component marker, find the corresponding component
                 const component = componentMap.get(section);
