@@ -13,11 +13,11 @@ Welcome to Cost Katana! Get your AI cost optimization platform up and running in
 ## Overview
 
 By the end of this guide, you'll have:
-- ✅ A Cost Katana account with AI-powered insights
-- ✅ Your first AI provider connected
-- ✅ Real-time usage tracking active
-- ✅ Personalized optimization recommendations
-- ✅ Predictive cost alerts configured
+- A Cost Katana account with AI-powered insights
+- Your first AI provider connected
+- Real-time usage tracking active
+- Personalized optimization recommendations
+- Predictive cost alerts configured
 
 ---
 
@@ -50,28 +50,28 @@ A fast, passwordless way to get started:
 Once logged in, you'll need an API key to start tracking usage:
 
 ### In the Dashboard:
-1. **Navigate to Settings** → Click your profile in the top right
-2. **Go to API Keys tab** → Find "API Keys" in the sidebar
-3. **Generate new key** → Click "Generate New Key"
+1. **Navigate to Settings** - Click your profile in the top right
+2. **Go to API Keys tab** - Find "API Keys" in the sidebar
+3. **Generate new key** - Click "Generate New Key"
 4. **Configure permissions**:
-   - ✅ **Write permissions** (for tracking usage)
-   - ✅ **Read permissions** (for analytics)
-5. **Copy your key** → It starts with \`ck_\` for regular keys
+   - **Write permissions** (for tracking usage)
+   - **Read permissions** (for analytics)
+5. **Copy your key** - It starts with \`ck_\` for regular keys
 
-> **🔒 Security Note**: Store your API key securely. Never commit it to version control or share it publicly.
+> **Security Note**: Store your API key securely. Never commit it to version control or share it publicly.
 
 ---
 
 ## Step 3: Choose Your Integration Method
 
-### ⭐ Option 1: Core Package (Primary/Recommended)
+### Option 1: Core Package (Primary/Recommended)
 **#1 Priority Package** - For JavaScript/TypeScript developers - the most powerful and recommended way to integrate:
 
 \`\`\`bash
 npm install cost-katana
 \`\`\`
 
-> **🎯 Primary Package**: \`cost-katana\` is our #1 priority package. This is the core SDK that provides the most features and best developer experience.
+> **Primary Package**: \`cost-katana\` is our #1 priority package. This is the core SDK that provides the most features and best developer experience.
 
 Try this example with automatic imports and context:
 
@@ -164,10 +164,10 @@ After tracking your first API call:
    - Predictive forecasts
 
 ### Dashboard Features:
-- **📊 Real-time Analytics**: Live usage graphs with AI insights
-- **🤖 AI Recommendations**: Personalized optimization tips
-- **📈 Predictive Forecasting**: ML-powered cost predictions
-- **⚡ Quick Actions**: One-click optimizations
+- **Real-time Analytics**: Live usage graphs with AI insights
+- **AI Recommendations**: Personalized optimization tips
+- **Predictive Forecasting**: ML-powered cost predictions
+- **Quick Actions**: One-click optimizations
 
 ---
 
@@ -177,9 +177,9 @@ Set up intelligent alerts to prevent overages:
 
 1. **Navigate to Alerts** in your dashboard
 2. **Enable Smart Alerts**:
-   - ⚠️ **50% threshold**: Early AI-powered warning
-   - 🚨 **80% threshold**: Urgent optimization recommendations
-   - 🔴 **90% threshold**: Critical alert with auto-suggestions
+   - **50% threshold**: Early AI-powered warning
+   - **80% threshold**: Urgent optimization recommendations
+   - **90% threshold**: Critical alert with auto-suggestions
 3. **Configure AI predictions**:
    - Enable "Predictive Alerts" for ML-based warnings
    - Set "Anomaly Detection" for unusual usage patterns
@@ -203,14 +203,14 @@ Set up intelligent alerts to prevent overages:
 
 ## Need Help?
 
-- 📧 **Email**: support@costkatana.com
-- 💬 **Chat**: Available in dashboard (bottom right)
-- 📚 **Docs**: You're here!
-- 🐛 **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/cost-katana/issues)
+- **Email**: support@costkatana.com
+- **Chat**: Available in dashboard (bottom right)
+- **Docs**: You're here!
+- **Issues**: [GitHub Issues](https://github.com/Hypothesize-Tech/cost-katana/issues)
 
 ---
 
-**Congratulations!** 🎉 You're now tracking and optimizing your AI costs with intelligent insights. The AI will learn from your usage patterns and provide increasingly personalized recommendations over time.`;
+**Congratulations!** You're now tracking and optimizing your AI costs with intelligent insights. The AI will learn from your usage patterns and provide increasingly personalized recommendations over time.`;
 
     return (
         <>
