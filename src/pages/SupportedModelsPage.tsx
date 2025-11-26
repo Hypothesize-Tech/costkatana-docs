@@ -16,17 +16,16 @@ import {
     X,
     ShieldCheck,
     Database,
-    ChevronDown,
     Sparkles,
-    MessageSquareText,
+    MessageSquare,
     Mic,
-    Languages,
+    Globe,
     Puzzle,
-    Crosshair,
+    Target,
     Radio,
     Crown,
     Feather,
-    ScanText,
+    ScanLine,
     Braces,
     FunctionSquare,
     Lightbulb,
@@ -37,7 +36,12 @@ import {
     AudioLines,
     Network,
     Wand2,
-    Compass,
+    Filter,
+    ChevronRight,
+    ChevronDown,
+    ExternalLink,
+    Copy,
+    Check,
     LayoutGrid,
     List,
     Table2,
@@ -314,119 +318,24 @@ const providers: Provider[] = [
     },
 ];
 
-type ViewMode = 'accordion' | 'cards' | 'table' | 'list';
+type ViewMode = 'cards' | 'table' | 'list' | 'accordion';
 
 const SupportedModelsPage: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProvider, setSelectedProvider] = useState<string>('all');
     const [selectedUseCase, setSelectedUseCase] = useState<string>('all');
-    const [selectedCategory, setSelectedCategory] = useState<string>('all');
     const [selectedModel, setSelectedModel] = useState<Model | null>(null);
+    const [copiedId, setCopiedId] = useState<string | null>(null);
+    const [showFilters, setShowFilters] = useState(false);
+    const [viewMode, setViewMode] = useState<ViewMode>('cards');
     const [expandedProviders, setExpandedProviders] = useState<Set<string>>(new Set());
-    const [viewMode, setViewMode] = useState<ViewMode>('accordion');
 
     const viewModes: { id: ViewMode; name: string; icon: LucideIcon }[] = [
-        { id: 'accordion', name: 'Accordion', icon: Rows3 },
         { id: 'cards', name: 'Cards', icon: LayoutGrid },
         { id: 'table', name: 'Table', icon: Table2 },
         { id: 'list', name: 'List', icon: List },
+        { id: 'accordion', name: 'Accordion', icon: Rows3 },
     ];
-
-    const categories = [
-        { id: 'all', name: 'All Models', count: 0 },
-        { id: 'featured', name: 'Featured', count: 0 },
-        { id: 'frontier', name: 'Frontier', count: 0 },
-        { id: 'open-weight', name: 'Open-Weight', count: 0 },
-        { id: 'specialized', name: 'Specialized', count: 0 },
-        { id: 'realtime-audio', name: 'Audio & Realtime', count: 0 },
-    ];
-
-    const allUseCases = useMemo(() => {
-        const cases = new Set<string>();
-        providers.forEach(provider => {
-            provider.models.forEach(model => {
-                model.useCases.forEach(useCase => cases.add(useCase));
-            });
-        });
-        return Array.from(cases).sort();
-    }, []);
-
-    const categorizeModel = (model: Model, providerId: string) => {
-        if (model.isLatest || model.isRecommended) return 'featured';
-        if (providerId === 'openai') {
-            if (model.name.includes('gpt-5') && !model.name.includes('chat')) return 'frontier';
-            if (model.name.includes('gpt-4.1') || model.name.includes('gpt-4o')) return 'frontier';
-            if (model.name.includes('gpt-oss')) return 'open-weight';
-            if (model.name.includes('sora') || model.name.includes('dall-e') || model.name.includes('image') || model.name.includes('tts') || model.name.includes('transcribe') || model.name.includes('deep-research')) return 'specialized';
-            if (model.name.includes('realtime') || model.name.includes('audio') || model.name.includes('whisper')) return 'realtime-audio';
-        }
-        if (providerId === 'anthropic') {
-            if (model.name.includes('claude')) return 'frontier';
-        }
-        if (providerId === 'google') {
-            if (model.name.includes('gemini-3')) return 'frontier';
-            if (model.name.includes('gemini-2.5-pro') || model.name.includes('gemini-2.0-flash')) return 'frontier';
-            if (model.name.includes('gemma')) return 'open-weight';
-            if (model.name.includes('imagen') || model.name.includes('veo') || model.name.includes('robotics')) return 'specialized';
-            if (model.name.includes('flash') && (model.name.includes('audio') || model.name.includes('tts'))) return 'realtime-audio';
-            if (model.name.includes('embedding')) return 'specialized';
-            return 'frontier';
-        }
-        if (providerId === 'xai') {
-            if (model.name.includes('grok')) return 'frontier';
-            if (model.name.includes('image')) return 'specialized';
-            return 'frontier';
-        }
-        if (providerId === 'mistral') {
-            if (model.name.includes('large') || model.name.includes('magistral') || model.name.includes('medium')) return 'frontier';
-            if (model.name.includes('ocr') || model.name.includes('pixtral') || model.name.includes('voxtral')) return 'specialized';
-            if (model.name.includes('embed')) return 'specialized';
-            return 'frontier';
-        }
-        if (providerId === 'cohere') {
-            if (model.name.includes('command-a') || model.name.includes('command-r')) return 'frontier';
-            if (model.name.includes('embed') || model.name.includes('rerank')) return 'specialized';
-            return 'frontier';
-        }
-        if (providerId === 'meta') {
-            if (model.name.includes('llama-4') || model.name.includes('llama-3')) return 'frontier';
-            return 'open-weight';
-        }
-        if (providerId === 'meta' || providerId === 'deepseek') return 'open-weight';
-        if (model.useCases.includes('image') || model.useCases.includes('video') || model.useCases.includes('audio')) return 'specialized';
-        return 'frontier';
-    };
-
-    const filteredProviders = useMemo(() => {
-        return providers.map(provider => {
-            const filteredModels = provider.models.filter(model => {
-                const matchesSearch = model.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    model.series.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    model.useCases.some(uc => uc.toLowerCase().includes(searchQuery.toLowerCase()));
-
-                const matchesUseCase = selectedUseCase === 'all' || model.useCases.includes(selectedUseCase);
-                const matchesCategory = selectedCategory === 'all' || categorizeModel(model, provider.id) === selectedCategory;
-
-                return matchesSearch && matchesUseCase && matchesCategory;
-            });
-
-            return { ...provider, models: filteredModels };
-        }).filter(provider =>
-            (selectedProvider === 'all' || provider.id === selectedProvider) &&
-            provider.models.length > 0
-        );
-    }, [searchQuery, selectedProvider, selectedUseCase, selectedCategory]);
-
-    const totalModels = providers.reduce((sum, provider) => sum + provider.models.length, 0);
-
-    const categoryCounts = categories.map(cat => ({
-        ...cat,
-        count: cat.id === 'all' ? totalModels :
-            providers.reduce((sum, provider) =>
-                sum + provider.models.filter(model =>
-                    cat.id === 'all' || categorizeModel(model, provider.id) === cat.id
-                ).length, 0)
-    }));
 
     const toggleProvider = (providerId: string) => {
         setExpandedProviders(prev => {
@@ -440,81 +349,83 @@ const SupportedModelsPage: React.FC = () => {
         });
     };
 
-    // Use case icons with better visual representations
-    const getUseCaseIcon = (useCase: string) => {
-        const iconConfig: Record<string, { icon: LucideIcon, color: string }> = {
-            text: { icon: MessageSquareText, color: 'text-gray-500 dark:text-gray-400' },
+    const allUseCases = useMemo(() => {
+        const cases = new Set<string>();
+        providers.forEach(provider => {
+            provider.models.forEach(model => {
+                model.useCases.forEach(useCase => cases.add(useCase));
+            });
+        });
+        return Array.from(cases).sort();
+    }, []);
+
+    const filteredProviders = useMemo(() => {
+        return providers.map(provider => {
+            const filteredModels = provider.models.filter(model => {
+                const matchesSearch = model.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    model.series.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    model.useCases.some(uc => uc.toLowerCase().includes(searchQuery.toLowerCase()));
+                const matchesUseCase = selectedUseCase === 'all' || model.useCases.includes(selectedUseCase);
+                return matchesSearch && matchesUseCase;
+            });
+            return { ...provider, models: filteredModels };
+        }).filter(provider =>
+            (selectedProvider === 'all' || provider.id === selectedProvider) &&
+            provider.models.length > 0
+        );
+    }, [searchQuery, selectedProvider, selectedUseCase]);
+
+    const totalModels = providers.reduce((sum, provider) => sum + provider.models.length, 0);
+    const filteredCount = filteredProviders.reduce((sum, p) => sum + p.models.length, 0);
+
+    // Use case icons with semantic meaning
+    const getUseCaseIcon = (useCase: string): { icon: LucideIcon; color: string } => {
+        const iconConfig: Record<string, { icon: LucideIcon; color: string }> = {
+            text: { icon: MessageSquare, color: 'text-slate-500' },
             vision: { icon: Eye, color: 'text-blue-500' },
-            audio: { icon: AudioLines, color: 'text-purple-500' },
+            audio: { icon: AudioLines, color: 'text-violet-500' },
             image: { icon: Palette, color: 'text-pink-500' },
             video: { icon: Video, color: 'text-red-500' },
             coding: { icon: Code2, color: 'text-primary-500' },
-            reasoning: { icon: Lightbulb, color: 'text-orange-500' },
+            reasoning: { icon: Lightbulb, color: 'text-amber-500' },
             fast: { icon: Zap, color: 'text-yellow-500' },
-            premium: { icon: Crown, color: 'text-amber-500' },
-            research: { icon: Crosshair, color: 'text-indigo-500' },
+            premium: { icon: Crown, color: 'text-amber-600' },
+            research: { icon: Target, color: 'text-indigo-500' },
             agents: { icon: Bot, color: 'text-cyan-500' },
-            transcription: { icon: Mic, color: 'text-violet-500' },
-            search: { icon: Compass, color: 'text-teal-500' },
+            transcription: { icon: Mic, color: 'text-purple-500' },
+            search: { icon: Search, color: 'text-teal-500' },
             moderation: { icon: ShieldCheck, color: 'text-rose-500' },
             embeddings: { icon: Network, color: 'text-emerald-500' },
+            embedding: { icon: Network, color: 'text-emerald-500' },
             realtime: { icon: Radio, color: 'text-lime-500' },
             tools: { icon: Puzzle, color: 'text-sky-500' },
             multimodal: { icon: Wand2, color: 'text-fuchsia-500' },
             agentic: { icon: Bot, color: 'text-cyan-500' },
-            lightweight: { icon: Feather, color: 'text-yellow-500' },
-            embedding: { icon: Network, color: 'text-emerald-500' },
-            voice: { icon: AudioLines, color: 'text-violet-500' },
-            ocr: { icon: ScanText, color: 'text-slate-500' },
+            lightweight: { icon: Feather, color: 'text-gray-500' },
+            voice: { icon: Mic, color: 'text-violet-500' },
+            ocr: { icon: ScanLine, color: 'text-slate-600' },
             json: { icon: Braces, color: 'text-primary-500' },
             functions: { icon: FunctionSquare, color: 'text-sky-500' },
             thinking: { icon: Brain, color: 'text-orange-500' },
-            enterprise: { icon: Building2, color: 'text-rose-500' },
-            efficiency: { icon: Gauge, color: 'text-yellow-500' },
+            enterprise: { icon: Building2, color: 'text-rose-600' },
+            efficiency: { icon: Gauge, color: 'text-yellow-600' },
             performance: { icon: TrendingUp, color: 'text-indigo-500' },
-            edge: { icon: Server, color: 'text-gray-500' },
+            edge: { icon: Server, color: 'text-gray-600' },
             reranking: { icon: Puzzle, color: 'text-sky-500' },
-            multilingual: { icon: Languages, color: 'text-teal-500' },
-            'long-context': { icon: FileText, color: 'text-slate-500' },
+            multilingual: { icon: Globe, color: 'text-teal-500' },
+            'long-context': { icon: FileText, color: 'text-slate-600' },
             'commodity-gpu': { icon: Server, color: 'text-gray-500' },
         };
-        const config = iconConfig[useCase] || { icon: Cpu, color: 'text-gray-500' };
-        const IconComponent = config.icon;
-        return <IconComponent size={12} className={`inline-block ${config.color}`} />;
-    };
-
-    const getModelDescription = (model: Model): string => {
-        const descriptions: Record<string, string> = {
-            'gpt-5.1': 'The best model for coding and agentic tasks with configurable reasoning effort.',
-            'gpt-5-mini': 'A faster, cost-efficient version of GPT-5 for well-defined tasks.',
-            'gpt-5-nano': 'Fastest, most cost-efficient version of GPT-5.',
-            'gpt-5-pro': 'Version of GPT-5 that produces smarter and more precise responses.',
-            'gpt-5': 'Previous intelligent reasoning model for coding and agentic tasks.',
-            'gpt-4.1': 'Smartest non-reasoning model.',
-            'claude-sonnet-4-5': 'Our smartest model for complex agents and coding. Fastest in its intelligence class.',
-            'claude-haiku-4-5': 'Our fastest model with near-frontier intelligence. Ideal for high-throughput tasks.',
-            'claude-opus-4-5': 'Premium model combining maximum intelligence with practical performance.',
-            'gemini-3-pro-preview': 'The best model for multimodal understanding and agentic tasks.',
-            'gemini-2-5-pro': 'State-of-the-art multipurpose model excelling at coding and reasoning.',
-            'gemini-2-5-flash': 'Hybrid reasoning model with 1M token context and thinking budgets.',
-            'grok-4-1-fast-reasoning': 'Frontier multimodal model optimized for high-performance agentic tool calling.',
-            'deepseek-chat': 'Fast and efficient model with JSON output, function calling, and chat prefix completion.',
-            'deepseek-reasoner': 'Advanced reasoning model with thinking capabilities and extended output limits.',
-            'mistral-large-latest': 'For complex tasks and sophisticated problems with multimodal capabilities.',
-            'command-a': 'Largest, most performant model for building enterprise agents.',
-            'command-r': 'Midsized model providing the best combination of efficiency and performance.',
-            'llama-4-maverick': 'Frontier multimodal model with exceptional performance across all tasks.',
-        };
-        return descriptions[model.id] || 'A powerful AI model for various tasks and applications.';
+        return iconConfig[useCase] || { icon: Cpu, color: 'text-gray-500' };
     };
 
     const getPricingTierInfo = (tier: number) => {
         switch (tier) {
-            case 1: return { label: 'Budget', color: 'bg-primary-500', dotColor: 'bg-primary-400' };
-            case 2: return { label: 'Standard', color: 'bg-yellow-500', dotColor: 'bg-yellow-400' };
-            case 3: return { label: 'Premium', color: 'bg-orange-500', dotColor: 'bg-orange-400' };
-            case 4: return { label: 'Enterprise', color: 'bg-red-500', dotColor: 'bg-red-400' };
-            default: return { label: 'Unknown', color: 'bg-gray-500', dotColor: 'bg-gray-400' };
+            case 1: return { label: 'Budget', color: 'bg-primary-500', textColor: 'text-primary-500' };
+            case 2: return { label: 'Standard', color: 'bg-highlight-500', textColor: 'text-highlight-500' };
+            case 3: return { label: 'Premium', color: 'bg-amber-500', textColor: 'text-amber-500' };
+            case 4: return { label: 'Enterprise', color: 'bg-rose-500', textColor: 'text-rose-500' };
+            default: return { label: 'Unknown', color: 'bg-gray-500', textColor: 'text-gray-500' };
         }
     };
 
@@ -591,7 +502,7 @@ const SupportedModelsPage: React.FC = () => {
             'tts-1-hd': { input: '-', output: '-', notes: '$30.00/1M chars' },
             'whisper-1': { input: '-', output: '-', notes: '$0.006/min' },
 
-            // OpenAI Legacy
+            // OpenAI Legacy & Other
             'gpt-4-turbo': { input: '$10.00', output: '$30.00', notes: 'Batch: $5/$15' },
             'gpt-4-turbo-preview': { input: '$10.00', output: '$30.00' },
             'gpt-4': { input: '$30.00', output: '$60.00', notes: 'Batch: $15/$30' },
@@ -601,78 +512,65 @@ const SupportedModelsPage: React.FC = () => {
             'codex-mini-latest': { input: '$1.50', output: '$6.00', cached: '$0.375' },
             'babbage-002': { input: '$0.40', output: '$0.40', notes: 'Batch: $0.20/$0.20' },
             'davinci-002': { input: '$2.00', output: '$2.00', notes: 'Batch: $1.00/$1.00' },
+            'gpt-oss-120b': { input: '$2.00', output: '$8.00' },
+            'gpt-oss-20b': { input: '$0.50', output: '$2.00' },
 
             // Anthropic Claude
             'claude-sonnet-4-5': { input: '$3.00', output: '$15.00', cached: '$0.30', notes: 'Batch: $1.50/$7.50' },
             'claude-haiku-4-5': { input: '$1.00', output: '$5.00', cached: '$0.10', notes: 'Batch: $0.50/$2.50' },
             'claude-opus-4-5': { input: '$5.00', output: '$25.00', cached: '$0.50', notes: 'Batch: $2.50/$12.50' },
-            'claude-opus-4-1': { input: '$15.00', output: '$75.00', cached: '$1.50', notes: 'Batch: $7.50/$37.50' },
-            'claude-sonnet-4': { input: '$3.00', output: '$15.00', cached: '$0.30', notes: '>200K: $6/$22.50' },
+            'claude-opus-4-1': { input: '$15.00', output: '$75.00', cached: '$1.50' },
+            'claude-sonnet-4': { input: '$3.00', output: '$15.00', cached: '$0.30' },
             'claude-3-7-sonnet': { input: '$3.00', output: '$15.00', cached: '$0.30' },
             'claude-opus-4': { input: '$15.00', output: '$75.00', cached: '$1.50' },
-            'claude-3-5-haiku': { input: '$0.80', output: '$4.00', cached: '$0.08', notes: 'Batch: $0.40/$2.00' },
+            'claude-3-5-haiku': { input: '$0.80', output: '$4.00', cached: '$0.08' },
             'claude-3-haiku': { input: '$0.25', output: '$1.25', cached: '$0.03' },
             'claude-opus-3': { input: '$15.00', output: '$75.00', notes: 'Deprecated' },
             'claude-sonnet-3': { input: '$3.00', output: '$15.00', notes: 'Deprecated' },
 
             // Google Gemini
-            'gemini-3-pro-preview': { input: '$2.00', output: '$12.00', cached: '$0.20', notes: '>200K: $4/$18' },
-            'gemini-3-pro-image-preview': { input: '$2.00', output: '$12.00', notes: 'Image: $0.134-$0.24/img' },
-            'gemini-2-5-pro': { input: '$1.25', output: '$10.00', cached: '$0.125', notes: '>200K: $2.50/$15' },
-            'gemini-2-5-flash': { input: '$0.30', output: '$2.50', cached: '$0.03', notes: 'Audio: $1.00 input' },
+            'gemini-3-pro-preview': { input: '$2.00', output: '$12.00', cached: '$0.20' },
+            'gemini-3-pro-image-preview': { input: '$2.00', output: '$12.00' },
+            'gemini-2-5-pro': { input: '$1.25', output: '$10.00', cached: '$0.125' },
+            'gemini-2-5-flash': { input: '$0.30', output: '$2.50', cached: '$0.03' },
             'gemini-2-5-flash-preview-09-2025': { input: '$0.30', output: '$2.50', cached: '$0.03' },
-            'gemini-2-5-flash-lite': { input: '$0.10', output: '$0.40', cached: '$0.01', notes: 'Audio: $0.30 input' },
-            'gemini-2-5-flash-native-audio-preview-09-2025': { input: '$0.50', output: '$2.00', notes: 'Audio: $3/$12 per 1M' },
-            'gemini-2-5-flash-image': { input: '$0.30', output: '-', notes: '$0.039/img' },
-            'gemini-2-5-flash-preview-tts': { input: '$0.50', output: '-', notes: 'Audio out: $10/1M' },
-            'gemini-2-5-pro-preview-tts': { input: '$1.00', output: '-', notes: 'Audio out: $20/1M' },
-            'gemini-2-5-computer-use-preview-10-2025': { input: '$1.25', output: '$10.00', notes: '>200K: $2.50/$15' },
-            'gemini-2-0-flash': { input: '$0.10', output: '$0.40', cached: '$0.025', notes: 'Image: $0.039/img' },
-            'gemini-2-0-flash-lite': { input: '$0.075', output: '$0.30', notes: 'Batch: $0.0375/$0.15' },
-            'gemini-robotics-er-1-5-preview': { input: '$0.30', output: '$2.50', notes: 'Audio: $1.00 input' },
-            'imagen-4': { input: '-', output: '-', notes: 'Fast: $0.02, Std: $0.04, Ultra: $0.06/img' },
-            'imagen-3': { input: '-', output: '-', notes: '$0.03/img' },
-            'veo-3-1-generate-preview': { input: '-', output: '-', notes: '$0.40/sec (with audio)' },
-            'veo-3-1-fast-generate-preview': { input: '-', output: '-', notes: '$0.15/sec (with audio)' },
-            'veo-3-0-generate-001': { input: '-', output: '-', notes: '$0.40/sec (with audio)' },
-            'veo-2-0-generate-001': { input: '-', output: '-', notes: '$0.35/sec' },
-            'gemini-embedding-001': { input: '$0.15', output: '-', notes: 'Batch: $0.075' },
-            'gemma-3': { input: 'Free', output: 'Free' },
-            'gemma-3n': { input: 'Free', output: 'Free' },
+            'gemini-2-5-flash-lite': { input: '$0.10', output: '$0.40', cached: '$0.01' },
+            'gemini-2-0-flash': { input: '$0.10', output: '$0.40', cached: '$0.025' },
+            'gemini-2-0-flash-lite': { input: '$0.075', output: '$0.30' },
             'gemini-1-5-pro': { input: '$0.125', output: '$0.375' },
             'gemini-1-5-flash': { input: '$0.075', output: '$0.30' },
+            'gemini-embedding-001': { input: '$0.15', output: '-' },
+            'gemma-3': { input: 'Free', output: 'Free' },
+            'gemma-3n': { input: 'Free', output: 'Free' },
 
             // xAI Grok
             'grok-4-1-fast-reasoning': { input: '$0.20', output: '$0.50', notes: '4M TPM, 480 RPM' },
-            'grok-4-1-fast-non-reasoning': { input: '$0.20', output: '$0.50', notes: '4M TPM, 480 RPM' },
-            'grok-4-fast-reasoning': { input: '$0.20', output: '$0.50', notes: '4M TPM, 480 RPM' },
-            'grok-4-fast-non-reasoning': { input: '$0.20', output: '$0.50', notes: '4M TPM, 480 RPM' },
-            'grok-4-0709': { input: '$3.00', output: '$15.00', notes: '2M TPM, 480 RPM' },
-            'grok-code-fast-1': { input: '$0.20', output: '$1.50', notes: '256K context' },
-            'grok-3': { input: '$3.00', output: '$15.00', notes: '131K TPM, 600 RPM' },
-            'grok-3-mini': { input: '$0.30', output: '$0.50', notes: '480 TPM, 480 RPM' },
-            'grok-2-vision-1212': { input: '$2.00', output: '$10.00', notes: '32K TPM, 600 RPM' },
-            'grok-2-image-1212': { input: '-', output: '-', notes: '$0.07/img, 300 RPM' },
+            'grok-4-1-fast-non-reasoning': { input: '$0.20', output: '$0.50' },
+            'grok-4-fast-reasoning': { input: '$0.20', output: '$0.50' },
+            'grok-4-fast-non-reasoning': { input: '$0.20', output: '$0.50' },
+            'grok-4-0709': { input: '$3.00', output: '$15.00' },
+            'grok-code-fast-1': { input: '$0.20', output: '$1.50' },
+            'grok-3': { input: '$3.00', output: '$15.00' },
+            'grok-3-mini': { input: '$0.30', output: '$0.50' },
+            'grok-2-vision-1212': { input: '$2.00', output: '$10.00' },
+            'grok-2-image-1212': { input: '-', output: '-', notes: '$0.07/img' },
 
             // DeepSeek
-            'deepseek-chat': { input: '$0.28', output: '$0.42', cached: '$0.028', notes: '128K context' },
-            'deepseek-reasoner': { input: '$0.28', output: '$0.42', cached: '$0.028', notes: 'Max 64K output' },
+            'deepseek-chat': { input: '$0.28', output: '$0.42', cached: '$0.028' },
+            'deepseek-reasoner': { input: '$0.28', output: '$0.42', cached: '$0.028' },
 
             // Mistral
-            'mistral-large-latest': { input: '$2.00', output: '$6.00', notes: 'Batch: $2/$6' },
+            'mistral-large-latest': { input: '$2.00', output: '$6.00' },
             'mistral-medium-latest': { input: '$0.40', output: '$2.00' },
             'magistral-medium-latest': { input: '$2.00', output: '$5.00' },
             'devstral-medium-2507': { input: '$0.40', output: '$2.00' },
-            'codestral-latest': { input: '$0.30', output: '$0.90', notes: 'Fine-tuned: $0.20/$0.60' },
-            'mistral-ocr-latest': { input: '-', output: '-', notes: 'OCR: $1/1k pages, Annotate: $3/1k' },
-            'voxtral-small-latest': { input: '$0.10', output: '$0.30', notes: 'Audio: $0.004/min' },
-            'voxtral-mini-latest': { input: '$0.04', output: '$0.04', notes: 'Audio: $0.001/min' },
-            'mistral-small-latest': { input: '$0.10', output: '$0.30', notes: 'Fine-tuned: same price' },
+            'codestral-latest': { input: '$0.30', output: '$0.90' },
+            'mistral-small-latest': { input: '$0.10', output: '$0.30' },
             'magistral-small-latest': { input: '$0.50', output: '$1.50' },
             'devstral-small-2507': { input: '$0.10', output: '$0.30' },
             'pixtral-large-latest': { input: '$2.00', output: '$6.00' },
-            'pixtral-12b': { input: '$0.15', output: '$0.15', notes: 'Fine-tuned: same price' },
-            'open-mistral-nemo': { input: '$0.15', output: '$0.15', notes: 'Fine-tuned: same price' },
+            'pixtral-12b': { input: '$0.15', output: '$0.15' },
+            'open-mistral-nemo': { input: '$0.15', output: '$0.15' },
             'open-mistral-7b': { input: '$0.25', output: '$0.25' },
             'open-mixtral-8x7b': { input: '$0.70', output: '$0.70' },
             'open-mixtral-8x22b': { input: '$2.00', output: '$6.00' },
@@ -682,16 +580,16 @@ const SupportedModelsPage: React.FC = () => {
             'mistral-embed': { input: '$0.10', output: '-' },
 
             // Cohere
-            'command-a': { input: '$2.50', output: '$10.00', notes: '256K context, 8K output' },
-            'command-r': { input: '$0.15', output: '$0.60', notes: '128K context, 4K output' },
-            'command-r7b': { input: '$0.0375', output: '$0.15', notes: '128K context, 4K output' },
-            'embed-4': { input: '$0.12', output: '-', notes: 'Images: $0.47/1M, 128K context' },
-            'rerank-3-5': { input: '-', output: '-', notes: '$2.00/1k searches, 4K context' },
+            'command-a': { input: '$2.50', output: '$10.00' },
+            'command-r': { input: '$0.15', output: '$0.60' },
+            'command-r7b': { input: '$0.0375', output: '$0.15' },
+            'embed-4': { input: '$0.12', output: '-' },
+            'rerank-3-5': { input: '-', output: '-', notes: '$2.00/1k searches' },
             'command-r-plus': { input: '$2.50', output: '$10.00' },
             'command-light': { input: '$0.30', output: '$0.60' },
 
             // Meta Llama
-            'llama-4-maverick': { input: '$0.19', output: '$0.19', notes: '3:1 blended, distributed' },
+            'llama-4-maverick': { input: '$0.19', output: '$0.19' },
             'llama-4-scout': { input: '$0.15', output: '$0.15' },
             'llama-4-behemoth': { input: '$0.30', output: '$0.30' },
             'llama-3-3-70b-alt': { input: '$0.10', output: '$0.10' },
@@ -702,10 +600,29 @@ const SupportedModelsPage: React.FC = () => {
             'nova-pro': { input: '$0.80', output: '$3.20' },
             'nova-lite': { input: '$0.06', output: '$0.24' },
             'nova-micro': { input: '$0.035', output: '$0.14' },
-            'claude-bedrock': { input: '$3.00', output: '$15.00', notes: 'Same as Anthropic API' },
+            'claude-bedrock': { input: '$3.00', output: '$15.00' },
             'llama-3-3': { input: '$0.10', output: '$0.10' },
         };
         return pricing[modelId] || null;
+    };
+
+    const copyModelId = (id: string) => {
+        navigator.clipboard.writeText(id);
+        setCopiedId(id);
+        setTimeout(() => setCopiedId(null), 2000);
+    };
+
+    const containerVariants = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.05 }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: 'easeOut' } }
     };
 
     return (
@@ -715,129 +632,77 @@ const SupportedModelsPage: React.FC = () => {
                 <meta name="description" content="Complete list of 400+ supported AI models across OpenAI, Anthropic, Google AI, AWS Bedrock, xAI, DeepSeek, Mistral, Cohere, and Meta." />
             </Helmet>
 
-            <div className="min-h-screen bg-gradient-to-br from-light-bg via-light-bg to-primary-500/5 dark:from-dark-bg-100 dark:via-dark-bg-100 dark:to-primary-500/10">
+            <div className="min-h-screen bg-gradient-to-br from-light-bg via-light-bg to-primary-500/5 dark:from-dark-bg-100 dark:via-dark-bg-200 dark:to-primary-900/20">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
                     {/* Header */}
-                    <div className="text-center mb-12">
-                        <motion.div
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 dark:bg-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6"
-                        >
-                            <Sparkles size={16} />
-                            <span>400+ Models Supported</span>
-                        </motion.div>
-
-                        <motion.h1
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.1 }}
-                            className="text-4xl md:text-5xl font-bold mb-4"
-                        >
-                            <span className="text-gradient">Supported Models</span>
-                        </motion.h1>
-
-                        <motion.p
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto"
-                        >
-                            Explore all available models and compare their capabilities across {providers.length} leading AI providers.
-                        </motion.p>
-
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ delay: 0.3 }}
-                            className="flex justify-center items-center gap-4 text-sm text-light-text-muted dark:text-dark-text-muted mt-4"
-                        >
-                            <span className="flex items-center gap-1">
-                                <Database size={14} className="text-primary-500" />
-                                {totalModels} models
-                            </span>
-                            <span>•</span>
-                            <span className="flex items-center gap-1">
-                                <Puzzle size={14} className="text-primary-500" />
-                                {providers.length} providers
-                            </span>
-                        </motion.div>
-                    </div>
-
-                    {/* Category Tabs */}
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.3 }}
-                        className="mb-8"
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-10"
                     >
-                        <div className="flex flex-wrap gap-2 p-2 bg-light-panel dark:bg-dark-panel rounded-xl max-w-4xl mx-auto border border-gray-200 dark:border-gray-800">
-                            {categoryCounts.map((category) => (
-                                <button
-                                    key={category.id}
-                                    onClick={() => setSelectedCategory(category.id)}
-                                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${selectedCategory === category.id
-                                        ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25'
-                                        : 'text-light-text-secondary dark:text-dark-text-secondary hover:bg-primary-500/10 hover:text-primary-600 dark:hover:text-primary-400'
-                                        }`}
-                                >
-                                    {category.name}
-                                    <span className={`ml-2 text-xs ${selectedCategory === category.id ? 'text-white/80' : 'text-light-text-muted dark:text-dark-text-muted'}`}>
-                                        {category.count}
-                                    </span>
-                                </button>
-                            ))}
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-500/10 to-primary-500/5 dark:from-primary-500/20 dark:to-primary-500/10 border border-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
+                            <Database size={16} className="animate-pulse" />
+                            <span>{totalModels} Models • {providers.length} Providers</span>
                         </div>
+
+                        <h1 className="text-4xl md:text-5xl font-bold mb-4 font-display">
+                            <span className="bg-gradient-to-r from-primary-500 via-primary-400 to-highlight-500 bg-clip-text text-transparent">
+                                Supported Models
+                            </span>
+                        </h1>
+
+                        <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
+                            Explore and compare AI models across all major providers. Click any model for details.
+                        </p>
                     </motion.div>
 
-                    {/* Search and Filters */}
+                    {/* Search & Filters */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 }}
+                        transition={{ delay: 0.2, duration: 0.5 }}
                         className="mb-8"
                     >
-                        <div className="max-w-3xl mx-auto">
-                            {/* Search */}
-                            <div className="relative mb-4">
-                                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-light-text-muted dark:text-dark-text-muted w-5 h-5" />
-                                <input
-                                    type="text"
-                                    placeholder="Search models by name, series, or capability..."
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    className="w-full pl-12 pr-4 py-4 bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-xl text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all"
-                                />
-                            </div>
+                        <div className="max-w-4xl mx-auto">
+                            <div className="flex flex-col sm:flex-row gap-3">
+                                {/* Search */}
+                                <div className="relative flex-1">
+                                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-light-text-muted dark:text-dark-text-muted w-5 h-5" />
+                                    <input
+                                        type="text"
+                                        placeholder="Search models, providers, or capabilities..."
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all shadow-sm"
+                                    />
+                                    {searchQuery && (
+                                        <button
+                                            onClick={() => setSearchQuery('')}
+                                            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-light-text-muted hover:text-light-text-primary dark:text-dark-text-muted dark:hover:text-dark-text-primary"
+                                        >
+                                            <X size={16} />
+                                        </button>
+                                    )}
+                                </div>
 
-                            {/* Filters */}
-                            <div className="flex flex-wrap gap-4">
-                                <select
-                                    value={selectedProvider}
-                                    onChange={(e) => setSelectedProvider(e.target.value)}
-                                    className="flex-1 min-w-[180px] px-4 py-3 bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-xl text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                {/* Filter Toggle */}
+                                <button
+                                    onClick={() => setShowFilters(!showFilters)}
+                                    className={`flex items-center gap-2 px-5 py-3.5 rounded-xl border transition-all shadow-sm ${showFilters
+                                        ? 'bg-primary-500 text-white border-primary-500'
+                                        : 'bg-white dark:bg-dark-panel border-gray-200 dark:border-gray-700/50 text-light-text-primary dark:text-dark-text-primary hover:border-primary-500'
+                                        }`}
                                 >
-                                    <option value="all">All Providers</option>
-                                    {providers.map(provider => (
-                                        <option key={provider.id} value={provider.id}>{provider.name}</option>
-                                    ))}
-                                </select>
-
-                                <select
-                                    value={selectedUseCase}
-                                    onChange={(e) => setSelectedUseCase(e.target.value)}
-                                    className="flex-1 min-w-[180px] px-4 py-3 bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-xl text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                                >
-                                    <option value="all">All Use Cases</option>
-                                    {allUseCases.map(useCase => (
-                                        <option key={useCase} value={useCase}>
-                                            {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
-                                        </option>
-                                    ))}
-                                </select>
+                                    <Filter size={18} />
+                                    <span className="font-medium">Filters</span>
+                                    {(selectedProvider !== 'all' || selectedUseCase !== 'all') && (
+                                        <span className="w-2 h-2 rounded-full bg-primary-400" />
+                                    )}
+                                </button>
 
                                 {/* View Mode Toggle */}
-                                <div className="flex items-center gap-1 p-1 bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-xl">
+                                <div className="flex items-center gap-1 p-1 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm">
                                     {viewModes.map((mode) => {
                                         const IconComponent = mode.icon;
                                         return (
@@ -856,39 +721,243 @@ const SupportedModelsPage: React.FC = () => {
                                     })}
                                 </div>
                             </div>
+
+                            {/* Filter Panel */}
+                            <AnimatePresence>
+                                {showFilters && (
+                                    <motion.div
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="overflow-hidden"
+                                    >
+                                        <div className="mt-4 p-5 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm">
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                                <div>
+                                                    <label className="block text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-2">Provider</label>
+                                                    <select
+                                                        value={selectedProvider}
+                                                        onChange={(e) => setSelectedProvider(e.target.value)}
+                                                        className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
+                                                    >
+                                                        <option value="all">All Providers</option>
+                                                        {providers.map(provider => (
+                                                            <option key={provider.id} value={provider.id}>{provider.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                                <div>
+                                                    <label className="block text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-2">Capability</label>
+                                                    <select
+                                                        value={selectedUseCase}
+                                                        onChange={(e) => setSelectedUseCase(e.target.value)}
+                                                        className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
+                                                    >
+                                                        <option value="all">All Capabilities</option>
+                                                        {allUseCases.map(useCase => (
+                                                            <option key={useCase} value={useCase}>
+                                                                {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
+                                                            </option>
+                                                        ))}
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            {(selectedProvider !== 'all' || selectedUseCase !== 'all') && (
+                                                <button
+                                                    onClick={() => { setSelectedProvider('all'); setSelectedUseCase('all'); }}
+                                                    className="mt-4 text-sm text-primary-600 dark:text-primary-400 hover:underline"
+                                                >
+                                                    Clear all filters
+                                                </button>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Results count */}
+                            {(searchQuery || selectedProvider !== 'all' || selectedUseCase !== 'all') && (
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    className="mt-3 text-sm text-light-text-muted dark:text-dark-text-muted"
+                                >
+                                    Showing {filteredCount} of {totalModels} models
+                                </motion.div>
+                            )}
                         </div>
                     </motion.div>
 
-                    {/* Models Display - Multiple View Modes */}
-                    {viewMode === 'accordion' && (
-                        <div className="space-y-4">
-                            {filteredProviders.map((provider, providerIndex) => (
+                    {/* Cards View */}
+                    {viewMode === 'cards' && (
+                        <motion.div
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            className="space-y-6"
+                        >
+                            {filteredProviders.map((provider) => (
                                 <motion.div
                                     key={provider.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: providerIndex * 0.05 }}
-                                    className="bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden"
+                                    variants={itemVariants}
+                                    className="bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
                                 >
-                                    <button
-                                        onClick={() => toggleProvider(provider.id)}
-                                        className="w-full p-6 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
-                                    >
+                                    {/* Provider Header */}
+                                    <div className="p-5 border-b border-gray-100 dark:border-gray-800">
                                         <div className="flex items-center gap-4">
                                             <div
-                                                className="w-14 h-14 rounded-xl flex items-center justify-center overflow-hidden"
+                                                className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden shadow-sm"
                                                 style={{ backgroundColor: `${provider.brandColor}15` }}
                                             >
                                                 {provider.logo ? (
-                                                    <img src={provider.logo} alt={`${provider.name} logo`} className="w-8 h-8 object-contain" onError={(e) => { e.currentTarget.style.display = 'none'; }} />
+                                                    <img
+                                                        src={provider.logo}
+                                                        alt={`${provider.name} logo`}
+                                                        className="w-7 h-7 object-contain"
+                                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                                    />
                                                 ) : null}
                                                 {provider.logoFallback && (
-                                                    <provider.logoFallback size={28} style={{ color: provider.brandColor, display: provider.logo ? 'none' : 'block' }} />
+                                                    <provider.logoFallback
+                                                        size={24}
+                                                        style={{ color: provider.brandColor, display: provider.logo ? 'none' : 'block' }}
+                                                    />
                                                 )}
+                                            </div>
+                                            <div className="flex-1">
+                                                <h2 className="text-xl font-semibold text-light-text-primary dark:text-dark-text-primary font-display">
+                                                    {provider.name}
+                                                </h2>
+                                                <p className="text-sm text-light-text-muted dark:text-dark-text-muted">
+                                                    {provider.description}
+                                                </p>
+                                            </div>
+                                            <div className="hidden sm:flex items-center gap-2">
+                                                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-500/20">
+                                                    {provider.models.length} models
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Models Grid */}
+                                    <div className="p-5">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                            {provider.models.map((model) => {
+                                                const pricingInfo = getPricingTierInfo(model.pricingTier);
+                                                const pricing = getModelPricing(model.id);
+
+                                                return (
+                                                    <motion.button
+                                                        key={model.id}
+                                                        onClick={() => setSelectedModel(model)}
+                                                        whileHover={{ scale: 1.02, y: -2 }}
+                                                        whileTap={{ scale: 0.98 }}
+                                                        className="group relative p-4 bg-light-panel dark:bg-dark-bg-300 border border-gray-100 dark:border-gray-700/50 rounded-xl text-left hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10 transition-all"
+                                                    >
+                                                        {/* Status Badge */}
+                                                        {(model.isLatest || model.isRecommended) && (
+                                                            <div className="absolute -top-2 -right-2">
+                                                                {model.isLatest && (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary-500 text-white shadow-lg shadow-primary-500/30">
+                                                                        <Sparkles size={10} />
+                                                                        NEW
+                                                                    </span>
+                                                                )}
+                                                                {model.isRecommended && !model.isLatest && (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500 text-white shadow-lg shadow-amber-500/30">
+                                                                        <Star size={10} />
+                                                                        TOP
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        )}
+
+                                                        {/* Model Name */}
+                                                        <div className="flex items-start justify-between mb-2">
+                                                            <h3 className={`font-semibold text-light-text-primary dark:text-dark-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors ${model.isDeprecated ? 'line-through opacity-60' : ''}`}>
+                                                                {model.name}
+                                                            </h3>
+                                                            <ChevronRight size={16} className="text-light-text-muted dark:text-dark-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                        </div>
+
+                                                        {/* Capabilities */}
+                                                        <div className="flex flex-wrap gap-1 mb-3">
+                                                            {model.useCases.slice(0, 3).map(uc => {
+                                                                const { icon: Icon, color } = getUseCaseIcon(uc);
+                                                                return (
+                                                                    <span
+                                                                        key={uc}
+                                                                        className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary"
+                                                                    >
+                                                                        <Icon size={10} className={color} />
+                                                                        <span className="capitalize">{uc}</span>
+                                                                    </span>
+                                                                );
+                                                            })}
+                                                            {model.useCases.length > 3 && (
+                                                                <span className="text-[10px] text-light-text-muted dark:text-dark-text-muted px-1">
+                                                                    +{model.useCases.length - 3}
+                                                                </span>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Pricing */}
+                                                        <div className="flex items-center justify-between">
+                                                            {pricing ? (
+                                                                <span className="text-xs font-medium text-primary-600 dark:text-primary-400">
+                                                                    {pricing.input} / {pricing.output}
+                                                                </span>
+                                                            ) : (
+                                                                <span className={`text-xs font-medium ${pricingInfo.textColor}`}>
+                                                                    {pricingInfo.label}
+                                                                </span>
+                                                            )}
+                                                            <div className="flex gap-0.5">
+                                                                {Array.from({ length: 4 }, (_, i) => (
+                                                                    <div
+                                                                        key={i}
+                                                                        className={`w-1.5 h-1.5 rounded-full transition-colors ${i < model.pricingTier ? pricingInfo.color : 'bg-gray-200 dark:bg-gray-700'}`}
+                                                                    />
+                                                                ))}
+                                                            </div>
+                                                        </div>
+
+                                                        {model.isDeprecated && (
+                                                            <div className="absolute inset-0 bg-gray-500/5 dark:bg-gray-500/10 rounded-xl" />
+                                                        )}
+                                                    </motion.button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </motion.div>
+                    )}
+
+                    {/* Accordion View */}
+                    {viewMode === 'accordion' && (
+                        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
+                            {filteredProviders.map((provider) => (
+                                <motion.div
+                                    key={provider.id}
+                                    variants={itemVariants}
+                                    className="bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm"
+                                >
+                                    <button
+                                        onClick={() => toggleProvider(provider.id)}
+                                        className="w-full p-5 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-900/50 transition-colors"
+                                    >
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden" style={{ backgroundColor: `${provider.brandColor}15` }}>
+                                                {provider.logo ? <img src={provider.logo} alt={provider.name} className="w-7 h-7 object-contain" /> : null}
+                                                {provider.logoFallback && <provider.logoFallback size={24} style={{ color: provider.brandColor, display: provider.logo ? 'none' : 'block' }} />}
                                             </div>
                                             <div className="text-left">
                                                 <h2 className="text-xl font-semibold text-light-text-primary dark:text-dark-text-primary">{provider.name}</h2>
-                                                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">{provider.description}</p>
+                                                <p className="text-sm text-light-text-muted dark:text-dark-text-muted">{provider.description}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-center gap-4">
@@ -905,10 +974,10 @@ const SupportedModelsPage: React.FC = () => {
                                                     <table className="w-full">
                                                         <thead>
                                                             <tr className="bg-gray-50 dark:bg-gray-900/50">
-                                                                <th className="px-6 py-4 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Model</th>
-                                                                <th className="px-6 py-4 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Capabilities</th>
-                                                                <th className="px-6 py-4 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Pricing</th>
-                                                                <th className="px-6 py-4 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Status</th>
+                                                                <th className="px-6 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Model</th>
+                                                                <th className="px-6 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Capabilities</th>
+                                                                <th className="px-6 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Pricing</th>
+                                                                <th className="px-6 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Status</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
@@ -921,26 +990,29 @@ const SupportedModelsPage: React.FC = () => {
                                                                             <div className="text-xs text-light-text-muted dark:text-dark-text-muted">{model.series}</div>
                                                                         </td>
                                                                         <td className="px-6 py-4">
-                                                                            <div className="flex flex-wrap gap-1.5">
-                                                                                {model.useCases.slice(0, 4).map(useCase => (
-                                                                                    <span key={useCase} className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary">
-                                                                                        {getUseCaseIcon(useCase)}<span className="capitalize">{useCase}</span>
-                                                                                    </span>
-                                                                                ))}
-                                                                                {model.useCases.length > 4 && <span className="text-xs text-light-text-muted dark:text-dark-text-muted">+{model.useCases.length - 4}</span>}
+                                                                            <div className="flex flex-wrap gap-1">
+                                                                                {model.useCases.slice(0, 4).map(uc => {
+                                                                                    const { icon: Icon, color } = getUseCaseIcon(uc);
+                                                                                    return (
+                                                                                        <span key={uc} className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary">
+                                                                                            <Icon size={10} className={color} /><span className="capitalize">{uc}</span>
+                                                                                        </span>
+                                                                                    );
+                                                                                })}
+                                                                                {model.useCases.length > 4 && <span className="text-xs text-light-text-muted">+{model.useCases.length - 4}</span>}
                                                                             </div>
                                                                         </td>
                                                                         <td className="px-6 py-4">
                                                                             <div className="flex items-center gap-2">
-                                                                                <div className="flex gap-0.5">{Array.from({ length: 4 }, (_, i) => (<div key={i} className={`w-2 h-2 rounded-full ${i < model.pricingTier ? pricingInfo.dotColor : 'bg-gray-200 dark:bg-gray-700'}`} />))}</div>
+                                                                                <div className="flex gap-0.5">{Array.from({ length: 4 }, (_, i) => (<div key={i} className={`w-2 h-2 rounded-full ${i < model.pricingTier ? pricingInfo.color : 'bg-gray-200 dark:bg-gray-700'}`} />))}</div>
                                                                                 <span className="text-xs text-light-text-muted dark:text-dark-text-muted">{pricingInfo.label}</span>
                                                                             </div>
                                                                         </td>
                                                                         <td className="px-6 py-4">
                                                                             <div className="flex gap-1.5">
                                                                                 {model.isLatest && <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400"><Sparkles size={10} className="mr-1" />New</span>}
-                                                                                {model.isRecommended && !model.isLatest && <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-highlight-500/10 text-highlight-600 dark:text-highlight-400"><Star size={10} className="mr-1" />Popular</span>}
-                                                                                {model.isDeprecated && <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-danger-500/10 text-danger-600 dark:text-danger-400">Deprecated</span>}
+                                                                                {model.isRecommended && !model.isLatest && <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400"><Star size={10} className="mr-1" />Top</span>}
+                                                                                {model.isDeprecated && <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-500/10 text-gray-600 dark:text-gray-400">Deprecated</span>}
                                                                                 {!model.isLatest && !model.isRecommended && !model.isDeprecated && <span className="text-xs text-light-text-muted dark:text-dark-text-muted">Active</span>}
                                                                             </div>
                                                                         </td>
@@ -955,160 +1027,12 @@ const SupportedModelsPage: React.FC = () => {
                                     </AnimatePresence>
                                 </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
 
-                    {/* Cards View */}
-                    {viewMode === 'cards' && (
-                        <div className="space-y-10">
-                            {filteredProviders.map((provider) => (
-                                <motion.div
-                                    key={provider.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                >
-                                    {/* Provider Header */}
-                                    <div className="flex items-center gap-4 mb-6">
-                                        <div
-                                            className="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
-                                            style={{ backgroundColor: `${provider.brandColor}20`, boxShadow: `0 4px 14px ${provider.brandColor}25` }}
-                                        >
-                                            {provider.logo ? (
-                                                <img src={provider.logo} alt={provider.name} className="w-7 h-7 object-contain" />
-                                            ) : provider.logoFallback && (
-                                                <provider.logoFallback size={24} style={{ color: provider.brandColor }} />
-                                            )}
-                                        </div>
-                                        <div>
-                                            <h2 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary">{provider.name}</h2>
-                                            <p className="text-sm text-light-text-muted dark:text-dark-text-muted">{provider.description}</p>
-                                        </div>
-                                        <span className="ml-auto px-3 py-1 rounded-full text-sm font-semibold bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-500/20">
-                                            {provider.models.length} models
-                                        </span>
-                                    </div>
-
-                                    {/* Model Cards Grid */}
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-                                        {provider.models.map((model, idx) => {
-                                            const pricingInfo = getPricingTierInfo(model.pricingTier);
-                                            const pricing = getModelPricing(model.id);
-                                            return (
-                                                <motion.div
-                                                    key={model.id}
-                                                    initial={{ opacity: 0, scale: 0.95 }}
-                                                    animate={{ opacity: 1, scale: 1 }}
-                                                    transition={{ delay: idx * 0.02 }}
-                                                    onClick={() => setSelectedModel(model)}
-                                                    className="group relative bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-2xl p-5 hover:border-primary-500 hover:shadow-xl hover:shadow-primary-500/15 cursor-pointer transition-all duration-300 hover:-translate-y-1"
-                                                >
-                                                    {/* Status Badge - Top Right */}
-                                                    {(model.isLatest || model.isRecommended || model.isDeprecated) && (
-                                                        <div className="absolute -top-2 -right-2">
-                                                            {model.isLatest && (
-                                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-500 text-white shadow-lg shadow-primary-500/30">
-                                                                    <Sparkles size={12} />
-                                                                    New
-                                                                </span>
-                                                            )}
-                                                            {model.isRecommended && !model.isLatest && (
-                                                                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-highlight-500 text-white shadow-lg shadow-highlight-500/30">
-                                                                    <Star size={12} />
-                                                                    Popular
-                                                                </span>
-                                                            )}
-                                                            {model.isDeprecated && (
-                                                                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-gray-500 text-white shadow-lg">
-                                                                    Deprecated
-                                                                </span>
-                                                            )}
-                                                        </div>
-                                                    )}
-
-                                                    {/* Model Name & Series */}
-                                                    <div className="mb-4">
-                                                        <h3 className="text-lg font-bold text-light-text-primary dark:text-dark-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
-                                                            {model.name}
-                                                        </h3>
-                                                        <p className="text-sm text-light-text-muted dark:text-dark-text-muted mt-0.5">{model.series}</p>
-                                                    </div>
-
-                                                    {/* Capabilities */}
-                                                    <div className="flex flex-wrap gap-1.5 mb-4">
-                                                        {model.useCases.slice(0, 4).map(uc => (
-                                                            <span
-                                                                key={uc}
-                                                                className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-medium bg-gray-100 dark:bg-gray-800/80 text-light-text-secondary dark:text-dark-text-secondary border border-gray-200/50 dark:border-gray-700/50"
-                                                            >
-                                                                {getUseCaseIcon(uc)}
-                                                                <span className="capitalize">{uc}</span>
-                                                            </span>
-                                                        ))}
-                                                        {model.useCases.length > 4 && (
-                                                            <span className="inline-flex items-center px-2 py-1 rounded-lg text-xs font-medium text-light-text-muted dark:text-dark-text-muted">
-                                                                +{model.useCases.length - 4} more
-                                                            </span>
-                                                        )}
-                                                    </div>
-
-                                                    {/* Pricing Section */}
-                                                    <div className="mt-auto pt-4 border-t border-gray-100 dark:border-gray-800">
-                                                        {pricing ? (
-                                                            <div className="flex items-center justify-between">
-                                                                <div className="space-y-1">
-                                                                    <div className="flex items-center gap-2">
-                                                                        <span className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wide">Input</span>
-                                                                        <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{pricing.input}</span>
-                                                                    </div>
-                                                                    <div className="flex items-center gap-2">
-                                                                        <span className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wide">Output</span>
-                                                                        <span className="text-sm font-bold text-primary-600 dark:text-primary-400">{pricing.output}</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div className="text-right">
-                                                                    <div className="flex gap-0.5 justify-end mb-1">
-                                                                        {Array.from({ length: 4 }, (_, i) => (
-                                                                            <div
-                                                                                key={i}
-                                                                                className={`w-2 h-2 rounded-full transition-colors ${i < model.pricingTier ? pricingInfo.dotColor : 'bg-gray-200 dark:bg-gray-700'}`}
-                                                                            />
-                                                                        ))}
-                                                                    </div>
-                                                                    <span className="text-xs text-light-text-muted dark:text-dark-text-muted">{pricingInfo.label}</span>
-                                                                </div>
-                                                            </div>
-                                                        ) : (
-                                                            <div className="flex items-center justify-between">
-                                                                <span className="text-sm text-light-text-muted dark:text-dark-text-muted">Pricing tier</span>
-                                                                <div className="flex items-center gap-2">
-                                                                    <div className="flex gap-0.5">
-                                                                        {Array.from({ length: 4 }, (_, i) => (
-                                                                            <div
-                                                                                key={i}
-                                                                                className={`w-2 h-2 rounded-full ${i < model.pricingTier ? pricingInfo.dotColor : 'bg-gray-200 dark:bg-gray-700'}`}
-                                                                            />
-                                                                        ))}
-                                                                    </div>
-                                                                    <span className="text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary">{pricingInfo.label}</span>
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                    </div>
-
-                                                    {/* Hover Indicator */}
-                                                    <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-primary-500 to-primary-400 rounded-b-2xl opacity-0 group-hover:opacity-100 transition-opacity" />
-                                                </motion.div>
-                                            );
-                                        })}
-                                    </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Table View - All models in one table */}
+                    {/* Table View */}
                     {viewMode === 'table' && (
-                        <div className="bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden">
+                        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm">
                             <div className="overflow-x-auto">
                                 <table className="w-full">
                                     <thead>
@@ -1141,11 +1065,14 @@ const SupportedModelsPage: React.FC = () => {
                                                         </td>
                                                         <td className="px-4 py-3">
                                                             <div className="flex flex-wrap gap-1">
-                                                                {model.useCases.slice(0, 3).map(uc => (
-                                                                    <span key={uc} className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary">
-                                                                        {getUseCaseIcon(uc)}<span className="capitalize">{uc}</span>
-                                                                    </span>
-                                                                ))}
+                                                                {model.useCases.slice(0, 3).map(uc => {
+                                                                    const { icon: Icon, color } = getUseCaseIcon(uc);
+                                                                    return (
+                                                                        <span key={uc} className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary">
+                                                                            <Icon size={10} className={color} /><span className="capitalize">{uc}</span>
+                                                                        </span>
+                                                                    );
+                                                                })}
                                                                 {model.useCases.length > 3 && <span className="text-[10px] text-light-text-muted">+{model.useCases.length - 3}</span>}
                                                             </div>
                                                         </td>
@@ -1153,8 +1080,8 @@ const SupportedModelsPage: React.FC = () => {
                                                         <td className="px-4 py-3 text-sm font-medium text-primary-600 dark:text-primary-400">{pricing?.output || '-'}</td>
                                                         <td className="px-4 py-3">
                                                             {model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400">New</span>}
-                                                            {model.isRecommended && !model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-highlight-500/10 text-highlight-600 dark:text-highlight-400">Popular</span>}
-                                                            {model.isDeprecated && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-danger-500/10 text-danger-600 dark:text-danger-400">Deprecated</span>}
+                                                            {model.isRecommended && !model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400">Top</span>}
+                                                            {model.isDeprecated && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-500/10 text-gray-600 dark:text-gray-400">Deprecated</span>}
                                                             {!model.isLatest && !model.isRecommended && !model.isDeprecated && <span className="text-[10px] text-light-text-muted dark:text-dark-text-muted">Active</span>}
                                                         </td>
                                                     </tr>
@@ -1164,14 +1091,14 @@ const SupportedModelsPage: React.FC = () => {
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
+                        </motion.div>
                     )}
 
-                    {/* List View - Compact list */}
+                    {/* List View */}
                     {viewMode === 'list' && (
-                        <div className="space-y-6">
+                        <motion.div variants={containerVariants} initial="hidden" animate="visible" className="space-y-4">
                             {filteredProviders.map((provider) => (
-                                <div key={provider.id} className="bg-light-panel dark:bg-dark-panel border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden">
+                                <motion.div key={provider.id} variants={itemVariants} className="bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm">
                                     <div className="px-4 py-3 bg-gray-50 dark:bg-gray-900/50 flex items-center gap-3 border-b border-gray-200 dark:border-gray-800">
                                         <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${provider.brandColor}15` }}>
                                             {provider.logo ? <img src={provider.logo} alt="" className="w-5 h-5 object-contain" /> : provider.logoFallback && <provider.logoFallback size={16} style={{ color: provider.brandColor }} />}
@@ -1191,17 +1118,20 @@ const SupportedModelsPage: React.FC = () => {
                                                     <div className="flex items-center gap-4 flex-1 min-w-0">
                                                         <div className="min-w-0 flex-1">
                                                             <div className="flex items-center gap-2">
-                                                                <span className="font-medium text-light-text-primary dark:text-dark-text-primary truncate">{model.name}</span>
+                                                                <span className={`font-medium text-light-text-primary dark:text-dark-text-primary truncate ${model.isDeprecated ? 'line-through opacity-60' : ''}`}>{model.name}</span>
                                                                 {model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 shrink-0">New</span>}
-                                                                {model.isRecommended && !model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-highlight-500/10 text-highlight-600 dark:text-highlight-400 shrink-0">Popular</span>}
-                                                                {model.isDeprecated && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-danger-500/10 text-danger-600 dark:text-danger-400 shrink-0">Deprecated</span>}
+                                                                {model.isRecommended && !model.isLatest && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-amber-500/10 text-amber-600 dark:text-amber-400 shrink-0">Top</span>}
+                                                                {model.isDeprecated && <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-500/10 text-gray-600 dark:text-gray-400 shrink-0">Deprecated</span>}
                                                             </div>
                                                             <div className="flex items-center gap-2 mt-1">
-                                                                {model.useCases.slice(0, 4).map(uc => (
-                                                                    <span key={uc} className="inline-flex items-center gap-0.5 text-[10px] text-light-text-muted dark:text-dark-text-muted">
-                                                                        {getUseCaseIcon(uc)}<span className="capitalize">{uc}</span>
-                                                                    </span>
-                                                                ))}
+                                                                {model.useCases.slice(0, 4).map(uc => {
+                                                                    const { icon: Icon, color } = getUseCaseIcon(uc);
+                                                                    return (
+                                                                        <span key={uc} className="inline-flex items-center gap-0.5 text-[10px] text-light-text-muted dark:text-dark-text-muted">
+                                                                            <Icon size={10} className={color} /><span className="capitalize">{uc}</span>
+                                                                        </span>
+                                                                    );
+                                                                })}
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1215,64 +1145,58 @@ const SupportedModelsPage: React.FC = () => {
                                             );
                                         })}
                                     </div>
-                                </div>
+                                </motion.div>
                             ))}
-                        </div>
+                        </motion.div>
                     )}
 
                     {/* No Results */}
                     {filteredProviders.length === 0 && (
                         <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="text-center py-16"
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            className="text-center py-20"
                         >
-                            <div className="max-w-md mx-auto">
-                                <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-primary-500/10 flex items-center justify-center">
-                                    <Search className="w-8 h-8 text-primary-500" />
-                                </div>
-                                <h3 className="text-lg font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
-                                    No models found
-                                </h3>
-                                <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">
-                                    Try adjusting your search or filters to find what you're looking for.
-                                </p>
-                                <button
-                                    onClick={() => {
-                                        setSearchQuery('');
-                                        setSelectedProvider('all');
-                                        setSelectedUseCase('all');
-                                        setSelectedCategory('all');
-                                    }}
-                                    className="px-6 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-colors font-medium shadow-lg shadow-primary-500/25"
-                                >
-                                    Clear filters
-                                </button>
+                            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary-500/20 to-primary-500/5 flex items-center justify-center">
+                                <Search className="w-10 h-10 text-primary-500" />
                             </div>
+                            <h3 className="text-xl font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
+                                No models found
+                            </h3>
+                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6 max-w-md mx-auto">
+                                Try adjusting your search or filters to find what you're looking for.
+                            </p>
+                            <button
+                                onClick={() => {
+                                    setSearchQuery('');
+                                    setSelectedProvider('all');
+                                    setSelectedUseCase('all');
+                                }}
+                                className="px-6 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-colors font-medium shadow-lg shadow-primary-500/25"
+                            >
+                                Clear all filters
+                            </button>
                         </motion.div>
                     )}
 
-                    {/* Footer */}
+                    {/* Footer CTA */}
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        transition={{ delay: 0.5 }}
-                        className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800"
+                        transition={{ delay: 0.6 }}
+                        className="mt-16 text-center"
                     >
-                        <div className="text-center text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 mb-4">
-                                <Sparkles size={14} className="text-primary-500" />
-                                <span className="text-primary-600 dark:text-primary-400 font-medium">
-                                    Cost Katana supports 400+ models across all providers
-                                </span>
-                            </div>
-                            <p className="mt-2">
-                                Visit our{' '}
-                                <a href="/getting-started/quick-start" className="text-primary-600 dark:text-primary-400 hover:underline font-medium">
-                                    Quick Start Guide
-                                </a>{' '}
-                                to learn how to integrate with any model.
-                            </p>
+                        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-primary-500/10 to-highlight-500/10 border border-primary-500/20">
+                            <Sparkles size={16} className="text-primary-500" />
+                            <span className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                Cost Katana optimizes costs across all {totalModels}+ models
+                            </span>
+                            <a
+                                href="/getting-started/quick-start"
+                                className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1"
+                            >
+                                Get Started <ExternalLink size={12} />
+                            </a>
                         </div>
                     </motion.div>
                 </div>
@@ -1284,24 +1208,42 @@ const SupportedModelsPage: React.FC = () => {
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
-                            className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+                            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
                             onClick={() => setSelectedModel(null)}
                         >
                             <motion.div
-                                initial={{ scale: 0.95, opacity: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                exit={{ scale: 0.95, opacity: 0 }}
+                                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                                 onClick={(e) => e.stopPropagation()}
-                                className="bg-light-bg dark:bg-dark-panel rounded-2xl max-w-2xl w-full max-h-[80vh] overflow-y-auto border border-gray-200 dark:border-gray-800 shadow-2xl"
+                                className="bg-white dark:bg-dark-panel rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto border border-gray-200 dark:border-gray-700/50 shadow-2xl"
                             >
                                 <div className="p-6">
                                     {/* Modal Header */}
                                     <div className="flex items-start justify-between mb-6">
                                         <div>
-                                            <h2 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-1">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                {selectedModel.isLatest && (
+                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-primary-500 text-white">
+                                                        <Sparkles size={10} /> New
+                                                    </span>
+                                                )}
+                                                {selectedModel.isRecommended && !selectedModel.isLatest && (
+                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-500 text-white">
+                                                        <Star size={10} /> Recommended
+                                                    </span>
+                                                )}
+                                                {selectedModel.isDeprecated && (
+                                                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gray-500 text-white">
+                                                        Deprecated
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <h2 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary font-display">
                                                 {selectedModel.name}
                                             </h2>
-                                            <p className="text-light-text-secondary dark:text-dark-text-secondary">
+                                            <p className="text-light-text-muted dark:text-dark-text-muted">
                                                 {selectedModel.series}
                                             </p>
                                         </div>
@@ -1313,135 +1255,92 @@ const SupportedModelsPage: React.FC = () => {
                                         </button>
                                     </div>
 
-                                    <div className="space-y-6">
-                                        {/* Status Badges */}
+                                    {/* Capabilities */}
+                                    <div className="mb-6">
+                                        <h3 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary mb-3 uppercase tracking-wider">
+                                            Capabilities
+                                        </h3>
                                         <div className="flex flex-wrap gap-2">
-                                            {selectedModel.isLatest && (
-                                                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400">
-                                                    <Sparkles size={14} className="mr-1.5" />
-                                                    New
-                                                </span>
-                                            )}
-                                            {selectedModel.isDeprecated && (
-                                                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-danger-500/10 text-danger-600 dark:text-danger-400">
-                                                    Deprecated
-                                                </span>
-                                            )}
-                                            {selectedModel.isRecommended && (
-                                                <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium bg-highlight-500/10 text-highlight-600 dark:text-highlight-400">
-                                                    <Star size={14} className="mr-1.5" />
-                                                    Popular
-                                                </span>
-                                            )}
-                                        </div>
-
-                                        {/* Description */}
-                                        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4">
-                                            <h3 className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2 uppercase tracking-wider">
-                                                Description
-                                            </h3>
-                                            <p className="text-light-text-secondary dark:text-dark-text-secondary">
-                                                {getModelDescription(selectedModel)}
-                                            </p>
-                                        </div>
-
-                                        {/* Use Cases */}
-                                        <div>
-                                            <h3 className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-3 uppercase tracking-wider">
-                                                Capabilities
-                                            </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {selectedModel.useCases.map(useCase => (
+                                            {selectedModel.useCases.map(useCase => {
+                                                const { icon: Icon, color } = getUseCaseIcon(useCase);
+                                                return (
                                                     <span
                                                         key={useCase}
                                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary"
                                                     >
-                                                        {getUseCaseIcon(useCase)}
+                                                        <Icon size={14} className={color} />
                                                         <span className="capitalize">{useCase}</span>
                                                     </span>
-                                                ))}
-                                            </div>
+                                                );
+                                            })}
                                         </div>
+                                    </div>
 
-                                        {/* Pricing */}
-                                        <div>
-                                            <h3 className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-3 uppercase tracking-wider">
-                                                Pricing (per 1M tokens)
-                                            </h3>
-                                            {(() => {
-                                                const pricing = getModelPricing(selectedModel.id);
-                                                if (pricing) {
-                                                    return (
-                                                        <div className="bg-gray-50 dark:bg-gray-900/50 rounded-xl p-4">
-                                                            <div className={`grid ${pricing.cached ? 'grid-cols-3' : 'grid-cols-2'} gap-3 mb-3`}>
-                                                                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wider mb-1">Input</div>
-                                                                    <div className="text-lg font-bold text-primary-600 dark:text-primary-400">{pricing.input}</div>
-                                                                </div>
-                                                                {pricing.cached && (
-                                                                    <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                                                                        <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wider mb-1">Cached</div>
-                                                                        <div className="text-lg font-bold text-yellow-600 dark:text-yellow-400">{pricing.cached}</div>
-                                                                    </div>
-                                                                )}
-                                                                <div className="text-center p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
-                                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wider mb-1">Output</div>
-                                                                    <div className="text-lg font-bold text-primary-600 dark:text-primary-400">{pricing.output}</div>
-                                                                </div>
-                                                            </div>
-                                                            {pricing.notes && (
-                                                                <div className="text-xs text-light-text-muted dark:text-dark-text-muted text-center bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2">
-                                                                    {pricing.notes}
-                                                                </div>
-                                                            )}
-                                                            <div className="flex items-center justify-center gap-2 mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                                                                <div className="flex gap-1">
-                                                                    {Array.from({ length: 4 }, (_, i) => {
-                                                                        const pricingInfo = getPricingTierInfo(selectedModel.pricingTier);
-                                                                        return (
-                                                                            <div
-                                                                                key={i}
-                                                                                className={`w-2 h-2 rounded-full ${i < selectedModel.pricingTier ? pricingInfo.dotColor : 'bg-gray-200 dark:bg-gray-700'}`}
-                                                                            />
-                                                                        );
-                                                                    })}
-                                                                </div>
-                                                                <span className="text-xs text-light-text-muted dark:text-dark-text-muted">
-                                                                    {getPricingTierInfo(selectedModel.pricingTier).label} Tier
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                }
+                                    {/* Pricing */}
+                                    <div className="mb-6">
+                                        <h3 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary mb-3 uppercase tracking-wider">
+                                            Pricing (per 1M tokens)
+                                        </h3>
+                                        {(() => {
+                                            const pricing = getModelPricing(selectedModel.id);
+                                            const pricingInfo = getPricingTierInfo(selectedModel.pricingTier);
+                                            if (pricing) {
                                                 return (
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="flex gap-1">
-                                                            {Array.from({ length: 4 }, (_, i) => {
-                                                                const pricingInfo = getPricingTierInfo(selectedModel.pricingTier);
-                                                                return (
-                                                                    <div
-                                                                        key={i}
-                                                                        className={`w-3 h-3 rounded-full ${i < selectedModel.pricingTier ? pricingInfo.dotColor : 'bg-gray-200 dark:bg-gray-700'}`}
-                                                                    />
-                                                                );
-                                                            })}
+                                                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                                        <div className="p-4 bg-gradient-to-br from-primary-500/10 to-primary-500/5 dark:from-primary-500/20 dark:to-primary-500/10 rounded-xl border border-primary-500/20">
+                                                            <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wide mb-1">Input</div>
+                                                            <div className="text-xl font-bold text-primary-600 dark:text-primary-400">{pricing.input}</div>
                                                         </div>
-                                                        <span className="text-light-text-secondary dark:text-dark-text-secondary">
-                                                            {getPricingTierInfo(selectedModel.pricingTier).label}
-                                                        </span>
+                                                        <div className="p-4 bg-gradient-to-br from-highlight-500/10 to-highlight-500/5 dark:from-highlight-500/20 dark:to-highlight-500/10 rounded-xl border border-highlight-500/20">
+                                                            <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wide mb-1">Output</div>
+                                                            <div className="text-xl font-bold text-highlight-600 dark:text-highlight-400">{pricing.output}</div>
+                                                        </div>
+                                                        {pricing.cached && (
+                                                            <div className="p-4 bg-gradient-to-br from-amber-500/10 to-amber-500/5 dark:from-amber-500/20 dark:to-amber-500/10 rounded-xl border border-amber-500/20">
+                                                                <div className="text-xs text-light-text-muted dark:text-dark-text-muted uppercase tracking-wide mb-1">Cached</div>
+                                                                <div className="text-xl font-bold text-amber-600 dark:text-amber-400">{pricing.cached}</div>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 );
-                                            })()}
-                                        </div>
+                                            }
+                                            return (
+                                                <div className="flex items-center gap-3 p-4 bg-gray-50 dark:bg-gray-800/50 rounded-xl">
+                                                    <div className="flex gap-1">
+                                                        {Array.from({ length: 4 }, (_, i) => (
+                                                            <div
+                                                                key={i}
+                                                                className={`w-3 h-3 rounded-full ${i < selectedModel.pricingTier ? pricingInfo.color : 'bg-gray-200 dark:bg-gray-700'}`}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                    <span className={`font-semibold ${pricingInfo.textColor}`}>
+                                                        {pricingInfo.label} Tier
+                                                    </span>
+                                                </div>
+                                            );
+                                        })()}
+                                    </div>
 
-                                        {/* Model ID */}
-                                        <div>
-                                            <h3 className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-3 uppercase tracking-wider">
-                                                Model ID
-                                            </h3>
-                                            <code className="block px-4 py-3 bg-gray-900 dark:bg-gray-950 rounded-lg text-sm font-mono text-primary-400 overflow-x-auto">
+                                    {/* Model ID */}
+                                    <div>
+                                        <h3 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary mb-3 uppercase tracking-wider">
+                                            Model ID
+                                        </h3>
+                                        <div className="flex items-center gap-2">
+                                            <code className="flex-1 px-4 py-3 bg-gray-900 dark:bg-gray-950 rounded-lg text-sm font-mono text-primary-400 overflow-x-auto">
                                                 {selectedModel.id}
                                             </code>
+                                            <button
+                                                onClick={() => copyModelId(selectedModel.id)}
+                                                className="p-3 bg-gray-900 dark:bg-gray-950 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-900 transition-colors"
+                                            >
+                                                {copiedId === selectedModel.id ? (
+                                                    <Check size={18} className="text-primary-400" />
+                                                ) : (
+                                                    <Copy size={18} className="text-gray-400" />
+                                                )}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
