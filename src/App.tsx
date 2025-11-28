@@ -5,6 +5,8 @@ import { Toaster } from 'react-hot-toast';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ReadingProvider } from './contexts/ReadingContext';
 import { TOCProvider } from './contexts/TOCContext';
+import { DocsAnalyticsProvider } from './contexts/DocsAnalyticsContext';
+import { CommunityProvider } from './contexts/CommunityContext';
 import Layout from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
 import ErrorBoundary from './components/ErrorBoundary';
@@ -69,6 +71,17 @@ const TraceAPIPage = lazy(() => import('./pages/DocumentationPages').then(module
 const FAQPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.FAQPage })));
 const SupportPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SupportPage })));
 const OpenTelemetryVendorsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.OpenTelemetryVendorsPage })));
+const SDKGeneratorPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SDKGeneratorPage })));
+const IntegrationWizardPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.IntegrationWizardPage })));
+const APIExplorerPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.APIExplorerPage })));
+const VersionComparisonPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.VersionComparisonPage })));
+
+// Community pages
+const CommunityExamplesPage = lazy(() => import('./pages/community/ExamplesPage').then(module => ({ default: module.ExamplesPage })));
+const CommunityDiscussionsPage = lazy(() => import('./pages/community/DiscussionsPage').then(module => ({ default: module.DiscussionsPage })));
+
+// Admin pages
+const AdminChatPage = lazy(() => import('./pages/admin/AdminChatPage').then(module => ({ default: module.AdminChatPage })));
 
 const App: React.FC = () => {
   return (
@@ -76,103 +89,118 @@ const App: React.FC = () => {
       <ThemeProvider>
         <ReadingProvider>
           <TOCProvider>
-            <Router>
-              <ErrorBoundary>
-                <Layout>
-                  <Suspense fallback={<LoadingSpinner />}>
-                    <Routes>
-                      {/* Home */}
-                      <Route path="/" element={<HomePage />} />
+            <DocsAnalyticsProvider>
+              <CommunityProvider>
+                <Router>
+                  <ErrorBoundary>
+                    <Layout>
+                      <Suspense fallback={<LoadingSpinner />}>
+                        <Routes>
+                          {/* Home */}
+                          <Route path="/" element={<HomePage />} />
 
-                      {/* Getting Started */}
-                      <Route path="/getting-started" element={<Navigate to="/getting-started/introduction" replace />} />
-                      <Route path="/getting-started/introduction" element={<IntroductionPage />} />
-                      <Route path="/getting-started/quick-start" element={<QuickStartPage />} />
-                      <Route path="/getting-started/installation" element={<InstallationPage />} />
+                          {/* Getting Started */}
+                          <Route path="/getting-started" element={<Navigate to="/getting-started/introduction" replace />} />
+                          <Route path="/getting-started/introduction" element={<IntroductionPage />} />
+                          <Route path="/getting-started/quick-start" element={<QuickStartPage />} />
+                          <Route path="/getting-started/installation" element={<InstallationPage />} />
 
-                      {/* Examples */}
-                      <Route path="/examples" element={<ExamplesPage />} />
+                          {/* Examples */}
+                          <Route path="/examples" element={<ExamplesPage />} />
 
-                      {/* Models */}
-                      <Route path="/models" element={<SupportedModelsPage />} />
+                          {/* Models */}
+                          <Route path="/models" element={<SupportedModelsPage />} />
 
-                      {/* Integrations */}
-                      <Route path="/integrations/cli" element={<CLIPage />} />
-                      <Route path="/integrations/nodejs" element={<NodeJSPage />} />
-                      <Route path="/integrations/python" element={<PythonPage />} />
-                      <Route path="/integrations/chatgpt" element={<ChatGPTPage />} />
+                          {/* Integrations */}
+                          <Route path="/integrations/cli" element={<CLIPage />} />
+                          <Route path="/integrations/nodejs" element={<NodeJSPage />} />
+                          <Route path="/integrations/python" element={<PythonPage />} />
+                          <Route path="/integrations/chatgpt" element={<ChatGPTPage />} />
+                          <Route path="/integrations/wizard" element={<IntegrationWizardPage />} />
+                          <Route path="/integrations/sdk-generator" element={<SDKGeneratorPage />} />
 
-                      {/* Features */}
-                      <Route path="/features" element={<FeaturesOverviewPage />} />
-                      <Route path="/features/dashboard" element={<DashboardPage />} />
-                      <Route path="/features/usage-tracking" element={<UsageTrackingPage />} />
-                      <Route path="/features/analytics" element={<CostAnalyticsPage />} />
-                      <Route path="/features/optimization" element={<OptimizationPage />} />
-                      <Route path="/features/sast" element={<SastPage />} />
-                      <Route path="/features/predictive-intelligence" element={<PredictiveIntelligencePage />} />
-                      <Route path="/features/projects" element={<ProjectsPage />} />
-                      <Route path="/features/templates" element={<TemplatesPage />} />
-                      <Route path="/features/workflows" element={<WorkflowsPage />} />
-                      <Route path="/features/gateway" element={<GatewayPage />} />
-                      <Route path="/features/key-vault" element={<KeyVaultPage />} />
-                      <Route path="/features/alerts" element={<AlertsPage />} />
-                      <Route path="/features/tracing" element={<TracingPage />} />
-                      <Route path="/features/telemetry" element={<TelemetryDashboardPage />} />
-                      <Route path="/features/sessions" element={<SessionsPage />} />
-                      <Route path="/features/logs" element={<LogsPage />} />
-                      <Route path="/features/cache" element={<CachePage />} />
-                      <Route path="/features/advanced-monitoring" element={<AdvancedMonitoringPage />} />
-                      <Route path="/features/unexplained-costs" element={<UnexplainedCostsPage />} />
-                      <Route path="/features/experimentation" element={<ExperimentationPage />} />
-                      <Route path="/features/moderation" element={<ModerationPage />} />
-                      <Route path="/features/security" element={<SecurityPage />} />
-                      <Route path="/features/memory" element={<MemoryPage />} />
-                      <Route path="/features/cost-lake" element={<CostLakePage />} />
-                      <Route path="/features/github-integrations" element={<GitHubIntegrationsPage />} />
+                          {/* Features */}
+                          <Route path="/features" element={<FeaturesOverviewPage />} />
+                          <Route path="/features/dashboard" element={<DashboardPage />} />
+                          <Route path="/features/usage-tracking" element={<UsageTrackingPage />} />
+                          <Route path="/features/analytics" element={<CostAnalyticsPage />} />
+                          <Route path="/features/optimization" element={<OptimizationPage />} />
+                          <Route path="/features/sast" element={<SastPage />} />
+                          <Route path="/features/predictive-intelligence" element={<PredictiveIntelligencePage />} />
+                          <Route path="/features/projects" element={<ProjectsPage />} />
+                          <Route path="/features/templates" element={<TemplatesPage />} />
+                          <Route path="/features/workflows" element={<WorkflowsPage />} />
+                          <Route path="/features/gateway" element={<GatewayPage />} />
+                          <Route path="/features/key-vault" element={<KeyVaultPage />} />
+                          <Route path="/features/alerts" element={<AlertsPage />} />
+                          <Route path="/features/tracing" element={<TracingPage />} />
+                          <Route path="/features/telemetry" element={<TelemetryDashboardPage />} />
+                          <Route path="/features/sessions" element={<SessionsPage />} />
+                          <Route path="/features/logs" element={<LogsPage />} />
+                          <Route path="/features/cache" element={<CachePage />} />
+                          <Route path="/features/advanced-monitoring" element={<AdvancedMonitoringPage />} />
+                          <Route path="/features/unexplained-costs" element={<UnexplainedCostsPage />} />
+                          <Route path="/features/experimentation" element={<ExperimentationPage />} />
+                          <Route path="/features/moderation" element={<ModerationPage />} />
+                          <Route path="/features/security" element={<SecurityPage />} />
+                          <Route path="/features/memory" element={<MemoryPage />} />
+                          <Route path="/features/cost-lake" element={<CostLakePage />} />
+                          <Route path="/features/github-integrations" element={<GitHubIntegrationsPage />} />
 
-                      {/* Observability */}
-                      <Route path="/observability/opentelemetry" element={<OpenTelemetryVendorsPage />} />
+                          {/* Observability */}
+                          <Route path="/observability/opentelemetry" element={<OpenTelemetryVendorsPage />} />
 
-                      {/* API Reference */}
-                      <Route path="/api" element={<APIOverviewPage />} />
-                      <Route path="/api/authentication" element={<AuthenticationPage />} />
-                      <Route path="/api/usage" element={<UsageAPIPage />} />
-                      <Route path="/api/analytics" element={<AnalyticsAPIPage />} />
-                      <Route path="/api/projects" element={<ProjectsAPIPage />} />
-                      <Route path="/api/optimization" element={<OptimizationAPIPage />} />
-                      <Route path="/api/webhooks" element={<WebhooksPage />} />
-                      <Route path="/api/rate-limits" element={<RateLimitsPage />} />
-                      <Route path="/api/chat" element={<ChatAPIPage />} />
-                      <Route path="/api/agent" element={<AgentAPIPage />} />
-                      <Route path="/api/memory" element={<MemoryAPIPage />} />
-                      <Route path="/api/cache" element={<CacheAPIPage />} />
-                      <Route path="/api/telemetry" element={<TelemetryAPIPage />} />
-                      <Route path="/api/logs" element={<LogsAPIPage />} />
-                      <Route path="/api/budget" element={<BudgetAPIPage />} />
-                      <Route path="/api/session-replay" element={<SessionReplayAPIPage />} />
-                      <Route path="/api/trace" element={<TraceAPIPage />} />
+                          {/* API Reference */}
+                          <Route path="/api" element={<APIOverviewPage />} />
+                          <Route path="/api/explorer" element={<APIExplorerPage />} />
+                          <Route path="/api/authentication" element={<AuthenticationPage />} />
+                          <Route path="/api/usage" element={<UsageAPIPage />} />
+                          <Route path="/api/analytics" element={<AnalyticsAPIPage />} />
+                          <Route path="/api/projects" element={<ProjectsAPIPage />} />
+                          <Route path="/api/optimization" element={<OptimizationAPIPage />} />
+                          <Route path="/api/webhooks" element={<WebhooksPage />} />
+                          <Route path="/api/rate-limits" element={<RateLimitsPage />} />
+                          <Route path="/api/chat" element={<ChatAPIPage />} />
+                          <Route path="/api/agent" element={<AgentAPIPage />} />
+                          <Route path="/api/memory" element={<MemoryAPIPage />} />
+                          <Route path="/api/cache" element={<CacheAPIPage />} />
+                          <Route path="/api/telemetry" element={<TelemetryAPIPage />} />
+                          <Route path="/api/logs" element={<LogsAPIPage />} />
+                          <Route path="/api/budget" element={<BudgetAPIPage />} />
+                          <Route path="/api/session-replay" element={<SessionReplayAPIPage />} />
+                          <Route path="/api/trace" element={<TraceAPIPage />} />
 
-                      {/* Support */}
-                      <Route path="/faq" element={<FAQPage />} />
-                      <Route path="/support" element={<SupportPage />} />
+                          {/* Support */}
+                          <Route path="/faq" element={<FAQPage />} />
+                          <Route path="/support" element={<SupportPage />} />
+                          <Route path="/tools/version-comparison" element={<VersionComparisonPage />} />
 
-                      {/* 404 Page */}
-                      <Route path="/404" element={<NotFoundPage />} />
+                          {/* Community */}
+                          <Route path="/community/examples" element={<CommunityExamplesPage />} />
+                          <Route path="/community/discussions" element={<CommunityDiscussionsPage />} />
 
-                      {/* Catch all */}
-                      <Route path="*" element={<NotFoundPage />} />
-                    </Routes>
-                  </Suspense>
-                </Layout>
-                <Toaster
-                  position="bottom-right"
-                  toastOptions={{
-                    className: 'dark:bg-gray-800 dark:text-white',
-                    duration: 3000,
-                  }}
-                />
-              </ErrorBoundary>
-            </Router>
+                          {/* Admin */}
+                          <Route path="/admin/chat" element={<AdminChatPage />} />
+
+                          {/* 404 Page */}
+                          <Route path="/404" element={<NotFoundPage />} />
+
+                          {/* Catch all */}
+                          <Route path="*" element={<NotFoundPage />} />
+                        </Routes>
+                      </Suspense>
+                    </Layout>
+                    <Toaster
+                      position="bottom-right"
+                      toastOptions={{
+                        className: 'dark:bg-gray-800 dark:text-white',
+                        duration: 3000,
+                      }}
+                    />
+                  </ErrorBoundary>
+                </Router>
+              </CommunityProvider>
+            </DocsAnalyticsProvider>
           </TOCProvider>
         </ReadingProvider>
       </ThemeProvider>

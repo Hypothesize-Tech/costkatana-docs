@@ -7871,4 +7871,145 @@ GET /api/v1/traces
 - [Sessions](/features/sessions) - Session replay`} />
 );
 
+// SDK Generator Page
+export const SDKGeneratorPage = () => (<DocumentationPage title="SDK Code Generator" description="Generate SDK code snippets in multiple languages" fallbackContent={`# SDK Code Generator
+
+Generate ready-to-use SDK code snippets for Cost Katana in multiple programming languages.
+
+\`\`\`sdk-generator
+\`\`\`
+
+## Features
+
+- **Multi-language Support**: Generate code for JavaScript, TypeScript, Python, and Node.js
+- **Feature-based Generation**: Select specific features to include in your code
+- **Copy & Download**: Easily copy or download generated code snippets
+- **Syntax Highlighting**: Beautiful code preview with syntax highlighting
+
+## Usage
+
+Use the SDK Generator above to:
+1. Select your preferred programming language
+2. Choose the features you want to include
+3. Copy or download the generated code
+4. Integrate into your project
+
+## Supported Languages
+
+- **JavaScript** - Browser and Node.js compatible
+- **TypeScript** - Full type safety with TypeScript
+- **Python** - Python SDK integration
+- **Node.js** - Node.js specific implementations
+
+## Available Features
+
+- Core tracking and analytics
+- Cost optimization
+- Advanced analytics
+- Workflow management
+- And more...
+
+Start generating your SDK code now using the generator above!`} />);
+
+// Integration Wizard Page
+export const IntegrationWizardPage = () => (<DocumentationPage title="Integration Wizard" description="Step-by-step integration guide for Cost Katana" fallbackContent={`# Integration Wizard
+
+Get started with Cost Katana in minutes using our interactive integration wizard.
+
+\`\`\`integration-wizard
+\`\`\`
+
+## What is the Integration Wizard?
+
+The Integration Wizard guides you through setting up Cost Katana in your project with:
+- Platform detection and selection
+- Package manager configuration
+- API key setup
+- Feature selection
+- Verification and testing
+
+## Step-by-Step Process
+
+1. **Platform Selection**: Choose your development platform
+2. **Package Manager**: Select npm, yarn, or pip
+3. **API Key**: Configure your Cost Katana API key
+4. **Features**: Select the features you want to use
+5. **Verification**: Test your integration
+
+## Benefits
+
+- **Zero Configuration**: Automated setup process
+- **Best Practices**: Follows recommended patterns
+- **Error Prevention**: Validates each step
+- **Quick Start**: Get up and running in minutes
+
+Start the wizard above to begin your integration!`} />);
+
+// API Explorer Page
+export const APIExplorerPage = () => (<DocumentationPage title="API Explorer" description="Interactive API explorer for Cost Katana endpoints" fallbackContent={`# API Explorer
+
+Explore and test all Cost Katana API endpoints interactively.
+
+\`\`\`api-explorer
+\`\`\`
+
+## Features
+
+- **Browse All Endpoints**: Explore all available API endpoints
+- **Category Filtering**: Filter by endpoint category
+- **Search & Filter**: Quickly find specific endpoints
+- **Try It Out**: Test endpoints directly from the explorer
+- **Schema Viewer**: View request/response schemas
+
+## How to Use
+
+1. Browse endpoints by category
+2. Use search to find specific endpoints
+3. Click on an endpoint to view details
+4. Use the integrated API tester to try endpoints
+5. View request/response schemas
+
+## Endpoint Categories
+
+- Authentication
+- Usage Tracking
+- Analytics
+- Optimization
+- Projects
+- Webhooks
+- And more...
+
+Start exploring the API using the explorer above!`} />);
+
+// Version Comparison Page
+export const VersionComparisonPage = () => (<DocumentationPage title="Version Comparison" description="Compare different versions of documentation content" fallbackContent={`# Version Comparison
+
+Compare different versions of documentation to see what has changed.
+
+\`\`\`version-comparison
+\`\`\`
+
+## Features
+
+- **Side-by-Side View**: Compare versions side by side
+- **Unified Diff View**: See changes in a unified format
+- **Version Selector**: Choose which versions to compare
+- **Change Highlighting**: Visual indicators for additions, deletions, and modifications
+
+## How to Use
+
+1. Select the versions you want to compare
+2. Choose your preferred view (side-by-side or unified)
+3. Review highlighted changes
+4. Navigate through different sections
+
+## Use Cases
+
+- Track documentation updates
+- Review content changes
+- Understand feature evolution
+- Compare API changes
+
+Use the version comparison tool above to compare documentation versions!`} />);
+
 export default OpenTelemetryVendorsPage;

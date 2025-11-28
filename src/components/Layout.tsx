@@ -55,6 +55,9 @@ import ReadingSettings from './ReadingSettings';
 import MobileTOC from './MobileTOC';
 import OfflineIndicator from './OfflineIndicator';
 import KeyboardShortcutsModal from './KeyboardShortcutsModal';
+import { FeedbackWidget } from './analytics';
+import { LiveChatWidget } from './community';
+import { UserMenu } from './UserMenu';
 import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
@@ -157,6 +160,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 { path: '/integrations/python', label: 'Python SDK', icon: <Code size={16} /> },
                 { path: '/integrations/cli', label: 'CLI Tool', icon: <Terminal size={16} /> },
                 { path: '/integrations/chatgpt', label: 'ChatGPT Integration', icon: <Bot size={16} /> },
+                { path: '/integrations/wizard', label: 'Integration Wizard', icon: <Sparkles size={16} /> },
+                { path: '/integrations/sdk-generator', label: 'SDK Code Generator', icon: <FileCode size={16} /> },
             ],
         },
         {
@@ -206,6 +211,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             icon: <Code size={18} />,
             items: [
                 { path: '/api', label: 'Overview', icon: <Code size={16} /> },
+                { path: '/api/explorer', label: 'API Explorer', icon: <Network size={16} /> },
                 { path: '/api/authentication', label: 'Authentication', icon: <Shield size={16} /> },
                 { path: '/api/usage', label: 'Usage API', icon: <TrendingUp size={16} /> },
                 { path: '/api/analytics', label: 'Analytics API', icon: <BarChart3 size={16} /> },
@@ -231,6 +237,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             items: [
                 { path: '/faq', label: 'FAQ', icon: <HelpCircle size={16} /> },
                 { path: '/support', label: 'Contact & Help', icon: <MessageCircle size={16} /> },
+                { path: '/tools/version-comparison', label: 'Version Comparison', icon: <GitBranch size={16} /> },
             ],
         },
     ];
@@ -304,8 +311,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     </button>
                 </div>
 
-                {/* Right section - Theme toggle and GitHub */}
+                {/* Right section - User Menu, Theme toggle and GitHub */}
                 <div className="flex items-center gap-x-2 lg:gap-x-4">
+                    {/* User Menu */}
+                    <UserMenu />
+
                     {/* Mobile TOC Button */}
                     {tocContent && (
                         <button
@@ -497,14 +507,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     }`}
                 tabIndex={-1}
             >
-                <div className="pt-24 pb-8">
+                <div className="pt-24 pb-4">
                     <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
                         {children}
+
+                        {/* Feedback Widget at Bottom of Page */}
+                        <FeedbackWidget
+                            pageId={location.pathname.replace(/\//g, '-').replace(/^-/, '') || 'home'}
+                            pagePath={location.pathname}
+                        />
                     </div>
 
                     {/* Footer */}
-                    <footer className="mt-16 border-t border-gray-200 dark:border-gray-700" role="contentinfo">
-                        <div className="max-w-6xl mx-auto px-6 py-8">
+                    <footer className="border-t border-gray-200 dark:border-gray-700" role="contentinfo">
+                        <div className="max-w-6xl mx-auto p-4">
                             <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
                                 <div className="flex flex-col md:flex-row items-center md:items-start gap-4 text-center md:text-left">
                                     <Link to="/" className="flex items-center gap-2 group">
@@ -538,12 +554,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                     >
                                         <Github size={20} />
                                     </a>
-                                    <a
-                                        href="mailto:support@costkatana.com"
-                                        className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-                                    >
-                                        <MessageCircle size={20} />
-                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -567,6 +577,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Offline Indicator */}
             <OfflineIndicator />
+
+            {/* Live Chat Widget */}
+            <LiveChatWidget />
 
             {/* Mobile Menu Overlay */}
             {sidebarOpen && (

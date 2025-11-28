@@ -16,7 +16,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({ contentContainerId = 
         const updateProgress = () => {
             // Always track the content container's scroll, not the window scrollbar
             const contentContainer = document.getElementById(contentContainerId);
-            
+
             if (contentContainer) {
                 const scrollTop = contentContainer.scrollTop;
                 const scrollHeight = contentContainer.scrollHeight - contentContainer.clientHeight;
@@ -33,11 +33,11 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({ contentContainerId = 
 
         // Always listen to content container scroll
         const contentContainer = document.getElementById(contentContainerId);
-        
+
         if (contentContainer) {
             // Listen to content container scroll
             contentContainer.addEventListener('scroll', updateProgress, { passive: true });
-            
+
             // Initial progress calculation
             updateProgress();
 
@@ -55,7 +55,7 @@ const ReadingProgress: React.FC<ReadingProgressProps> = ({ contentContainerId = 
             // Fallback: listen to window scroll if container not found
             window.addEventListener('scroll', updateProgress, { passive: true });
             updateProgress();
-            
+
             return () => {
                 window.removeEventListener('scroll', updateProgress);
             };

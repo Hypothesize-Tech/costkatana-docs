@@ -3,11 +3,16 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
+import { useLocation } from 'react-router-dom';
 import { useReading } from '../contexts/ReadingContext';
 import StepByStepGuide from './StepByStepGuide';
 import VideoTutorial from './VideoTutorial';
 import SmartCodeCopy from './SmartCodeCopy';
 import APITester from './APITester';
+import SDKGenerator from './SDKGenerator';
+import IntegrationWizard from './IntegrationWizard';
+import APIExplorer from './APIExplorer';
+import VersionComparison from './VersionComparison';
 import {
     Copy,
     Check,
@@ -118,6 +123,7 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
     const [copiedCode, setCopiedCode] = useState<string | null>(null);
     const idCountsRef = useRef<Record<string, number>>({});
     const { settings } = useReading();
+    const location = useLocation();
 
     // Reset ID counts when content changes
     useEffect(() => {
@@ -764,8 +770,12 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         const hasSmartCode = /```smart:/.test(markdownContent);
         const hasVideo = /```video:/.test(markdownContent);
         const hasAPI = /```api:/.test(markdownContent);
+        const hasSDKGenerator = /```sdk-generator/.test(markdownContent);
+        const hasIntegrationWizard = /```integration-wizard/.test(markdownContent);
+        const hasAPIExplorer = /```api-explorer/.test(markdownContent);
+        const hasVersionComparison = /```version-comparison/.test(markdownContent);
 
-        if (!hasSteps && !hasSmartCode && !hasVideo && !hasAPI) {
+        if (!hasSteps && !hasSmartCode && !hasVideo && !hasAPI && !hasSDKGenerator && !hasIntegrationWizard && !hasAPIExplorer && !hasVersionComparison) {
             // No interactive components, render normally
             return (
                 <ReactMarkdown
@@ -924,28 +934,109 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             }
         );
 
+        // Process SDKGenerator: ```sdk-generator
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)sdk-generator\n(?:```|\\`\\`\\`)/g,
+            () => {
+                const componentKey = `sdk-generator-${keyCounter++}`;
+                parts.push(
+                    <SDKGenerator key={componentKey} />
+                );
+                return `__SDK_GENERATOR_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Process IntegrationWizard: ```integration-wizard
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)integration-wizard\n(?:```|\\`\\`\\`)/g,
+            () => {
+                const componentKey = `integration-wizard-${keyCounter++}`;
+                parts.push(
+                    <IntegrationWizard key={componentKey} />
+                );
+                return `__INTEGRATION_WIZARD_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Process APIExplorer: ```api-explorer
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)api-explorer\n(?:```|\\`\\`\\`)/g,
+            () => {
+                const componentKey = `api-explorer-${keyCounter++}`;
+                parts.push(
+                    <APIExplorer key={componentKey} />
+                );
+                return `__API_EXPLORER_COMPONENT_${componentKey}__`;
+            }
+        );
+
+        // Process VersionComparison: ```version-comparison:pageId
+        processedContent = processedContent.replace(
+            /(?:```|\\`\\`\\`)version-comparison(?::([^\n]+?))?\n(?:```|\\`\\`\\`)/g,
+            (_match, customPageId) => {
+                const componentKey = `version-comparison-${keyCounter++}`;
+                const pageId = customPageId?.trim() || location.pathname.replace(/\//g, '-').replace(/^-/, '') || 'default';
+                parts.push(
+                    <VersionComparison
+                        key={componentKey}
+                        pageId={pageId}
+                        currentContent={content}
+                    />
+                );
+                return `__VERSION_COMPARISON_COMPONENT_${componentKey}__`;
+            }
+        );
+
         // Create a map of component markers to components for easier lookup
         const componentMap = new Map<string, React.ReactNode>();
         parts.forEach((part) => {
             if (part && typeof part === 'object' && 'key' in part) {
                 const key = String((part as { key: string }).key);
                 // Create marker string that matches what we generated
-                const keyMatch = key.match(/(\w+)-(\d+)/);
-                if (keyMatch) {
-                    const [, componentType, componentIndex] = keyMatch;
-                    const marker = `__${componentType.toUpperCase()}_COMPONENT_${componentType}-${componentIndex}__`;
-                    componentMap.set(marker, part);
+                // Handle different component key formats
+                if (key.includes('integration-wizard')) {
+                    const keyMatch = key.match(/integration-wizard-(\d+)/);
+                    if (keyMatch) {
+                        const marker = `__INTEGRATION_WIZARD_COMPONENT_integration-wizard-${keyMatch[1]}__`;
+                        componentMap.set(marker, part);
+                    }
+                } else if (key.includes('sdk-generator')) {
+                    const keyMatch = key.match(/sdk-generator-(\d+)/);
+                    if (keyMatch) {
+                        const marker = `__SDK_GENERATOR_COMPONENT_sdk-generator-${keyMatch[1]}__`;
+                        componentMap.set(marker, part);
+                    }
+                } else if (key.includes('api-explorer')) {
+                    const keyMatch = key.match(/api-explorer-(\d+)/);
+                    if (keyMatch) {
+                        const marker = `__API_EXPLORER_COMPONENT_api-explorer-${keyMatch[1]}__`;
+                        componentMap.set(marker, part);
+                    }
+                } else if (key.includes('version-comparison')) {
+                    const keyMatch = key.match(/version-comparison-(\d+)/);
+                    if (keyMatch) {
+                        const marker = `__VERSION_COMPARISON_COMPONENT_version-comparison-${keyMatch[1]}__`;
+                        componentMap.set(marker, part);
+                    }
+                } else {
+                    // Handle other components (smart, steps, video, api)
+                    const keyMatch = key.match(/(\w+)-(\d+)/);
+                    if (keyMatch) {
+                        const [, componentType, componentIndex] = keyMatch;
+                        const marker = `__${componentType.toUpperCase()}_COMPONENT_${componentType}-${componentIndex}__`;
+                        componentMap.set(marker, part);
+                    }
                 }
             }
         });
 
         // Split by component markers and render
-        const sections = processedContent.split(/(__\w+_COMPONENT_\w+-\d+__)/);
+        const sections = processedContent.split(/(__\w+_COMPONENT_[\w-]+-\d+__|__\w+_GENERATOR_COMPONENT_[\w-]+-\d+__|__\w+_WIZARD_COMPONENT_[\w-]+-\d+__|__\w+_EXPLORER_COMPONENT_[\w-]+-\d+__|__\w+_COMPARISON_COMPONENT_[\w-]+-\d+__)/);
         const finalParts: React.ReactNode[] = [];
         let partIndex = 0;
 
         sections.forEach((section) => {
-            if (section.match(/^__\w+_COMPONENT_\w+-\d+__$/)) {
+            if (section.match(/^__(?:\w+_)?(?:COMPONENT|GENERATOR|WIZARD|EXPLORER|COMPARISON)_[\w-]+-\d+__$/)) {
                 // This is a component marker, find the corresponding component
                 const component = componentMap.get(section);
                 if (component) {

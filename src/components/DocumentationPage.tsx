@@ -13,6 +13,9 @@ import { useMarkdownContent } from '../hooks/useMarkdownContent';
 import { useReading } from '../contexts/ReadingContext';
 import { useTOC } from '../contexts/TOCContext';
 import { useSwipeNavigation } from '../hooks/useSwipeNavigation';
+import { usePageAnalytics } from '../hooks/usePageAnalytics';
+import { PageRating, ContentMeta, RecommendedContent } from './analytics';
+import { CommentsSection } from './community';
 
 interface NavigationLink {
     path: string;
@@ -39,6 +42,12 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
     const { settings, estimateReadingTime, getReadingPosition, saveReadingPosition } = useReading();
     const { setContent } = useTOC();
     const { swipeState } = useSwipeNavigation({ enabled: true });
+
+    // Generate pageId from path
+    const pageId = location.pathname.replace(/\//g, '-').replace(/^-/, '') || 'home';
+
+    // Track page analytics
+    usePageAnalytics({ pageId, pagePath: location.pathname });
 
     // Update TOC content when content changes
     useEffect(() => {
@@ -221,6 +230,11 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                     </div>
                                 )}
                             </div>
+                            {/* Content Meta - Views, Helpfulness */}
+                            <ContentMeta
+                                pageId={pageId}
+                                readingTime={content ? estimateReadingTime(content) : undefined}
+                            />
                         </div>
 
                         {/* Reading Progress */}
@@ -253,6 +267,12 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                             <>
                                 <section className="card glass rounded-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-xl p-8 mb-8">
                                     <MarkdownContent content={content} />
+
+                                    {/* Page Rating */}
+                                    <PageRating pageId={pageId} pagePath={location.pathname} />
+
+                                    {/* Recommended Content */}
+                                    <RecommendedContent currentPageId={pageId} maxItems={3} />
                                 </section>
 
                                 {(prevPage || nextPage) && (
@@ -280,6 +300,9 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                         )}
                                     </div>
                                 )}
+
+                                {/* Comments Section */}
+                                <CommentsSection pageId={pageId} pagePath={location.pathname} />
                             </>
                         )}
                     </article>

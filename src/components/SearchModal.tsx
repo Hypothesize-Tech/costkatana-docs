@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, X, FileText, Code, Book, ChevronRight } from 'lucide-react';
+import { Search, X, FileText, Code, Book, ChevronRight, Sparkles, Loader2, Brain } from 'lucide-react';
 import Fuse from 'fuse.js';
 
 interface SearchModalProps {
@@ -54,13 +54,19 @@ const searchData: SearchResult[] = [
     { title: 'ChatGPT Integration', path: '/integrations/chatgpt', category: 'Integrations', content: 'Direct ChatGPT custom GPT integration', icon: <Code size={16} /> },
 ];
 
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
+
 const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
     const [query, setQuery] = useState('');
     const [results, setResults] = useState<SearchResult[]>([]);
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const [isAISearch, setIsAISearch] = useState(false);
+    const [isAILoading, setIsAILoading] = useState(false);
+    const [aiSuggestions, setAISuggestions] = useState<string[]>([]);
     const navigate = useNavigate();
     const inputRef = React.useRef<HTMLInputElement>(null);
     const modalRef = React.useRef<HTMLDivElement>(null);
+    const searchTimeoutRef = React.useRef<ReturnType<typeof setTimeout>>();
 
     // Initialize Fuse.js for fuzzy search
     const fuse = React.useMemo(() => new Fuse(searchData, {
@@ -69,16 +75,81 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
         includeScore: true,
     }), []);
 
-    // Handle search
+    // AI-powered semantic search
+    const performAISearch = useCallback(async (searchQuery: string) => {
+        if (!searchQuery.trim() || searchQuery.length < 3) {
+            return;
+        }
+
+        setIsAILoading(true);
+        setIsAISearch(true);
+
+        try {
+            // Call backend AI search endpoint
+            const response = await fetch(`${API_BASE_URL}/docs-analytics/ai-search`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query: searchQuery }),
+            });
+
+            if (response.ok) {
+                const data = await response.json() as { success: boolean; results?: Array<{ title?: string; pageTitle?: string; path?: string; pagePath?: string; category?: string; reason?: string; description?: string; content?: string }>; suggestions?: string[] };
+                if (data.success && data.results) {
+                    // Map AI results to SearchResult format
+                    const aiResults = data.results.map((r) => ({
+                        title: r.title || r.pageTitle || '',
+                        path: r.path || r.pagePath || '',
+                        category: r.category || 'AI Recommended',
+                        content: r.reason || r.description || r.content || '',
+                        icon: <Brain size={16} />,
+                    }));
+                    setResults(aiResults);
+                    setAISuggestions(data.suggestions || []);
+                    return;
+                }
+            }
+        } catch (error) {
+            console.error('AI search failed:', error);
+        } finally {
+            setIsAILoading(false);
+        }
+
+        // Fallback to fuzzy search
+        setIsAISearch(false);
+        const searchResults = fuse.search(searchQuery).slice(0, 8);
+        setResults(searchResults.map(r => r.item));
+    }, [fuse]);
+
+    // Handle search with debouncing
     useEffect(() => {
+        if (searchTimeoutRef.current) {
+            clearTimeout(searchTimeoutRef.current);
+        }
+
         if (query.trim()) {
-            const searchResults = fuse.search(query).slice(0, 8);
-            setResults(searchResults.map(r => r.item));
+            // Use AI search for longer queries, fuzzy for shorter ones
+            if (query.length >= 3) {
+                searchTimeoutRef.current = setTimeout(() => {
+                    performAISearch(query);
+                }, 300);
+            } else {
+                const searchResults = fuse.search(query).slice(0, 8);
+                setResults(searchResults.map(r => r.item));
+                setIsAISearch(false);
+            }
         } else {
             setResults(searchData.slice(0, 8));
+            setIsAISearch(false);
+            setAISuggestions([]);
         }
         setSelectedIndex(0);
-    }, [query, fuse]);
+
+        return () => {
+            if (searchTimeoutRef.current) {
+                clearTimeout(searchTimeoutRef.current);
+            }
+        };
+    }, [query, fuse, performAISearch]);
 
     // Handle keyboard navigation
     const handleKeyDown = useCallback((e: KeyboardEvent) => {
@@ -195,31 +266,60 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
                             <div className="glass rounded-2xl sm:rounded-2xl rounded-b-none sm:rounded-b-2xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel shadow-2xl overflow-hidden backdrop-blur-xl h-full sm:h-auto flex flex-col">
                                 {/* Search Input */}
                                 <div className="flex items-center px-6 sm:px-4 py-4 sm:py-3 border-b border-primary-200/30 dark:border-primary-700/30 flex-shrink-0">
-                                    <Search className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0" size={20} aria-hidden="true" />
-                                    <label htmlFor="search-input" className="sr-only">
-                                        Search documentation
-                                    </label>
-                                    <input
-                                        ref={inputRef}
-                                        id="search-input"
-                                        type="text"
-                                        value={query}
-                                        onChange={(e) => setQuery(e.target.value)}
-                                        placeholder="Search documentation..."
-                                        className="flex-1 bg-transparent outline-none text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500/50 rounded-lg px-2 py-2 sm:py-1 text-base sm:text-sm min-h-[44px] sm:min-h-auto"
-                                        autoFocus
-                                        aria-label="Search documentation"
-                                        aria-describedby="search-results-count"
-                                        aria-controls="search-results"
-                                    />
+                                    <div className="relative flex-1 flex items-center">
+                                        {isAILoading ? (
+                                            <Loader2 className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0 animate-spin" size={20} />
+                                        ) : isAISearch ? (
+                                            <Sparkles className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0" size={20} />
+                                        ) : (
+                                            <Search className="text-primary-600 dark:text-primary-400 mr-3 flex-shrink-0" size={20} aria-hidden="true" />
+                                        )}
+                                        <label htmlFor="search-input" className="sr-only">
+                                            Search documentation
+                                        </label>
+                                        <input
+                                            ref={inputRef}
+                                            id="search-input"
+                                            type="text"
+                                            value={query}
+                                            onChange={(e) => setQuery(e.target.value)}
+                                            placeholder="Search documentation... (AI-powered)"
+                                            className="flex-1 bg-transparent outline-none text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500/50 rounded-lg px-2 py-2 sm:py-1 text-base sm:text-sm min-h-[44px] sm:min-h-auto"
+                                            autoFocus
+                                            aria-label="Search documentation"
+                                            aria-describedby="search-results-count"
+                                            aria-controls="search-results"
+                                        />
+                                    </div>
                                     <button
                                         onClick={onClose}
-                                        className="btn p-2 sm:p-1 hover:bg-primary-100/50 dark:hover:bg-primary-900/30 rounded-lg transition-colors text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-600 dark:hover:text-primary-400 min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center flex-shrink-0"
+                                        className="btn p-2 sm:p-1 hover:bg-primary-100/50 dark:hover:bg-primary-900/30 rounded-lg transition-colors text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-600 dark:hover:text-primary-400 min-w-[44px] min-h-[44px] sm:min-w-auto sm:min-h-auto flex items-center justify-center flex-shrink-0 ml-2"
                                         aria-label="Close search"
                                     >
                                         <X size={20} aria-hidden="true" />
                                     </button>
                                 </div>
+
+                                {/* AI Suggestions */}
+                                {isAISearch && aiSuggestions.length > 0 && (
+                                    <div className="px-6 sm:px-4 py-2 border-b border-primary-200/30 dark:border-primary-700/30 bg-primary-500/5">
+                                        <div className="flex items-center gap-2 text-xs text-light-text-muted dark:text-dark-text-muted">
+                                            <Brain size={14} />
+                                            <span>Related searches:</span>
+                                            <div className="flex flex-wrap gap-2">
+                                                {aiSuggestions.slice(0, 3).map((suggestion, idx) => (
+                                                    <button
+                                                        key={idx}
+                                                        onClick={() => setQuery(suggestion)}
+                                                        className="px-2 py-1 rounded bg-primary-500/10 hover:bg-primary-500/20 text-primary-600 dark:text-primary-400 transition-colors"
+                                                    >
+                                                        {suggestion}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
 
                                 {/* Search Results */}
                                 <div
