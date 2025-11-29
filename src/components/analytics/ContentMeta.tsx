@@ -35,7 +35,7 @@ export const ContentMeta: React.FC<ContentMetaProps> = ({ pageId, lastUpdated, r
     };
 
     return (
-        <div className="flex flex-wrap items-center gap-4 text-sm text-light-text-muted dark:text-dark-text-muted mb-6">
+        <div className="flex flex-wrap items-center gap-4 text-sm text-light-text-muted dark:text-dark-text-muted">
             {lastUpdated && (
                 <div className="flex items-center gap-1.5">
                     <svg viewBox="0 0 24 24" className="w-4 h-4" fill="currentColor">

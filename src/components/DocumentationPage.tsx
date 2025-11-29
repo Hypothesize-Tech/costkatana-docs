@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, FileText, AlertCircle, Clock } from 'lucide-react';
+import { ChevronLeft, ChevronRight, FileText, AlertCircle } from 'lucide-react';
 import MarkdownContent from './MarkdownContent';
 import TableOfContents from './TableOfContents';
 import Breadcrumb from './Breadcrumb';
@@ -39,7 +39,7 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
 }) => {
     const location = useLocation();
     const { content, loading, error } = useMarkdownContent(location.pathname, fallbackContent);
-    const { settings, estimateReadingTime, getReadingPosition, saveReadingPosition } = useReading();
+    const { estimateReadingTime, getReadingPosition, saveReadingPosition } = useReading();
     const { setContent } = useTOC();
     const { swipeState } = useSwipeNavigation({ enabled: true });
 
@@ -220,16 +220,8 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                             </>
                         )}
                         {/* Breadcrumb Navigation and Reading Info */}
-                        <div className="mb-6">
-                            <div className="flex items-center justify-between mb-4">
-                                <Breadcrumb />
-                                {settings.showReadingTime && content && (
-                                    <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                                        <Clock className="w-4 h-4" />
-                                        <span>{estimateReadingTime(content)} min read</span>
-                                    </div>
-                                )}
-                            </div>
+                        <div className="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <Breadcrumb />
                             {/* Content Meta - Views, Helpfulness */}
                             <ContentMeta
                                 pageId={pageId}
@@ -251,7 +243,12 @@ const DocumentationPage: React.FC<DocumentationPageProps> = ({
                                     </div>
                                 </div>
 
-                                <h1 className="text-3xl font-display font-bold mb-4 text-light-text-primary dark:text-dark-text-primary">{title}</h1>
+                                <h1
+                                    className="font-display font-bold text-light-text-primary dark:text-dark-text-primary"
+                                    style={{ fontSize: '2.5rem', lineHeight: '1.2', marginBottom: '1.5rem', marginTop: '0' }}
+                                >
+                                    {title}
+                                </h1>
                                 {description && (
                                     <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">{description}</p>
                                 )}

@@ -5,13 +5,30 @@ import { useDocsAnalytics } from '../../contexts/DocsAnalyticsContext';
 interface FeedbackWidgetProps {
     pageId: string;
     pagePath: string;
+    isOpen?: boolean;
+    onOpenChange?: (open: boolean) => void;
+    showButton?: boolean;
 }
 
 type FeedbackType = 'bug' | 'improvement' | 'question' | 'other';
 
-export const FeedbackWidget: React.FC<FeedbackWidgetProps> = ({ pageId, pagePath }) => {
+export const FeedbackWidget: React.FC<FeedbackWidgetProps> = ({
+    pageId,
+    pagePath,
+    isOpen: externalIsOpen,
+    onOpenChange,
+    showButton = true
+}) => {
     const { submitFeedback } = useDocsAnalytics();
-    const [isOpen, setIsOpen] = useState(false);
+    const [internalIsOpen, setInternalIsOpen] = useState(false);
+    const isOpen = externalIsOpen !== undefined ? externalIsOpen : internalIsOpen;
+    const setIsOpen = (open: boolean) => {
+        if (onOpenChange) {
+            onOpenChange(open);
+        } else {
+            setInternalIsOpen(open);
+        }
+    };
     const [feedbackType, setFeedbackType] = useState<FeedbackType>('improvement');
     const [message, setMessage] = useState('');
     const [email, setEmail] = useState('');
@@ -44,38 +61,30 @@ export const FeedbackWidget: React.FC<FeedbackWidgetProps> = ({ pageId, pagePath
 
     return (
         <>
-            {/* Feedback Section at Bottom of Page */}
-            <div className="mt-12 mb-8 max-w-5xl p-6 rounded-2xl border border-gray-200 dark:border-gray-700
-                bg-gradient-to-br from-primary-500/5 via-transparent to-primary-500/5
-                hover:from-primary-500/10 hover:to-primary-500/10 transition-all duration-300">
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                    <div className="flex items-start gap-4">
-                        <div className="p-3 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg">
-                            <MessageSquare className="w-6 h-6" />
-                        </div>
-                        <div>
-                            <h3 className="text-lg font-display font-semibold text-light-text-primary dark:text-dark-text-primary mb-1">
-                                Was this page helpful?
-                            </h3>
-                            <p className="text-sm text-light-text-muted dark:text-dark-text-muted">
-                                Help us improve our documentation by sharing your feedback
-                            </p>
-                        </div>
-                    </div>
-                    <button
-                        onClick={() => setIsOpen(true)}
-                        className="btn flex items-center gap-2 px-6 py-3 rounded-xl
-                            bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold
-                            hover:from-primary-600 hover:to-primary-700
-                            shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30
-                            transition-all duration-300 hover:scale-105 whitespace-nowrap"
-                        aria-label="Send feedback"
-                    >
+            {/* Floating Feedback Button - Only show if showButton is true */}
+            {showButton && (
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="fixed bottom-6 right-6 z-50
+                        flex items-center gap-3 px-5 py-3.5 rounded-full
+                        bg-transparent backdrop-blur-md
+                        border-2 border-primary-500/30 dark:border-primary-400/30
+                        text-primary-600 dark:text-primary-400
+                        hover:border-primary-500 dark:hover:border-primary-400
+                        hover:bg-primary-500/10 dark:hover:bg-primary-500/20
+                        shadow-lg shadow-primary-500/20 hover:shadow-xl hover:shadow-primary-500/30
+                        transition-all duration-300 hover:scale-105
+                        group"
+                    aria-label="Send feedback"
+                >
+                    <div className="p-2 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-md group-hover:shadow-lg transition-shadow">
                         <MessageSquare className="w-5 h-5" />
-                        <span>Share Feedback</span>
-                    </button>
-                </div>
-            </div>
+                    </div>
+                    <span className="font-semibold text-sm whitespace-nowrap hidden sm:block">
+                        Share Feedback
+                    </span>
+                </button>
+            )}
 
             {/* Modal Overlay */}
             {isOpen && (

@@ -58,6 +58,7 @@ import KeyboardShortcutsModal from './KeyboardShortcutsModal';
 import { FeedbackWidget } from './analytics';
 import { LiveChatWidget } from './community';
 import { UserMenu } from './UserMenu';
+import { Tooltip } from './Tooltip';
 import logoImage from '../assets/logo.jpg';
 
 interface NavigationItem {
@@ -80,6 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     const [readingSettingsOpen, setReadingSettingsOpen] = useState(false);
     const [mobileTOCOpen, setMobileTOCOpen] = useState(false);
     const [shortcutsOpen, setShortcutsOpen] = useState(false);
+    const [feedbackOpen, setFeedbackOpen] = useState(false);
     const [expandedSections, setExpandedSections] = useState<string[]>(['getting-started']);
     const location = useLocation();
 
@@ -268,17 +270,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
                 {/* Left section - Logo and mobile menu */}
                 <div className="flex items-center gap-x-4 lg:gap-x-6">
-                    <button
-                        type="button"
-                        className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
-                        onClick={() => setSidebarOpen(!sidebarOpen)}
-                        aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-                        aria-expanded={sidebarOpen}
-                        aria-controls="sidebar-navigation"
-                    >
-                        <span className="sr-only">{sidebarOpen ? 'Close sidebar' : 'Open sidebar'}</span>
-                        {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-                    </button>
+                    <Tooltip content={sidebarOpen ? 'Close navigation menu' : 'Open navigation menu'} position="bottom">
+                        <button
+                            type="button"
+                            className="btn -m-2.5 p-2.5 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden"
+                            onClick={() => setSidebarOpen(!sidebarOpen)}
+                            aria-label={sidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+                            aria-expanded={sidebarOpen}
+                            aria-controls="sidebar-navigation"
+                        >
+                            <span className="sr-only">{sidebarOpen ? 'Close sidebar' : 'Open sidebar'}</span>
+                            {sidebarOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+                        </button>
+                    </Tooltip>
 
                     {/* Logo */}
                     <Link to="/" className="flex gap-x-3 items-center group">
@@ -297,104 +301,129 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
                 {/* Center section - Search bar */}
                 <div className="flex-1 flex justify-center mx-4 lg:mx-8">
-                    <button
-                        type="button"
-                        onClick={() => setSearchOpen(true)}
-                        className="btn flex items-center gap-x-3 px-6 py-2.5 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-105 rounded-xl min-w-[200px] max-w-[400px] justify-center"
-                        aria-label="Open search"
-                    >
-                        <Search className="w-5 h-5" aria-hidden="true" />
-                        <span className="hidden sm:inline text-sm">Search documentation...</span>
-                        <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600 ml-2" aria-label="Press Command K to search">
-                            ⌘K
-                        </kbd>
-                    </button>
-                </div>
-
-                {/* Right section - User Menu, Theme toggle and GitHub */}
-                <div className="flex items-center gap-x-2 lg:gap-x-4">
-                    {/* User Menu */}
-                    <UserMenu />
-
-                    {/* Mobile TOC Button */}
-                    {tocContent && (
+                    <Tooltip content="Search documentation (⌘K)" position="bottom">
                         <button
                             type="button"
-                            onClick={() => setMobileTOCOpen(true)}
-                            className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
-                            aria-label="Open table of contents"
-                            aria-expanded={mobileTOCOpen}
+                            onClick={() => setSearchOpen(true)}
+                            className="btn flex items-center gap-x-3 px-6 py-2.5 glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-105 rounded-xl min-w-[300px] max-w-[600px] w-full justify-center"
+                            aria-label="Open search"
                         >
-                            <List size={20} aria-hidden="true" />
+                            <Search className="w-5 h-5" aria-hidden="true" />
+                            <span className="hidden sm:inline text-sm">Search documentation...</span>
+                            <kbd className="hidden sm:inline px-2 py-1 text-xs bg-light-bg dark:bg-dark-bg-300 rounded border border-gray-300 dark:border-gray-600 ml-2" aria-label="Press Command K to search">
+                                ⌘K
+                            </kbd>
                         </button>
+                    </Tooltip>
+                </div>
+
+                {/* Right section - Theme toggle, GitHub, and User Menu */}
+                <div className="flex items-center gap-x-2 lg:gap-x-4">
+                    {/* Mobile TOC Button */}
+                    {tocContent && (
+                        <Tooltip content="Table of contents" position="bottom">
+                            <button
+                                type="button"
+                                onClick={() => setMobileTOCOpen(true)}
+                                className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 lg:hidden min-w-[44px] min-h-[44px] flex items-center justify-center"
+                                aria-label="Open table of contents"
+                                aria-expanded={mobileTOCOpen}
+                            >
+                                <List size={20} aria-hidden="true" />
+                            </button>
+                        </Tooltip>
                     )}
                     {/* Theme toggle */}
-                    <button
-                        type="button"
-                        onClick={toggleTheme}
-                        className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 hover:rotate-12"
-                        aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
-                    >
-                        {theme === "light" ? (
-                            <Moon className="w-5 h-5" aria-hidden="true" />
-                        ) : (
-                            <Sun className="w-5 h-5" aria-hidden="true" />
-                        )}
-                    </button>
+                    <Tooltip content={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`} position="bottom">
+                        <button
+                            type="button"
+                            onClick={toggleTheme}
+                            className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 hover:rotate-12"
+                            aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+                        >
+                            {theme === "light" ? (
+                                <Moon className="w-5 h-5" aria-hidden="true" />
+                            ) : (
+                                <Sun className="w-5 h-5" aria-hidden="true" />
+                            )}
+                        </button>
+                    </Tooltip>
 
                     {/* Reading Mode */}
-                    <button
-                        type="button"
-                        onClick={toggleReadingMode}
-                        className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${settings.isReadingMode ? 'bg-primary-500/20 text-primary-500' : ''
-                            }`}
-                        aria-label={settings.isReadingMode ? 'Disable reading mode' : 'Enable reading mode'}
-                        aria-pressed={settings.isReadingMode}
-                    >
-                        <Book className="w-5 h-5" aria-hidden="true" />
-                    </button>
+                    <Tooltip content={settings.isReadingMode ? 'Disable reading mode' : 'Enable reading mode - Hide sidebar for focused reading'} position="bottom">
+                        <button
+                            type="button"
+                            onClick={toggleReadingMode}
+                            className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${settings.isReadingMode ? 'bg-primary-500/20 text-primary-500' : ''
+                                }`}
+                            aria-label={settings.isReadingMode ? 'Disable reading mode' : 'Enable reading mode'}
+                            aria-pressed={settings.isReadingMode}
+                        >
+                            <Book className="w-5 h-5" aria-hidden="true" />
+                        </button>
+                    </Tooltip>
 
                     {/* Reading Settings */}
-                    <button
-                        type="button"
-                        onClick={() => setReadingSettingsOpen(!readingSettingsOpen)}
-                        className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
-                        aria-label="Open reading settings"
-                        aria-expanded={readingSettingsOpen}
-                    >
-                        <Type className="w-5 h-5" aria-hidden="true" />
-                    </button>
+                    <Tooltip content="Font size and reading preferences" position="bottom">
+                        <button
+                            type="button"
+                            onClick={() => setReadingSettingsOpen(!readingSettingsOpen)}
+                            className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                            aria-label="Open reading settings"
+                            aria-expanded={readingSettingsOpen}
+                        >
+                            <Type className="w-5 h-5" aria-hidden="true" />
+                        </button>
+                    </Tooltip>
 
                     {/* High Contrast Toggle */}
-                    <button
-                        type="button"
-                        onClick={toggleHighContrast}
-                        className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${highContrast ? 'bg-primary-500/20 text-primary-500' : ''
-                            }`}
-                        aria-label={highContrast ? 'Disable high contrast mode' : 'Enable high contrast mode'}
-                        aria-pressed={highContrast}
-                        title={highContrast ? 'Disable high contrast' : 'Enable high contrast'}
-                    >
-                        <Eye className="w-5 h-5" aria-hidden="true" />
-                    </button>
+                    <Tooltip content={highContrast ? 'Disable high contrast mode' : 'Enable high contrast mode - Improve visibility'} position="bottom">
+                        <button
+                            type="button"
+                            onClick={toggleHighContrast}
+                            className={`btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110 ${highContrast ? 'bg-primary-500/20 text-primary-500' : ''
+                                }`}
+                            aria-label={highContrast ? 'Disable high contrast mode' : 'Enable high contrast mode'}
+                            aria-pressed={highContrast}
+                        >
+                            <Eye className="w-5 h-5" aria-hidden="true" />
+                        </button>
+                    </Tooltip>
+
+                    {/* Feedback Button */}
+                    <Tooltip content="Send feedback - Report bugs, suggest improvements, or ask questions" position="bottom">
+                        <button
+                            type="button"
+                            onClick={() => setFeedbackOpen(true)}
+                            className="btn p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                            aria-label="Send feedback"
+                        >
+                            <MessageCircle className="w-5 h-5" aria-hidden="true" />
+                        </button>
+                    </Tooltip>
 
                     {/* GitHub */}
-                    <a
-                        href="https://github.com/Hypothesize-Tech/costkatana-backend"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
-                        aria-label="Visit Cost Katana GitHub repository (opens in new tab)"
-                    >
-                        <Github className="w-5 h-5" aria-hidden="true" />
-                    </a>
+                    <Tooltip content="View Cost Katana on GitHub (opens in new tab)" position="bottom">
+                        <a
+                            href="https://github.com/Hypothesize-Tech/costkatana-backend"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-3 rounded-xl glass hover:bg-primary-500/20 text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 transition-all duration-300 hover:scale-110"
+                            aria-label="Visit Cost Katana GitHub repository (opens in new tab)"
+                        >
+                            <Github className="w-5 h-5" aria-hidden="true" />
+                        </a>
+                    </Tooltip>
+
+                    {/* User Menu - Extreme Right */}
+                    <UserMenu />
                 </div>
             </header>
 
             {/* Sidebar */}
             <aside
                 id="sidebar-navigation"
-                className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${settings.isReadingMode
+                className={`fixed left-0 top-16 bottom-0 w-72 glass backdrop-blur-xl border-r border-primary-200/30 dark:border-primary-700/30 overflow-y-auto overflow-x-visible transform transition-transform duration-300 z-40 bg-gradient-light-panel/80 dark:bg-gradient-dark-panel/80 ${settings.isReadingMode
                     ? '-translate-x-full'
                     : sidebarOpen
                         ? 'translate-x-0'
@@ -420,14 +449,16 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                 }}
                             >
                                 <div className="flex items-center gap-x-3">
-                                    <div
-                                        className={`transition-colors duration-300 ${expandedSections.includes(section.id)
-                                            ? 'text-primary-500 dark:text-primary-400'
-                                            : 'text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 dark:group-hover:text-primary-400'
-                                            }`}
-                                    >
-                                        {section.icon}
-                                    </div>
+                                    <Tooltip content={section.title} position="right">
+                                        <div
+                                            className={`transition-colors duration-300 ${expandedSections.includes(section.id)
+                                                ? 'text-primary-500 dark:text-primary-400'
+                                                : 'text-light-text-secondary dark:text-dark-text-secondary group-hover:text-primary-500 dark:group-hover:text-primary-400'
+                                                }`}
+                                        >
+                                            {section.icon}
+                                        </div>
+                                    </Tooltip>
                                     <span className="text-light-text-primary dark:text-dark-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
                                         {section.title}
                                     </span>
@@ -457,37 +488,39 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                         <div className="ml-1 mt-2 space-y-1 pl-3 border-l-2 border-primary-200/30 dark:border-primary-700/30" role="list">
                                             {section.items.map((item: NavigationItem) => (
                                                 item.external ? (
-                                                    <a
-                                                        key={item.path}
-                                                        href={item.path}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="sidebar-link group"
-                                                    >
-                                                        <div className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
-                                                            {item.icon}
-                                                        </div>
-                                                        <span className="flex-1">{item.label}</span>
-                                                        <ExternalLink
-                                                            size={14}
-                                                            className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors opacity-60 group-hover:opacity-100"
-                                                        />
-                                                    </a>
+                                                    <Tooltip key={item.path} content={item.label} position="right" fullWidth>
+                                                        <a
+                                                            href={item.path}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="sidebar-link group"
+                                                        >
+                                                            <div className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors">
+                                                                {item.icon}
+                                                            </div>
+                                                            <span className="flex-1">{item.label}</span>
+                                                            <ExternalLink
+                                                                size={14}
+                                                                className="text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors opacity-60 group-hover:opacity-100"
+                                                            />
+                                                        </a>
+                                                    </Tooltip>
                                                 ) : (
-                                                    <Link
-                                                        key={item.path}
-                                                        to={item.path}
-                                                        className={`sidebar-link group ${location.pathname === item.path ? 'active' : ''}`}
-                                                        aria-current={location.pathname === item.path ? 'page' : undefined}
-                                                    >
-                                                        <div className={location.pathname === item.path
-                                                            ? 'text-white'
-                                                            : 'text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors'
-                                                        }>
-                                                            {item.icon}
-                                                        </div>
-                                                        <span>{item.label}</span>
-                                                    </Link>
+                                                    <Tooltip key={item.path} content={item.label} position="right" fullWidth>
+                                                        <Link
+                                                            to={item.path}
+                                                            className={`sidebar-link group ${location.pathname === item.path ? 'active' : ''}`}
+                                                            aria-current={location.pathname === item.path ? 'page' : undefined}
+                                                        >
+                                                            <div className={location.pathname === item.path
+                                                                ? 'text-white'
+                                                                : 'text-light-text-muted dark:text-dark-text-muted group-hover:text-primary-500 dark:group-hover:text-primary-400 transition-colors'
+                                                            }>
+                                                                {item.icon}
+                                                            </div>
+                                                            <span>{item.label}</span>
+                                                        </Link>
+                                                    </Tooltip>
                                                 )
                                             ))}
                                         </div>
@@ -510,20 +543,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div className="pt-24 pb-4">
                     <div className="w-full px-6 sm:px-8 md:px-10 max-w-6xl mx-auto">
                         {children}
-
-                        {/* Feedback Widget at Bottom of Page */}
-                        <FeedbackWidget
-                            pageId={location.pathname.replace(/\//g, '-').replace(/^-/, '') || 'home'}
-                            pagePath={location.pathname}
-                        />
                     </div>
 
                     {/* Footer */}
-                    <footer className="border-t border-gray-200 dark:border-gray-700" role="contentinfo">
-                        <div className="max-w-6xl mx-auto p-4">
-                            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-                                <div className="flex flex-col md:flex-row items-center md:items-start gap-4 text-center md:text-left">
-                                    <Link to="/" className="flex items-center gap-2 group">
+                    <footer className="border-t border-gray-200 dark:border-gray-700 mt-12" role="contentinfo">
+                        <div className="max-w-6xl mx-auto px-6 sm:px-8 md:px-10 py-8">
+                            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                                <div className="flex flex-col gap-4">
+                                    <Link to="/" className="flex items-center gap-2 group w-fit">
                                         <div className="flex justify-center items-center w-10 h-10 rounded-lg shadow-md bg-gradient-primary glow-primary group-hover:scale-105 transition-all duration-300 overflow-hidden">
                                             <img
                                                 src={logoImage}
@@ -535,22 +562,23 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                                             Cost Katana
                                         </span>
                                     </Link>
-                                    <div>
+                                    <div className="flex flex-col gap-1">
                                         <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
                                             © 2025 Cost Katana. All rights reserved.
                                         </p>
-                                        <p className="text-xs text-light-text-muted dark:text-dark-text-muted mt-1 flex items-center justify-center md:justify-start">
+                                        <p className="text-xs text-light-text-muted dark:text-dark-text-muted flex items-center">
                                             Made with <Heart size={12} className="inline-block mx-1 text-red-500" fill="currentColor" /> by the Cost Katana team
                                         </p>
                                     </div>
                                 </div>
 
-                                <div className="flex space-x-6">
+                                <div className="flex items-center gap-4">
                                     <a
                                         href="https://github.com/Hypothesize-Tech"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+                                        className="p-2 rounded-lg text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 dark:hover:text-primary-400 hover:bg-primary-500/10 dark:hover:bg-primary-500/20 transition-all duration-200"
+                                        aria-label="Visit Cost Katana on GitHub"
                                     >
                                         <Github size={20} />
                                     </a>
@@ -580,6 +608,15 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             {/* Live Chat Widget */}
             <LiveChatWidget />
+
+            {/* Feedback Widget - Modal only, controlled by header button */}
+            <FeedbackWidget
+                pageId={location.pathname.replace(/\//g, '-').replace(/^-/, '') || 'home'}
+                pagePath={location.pathname}
+                isOpen={feedbackOpen}
+                onOpenChange={setFeedbackOpen}
+                showButton={false}
+            />
 
             {/* Mobile Menu Overlay */}
             {sidebarOpen && (

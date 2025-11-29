@@ -1,8 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, LogOut, ExternalLink, ChevronDown, LogIn, MessageSquare } from 'lucide-react';
+import { LogOut, ExternalLink, ChevronDown, LogIn, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useCommunity } from '../contexts/CommunityContext';
 import { AuthPrompt } from './community';
+import { Tooltip } from './Tooltip';
 
 export const UserMenu: React.FC = () => {
     const { user, isAuthenticated, logout } = useCommunity();
@@ -29,16 +30,18 @@ export const UserMenu: React.FC = () => {
     if (!isAuthenticated) {
         return (
             <>
-                <button
-                    onClick={() => setShowAuthPrompt(true)}
-                    className="btn flex items-center gap-2 px-4 py-2 rounded-xl glass hover:bg-primary-500/20 
-                        text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 
-                        transition-all duration-300 hover:scale-105"
-                    aria-label="Sign in"
-                >
-                    <LogIn className="w-5 h-5" />
-                    <span className="hidden sm:inline">Sign In</span>
-                </button>
+                <Tooltip content="Sign in to access community features and discussions" position="bottom">
+                    <button
+                        onClick={() => setShowAuthPrompt(true)}
+                        className="btn flex items-center gap-2 px-4 py-2 rounded-xl glass hover:bg-primary-500/20 
+                            text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 
+                            transition-all duration-300 hover:scale-105"
+                        aria-label="Sign in"
+                    >
+                        <LogIn className="w-5 h-5" />
+                        <span className="hidden sm:inline">Sign In</span>
+                    </button>
+                </Tooltip>
                 <AuthPrompt
                     isOpen={showAuthPrompt}
                     onClose={() => setShowAuthPrompt(false)}
@@ -58,27 +61,29 @@ export const UserMenu: React.FC = () => {
 
     return (
         <div className="relative" ref={menuRef}>
-            <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="btn flex items-center gap-2 px-3 py-2 rounded-xl glass hover:bg-primary-500/20 
-                    text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 
-                    transition-all duration-300 hover:scale-105"
-                aria-label="User menu"
-                aria-expanded={isOpen}
-            >
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 
+            <Tooltip content="User account menu" position="bottom">
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="btn flex items-center gap-2 px-3 py-2 rounded-xl glass hover:bg-primary-500/20 
+                        text-light-text-secondary dark:text-dark-text-secondary hover:text-primary-500 
+                        transition-all duration-300 hover:scale-105"
+                    aria-label="User menu"
+                    aria-expanded={isOpen}
+                >
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 
                     flex items-center justify-center text-white text-sm font-semibold">
-                    {user?.avatar ? (
-                        <img src={user.avatar} alt="" className="w-full h-full rounded-full object-cover" />
-                    ) : (
-                        getInitials(user?.name || user?.email || 'U')
-                    )}
-                </div>
-                <span className="hidden md:inline font-medium max-w-[120px] truncate">
-                    {user?.name || user?.email?.split('@')[0] || 'User'}
-                </span>
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-            </button>
+                        {user?.avatar ? (
+                            <img src={user.avatar} alt="" className="w-full h-full rounded-full object-cover" />
+                        ) : (
+                            getInitials(user?.name || user?.email || 'U')
+                        )}
+                    </div>
+                    <span className="hidden md:inline font-medium max-w-[120px] truncate">
+                        {user?.name || user?.email?.split('@')[0] || 'User'}
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+                </button>
+            </Tooltip>
 
             {isOpen && (
                 <div className="absolute right-0 mt-2 w-56 rounded-2xl overflow-hidden

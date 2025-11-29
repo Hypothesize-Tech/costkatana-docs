@@ -546,7 +546,11 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
         // Blockquotes with green accent
         blockquote: ({ children, ...props }: { children?: React.ReactNode }) => (
-            <blockquote className="border-l-4 border-primary-500 dark:border-primary-400 bg-gradient-light-panel dark:bg-gradient-dark-panel glass border border-primary-200/30 dark:border-primary-700/30 p-4 my-4 rounded-r-lg shadow-sm" {...props}>
+            <blockquote
+                className="border-l-4 border-primary-500 dark:border-primary-400 bg-gradient-light-panel dark:bg-gradient-dark-panel glass border border-primary-200/30 dark:border-primary-700/30 p-4 my-4 rounded-r-lg shadow-sm"
+                style={{ fontSize: '1rem', lineHeight: '1.7' }}
+                {...props}
+            >
                 {processChildrenRecursively(children)}
             </blockquote>
         ),
@@ -569,19 +573,31 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
         // Lists
         ul: ({ children, ...props }: { children?: React.ReactNode }) => (
-            <ul className="list-disc list-inside mb-4 space-y-2" {...props}>
+            <ul
+                className="list-disc list-inside mb-4 text-light-text-secondary dark:text-dark-text-secondary"
+                style={{ paddingLeft: '1.5rem' }}
+                {...props}
+            >
                 {children}
             </ul>
         ),
 
         ol: ({ children, ...props }: { children?: React.ReactNode }) => (
-            <ol className="list-decimal list-inside mb-4 space-y-2" {...props}>
+            <ol
+                className="list-decimal list-inside mb-4 text-light-text-secondary dark:text-dark-text-secondary"
+                style={{ paddingLeft: '1.5rem' }}
+                {...props}
+            >
                 {children}
             </ol>
         ),
 
         li: ({ children, ...props }: { children?: React.ReactNode }) => (
-            <li className="text-light-text-secondary dark:text-dark-text-secondary" {...props}>
+            <li
+                className="text-light-text-secondary dark:text-dark-text-secondary"
+                style={{ lineHeight: '1.7', marginBottom: '0.5rem' }}
+                {...props}
+            >
                 {processChildrenRecursively(children)}
             </li>
         ),
@@ -592,7 +608,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return (
                 <h1
                     id={id}
-                    className="text-4xl font-display font-bold mb-6 gradient-text scroll-mt-24"
+                    className="font-display font-bold gradient-text scroll-mt-24"
+                    style={{ fontSize: '2.5rem', lineHeight: '1.2', marginBottom: '1.5rem', marginTop: '0' }}
                     {...props}
                 >
                     {processChildrenRecursively(children)}
@@ -605,7 +622,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return (
                 <h2
                     id={id}
-                    className="text-3xl font-display font-semibold mt-8 mb-4 gradient-text border-b border-primary-200/30 dark:border-primary-700/30 pb-2 scroll-mt-24"
+                    className="font-display font-semibold gradient-text border-b border-primary-200/30 dark:border-primary-700/30 pb-2 scroll-mt-24"
+                    style={{ fontSize: '2rem', lineHeight: '1.3', marginTop: '2rem', marginBottom: '1rem' }}
                     {...props}
                 >
                     {processChildrenRecursively(children)}
@@ -618,7 +636,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return (
                 <h3
                     id={id}
-                    className="text-2xl font-display font-semibold mt-6 mb-3 gradient-text scroll-mt-24"
+                    className="font-display font-semibold gradient-text scroll-mt-24"
+                    style={{ fontSize: '1.5rem', lineHeight: '1.4', marginTop: '1.5rem', marginBottom: '0.75rem' }}
                     {...props}
                 >
                     {processChildrenRecursively(children)}
@@ -631,7 +650,8 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             return (
                 <h4
                     id={id}
-                    className="text-xl font-display font-medium mt-4 mb-2 text-primary-600 dark:text-primary-400 scroll-mt-24"
+                    className="font-display font-semibold text-primary-600 dark:text-primary-400 scroll-mt-24"
+                    style={{ fontSize: '1.25rem', lineHeight: '1.5', marginTop: '1.25rem', marginBottom: '0.5rem' }}
                     {...props}
                 >
                     {processChildrenRecursively(children)}
@@ -641,7 +661,11 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
 
         // Paragraphs
         p: ({ children, ...props }: { children?: React.ReactNode }) => (
-            <p className="mb-4 leading-relaxed text-light-text-secondary dark:text-dark-text-secondary" {...props}>
+            <p
+                className="text-light-text-secondary dark:text-dark-text-secondary"
+                style={{ fontSize: '1rem', lineHeight: '1.7', marginBottom: '1rem' }}
+                {...props}
+            >
                 {processChildrenRecursively(children)}
             </p>
         ),

@@ -283,7 +283,7 @@ const TableOfContents: React.FC<TableOfContentsProps> = ({ content }) => {
 
     return (
         <aside className="hidden lg:block w-64 flex-shrink-0" aria-label="Table of contents">
-            <div className="fixed top-24 right-8 w-64 max-h-[70vh] overflow-y-auto toc-scrollbar">
+            <div className="fixed top-24 right-8 w-64 max-h-[50vh] overflow-y-auto toc-scrollbar rounded-xl">
                 <div className="card glass rounded-xl border border-primary-200/30 dark:border-primary-700/30 bg-gradient-light-panel dark:bg-gradient-dark-panel p-4">
                     <h3 className="text-sm font-display font-semibold text-light-text-primary dark:text-dark-text-primary mb-3 gradient-text">
                         Table of Contents
