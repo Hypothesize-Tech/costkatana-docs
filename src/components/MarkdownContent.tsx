@@ -333,7 +333,10 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
             const codeElement = children as React.ReactElement<{ className?: string }>;
             const className = codeElement.props?.className || '';
             const match = className.match(/language-(\w+)/);
-            if (match) return match[1];
+            if (match) {
+                const lang = match[1].toLowerCase();
+                return lang;
+            }
         }
         return 'bash';
     };
@@ -343,7 +346,9 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         const preRef = useRef<HTMLPreElement>(null);
         const [codeContent, setCodeContent] = useState('');
         const language = detectLanguage(children);
-        const isTerminal = ['bash', 'sh', 'shell', 'zsh', 'terminal'].includes(language);
+        // Don't treat JSON, text, or other non-terminal languages as terminal
+        const isTerminal = ['bash', 'sh', 'shell', 'zsh', 'terminal'].includes(language) &&
+            !['json', 'text', 'plaintext'].includes(language);
 
         // Extract code content on mount and when children change
         useEffect(() => {
@@ -385,16 +390,59 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
         // Format terminal content with prompt and cursor
         const formatTerminalContent = (code: string): React.ReactNode => {
             const lines = code.split('\n');
+
+            // Check if the entire block is pure JSON (starts with { or [ and is mostly JSON)
+            const trimmedCode = code.trim();
+            const isPureJson = (trimmedCode.startsWith('{') || trimmedCode.startsWith('[')) &&
+                trimmedCode.includes('"') &&
+                !trimmedCode.includes('user@costkatana') &&
+                !trimmedCode.startsWith('#') &&
+                !trimmedCode.startsWith('$');
+
+            // If it's pure JSON, render without terminal prompts but keep terminal styling
+            if (isPureJson) {
+                return (
+                    <div className="text-gray-300 whitespace-pre-wrap font-mono">
+                        {code}
+                    </div>
+                );
+            }
+
             return lines.map((line, index) => {
                 const isLastLine = index === lines.length - 1;
                 const trimmedLine = line.trim();
 
-                // Check if line starts with a command (not a comment or output)
-                const isCommand = trimmedLine && !trimmedLine.startsWith('#') && !trimmedLine.startsWith('//');
+                // Detect JSON lines more accurately
+                // JSON lines typically:
+                // - Start with {, [, }, ], or whitespace + {, [, }, ]
+                // - Contain "key": or "key": value patterns
+                // - Are part of a JSON structure
+                const startsWithJsonChar = /^\s*[{}[\],]/.test(trimmedLine);
+                const hasJsonKeyValue = trimmedLine.includes('"') && trimmedLine.includes(':');
+                const isJsonLine = (startsWithJsonChar || hasJsonKeyValue) &&
+                    !trimmedLine.startsWith('#') &&
+                    !trimmedLine.startsWith('//') &&
+                    !trimmedLine.startsWith('$') &&
+                    !trimmedLine.startsWith('user@') &&
+                    !trimmedLine.match(/^(curl|npm|pip|git|echo|cat|ls|cd|mkdir|rm|mv|cp)/i); // Exclude common commands
+
+                // Check if line is a command (not a comment, not JSON, not empty, not already has prompt)
+                const hasPrompt = line.includes('user@costkatana');
+                const isCommand = trimmedLine &&
+                    !hasPrompt &&
+                    !trimmedLine.startsWith('#') &&
+                    !trimmedLine.startsWith('//') &&
+                    !isJsonLine &&
+                    !trimmedLine.startsWith('{') &&
+                    !trimmedLine.startsWith('}') &&
+                    !trimmedLine.startsWith('[') &&
+                    !trimmedLine.startsWith(']') &&
+                    !trimmedLine.match(/^\s*["{[]/) && // Don't treat lines starting with quotes or braces as commands
+                    !trimmedLine.match(/^\s*[{}[\],]/); // Don't treat JSON structure lines as commands
 
                 return (
                     <div key={index} className="flex items-start">
-                        {isCommand && (
+                        {isCommand && !hasPrompt && (
                             <span className="text-blue-400 mr-2 select-none flex-shrink-0">
                                 <span className="text-green-400">user@costkatana</span>
                                 <span className="text-gray-400">:</span>
@@ -402,14 +450,105 @@ const MarkdownContent: React.FC<MarkdownContentProps> = ({ content, className = 
                                 <span className="text-gray-400">$</span>
                             </span>
                         )}
-                        <span className={isCommand ? 'text-green-400' : 'text-gray-400'}>
+                        <span className={
+                            hasPrompt ? 'text-gray-400' : // Already has prompt, keep original color
+                                isCommand ? 'text-green-400' :
+                                    isJsonLine ? 'text-gray-300' :
+                                        'text-gray-400'
+                        }>
                             {line}
-                            {isLastLine && isCommand && <BlinkingCursor />}
+                            {isLastLine && isCommand && !hasPrompt && <BlinkingCursor />}
                         </span>
                     </div>
                 );
             });
         };
+
+        // If language is explicitly json, render in terminal style but without prompts
+        if (language === 'json') {
+            return (
+                <div className="relative group my-4 overflow-hidden bg-gray-900 rounded-xl border border-primary-500/20 shadow-2xl">
+                    {/* Terminal header with traffic lights */}
+                    <div className="flex justify-between items-center px-4 py-3 bg-gray-800 border-b border-gray-700">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg hover:bg-red-400 transition-colors"></div>
+                            <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg hover:bg-yellow-400 transition-colors"></div>
+                            <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg hover:bg-green-400 transition-colors"></div>
+                        </div>
+                        <div className="flex gap-3 items-center">
+                            <span className="font-mono text-xs text-gray-400">user@costkatana: ~</span>
+                            {codeContent && (
+                                <button
+                                    onClick={() => copyToClipboard(codeContent)}
+                                    className="p-1.5 rounded-md hover:bg-gray-700 transition-colors group/btn"
+                                    title="Copy code"
+                                >
+                                    {copiedCode === codeContent ? (
+                                        <Check size={16} className="text-primary-400" />
+                                    ) : (
+                                        <Copy size={16} className="text-gray-400 group-hover/btn:text-white transition-colors" />
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    {/* Terminal content - JSON without prompts */}
+                    <div className="p-4 font-mono text-sm leading-relaxed bg-black min-h-[60px] overflow-x-auto">
+                        <pre ref={preRef} className="whitespace-pre-wrap hidden" {...props}>
+                            {children}
+                        </pre>
+                        <div className="text-gray-300 whitespace-pre-wrap">
+                            {codeContent || children}
+                        </div>
+                    </div>
+                    {/* Terminal glow effect */}
+                    <div className="absolute inset-0 pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-transparent animate-pulse via-primary-500/3"></div>
+                        <div className="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent to-transparent via-primary-500/50"></div>
+                    </div>
+                </div>
+            );
+        }
+
+        // If language is text or plaintext, render as regular code block (not terminal)
+        if (['text', 'plaintext'].includes(language)) {
+            return (
+                <div className="relative group my-4 overflow-hidden bg-gray-900 rounded-xl border border-primary-500/20 shadow-2xl">
+                    {/* Code block header with traffic lights */}
+                    <div className="flex justify-between items-center px-4 py-3 bg-gray-800 border-b border-gray-700">
+                        <div className="flex gap-2 items-center">
+                            <div className="w-3 h-3 bg-red-500 rounded-full shadow-lg"></div>
+                            <div className="w-3 h-3 bg-yellow-500 rounded-full shadow-lg"></div>
+                            <div className="w-3 h-3 bg-green-500 rounded-full shadow-lg"></div>
+                        </div>
+                        <div className="flex gap-3 items-center">
+                            <span className="font-mono text-xs text-gray-400 capitalize">{language}</span>
+                            {codeContent && (
+                                <button
+                                    onClick={() => copyToClipboard(codeContent)}
+                                    className="p-1.5 rounded-md hover:bg-gray-700 transition-colors group/btn"
+                                    title="Copy code"
+                                >
+                                    {copiedCode === codeContent ? (
+                                        <Check size={16} className="text-primary-400" />
+                                    ) : (
+                                        <Copy size={16} className="text-gray-400 group-hover/btn:text-white transition-colors" />
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    </div>
+                    {/* Code content */}
+                    <pre
+                        ref={preRef}
+                        className="p-4 font-mono text-sm leading-relaxed bg-black min-h-[60px] overflow-x-auto text-gray-300 whitespace-pre-wrap"
+                        {...props}
+                    >
+                        {codeContent || children}
+                    </pre>
+                </div>
+            );
+        }
 
         // MacBook-style terminal for bash/shell commands
         if (isTerminal) {

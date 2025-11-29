@@ -52,6 +52,10 @@ const searchData: SearchResult[] = [
     { title: 'Node.js SDK', path: '/integrations/nodejs', category: 'Integrations', content: 'Integrate Cost Katana with Node.js applications', icon: <Code size={16} /> },
     { title: 'Python SDK', path: '/integrations/python', category: 'Integrations', content: 'Integrate Cost Katana with Python applications', icon: <Code size={16} /> },
     { title: 'ChatGPT Integration', path: '/integrations/chatgpt', category: 'Integrations', content: 'Direct ChatGPT custom GPT integration', icon: <Code size={16} /> },
+    { title: 'Automation Tools', path: '/integrations/automation-tools', category: 'Integrations', content: 'Track AI costs from Zapier, Make, and n8n workflows', icon: <Code size={16} /> },
+    { title: 'Zapier Integration', path: '/integrations/automation-tools/zapier', category: 'Integrations', content: 'Track AI costs from your Zapier workflows', icon: <Code size={16} /> },
+    { title: 'Make Integration', path: '/integrations/automation-tools/make', category: 'Integrations', content: 'Track AI costs from your Make scenarios', icon: <Code size={16} /> },
+    { title: 'n8n Integration', path: '/integrations/automation-tools/n8n', category: 'Integrations', content: 'Track AI costs from your n8n workflows', icon: <Code size={16} /> },
 ];
 
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api';
