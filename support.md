@@ -35,7 +35,7 @@ We love hearing your ideas! Submit feature requests through:
 ## 📚 Documentation
 
 - **Website**: [costkatana.com](https://costkatana.com)
-- **API Documentation**: [cost-katana-backend.store/api](https://cost-katana-backend.store/api)
+- **API Documentation**: [cost-katana-backend.store/api](https://api.costkatana.com/api)
 - **NPM Package**: [ai-cost-tracker](https://www.npmjs.com/package/ai-cost-tracker)
 - **Python Package**: [cost-katana](https://pypi.org/project/cost-katana/)
 

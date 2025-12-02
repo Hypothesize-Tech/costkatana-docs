@@ -4125,7 +4125,7 @@ Complete REST API reference for Cost Katana. All endpoints use JSON for request 
 All API requests should be made to:
 
 \`\`\`
-https://cost-katana-backend.store
+https://api.costkatana.com
 \`\`\`
 
 ## Authentication
@@ -4143,7 +4143,7 @@ Authorization: Bearer ck_your_api_key_here
 The API is versioned. Current version: 
 
 \`\`\`
-https://cost-katana-backend.store/...
+https://api.costkatana.com/...
 \`\`\`
 
 ## Response Format
@@ -4325,10 +4325,10 @@ Include your key in requests:
 \`\`\`bash
 # Header authentication (recommended)
 curl -H "Authorization: Bearer ck_your_api_key" \\
-  https://cost-katana-backend.store/v1/usage
+  https://api.costkatana.com/v1/usage
 
 # Query parameter (less secure)
-curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
+curl https://api.costkatana.com/v1/usage?api_key=ck_your_api_key
 \`\`\`
 
 ### Key Types
@@ -4342,7 +4342,7 @@ curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
 ### Login Flow
 \`\`\`javascript
 // Obtain JWT token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/login', {
+const response = await fetch('https://api.costkatana.com/v1/auth/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -4354,7 +4354,7 @@ const response = await fetch('https://cost-katana-backend.store/v1/auth/login', 
 const { token } = await response.json();
 
 // Use token in subsequent requests
-const data = await fetch('https://cost-katana-backend.store/v1/usage', {
+const data = await fetch('https://api.costkatana.com/v1/usage', {
   headers: { 'Authorization': \`Bearer \${token}\` }
 });
 \`\`\`
@@ -4362,7 +4362,7 @@ const data = await fetch('https://cost-katana-backend.store/v1/usage', {
 ### Token Refresh
 \`\`\`javascript
 // Refresh expired token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/refresh', {
+const response = await fetch('https://api.costkatana.com/v1/auth/refresh', {
   method: 'POST',
   headers: { 'Authorization': \`Bearer \${refreshToken}\` }
 });
@@ -6330,7 +6330,7 @@ console.log('Token Reduction:', result.optimizationMetrics.tokenReduction);
 ### Gateway Integration
 \`\`\`smart:javascript:{"imports":["import { GatewayClient } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Gateway client with SAST optimization and comparison between traditional and SAST approaches"}
 const client = new GatewayClient({
-  baseUrl: 'https://cost-katana-backend.store',
+  baseUrl: 'https://api.costkatana.com',
   apiKey: 'your-api-key'
 });
 
@@ -6733,14 +6733,14 @@ Customize dashboard settings:
 ### Fetch Enhanced Dashboard Data
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Fetch enhanced dashboard data using the telemetry API\\"}
-curl -X GET https://cost-katana-backend.store/api/telemetry/dashboard/enhanced \\
+curl -X GET https://api.costkatana.com/api/telemetry/dashboard/enhanced \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Query Telemetry Data
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Query telemetry data with custom filters and time ranges\\"}
-curl -X POST https://cost-katana-backend.store/api/telemetry/query \\
+curl -X POST https://api.costkatana.com/api/telemetry/query \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -6951,7 +6951,7 @@ trace.visualize({
 ### List Sessions
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List all sessions with optional filters for feature type, status, and limit\\"}
-curl -X GET https://cost-katana-backend.store/api/session-replay/sessions \\
+curl -X GET https://api.costkatana.com/api/session-replay/sessions \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "feature=chat&status=completed&limit=50"
 \`\`\`
@@ -6959,14 +6959,14 @@ curl -X GET https://cost-katana-backend.store/api/session-replay/sessions \\
 ### Get Session Replay
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific session replay by session ID\\"}
-curl -X GET https://cost-katana-backend.store/api/session-replay/sessions/SESSION_ID \\
+curl -X GET https://api.costkatana.com/api/session-replay/sessions/SESSION_ID \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Get Trace Details
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve detailed trace information by trace ID\\"}
-curl -X GET https://cost-katana-backend.store/api/v1/traces/TRACE_ID \\
+curl -X GET https://api.costkatana.com/api/v1/traces/TRACE_ID \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
@@ -7183,7 +7183,7 @@ View full details for any log entry:
 ### List Logs
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List logs with filters for service, level, and limit\\"}
-curl -X GET https://cost-katana-backend.store/api/logs/ai \\
+curl -X GET https://api.costkatana.com/api/logs/ai \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "service=api&level=error&limit=100"
 \`\`\`
@@ -7191,14 +7191,14 @@ curl -X GET https://cost-katana-backend.store/api/logs/ai \\
 ### Get Log by ID
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific log entry by log ID\\"}
-curl -X GET https://cost-katana-backend.store/api/logs/ai/LOG_ID \\
+curl -X GET https://api.costkatana.com/api/logs/ai/LOG_ID \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Natural Language Query
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Query logs using natural language with AI-powered search\\"}
-curl -X POST https://cost-katana-backend.store/api/logs/ai/chat \\
+curl -X POST https://api.costkatana.com/api/logs/ai/chat \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7210,7 +7210,7 @@ curl -X POST https://cost-katana-backend.store/api/logs/ai/chat \\
 ### Export Logs
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Export logs in various formats (JSON, CSV, JSONL) with filters\\"}
-curl -X GET https://cost-katana-backend.store/api/logs/ai/export \\
+curl -X GET https://api.costkatana.com/api/logs/ai/export \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "format=json&service=api&timeRange=24h" \\
   --output logs.json
@@ -7433,14 +7433,14 @@ const prompt3 = "How's the weather?";
 ### Get Cache Statistics
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve cache statistics including hit rate, size, and performance metrics\\"}
-curl -X GET https://cost-katana-backend.store/api/cache/stats \\
+curl -X GET https://api.costkatana.com/api/cache/stats \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### List Cache Keys
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List cache keys with optional pattern matching and limit\\"}
-curl -X GET https://cost-katana-backend.store/api/cache/keys \\
+curl -X GET https://api.costkatana.com/api/cache/keys \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "pattern=prompt:*&limit=100"
 \`\`\`
@@ -7448,21 +7448,21 @@ curl -X GET https://cost-katana-backend.store/api/cache/keys \\
 ### Get Cache Key
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific cache key value by key name\\"}
-curl -X GET https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
+curl -X GET https://api.costkatana.com/api/cache/keys/KEY_NAME \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Delete Cache Key
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Delete a specific cache key by key name\\"}
-curl -X DELETE https://cost-katana-backend.store/api/cache/keys/KEY_NAME \\
+curl -X DELETE https://api.costkatana.com/api/cache/keys/KEY_NAME \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
 ### Clear Cache
 
 \`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Clear cache entries by pattern or tags\\"}
-curl -X POST https://cost-katana-backend.store/api/cache/clear \\
+curl -X POST https://api.costkatana.com/api/cache/clear \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7557,7 +7557,7 @@ Deep performance analysis tools:
 ### Get Monitoring Metrics
 
 \`\`\`smart:bash:{"description":"Get real-time monitoring metrics with time range and grouping options"}
-curl -X GET https://cost-katana-backend.store/api/monitoring/metrics \\
+curl -X GET https://api.costkatana.com/api/monitoring/metrics \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "timeRange=1h&groupBy=service"
 \`\`\`
@@ -7565,7 +7565,7 @@ curl -X GET https://cost-katana-backend.store/api/monitoring/metrics \\
 ### Create Alert
 
 \`\`\`smart:bash:{"description":"Create an intelligent alert with custom conditions and notification channels"}
-curl -X POST https://cost-katana-backend.store/api/monitoring/alerts \\
+curl -X POST https://api.costkatana.com/api/monitoring/alerts \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7638,7 +7638,7 @@ AI-powered analysis to identify:
 ### Get Unexplained Costs
 
 \`\`\`smart:bash:{"description":"Retrieve unexplained costs with time range and threshold filters"}
-curl -X GET https://cost-katana-backend.store/api/unexplained-costs \\
+curl -X GET https://api.costkatana.com/api/unexplained-costs \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "timeRange=7d&threshold=0.10"
 \`\`\`
@@ -7646,7 +7646,7 @@ curl -X GET https://cost-katana-backend.store/api/unexplained-costs \\
 ### Analyze Cost
 
 \`\`\`smart:bash:{"description":"Perform AI-powered root cause analysis on specific cost with optimization recommendations"}
-curl -X POST https://cost-katana-backend.store/api/unexplained-costs/analyze \\
+curl -X POST https://api.costkatana.com/api/unexplained-costs/analyze \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7751,7 +7751,7 @@ Track optimization wins:
 ### Run Experiment
 
 \`\`\`smart:bash:{"description":"Run A/B test experiment comparing multiple models with cost and quality metrics"}
-curl -X POST https://cost-katana-backend.store/api/experimentation/model-comparison \\
+curl -X POST https://api.costkatana.com/api/experimentation/model-comparison \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7764,7 +7764,7 @@ curl -X POST https://cost-katana-backend.store/api/experimentation/model-compari
 ### Simulate Cost
 
 \`\`\`smart:bash:{"description":"Simulate cost optimization scenarios with real-time analysis and savings projections"}
-curl -X POST https://cost-katana-backend.store/api/experimentation/real-time-simulation \\
+curl -X POST https://api.costkatana.com/api/experimentation/real-time-simulation \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7852,7 +7852,7 @@ Track compliance:
 ### Moderate Content
 
 \`\`\`smart:bash:{"description":"Moderate content with automated filtering and policy enforcement for safety compliance"}
-curl -X POST https://cost-katana-backend.store/api/moderation/moderate \\
+curl -X POST https://api.costkatana.com/api/moderation/moderate \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -7930,7 +7930,7 @@ Regulatory compliance:
 ### Get Security Status
 
 \`\`\`smart:bash:{"description":"Get current security status including compliance, encryption, and threat detection status"}
-curl -X GET https://cost-katana-backend.store/api/security/status \\
+curl -X GET https://api.costkatana.com/api/security/status \\
   -H "Authorization: Bearer YOUR_API_KEY"
 \`\`\`
 
@@ -8010,7 +8010,7 @@ Intelligent context retrieval:
 ### Store Memory
 
 \`\`\`smart:bash:{"description":"Store memory with context for preserving user preferences and conversation history"}
-curl -X POST https://cost-katana-backend.store/api/memory/store \\
+curl -X POST https://api.costkatana.com/api/memory/store \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -8023,7 +8023,7 @@ curl -X POST https://cost-katana-backend.store/api/memory/store \\
 ### Retrieve Memory
 
 \`\`\`smart:bash:{"description":"Retrieve stored memory with intelligent context matching and semantic search"}
-curl -X GET https://cost-katana-backend.store/api/memory/retrieve \\
+curl -X GET https://api.costkatana.com/api/memory/retrieve \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "key=user_preference&userId=user_123"
 \`\`\`
@@ -8088,7 +8088,7 @@ Advanced analytics:
 ### Query Cost Lake
 
 \`\`\`smart:bash:{"description":"Query the Cost Lake data warehouse with SQL-like syntax for comprehensive cost data analysis"}
-curl -X POST https://cost-katana-backend.store/api/cost-lake/query \\
+curl -X POST https://api.costkatana.com/api/cost-lake/query \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -8165,7 +8165,7 @@ Analyze pull requests:
 ### Connect Repository
 
 \`\`\`smart:bash:{"description":"Connect a GitHub repository to enable code-aware AI operations and repository context"}
-curl -X POST https://cost-katana-backend.store/api/github/connect \\
+curl -X POST https://api.costkatana.com/api/github/connect \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{
@@ -8177,7 +8177,7 @@ curl -X POST https://cost-katana-backend.store/api/github/connect \\
 ### Get Repository Context
 
 \`\`\`smart:bash:{"description":"Retrieve repository context including file and function information for AI operations"}
-curl -X GET https://cost-katana-backend.store/api/github/repos/owner/repo/context \\
+curl -X GET https://api.costkatana.com/api/github/repos/owner/repo/context \\
   -H "Authorization: Bearer YOUR_API_KEY" \\
   -G -d "file=src/utils.ts&function=processData"
 \`\`\`
@@ -8199,7 +8199,7 @@ Complete API reference for chat endpoints, message handling, conversation manage
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/chat\`
+\`https://api.costkatana.com/api/chat\`
 
 ## Authentication
 
@@ -8415,7 +8415,7 @@ Complete API reference for AI agent endpoints including query processing, stream
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/agent\`
+\`https://api.costkatana.com/api/agent\`
 
 ## Authentication
 
@@ -8575,7 +8575,7 @@ Complete API reference for memory management endpoints including user preference
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/memory\`
+\`https://api.costkatana.com/api/memory\`
 
 ## Authentication
 
@@ -8734,7 +8734,7 @@ Complete API reference for cache management endpoints including statistics, clea
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/cache\`
+\`https://api.costkatana.com/api/cache\`
 
 ## Authentication
 
@@ -8855,7 +8855,7 @@ Complete API reference for telemetry data endpoints including dashboard data, qu
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/telemetry\`
+\`https://api.costkatana.com/api/telemetry\`
 
 ## Authentication
 
@@ -8932,7 +8932,7 @@ Complete API reference for logs query endpoints including listing, filtering, na
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/logs\`
+\`https://api.costkatana.com/api/logs\`
 
 ## Authentication
 
@@ -9021,7 +9021,7 @@ Complete API reference for budget management endpoints.
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/budget\`
+\`https://api.costkatana.com/api/budget\`
 
 ## Authentication
 
@@ -9068,7 +9068,7 @@ Complete API reference for session replay endpoints.
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/session-replay\`
+\`https://api.costkatana.com/api/session-replay\`
 
 ## Authentication
 
@@ -9116,7 +9116,7 @@ Complete API reference for distributed tracing endpoints.
 
 ## Base URL
 
-\`https://cost-katana-backend.store/api/v1\`
+\`https://api.costkatana.com/api/v1\`
 
 ## Authentication
 

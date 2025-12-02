@@ -21,7 +21,7 @@ interface APITesterProps {
 
 // Open source API endpoints for sandbox testing
 const SANDBOX_APIS = {
-    costkatana: 'https://cost-katana-backend.store',
+    costkatana: 'https://api.costkatana.com',
 };
 
 // Get sandbox URL based on method and selected sandbox API

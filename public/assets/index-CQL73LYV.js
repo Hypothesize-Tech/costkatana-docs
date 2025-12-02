@@ -1507,10 +1507,10 @@ Include your key in requests:
 \`\`\`bash
 # Header authentication (recommended)
 curl -H "Authorization: Bearer ck_your_api_key" \\
-  https://cost-katana-backend.store/v1/usage
+  https://api.costkatana.com/v1/usage
 
 # Query parameter (less secure)
-curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
+curl https://api.costkatana.com/v1/usage?api_key=ck_your_api_key
 \`\`\`
 
 ### Key Types
@@ -1524,7 +1524,7 @@ curl https://cost-katana-backend.store/v1/usage?api_key=ck_your_api_key
 ### Login Flow
 \`\`\`javascript
 // Obtain JWT token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/login', {
+const response = await fetch('https://api.costkatana.com/v1/auth/login', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({
@@ -1536,7 +1536,7 @@ const response = await fetch('https://cost-katana-backend.store/v1/auth/login', 
 const { token } = await response.json();
 
 // Use token in subsequent requests
-const data = await fetch('https://cost-katana-backend.store/v1/usage', {
+const data = await fetch('https://api.costkatana.com/v1/usage', {
   headers: {
     'Authorization': \`Bearer \${token}\`
   }
@@ -1546,7 +1546,7 @@ const data = await fetch('https://cost-katana-backend.store/v1/usage', {
 ### Token Refresh
 \`\`\`javascript
 // Refresh expired token
-const response = await fetch('https://cost-katana-backend.store/v1/auth/refresh', {
+const response = await fetch('https://api.costkatana.com/v1/auth/refresh', {
   method: 'POST',
   headers: {
     'Authorization': \`Bearer \${refreshToken}\`
