@@ -80,6 +80,13 @@ const IntegrationWizardPage = lazy(() => import('./pages/DocumentationPages').th
 const APIExplorerPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.APIExplorerPage })));
 const VersionComparisonPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.VersionComparisonPage })));
 
+// Architecture pages
+const ArchitectureOverviewPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ArchitectureOverviewPage })));
+const ArchitectureDecisionsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ArchitectureDecisionsPage })));
+const CostPerformanceTradeoffsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CostPerformanceTradeoffsPage })));
+const FailureDomainsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.FailureDomainsPage })));
+const ArchitectureMetricsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ArchitectureMetricsPage })));
+
 // Community pages
 const CommunityExamplesPage = lazy(() => import('./pages/community/ExamplesPage').then(module => ({ default: module.ExamplesPage })));
 const CommunityDiscussionsPage = lazy(() => import('./pages/community/DiscussionsPage').then(module => ({ default: module.DiscussionsPage })));
@@ -157,6 +164,13 @@ const App: React.FC = () => {
 
                           {/* Observability */}
                           <Route path="/observability/opentelemetry" element={<OpenTelemetryVendorsPage />} />
+
+                          {/* Architecture */}
+                          <Route path="/architecture" element={<ArchitectureOverviewPage />} />
+                          <Route path="/architecture/decisions" element={<ArchitectureDecisionsPage />} />
+                          <Route path="/architecture/cost-performance" element={<CostPerformanceTradeoffsPage />} />
+                          <Route path="/architecture/failure-domains" element={<FailureDomainsPage />} />
+                          <Route path="/architecture/metrics" element={<ArchitectureMetricsPage />} />
 
                           {/* API Reference */}
                           <Route path="/api" element={<APIOverviewPage />} />

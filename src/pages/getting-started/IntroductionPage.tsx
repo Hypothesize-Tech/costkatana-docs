@@ -36,18 +36,22 @@ Cost Katana transforms how you manage AI costs by providing:
 - **Smart Savings**: Personalized cost reduction strategies with predicted savings
 - **Model Suggestions**: AI recommends optimal models based on use case analysis
 - **Prompt Optimization**: Intelligent prompt compression and optimization
+- **Data Network Effects**: Self-improving system with learning loops that gets better with every user interaction
 
 ### 📈 Advanced Analytics & Monitoring
 - **Real-Time Dashboards**: Live usage monitoring with AI insights
+- **Cost Intelligence Stack**: 6-layer system with telemetry, intelligence, routing, enforcement, caching, and simulation
 - **Predictive Analytics**: ML-powered forecasting and trend analysis
 - **Cost Breakdown**: Detailed analysis by project, model, and time period
 - **Usage Intelligence**: Deep insights into spending patterns and efficiency
 
 ### 🔗 Universal Integration
+- **Provider-Independent Core**: Write once, run anywhere with capability-based routing
 - **Primary Package**: \`cost-katana\` ⭐ - Our #1 priority npm package for Node.js/TypeScript with type-safe model constants
-- **Multi-Provider Support**: 400+ models across 10 providers
+- **Multi-Provider Support**: 400+ models across 12+ providers
   - Latest models: GPT-5, Claude Sonnet 4.5, Gemini 2.5 Pro
-  - All major providers: OpenAI, Anthropic, Google, AWS, xAI, and more
+  - All major providers: OpenAI, Anthropic, Google, AWS, xAI, DeepSeek, Mistral, and more
+- **Zero Vendor Lock-In**: Switch providers without changing code
 - **Additional Tools**: CLI tools, Python SDK, VSCode/Cursor extensions
 - **ChatGPT Custom GPT**: Direct integration with personalized AI tips
 - **API Gateway**: Unified proxy with caching, retries, and optimization
@@ -57,6 +61,12 @@ Cost Katana transforms how you manage AI costs by providing:
 - **Predictive Warnings**: AI predicts problems before they occur
 - **Email Intelligence**: AI-enhanced weekly digests with actionable insights
 - **Real-time Notifications**: Instant alerts via email, webhook, or dashboard
+
+### 🛡️ AI Governance & Security
+- **Agent Governance**: Zero-trust architecture with RBAC and capability management
+- **Sandbox Execution**: Isolated agent execution with resource constraints
+- **Budget Controls**: Multi-level budget caps (per-request, daily, monthly)
+- **Comprehensive Auditing**: Forensic-level logging and decision tracking
 
 ## How It Works
 

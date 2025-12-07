@@ -54,6 +54,13 @@ export const navigationOrder: string[] = [
     // Observability
     '/observability/opentelemetry',
     
+    // Architecture
+    '/architecture',
+    '/architecture/decisions',
+    '/architecture/cost-performance',
+    '/architecture/failure-domains',
+    '/architecture/metrics',
+    
     // API Reference
     '/api',
     '/api/authentication',

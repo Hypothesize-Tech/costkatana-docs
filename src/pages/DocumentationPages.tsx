@@ -2609,6 +2609,28 @@ Comprehensive AI cost optimization platform powered by revolutionary **Cortex Me
 
 ## Core Features
 
+### Provider-Independent Architecture
+Write once, run anywhere. Cost Katana's provider-agnostic core eliminates vendor lock-in and maximizes flexibility.
+
+**Key Capabilities:**
+- **Capability-Based Routing** - Request by capability (code generation, vision, conversation) not by provider
+- **Performance-Based Selection** - Specify speed, cost, or quality preferences instead of hardcoding models
+- **Automatic Failover** - Seamless provider switching when one goes down
+- **Zero Lock-In** - Switch providers without changing a single line of code
+- **Unified API** - One interface for 400+ models across 12+ providers
+- **Intelligent Routing** - AI-powered model selection based on your requirements
+
+**Example:**
+\`\`\`typescript
+// Provider-agnostic: automatically selects best model
+const response = await ai('code-generation', 'Write a REST API');
+
+// Performance-based: optimize for speed and cost
+const fast = await ai({ speed: 'fastest', cost: 'cheap' }, prompt);
+\`\`\`
+
+[Learn Provider-Agnostic Patterns →](/examples/provider-agnostic)
+
 ### Real-time Dashboard
 Monitor your AI costs and usage in real-time with beautiful, customizable dashboards.
 
@@ -2648,6 +2670,22 @@ Deep dive into your AI spending with advanced analytics and optimization recomme
 
 ## Advanced Features
 
+### Closed-Loop Cost Brain (Autonomous)
+Real-time AI cost optimization that automatically optimizes requests before they reach AI providers.
+
+**Brain Features:**
+- **Autonomous Interventions** - Automatic model downgrade, provider switching, and prompt compression
+- **In-Flight Optimization** - Intercept and optimize requests in real-time without code changes
+- **Active Flow Management** - Track and manage concurrent AI operations with resource allocation
+- **Budget Protection** - Automatically block requests when budgets are exhausted
+- **Shadow Mode** - Test interventions without modifying actual requests
+- **Real-time Metrics** - Live tracking of interventions, cost savings, and active flows
+
+**How It Works:**
+The Cost Brain monitors all AI requests in real-time and applies intelligent interventions based on budget constraints, provider availability, and cost-effectiveness. It learns from your usage patterns to make optimal decisions automatically.
+
+[Explore Cost Brain →](/features/cost-brain)
+
 ### Cortex Meta-Language (Revolutionary)
 The world's first AI meta-language achieving **40-75% token reduction** through LISP-based answer generation.
 
@@ -2672,6 +2710,25 @@ console.log(response.metadata.cortex.tokenReduction);
 
 [Learn More About Cortex →](/features/cortex)
 
+### Cost Intelligence Stack (6-Layer System)
+Comprehensive real-time cost intelligence with continuous analysis and automated recommendations.
+
+**Intelligence Layers:**
+- **Layer 1: Telemetry** - Real-time data capture with streaming support and configurable sampling
+- **Layer 2: Intelligence** - Continuous analysis with anomaly detection and AI-powered recommendations
+- **Layer 3: Routing** - Telemetry-driven routing with plan-tier mapping and fallback strategies
+- **Layer 4: Enforcement** - Pre-flight checks, budget limits, and request blocking
+- **Layer 5: Caching** - Exact, semantic, and deduplication caching with auto-warming
+- **Layer 6: Simulation** - What-if scenarios, alternative model suggestions, and accuracy tracking
+
+**Key Benefits:**
+- Real-time insights and trend analysis
+- Automated anomaly detection and alerts
+- Continuous optimization recommendations
+- Configurable performance modes (low, medium, high)
+
+[Configure Intelligence Stack →](/features/cost-intelligence)
+
 ### Traditional AI Optimization Engine
 Intelligent optimization powered by machine learning to automatically reduce your costs.
 
@@ -2684,6 +2741,26 @@ Intelligent optimization powered by machine learning to automatically reduce you
 [Discover Optimization →](/features/optimization)
 
 ![AI Optimization Results](/assets/optimization_1.png)
+
+### Data Network Effects (Self-Improving AI)
+Continuous learning system that gets smarter with every interaction across all users.
+
+**Network Effects Features:**
+- **Learning Loops** - Tracks recommendations → outcomes → weight updates for continuous improvement
+- **Performance Aggregation** - Collective intelligence from all users improves model routing for everyone
+- **Semantic Clustering** - Groups similar use cases to share optimization insights
+- **Global Benchmarks** - Compare your performance against anonymized aggregate data
+- **Recommendation Quality Tracking** - Measures accuracy of suggestions and adapts accordingly
+- **Multi-Dimensional Learning** - Improves across cost, speed, quality, and user satisfaction
+
+**How It Works:**
+1. System makes optimization recommendations
+2. You accept or reject suggestions
+3. Actual outcomes are measured (cost savings, performance)
+4. Learning signals feed back into the system
+5. Future recommendations improve for everyone
+
+[Explore Network Effects →](/features/data-network-effects)
 
 ### Predictive Intelligence
 AI-powered forecasting and recommendations to stay ahead of your costs.
@@ -2747,6 +2824,27 @@ Centralized gateway for all your AI API calls with built-in optimization.
 - **Rate limiting** and quota management
 
 [Setup Gateway →](/features/gateway)
+
+### AI Governance & Security
+Comprehensive agent governance with zero-trust architecture and defense-in-depth security.
+
+**Governance Features:**
+- **Identity & RBAC** - Zero-trust agent authentication with role-based access control
+- **Sandbox Execution** - Isolated agent execution with resource constraints (CPU, memory, disk)
+- **Budget Controls** - Per-request, daily, and monthly budget caps with automatic enforcement
+- **Rate Limiting** - Hierarchical rate limits (per-minute, per-hour, concurrent executions)
+- **Capability Management** - Fine-grained permissions for models, providers, and actions
+- **Audit & Compliance** - Comprehensive decision auditing with forensic-level logging
+
+**Security Layers:**
+- Layer 1: Identity verification (Zero Trust)
+- Layer 2: Permission checks (RBAC)
+- Layer 3: Rate limit enforcement
+- Layer 4: Budget validation
+- Layer 5: Sandbox isolation
+- Layer 6: Comprehensive audit trails
+
+[Configure Governance →](/features/agent-governance)
 
 ### Key Vault
 Secure management of all your AI provider API keys.
@@ -2909,7 +3007,137 @@ Test the dashboard API to get real-time metrics:
 - Cost-saving opportunities
 - Model recommendations
 - Usage efficiency tips
-- Performance improvements`} />
+- Performance improvements
+
+---
+
+## 🆕 Architectural Health Monitoring
+
+Monitor the **strategic health** of your AI infrastructure, not just operational metrics.
+
+### Architecture Health Score
+
+Track overall architectural quality:
+
+\`\`\`typescript
+GET /api/v1/dashboard/architecture-health
+
+Response:
+{
+  "overall_health": 87,  // Score out of 100
+  "components": {
+    "adr_coverage": { score: 73, target: 90, status: "warning" },
+    "tradeoff_explicitness": { score: 68, target: 95, status: "warning" },
+    "circuit_breaker_health": { score: 96, target: 90, status: "excellent" },
+    "blast_radius_containment": { score: 97, target: 95, status: "excellent" },
+    "sla_compliance": { score: 100, target: 100, status: "perfect" }
+  }
+}
+\`\`\`
+
+### Strategic Metrics Widget
+
+Monitor key architectural decisions:
+
+- **ADR Coverage**: Percentage of strategic decisions documented
+- **Tradeoff Explicitness**: How clear cost-performance tradeoffs are
+- **Policy Compliance**: Adherence to strategic policies
+- **Decision Quality**: Effectiveness of architectural choices
+
+### Failure Domain Health
+
+Visualize failure isolation effectiveness:
+
+\`\`\`typescript
+GET /api/v1/dashboard/failure-domains
+
+Response:
+{
+  "circuit_breakers": {
+    "providers": { total: 12, closed: 10, half_open: 1, open: 1 },
+    "services": { total: 25, closed: 24, half_open: 1, open: 0 }
+  },
+  "blast_radius_containment": 0.973,  // 97.3% of failures contained
+  "mttd_seconds": 21,                  // Mean time to detect
+  "cascading_failures": 0.027          // 2.7% cascaded
+}
+\`\`\`
+
+### Cost-Performance Dashboard
+
+Track optimization effectiveness:
+
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Token Reduction | 58% | 40-75% | ✅ On Target |
+| Net Cost Savings | $12.1K/mo | Positive | ✅ Excellent |
+| Cache Hit Rate | 74% | 70%+ | ✅ Excellent |
+| SLA Compliance | 100% | 95%+ | ✅ Perfect |
+
+### Tradeoff Visualization
+
+See where you're optimizing:
+
+\`\`\`
+Cost-Performance Triangle:
+
+        ⚡ Speed
+         /\\
+        /  \\
+       /    \\   ← Your Strategy (Balanced)
+      /  🎯  \\
+     /        \\
+    /          \\
+   /____________\\
+  💰 Cost   📊 Quality
+\`\`\`
+
+### Strategic Alerts
+
+Get notified about architectural issues:
+
+- **P0 Critical**: Blast radius containment < 90%
+- **P0 Critical**: SLA compliance breach
+- **P1 High**: ADR coverage < 80%
+- **P1 High**: Tradeoff explicitness < 70%
+- **P2 Medium**: MTTD > 40 seconds
+
+### Dashboard Configuration
+
+Enable architectural monitoring:
+
+\`\`\`typescript
+// Enable in dashboard settings
+{
+  "enable_architecture_monitoring": true,
+  "metrics": [
+    "adr_coverage",
+    "circuit_breaker_health",
+    "blast_radius_containment",
+    "cost_performance_effectiveness",
+    "strategic_decision_quality"
+  ],
+  "refresh_interval": 60  // seconds
+}
+\`\`\`
+
+### Integration with Observability
+
+Connect with your existing monitoring:
+
+- **Grafana**: Import "Cost Katana - Architecture Health" dashboard
+- **Datadog**: Enable "Architecture Metrics" integration
+- **New Relic**: Use "Strategic Health" dashboard template
+
+### Learn More
+
+- **[Architecture Overview](/architecture)** - Understand architectural principles
+- **[Strategic Metrics](/architecture/metrics)** - Deep dive into metrics
+- **[Failure Domains](/architecture/failure-domains)** - Explore isolation strategy
+
+---
+
+*Monitor strategy, not just syntax. Track architectural health alongside operational metrics.*`} />
 );
 
 export const UsageTrackingPage = () => (<DocumentationPage title="Usage Tracking" description="Track your AI usage across all providers" prevPage={{ path: '/features/dashboard', label: 'Previous: Dashboard' }} nextPage={{ path: '/features/analytics', label: 'Next: Cost Analytics' }} fallbackContent={`# Usage Tracking
@@ -6160,7 +6388,7 @@ export const OpenTelemetryVendorsPage = () => (
     description="Native OTel traces/metrics with support for Grafana/Tempo, Datadog, and New Relic"
     fallbackContent={`# OpenTelemetry & Vendor Support
 
-Cost Katana ships with native OpenTelemetry (OTel) integration for traces and metrics.
+Cost Katana ships with native OpenTelemetry (OTel) integration for traces, metrics, and **failure domain monitoring**.
 
 ## Quick Setup (Grafana Cloud)
 
@@ -6178,6 +6406,8 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
 - \`GET /api/telemetry?{filters}\`
 - \`GET /api/telemetry/dependencies\`
 - \`GET /api/telemetry/health\`
+- \`GET /api/telemetry/failure-domains\` 🆕 **Failure domain monitoring**
+- \`GET /api/telemetry/circuit-breakers\` 🆕 **Circuit breaker states**
 
 ## Dashboard Coverage
 
@@ -6187,7 +6417,231 @@ OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_TOKEN>
 - Top Operations
 - Telemetry Explorer
 - Trace Viewer
-- Service Dependency Graph
+- **Service Dependency Graph** (with failure domain isolation)
+- **Circuit Breaker Health** 🆕
+- **Blast Radius Visualization** 🆕
+
+---
+
+## Failure Domain Monitoring
+
+### What Are Failure Domains?
+
+Failure domains are **isolated system boundaries** that prevent cascading failures. When one service or provider fails, the failure is contained within its domain rather than taking down the entire system.
+
+### Key Metrics
+
+#### Circuit Breaker States
+\`\`\`typescript
+// Monitor circuit breaker health per domain
+GET /api/telemetry/circuit-breakers
+
+Response:
+{
+  "providers": {
+    "openai": { state: "CLOSED", failures: 0, health: 1.00 },
+    "anthropic": { state: "CLOSED", failures: 0, health: 1.00 },
+    "google": { state: "OPEN", failures: 5, health: 0.00 },
+    "aws-bedrock": { state: "HALF_OPEN", failures: 2, health: 0.50 }
+  },
+  "overall_health": 0.917  // 91.7% healthy
+}
+\`\`\`
+
+#### Failure Domain Map
+\`\`\`typescript
+// Visualize failure propagation paths
+GET /api/telemetry/failure-domains
+
+Response:
+{
+  "domains": [
+    {
+      "name": "gateway",
+      "tier": "critical",
+      "dependencies": ["providers", "redis"],
+      "blast_radius": "single_tenant",
+      "isolation_strategy": "per_provider_circuit_breaker"
+    },
+    {
+      "name": "ai_providers",
+      "tier": "external",
+      "dependencies": [],
+      "blast_radius": "single_provider",
+      "isolation_strategy": "failover_chain"
+    },
+    {
+      "name": "core_services",
+      "tier": "essential",
+      "dependencies": ["mongodb", "redis"],
+      "blast_radius": "service_tier",
+      "isolation_strategy": "graceful_degradation"
+    }
+  ],
+  "containment_rate": 0.973  // 97.3% of failures contained
+}
+\`\`\`
+
+---
+
+### Grafana Dashboard Queries
+
+#### Circuit Breaker Health
+\`\`\`promql
+# Percentage of circuit breakers in healthy (CLOSED) state
+sum(circuit_breaker_state{state="CLOSED"}) / sum(circuit_breaker_state) * 100
+
+# Alert: Circuit breaker health below 90%
+circuit_breaker_health < 0.90
+\`\`\`
+
+#### Blast Radius Containment
+\`\`\`promql
+# Percentage of failures that didn't cascade
+sum(failures_contained) / sum(failures_total) * 100
+
+# Alert: Containment rate below 95%
+blast_radius_containment_rate < 0.95
+\`\`\`
+
+#### Mean Time to Detect (MTTD)
+\`\`\`promql
+# Average time to detect failures
+avg(failure_detection_time_seconds)
+
+# Alert: MTTD > 40 seconds
+avg_over_time(failure_detection_time_seconds[5m]) > 40
+\`\`\`
+
+---
+
+### Datadog Dashboard
+
+\`\`\`yaml
+# Failure Domain Overview Dashboard
+widgets:
+  - type: timeseries
+    title: "Circuit Breaker Health"
+    metrics:
+      - "architecture.circuit_breaker_health{*}"
+    
+  - type: query_value
+    title: "Blast Radius Containment"
+    metrics:
+      - "architecture.blast_radius_containment{*}"
+    
+  - type: topology_map
+    title: "Service Dependencies with Failure States"
+    metrics:
+      - "trace.service.dependencies{*}"
+\`\`\`
+
+---
+
+### New Relic Queries
+
+\`\`\`sql
+-- Circuit breaker failures by provider
+SELECT count(*) 
+FROM Metric 
+WHERE metricName = 'circuit_breaker_failures' 
+FACET provider 
+SINCE 1 hour ago
+
+-- Cascading failure detection
+SELECT count(*) 
+FROM Metric 
+WHERE metricName = 'cascading_failure' 
+AND blast_radius = 'multi_domain' 
+SINCE 1 day ago
+
+-- Service tier health
+SELECT average(service_health) 
+FROM Metric 
+FACET service_tier 
+TIMESERIES 
+SINCE 24 hours ago
+\`\`\`
+
+---
+
+## Vendor-Specific Setup
+
+### Grafana Cloud + Tempo
+
+\`\`\`bash
+# Traces
+OTLP_HTTP_TRACES_URL=https://tempo-prod-us-central1.grafana.net/tempo/api/push
+
+# Metrics (includes failure domain metrics)
+OTLP_HTTP_METRICS_URL=https://prometheus-prod-us-central1.grafana.net/api/prom/push
+
+# Auth
+OTEL_EXPORTER_OTLP_HEADERS=Authorization=Bearer <YOUR_GRAFANA_TOKEN>
+\`\`\`
+
+**Grafana Dashboards**:
+- Import \`grafana-failure-domains.json\` from our repo
+- Includes circuit breaker, blast radius, and MTTD panels
+
+---
+
+### Datadog
+
+\`\`\`bash
+# Traces
+OTLP_HTTP_TRACES_URL=https://trace.agent.datadoghq.com/v0.7/traces
+
+# Metrics
+OTLP_HTTP_METRICS_URL=https://api.datadoghq.com/v1/series
+
+# Auth
+OTEL_EXPORTER_OTLP_HEADERS=DD-API-KEY=<YOUR_DATADOG_API_KEY>
+\`\`\`
+
+**Datadog Dashboards**:
+- Navigate to APM → Service Map
+- Enable "Circuit Breaker States" overlay
+- View failure domain containment in "Architecture Health" dashboard
+
+---
+
+### New Relic
+
+\`\`\`bash
+# Traces & Metrics
+OTLP_HTTP_TRACES_URL=https://otlp.nr-data.net:4318/v1/traces
+OTLP_HTTP_METRICS_URL=https://otlp.nr-data.net:4318/v1/metrics
+
+# Auth
+OTEL_EXPORTER_OTLP_HEADERS=api-key=<YOUR_NEW_RELIC_LICENSE_KEY>
+\`\`\`
+
+**New Relic Dashboards**:
+- Use "Cost Katana - Architecture Health" template
+- Includes failure domain maps, circuit breaker health, blast radius metrics
+
+---
+
+## Strategic Metrics
+
+Track **architectural health**, not just operational metrics:
+
+| Metric | Target | Alert Threshold |
+|--------|--------|----------------|
+| Circuit Breaker Health | 95%+ | < 90% |
+| Blast Radius Containment | 95%+ | < 90% |
+| Mean Time to Detect (MTTD) | < 30s | > 40s |
+| Cascading Failures | < 5% | > 10% |
+| SLA Compliance | 100% | < 95% |
+
+---
+
+## Next Steps
+
+- **[Architecture Overview](/architecture)** - Understand failure domain design
+- **[Failure Domains](/architecture/failure-domains)** - Deep dive into isolation strategy
+- **[Strategic Metrics](/architecture/metrics)** - Track architectural health
 
 See backend OBSERVABILITY.md for vendor examples and local collector instructions.`}
   />
@@ -9300,5 +9754,1587 @@ Compare different versions of documentation to see what has changed.
 - Compare API changes
 
 Use the version comparison tool above to compare documentation versions!`} />);
+
+// Architecture Pages
+export const ArchitectureOverviewPage = () => (<DocumentationPage title="Architecture Overview" description="Strategic architecture and system design principles" nextPage={{ path: '/architecture/decisions', label: 'Next: Architectural Decisions' }} fallbackContent={`# Architecture Overview
+
+## Strategy > Syntax
+
+Cost Katana's architecture is built on strategic thinking principles that prioritize **system behavior over implementation details**, **abstractions over code**, and **explicit tradeoffs over implicit assumptions**.
+
+## AI-Native Architecture
+
+Cost Katana is built on **AI-native architecture** principles, meaning the platform is designed from the ground up with AI models as first-class infrastructure components. Unlike traditional monitoring tools that track AI usage, Cost Katana embeds AI throughout its entire stack - from the Cortex meta-language optimization engine and multi-agent workflows to predictive analytics and intelligent routing. This AI-native foundation enables the platform to actively optimize costs using AI, rather than simply measuring them.
+
+## Architectural Pillars
+
+### 1. **Systems Thinking**
+- **Layered Architecture**: Clear separation between controllers → services → models
+- **Domain Boundaries**: Isolated failure domains with explicit interfaces
+- **Orchestration First**: Complex flows managed by dedicated orchestrators, not scattered logic
+
+### 2. **Abstractions Over Implementations**
+- **Provider Abstraction**: \`BaseProvider\` enables 300+ models across 12+ providers
+- **Service Abstraction**: \`BaseService\` provides circuit breakers, caching, and monitoring
+- **RAG Abstraction**: \`BaseRAGModule\` and \`BaseRAGPattern\` for extensible AI pipelines
+
+### 3. **Orchestration Mindset**
+- **Multi-Agent Workflows**: LangGraph-based orchestration for complex AI tasks
+- **Workflow Engine**: DAG-based execution with dependencies and parallelism
+- **Cortex Streaming**: Real-time orchestration with 40-75% token reduction
+
+### 4. **Failure Domain Isolation**
+- **Circuit Breakers**: Per-service and per-provider failure protection
+- **Graceful Degradation**: 5-tier degradation strategy (normal → light → moderate → heavy → severe)
+- **Explicit Failover**: Documented fallback paths and blast radius containment
+
+### 5. **Cost-Performance Curves**
+- **Explicit Tradeoffs**: Cost vs latency vs quality decision points
+- **SLA-Driven Routing**: Plan-tier mapping (free → fast, pro → premium, enterprise → expert)
+- **Configurable Policies**: Strategic decisions exposed as configuration, not hardcoded logic
+
+### 6. **Closed-Loop Optimization**
+- **Real-Time Interventions**: Automatic request optimization before reaching AI providers
+- **Active Flow Management**: Resource reservation and conflict detection across concurrent operations
+- **Budget-Aware Routing**: Autonomous decisions based on remaining budget and cost projections
+- **Learning Feedback Loop**: Continuous improvement from intervention outcomes and user patterns
+
+## System Architecture
+
+\`\`\`
+┌─────────────────────────────────────────────────────────────────┐
+│                     Cost Katana Platform                         │
+├─────────────┬─────────────┬─────────────┬───────────────────────┤
+│  Gateway    │  Core       │  Intelligence│  Observability       │
+│  Layer      │  Services   │  Layer       │  Layer               │
+├─────────────┼─────────────┼─────────────┼───────────────────────┤
+│ • Routing   │ • AI Invoke │ • Cortex     │ • OpenTelemetry     │
+│ • Caching   │ • Tracking  │ • Multi-Agent│ • Tracing           │
+│ • Failover  │ • Analytics │ • RAG        │ • Metrics           │
+│ • Circuit   │ • Budget    │ • Predictive │ • Decision Audit    │
+│   Breakers  │ • Alerts    │   Analytics  │ • Cost Attribution  │
+└─────────────┴─────────────┴─────────────┴───────────────────────┘
+\`\`\`
+
+The Intelligence Layer represents the core of our AI-native architecture, where Cortex, Multi-Agent orchestration, and Predictive Analytics are powered by AI models, not rule-based systems.This enables dynamic optimization and intelligent decision-making across the entire platform.
+
+## Strategic Layers
+
+### Layer 1: Telemetry & Observability
+  - ** Purpose **: Capture comprehensive system behavior
+    - ** Strategy **: Sample 10 % for cost efficiency, 100 % for critical paths
+      - ** Tradeoff **: Cost vs visibility(configurable sample rate)
+
+### Layer 2: Intelligence & Analysis
+  - ** Purpose **: Extract actionable insights from telemetry
+    - ** Strategy **: Continuous analysis with 3 - tier intervals(fast / medium / slow)
+      - ** Tradeoff **: Real - time accuracy vs compute cost
+
+### Layer 3: Routing & Optimization
+  - ** Purpose **: Route requests to optimal providers / models
+    - ** Strategy **: Telemetry - driven routing with fallback strategies
+      - ** Tradeoff **: Cost vs speed vs quality(plan - specific)
+
+### Layer 4: Enforcement & Governance
+  - ** Purpose **: Enforce budgets, limits, and policies
+    - ** Strategy **: Pre - flight checks with soft / hard limits
+      - ** Tradeoff **: Strictness vs user experience
+
+### Layer 5: Caching & Deduplication
+  - ** Purpose **: Eliminate redundant AI calls
+    - ** Strategy **: Exact + semantic caching(85 % similarity threshold)
+      - ** Tradeoff **: Cache freshness vs cost savings
+
+### Layer 6: Simulation & Prediction
+  - ** Purpose **: Forecast costs and recommend alternatives
+    - ** Strategy **: Track accuracy with 70 % confidence threshold
+      - ** Tradeoff **: Simulation overhead vs decision quality
+
+### Layer 7: Closed - Loop Cost Brain
+  - ** Purpose **: Autonomous real - time request optimization and intervention
+    - ** Strategy **: In - flight request interception with model downgrade, provider switching, and prompt compression
+      - ** Tradeoff **: Intervention latency vs cost savings(configurable shadow mode for testing)
+
+## Key Design Patterns
+
+### Circuit Breaker Pattern
+\`\`\`typescript
+// Threshold-based with exponential backoff
+OPEN → (timeout) → HALF_OPEN → (success) → CLOSED
+      ↑                           ↓
+      └─────── (failure) ─────────┘
+\`\`\`
+
+### Orchestration Pattern
+\`\`\`typescript
+// DAG-based workflow execution
+[Start] → [Parallel Steps] → [Aggregation] → [Decision] → [End]
+           ↓                    ↓              ↓
+          [Failure Recovery] ← [Retry Logic] ← [Circuit Breaker]
+\`\`\`
+
+### Cost-Performance Policy Pattern
+\`\`\`typescript
+// Explicit tradeoff configuration
+interface PolicyConfig {
+  costWeight: number;      // 0-1
+  latencyWeight: number;   // 0-1
+  qualityWeight: number;   // 0-1
+  sla: SLARequirements;    // explicit guarantees
+}
+\`\`\`
+
+## Strategic Metrics
+
+### System Health
+- Circuit breaker state (% open/closed/half-open)
+- Failure rate by domain
+- Average latency by service tier
+
+### Cost Efficiency
+- Token reduction rate (target: 40-75% with Cortex)
+- Cache hit rate (target: 70-80%)
+- Provider cost distribution
+
+### Decision Quality
+- ADR coverage (% decisions documented)
+- Policy compliance rate
+- Tradeoff explicitness score
+
+## Next Steps
+
+- **[Architectural Decisions](/architecture/decisions)** - Browse ADRs
+- **[Cost-Performance Tradeoffs](/architecture/cost-performance)** - Understand policy configurations
+- **[Failure Domains](/architecture/failure-domains)** - Explore blast radius maps
+- **[Strategic Metrics](/architecture/metrics)** - Monitor architectural health
+
+---
+
+*Architecture is not about code—it's about strategy. Make decisions explicit, tradeoffs clear, and failures isolated.*`} />);
+
+export const ArchitectureDecisionsPage = () => (<DocumentationPage title="Architectural Decisions (ADRs)" description="Documented architectural decisions and their rationale" prevPage={{ path: '/architecture', label: 'Previous: Architecture Overview' }} nextPage={{ path: '/architecture/cost-performance', label: 'Next: Cost-Performance Tradeoffs' }} fallbackContent={`# Architectural Decision Records (ADRs)
+
+## What are ADRs?
+
+ADRs document **strategic architectural decisions** with their context, alternatives considered, and tradeoffs made. They serve as living documentation of *why* our system evolved the way it did.
+
+## ADR Index
+
+### Infrastructure & Deployment
+
+#### ADR-001: Multi-Provider Abstraction Layer
+**Status**: Accepted | **Date**: 2024-Q1
+
+**Context**: Support 300+ AI models across 12+ providers without tight coupling
+
+**Decision**: Create \`BaseProvider\` abstraction with:
+- Unified interface for invoke, tokenCount, costEstimate
+- Provider-specific implementations inherit from base
+- Model registry with capabilities and pricing metadata
+
+**Alternatives Considered**:
+1. **Direct API integration** - Rejected: Creates tight coupling, hard to test
+2. **Third-party abstraction (LiteLLM)** - Rejected: Loss of control, vendor lock-in
+3. **Custom abstraction layer** - **Accepted**: Full control, testable, extensible
+
+**Tradeoffs**:
+- ✅ Flexibility: Add providers without changing business logic
+- ✅ Testability: Mock providers for testing
+- ❌ Abstraction overhead: 10-20ms latency per call
+- ❌ Maintenance: Must update for provider API changes
+
+**Cost-Performance Impact**:
+- Latency: +15ms average (routing overhead)
+- Cost: Neutral (enables cost optimization through routing)
+- Quality: Neutral (transparent to AI quality)
+
+---
+
+#### ADR-002: LangGraph for Multi-Agent Orchestration
+**Status**: Accepted | **Date**: 2024-Q2
+
+**Context**: Complex AI workflows require orchestration, not ad-hoc sequencing
+
+**Decision**: Adopt LangGraph for:
+- State management across agent steps
+- Conditional routing based on agent outputs
+- Parallel execution of independent agents
+- Built-in retry and error handling
+
+**Alternatives Considered**:
+1. **Custom orchestrator** - Rejected: High maintenance, reinventing wheels
+2. **Temporal workflow** - Rejected: Overkill for AI-specific flows
+3. **LangGraph** - **Accepted**: AI-native, proven patterns, active community
+
+**Tradeoffs**:
+- ✅ Proven patterns: Battle-tested for AI workflows
+- ✅ Developer experience: Clear state management
+- ❌ Learning curve: New abstraction to learn
+- ❌ Dependency: Couples us to LangChain ecosystem
+
+**Cost-Performance Impact**:
+- Latency: +50ms per workflow (state serialization)
+- Cost: -30% average (better prompt optimization through agents)
+- Quality: +20% (multi-agent validation improves outputs)
+
+---
+
+### Cost Optimization
+
+#### ADR-003: Cortex Meta-Language for Token Reduction
+**Status**: Accepted | **Date**: 2024-Q3
+
+**Context**: Output tokens dominate AI costs, need semantic compression
+
+**Decision**: Implement Cortex meta-language:
+- LISP-based SAST representation
+- 3-stage pipeline: NL → Cortex → Optimized Cortex → NL
+- Configurable optimization techniques per model
+- Fallback to original on decode failures
+
+**Alternatives Considered**:
+1. **Prompt compression only** - Rejected: Input tokens < 30% of cost
+2. **Output post-processing** - Rejected: Loses semantic meaning
+3. **Cortex semantic layer** - **Accepted**: Preserves meaning, optimizes representation
+
+**Tradeoffs**:
+- ✅ Token reduction: 40-75% output token savings
+- ✅ Cost reduction: 30-60% total cost savings
+- ❌ Latency: +200ms per request (encoding/decoding)
+- ❌ Complexity: New meta-language to maintain
+
+**Cost-Performance Impact**:
+- Latency: +200ms average (optimization overhead)
+- Cost: -50% average (massive token reduction)
+- Quality: -2% (slight semantic loss in edge cases)
+
+**ROI**: At 1M requests/month, saves $50K+ vs 200ms latency increase
+
+---
+
+#### ADR-004: Semantic Caching with 85% Threshold
+**Status**: Accepted | **Date**: 2024-Q2
+
+**Context**: Many AI requests are semantically similar, exact cache has low hit rate
+
+**Decision**: Implement semantic caching:
+- Embedding-based similarity search
+- 85% similarity threshold for cache hits
+- 7-day TTL for cached responses
+- Redis for distributed cache
+
+**Alternatives Considered**:
+1. **Exact string matching** - Rejected: ~5% hit rate too low
+2. **90% similarity** - Rejected: Too strict, 40% hit rate
+3. **85% similarity** - **Accepted**: 70-80% hit rate, acceptable quality
+4. **80% similarity** - Rejected: Too permissive, quality degradation
+
+**Tradeoffs**:
+- ✅ Hit rate: 70-80% cache hits
+- ✅ Cost savings: $0 for cached responses
+- ❌ Quality risk: 85% match may not be perfect
+- ❌ Embedding cost: $0.0001 per request for similarity
+
+**Cost-Performance Impact**:
+- Latency: 50ms (cache) vs 2000ms (API call) = 40x faster
+- Cost: $0.0001 (embedding) vs $0.01 (API call) = 99% savings
+- Quality: 97% user satisfaction (3% report cache mismatches)
+
+---
+
+### Failure & Resilience
+
+#### ADR-005: 5-Tier Graceful Degradation
+**Status**: Accepted | **Date**: 2024-Q1
+
+**Context**: System overload requires prioritizing critical services
+
+**Decision**: Implement service-tier prioritization:
+- **Critical**: Authentication, billing (never degrade)
+- **Essential**: Usage tracking, cost alerts (degrade last)
+- **Important**: Analytics, insights (degrade under load)
+- **Standard**: Reporting, exports (throttle early)
+- **Optional**: Recommendations, trends (disable first)
+
+**Alternatives Considered**:
+1. **No prioritization** - Rejected: Total system failure under load
+2. **Binary critical/non-critical** - Rejected: Too coarse-grained
+3. **5-tier system** - **Accepted**: Granular control, clear SLAs
+
+**Tradeoffs**:
+- ✅ Resilience: Core services stay up under load
+- ✅ User experience: Degradation over failure
+- ❌ Complexity: Every service needs tier classification
+- ❌ Testing: Hard to verify degradation paths
+
+**Cost-Performance Impact**:
+- Latency: Variable by tier (critical < 100ms, optional < 5s)
+- Cost: Neutral (resource reallocation, not reduction)
+- Availability: 99.9% for critical, 95% for optional
+
+---
+
+#### ADR-006: Circuit Breaker with Exponential Backoff
+**Status**: Accepted | **Date**: 2024-Q1
+
+**Context**: Provider failures cascade without protection
+
+**Decision**: Implement circuit breakers:
+- 5 failures trigger OPEN state
+- 30s timeout before HALF_OPEN retry
+- Exponential backoff: 1s → 2s → 4s → 8s → 16s
+- Per-provider, per-model granularity
+
+**Alternatives Considered**:
+1. **No circuit breakers** - Rejected: Cascading failures
+2. **Global circuit breaker** - Rejected: One failure affects all providers
+3. **Per-provider breakers** - **Accepted**: Isolated failure domains
+
+**Tradeoffs**:
+- ✅ Failure isolation: One provider failure doesn't affect others
+- ✅ Fast recovery: Exponential backoff prevents thundering herd
+- ❌ False positives: Temporary errors trigger circuit
+- ❌ Monitoring overhead: Track state per provider
+
+**Cost-Performance Impact**:
+- Latency: Immediate failure (0ms) vs timeout (30s)
+- Cost: Neutral (prevents wasteful retries)
+- Availability: 99.5% (circuit breaker prevents 0.5% failures)
+
+---
+
+## ADR Template
+
+Use this template for new architectural decisions:
+
+\`\`\`markdown
+### ADR-XXX: [Decision Title]
+**Status**: [Proposed|Accepted|Deprecated|Superseded] | **Date**: YYYY-QX
+
+**Context**: [Why is this decision needed? What problem are we solving?]
+
+**Decision**: [What did we decide? Be specific about implementation]
+
+**Alternatives Considered**:
+1. **Option A** - [Why rejected]
+2. **Option B** - [Why rejected]
+3. **Option C** - **Accepted**: [Why chosen]
+
+**Tradeoffs**:
+- ✅ Benefit 1
+- ✅ Benefit 2
+- ❌ Cost 1
+- ❌ Cost 2
+
+**Cost-Performance Impact**:
+- Latency: [Quantify impact]
+- Cost: [Quantify impact]
+- Quality: [Quantify impact]
+\`\`\`
+
+## Next Steps
+
+- **[Cost-Performance Tradeoffs](/architecture/cost-performance)** - Understand policy configurations
+- **[Failure Domains](/architecture/failure-domains)** - Explore blast radius maps
+- **[Propose New ADR](https://github.com/Hypothesize-Tech/costkatana-backend/issues/new?template=adr)** - Submit architectural decision
+
+---
+
+*Good ADRs make implicit decisions explicit. Document not just what you decided, but why—and what you gave up.*`} />);
+
+export const CostPerformanceTradeoffsPage = () => (<DocumentationPage title="Cost-Performance Tradeoffs" description="Explicit cost vs latency vs quality configurations" prevPage={{ path: '/architecture/decisions', label: 'Previous: Architectural Decisions' }} nextPage={{ path: '/architecture/failure-domains', label: 'Next: Failure Domains' }} fallbackContent={`# Cost-Performance Tradeoffs
+
+## Explicit Over Implicit
+
+Cost Katana makes **cost-performance tradeoffs explicit** through configurable policies rather than hardcoded assumptions. Every strategic decision point exposes its tradeoffs clearly.
+
+## The Tradeoff Triangle
+
+\`\`\`
+        ⚡ Performance (Latency)
+         /\\
+        /  \\
+       /    \\
+      /      \\
+     /        \\
+    /          \\
+   /____________\\
+  💰 Cost    📊 Quality
+\`\`\`
+
+You can optimize for **any two**, but not all three:
+- **Cheap + Fast**: Lower quality (smaller models)
+- **Cheap + High Quality**: Slower (batch processing, async)
+- **Fast + High Quality**: Expensive (premium models, low latency)
+
+## Routing Strategies
+
+### Strategy 1: Cost-Optimized (Default for Free Tier)
+**Priority**: Minimize cost above all
+
+\`\`\`typescript
+{
+  costWeight: 0.60,        // 60% weight on cost
+  latencyWeight: 0.15,     // 15% weight on latency
+  qualityWeight: 0.25,     // 25% weight on quality
+  fallbackStrategy: 'cost',
+  
+  modelPreferences: [
+    'gemini-2.5-flash',    // $0.15 per 1M tokens
+    'gpt-4o-mini',         // $0.30 per 1M tokens
+    'claude-3-haiku'       // $0.50 per 1M tokens
+  ]
+}
+\`\`\`
+
+**Characteristics**:
+- Latency: 1-3 seconds average
+- Cost: $0.001 per request
+- Quality: 85% user satisfaction
+
+**Use Cases**: High-volume, cost-sensitive applications
+
+---
+
+### Strategy 2: Balanced (Default for Pro Tier)
+**Priority**: Balance all three factors
+
+\`\`\`typescript
+{
+  costWeight: 0.33,        // Equal weighting
+  latencyWeight: 0.33,
+  qualityWeight: 0.34,
+  fallbackStrategy: 'balanced',
+  
+  modelPreferences: [
+    'gpt-4o',              // Balance of all factors
+    'claude-3.5-sonnet',   // High quality fallback
+    'gemini-1.5-pro'       // Cost-effective fallback
+  ]
+}
+\`\`\`
+
+**Characteristics**:
+- Latency: 800ms average
+- Cost: $0.005 per request
+- Quality: 93% user satisfaction
+
+**Use Cases**: Production applications, general-purpose AI
+
+---
+
+### Strategy 3: Speed-Optimized (Default for Enterprise Tier)
+**Priority**: Minimize latency
+
+\`\`\`typescript
+{
+  costWeight: 0.10,        // Cost is secondary
+  latencyWeight: 0.70,     // 70% weight on speed
+  qualityWeight: 0.20,
+  fallbackStrategy: 'speed',
+  
+  modelPreferences: [
+    'gpt-4o-mini',         // Fast + decent quality
+    'gemini-2.5-flash',    // Fastest available
+    'claude-3-haiku'       // Speed fallback
+  ],
+  
+  cacheStrategy: 'aggressive',  // Cache everything
+  timeoutMs: 500                // Fail fast
+}
+\`\`\`
+
+**Characteristics**:
+- Latency: 200-400ms average
+- Cost: $0.002 per request
+- Quality: 88% user satisfaction
+
+**Use Cases**: Real-time chat, interactive applications
+
+---
+
+### Strategy 4: Quality-Optimized (Custom)
+**Priority**: Maximum output quality
+
+\`\`\`typescript
+{
+  costWeight: 0.10,        // Cost is secondary
+  latencyWeight: 0.15,
+  qualityWeight: 0.75,     // 75% weight on quality
+  fallbackStrategy: 'quality',
+  
+  modelPreferences: [
+    'claude-opus-4',       // Highest quality
+    'gpt-4o',              // High quality fallback
+    'gemini-1.5-pro'       // Quality fallback
+  ],
+  
+  enableMultiAgent: true,  // Use quality analyst agent
+  qualityThreshold: 0.95   // Only return if 95%+ confidence
+}
+\`\`\`
+
+**Characteristics**:
+- Latency: 3-5 seconds average
+- Cost: $0.020 per request
+- Quality: 98% user satisfaction
+
+**Use Cases**: Content creation, critical decision-making
+
+---
+
+## Cortex Optimization Tradeoffs
+
+### Technique: LISP-based Compression
+**What it does**: Convert natural language to compact semantic representation
+
+\`\`\`typescript
+{
+  technique: 'cortex_lisp',
+  tokenReduction: 0.45,    // 45% fewer tokens
+  latencyOverhead: 200,    // +200ms processing
+  costSavings: 0.40,       // 40% cost reduction
+  qualityLoss: 0.02,       // 2% semantic loss
+  
+  // Tradeoff analysis
+  netBenefit: {
+    at_1K_requests: -$5,    // Overhead dominates
+    at_10K_requests: +$150, // Break-even
+    at_100K_requests: +$2000, // Massive savings
+    at_1M_requests: +$20K   // Highly profitable
+  }
+}
+\`\`\`
+
+**Recommendation**: Enable for **production workloads > 10K requests/month**
+
+---
+
+### Technique: Semantic Caching
+**What it does**: Reuse similar responses with 85% similarity threshold
+
+\`\`\`typescript
+{
+  technique: 'semantic_cache',
+  similarityThreshold: 0.85,  // 85% match required
+  hitRate: 0.75,              // 75% of requests cached
+  embeddingCost: 0.0001,      // $0.0001 per request
+  
+  // Tradeoff analysis
+  perRequest: {
+    cacheHit: {
+      latency: 50,       // 50ms
+      cost: 0.0001,      // Embedding only
+      quality: 0.97      // 97% match quality
+    },
+    cacheMiss: {
+      latency: 2000,     // 2s (API call)
+      cost: 0.01,        // Full API cost
+      quality: 1.00      // Perfect match
+    },
+    weighted: {
+      latency: 537,      // 75% * 50 + 25% * 2000
+      cost: 0.00257,     // 75% * 0.0001 + 25% * 0.01
+      quality: 0.9775,   // 75% * 0.97 + 25% * 1.0
+      savings: 74.3%     // Cost reduction
+    }
+  }
+}
+\`\`\`
+
+**Recommendation**: Always enable semantic caching (massive ROI)
+
+---
+
+## SLA Configuration
+
+### Free Tier SLA
+\`\`\`typescript
+{
+  maxResponseTime: 5000,      // 5 seconds
+  minAvailability: 0.95,      // 95% uptime
+  maxErrorRate: 0.10,         // 10% errors tolerated
+  budgetLimit: 100,           // $100/month
+  rateLimit: 1000,            // 1K requests/minute
+  
+  degradationBehavior: {
+    at80PercentBudget: 'warn',
+    at90PercentBudget: 'throttle_to_balanced',
+    at95PercentBudget: 'throttle_to_cost',
+    at100PercentBudget: 'block_requests'
+  }
+}
+\`\`\`
+
+---
+
+### Pro Tier SLA
+\`\`\`typescript
+{
+  maxResponseTime: 2000,      // 2 seconds
+  minAvailability: 0.99,      // 99% uptime
+  maxErrorRate: 0.05,         // 5% errors tolerated
+  budgetLimit: null,          // No hard limit
+  rateLimit: 10000,           // 10K requests/minute
+  
+  degradationBehavior: {
+    at80PercentBudget: 'warn_only',
+    at90PercentBudget: 'notify_user',
+    at95PercentBudget: 'escalate_alert',
+    at100PercentBudget: 'continue_with_notification'
+  }
+}
+\`\`\`
+
+---
+
+### Enterprise Tier SLA
+\`\`\`typescript
+{
+  maxResponseTime: 1000,      // 1 second
+  minAvailability: 0.999,     // 99.9% uptime (3 nines)
+  maxErrorRate: 0.01,         // 1% errors tolerated
+  budgetLimit: null,          // No limit
+  rateLimit: 100000,          // 100K requests/minute
+  
+  customSLA: true,            // Negotiated per customer
+  dedicatedSupport: true,
+  priorityRouting: true,
+  
+  degradationBehavior: {
+    never_throttle: true,
+    priority_lane: true,
+    dedicated_resources: true
+  }
+}
+\`\`\`
+
+---
+
+## Decision Matrix
+
+| Use Case | Strategy | Cost | Latency | Quality | Cortex | Cache |
+|----------|----------|------|---------|---------|--------|-------|
+| **Chatbot (high volume)** | Cost-Opt | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ✅ | ✅ |
+| **Search/Discovery** | Speed-Opt | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ | ✅ |
+| **Content Creation** | Quality-Opt | ⭐ | ⭐ | ⭐⭐⭐ | ✅ | ❌ |
+| **Code Generation** | Balanced | ⭐⭐ | ⭐⭐ | ⭐⭐⭐ | ✅ | ✅ |
+| **Summarization** | Cost-Opt | ⭐⭐⭐ | ⭐⭐ | ⭐⭐ | ✅ | ✅ |
+| **Real-time Assistant** | Speed-Opt | ⭐⭐ | ⭐⭐⭐ | ⭐⭐ | ❌ | ✅ |
+| **Research Analysis** | Quality-Opt | ⭐ | ⭐ | ⭐⭐⭐ | ✅ | ❌ |
+
+---
+
+## Configuration Examples
+
+### Example 1: Cost-Sensitive Startup
+\`\`\`typescript
+import { ai } from 'cost-katana';
+
+const config = {
+  strategy: 'cost',
+  cortex: { enabled: true },
+  cache: { enabled: true, threshold: 0.85 },
+  budget: { daily: 50, alerts: [0.8, 0.9, 0.95] },
+  fallback: ['gemini-2.5-flash', 'gpt-4o-mini']
+};
+
+const response = await ai('gpt-4o', prompt, config);
+\`\`\`
+
+### Example 2: Enterprise Real-Time Application
+\`\`\`typescript
+const config = {
+  strategy: 'speed',
+  cortex: { enabled: false },  // Skip optimization overhead
+  cache: { enabled: true, aggressive: true },
+  timeout: 500,                // Fail fast
+  fallback: ['gpt-4o-mini', 'gemini-2.5-flash']
+};
+\`\`\`
+
+### Example 3: Quality-Critical Content
+\`\`\`typescript
+const config = {
+  strategy: 'quality',
+  cortex: { enabled: true, technique: 'advanced' },
+  multiAgent: { enabled: true, includeQualityAnalyst: true },
+  qualityThreshold: 0.95,
+  fallback: ['claude-opus-4', 'gpt-4o']
+};
+\`\`\`
+
+---
+
+## Next Steps
+
+- **[Failure Domains](/architecture/failure-domains)** - Understand blast radius
+- **[Strategic Metrics](/architecture/metrics)** - Monitor tradeoff effectiveness
+- **[Configuration Guide](/features/optimization)** - Implement these strategies
+
+---
+
+*Every decision is a tradeoff. Make your tradeoffs explicit, measurable, and configurable.*`} />);
+
+export const FailureDomainsPage = () => (<DocumentationPage title="Failure Domains" description="Blast radius mapping and failure isolation strategy" prevPage={{ path: '/architecture/cost-performance', label: 'Previous: Cost-Performance' }} nextPage={{ path: '/architecture/metrics', label: 'Next: Strategic Metrics' }} fallbackContent={`# Failure Domains & Blast Radius
+
+## Failure Domain Philosophy
+
+**Principle**: Failures are inevitable. **Isolate them** so one failure doesn't cascade into total system failure.
+
+Cost Katana uses **explicit failure domain boundaries** with documented blast radius for every service and dependency.
+
+## Failure Domain Map
+
+\`\`\`
+┌──────────────────────────────────────────────────────────────┐
+│                     DOMAIN 1: Gateway                         │
+│  Blast Radius: User requests (single-tenant isolation)       │
+├──────────────────────────────────────────────────────────────┤
+│  • Circuit Breaker: Per-provider, 5-failure threshold        │
+│  • Timeout: 30s default, configurable per tier               │
+│  • Fallback: 3-provider chain, Redis → In-Memory cache       │
+│  • Impact: Gateway failure → 503 (no data loss)              │
+└─────────────┬────────────────────────────────────────────────┘
+              │
+┌─────────────▼────────────────────────────────────────────────┐
+│                 DOMAIN 2: AI Provider Layer                   │
+│  Blast Radius: Single provider (others unaffected)           │
+├──────────────────────────────────────────────────────────────┤
+│  • OpenAI     [Circuit: CLOSED]  ✅ Healthy                   │
+│  • Anthropic  [Circuit: CLOSED]  ✅ Healthy                   │
+│  • Google AI  [Circuit: OPEN]    ❌ Failing (isolated)        │
+│  • AWS        [Circuit: HALF_OPEN] 🟡 Recovering             │
+│  • Impact: Provider failure → Failover to next provider      │
+└─────────────┬────────────────────────────────────────────────┘
+              │
+┌─────────────▼────────────────────────────────────────────────┐
+│                   DOMAIN 3: Core Services                     │
+│  Blast Radius: Service-tier dependent (critical never fail)  │
+├──────────────────────────────────────────────────────────────┤
+│  • Authentication   [CRITICAL]   ✅ No degradation           │
+│  • Billing          [CRITICAL]   ✅ No degradation           │
+│  • Usage Tracking   [ESSENTIAL]  🟡 Degrade last             │
+│  • Analytics        [IMPORTANT]  🟠 Degrade under load       │
+│  • Reporting        [STANDARD]   🟠 Throttle early           │
+│  • Recommendations  [OPTIONAL]   ⚪ Disable first            │
+│  • Impact: Service failure → Graceful degradation by tier    │
+└─────────────┬────────────────────────────────────────────────┘
+              │
+┌─────────────▼────────────────────────────────────────────────┐
+│                  DOMAIN 4: Data Layer                         │
+│  Blast Radius: Database-level (read replicas isolate writes) │
+├──────────────────────────────────────────────────────────────┤
+│  • MongoDB Primary   [Writes]    ✅ Healthy                   │
+│  • MongoDB Replica 1 [Reads]     ✅ Healthy                   │
+│  • MongoDB Replica 2 [Reads]     ❌ Down (read failover)      │
+│  • Redis Cache       [Fast path] ✅ Healthy                   │
+│  • Impact: DB failure → Read-only mode, cache-only fallback  │
+└──────────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## Failure Scenarios & Blast Radius
+
+### Scenario 1: Single Provider Failure (e.g., OpenAI Down)
+**Blast Radius**: OpenAI requests only
+
+\`\`\`
+[User Request] → [Gateway]
+                    ↓
+      [OpenAI Circuit: CLOSED] → [Invoke OpenAI]
+                    ↓
+              ❌ Failure (5x in 30s)
+                    ↓
+      [Circuit Opens: OPEN state]
+                    ↓
+         [Failover to Anthropic]
+                    ↓
+              ✅ Success
+\`\`\`
+
+**Impact**:
+- OpenAI requests: 100% failover to Anthropic
+- Other providers: Unaffected
+- User experience: Transparent (slight latency increase)
+- Cost impact: +20% (Anthropic slightly more expensive)
+
+**Recovery**:
+- After 30s: Circuit → HALF_OPEN
+- 1 successful request: Circuit → CLOSED
+- OpenAI back in rotation
+
+---
+
+### Scenario 2: MongoDB Primary Failure
+**Blast Radius**: Write operations (reads continue via replicas)
+
+\`\`\`
+[User Request: Write Usage Data]
+         ↓
+   [MongoDB Primary]
+         ↓
+    ❌ Timeout (5s)
+         ↓
+   [Circuit Breaker Opens]
+         ↓
+   [Fallback: Redis Queue]
+         ↓
+   ✅ Queued for later write
+         ↓
+   [Background: Retry every 30s]
+         ↓
+   [MongoDB recovers]
+         ↓
+   [Drain queue: Write buffered data]
+\`\`\`
+
+**Impact**:
+- Write operations: Queued (no data loss)
+- Read operations: Served from replicas (unaffected)
+- Real-time analytics: Delayed by queue drain time
+- User experience: No visible impact
+
+**Mitigation**:
+- Redis queue capacity: 10M events
+- Queue drain rate: 100K events/minute
+- Alerting: PagerDuty if queue > 1M events
+
+---
+
+### Scenario 3: Redis Cache Failure
+**Blast Radius**: Cache hits only (degraded to direct API)
+
+\`\`\`
+[User Request]
+      ↓
+[Check Redis Cache]
+      ↓
+ ❌ Redis timeout (100ms)
+      ↓
+[Fallback: In-Memory Cache]
+      ↓
+  🟡 Cache Miss (50% hit rate vs 80%)
+      ↓
+[Direct AI Provider Call]
+      ↓
+  ✅ Success (higher latency, cost)
+\`\`\`
+
+**Impact**:
+- Cache hit rate: 80% → 50% (in-memory fallback)
+- Cost: +30% (more API calls)
+- Latency: +500ms average
+- User experience: Slower responses
+
+**Mitigation**:
+- In-memory cache: 10K most recent entries
+- Redis auto-recovery: Sentinel failover in 30s
+- Alerting: Slack if hit rate < 60%
+
+---
+
+### Scenario 4: Multi-Agent Orchestration Failure
+**Blast Radius**: Multi-agent workflows only (single-agent unaffected)
+
+\`\`\`
+[User Request: Complex Analysis]
+         ↓
+   [Master Agent]
+         ↓
+  [Parallel: Cost Optimizer, Quality Analyst, Web Scraper]
+         ↓
+    ❌ Web Scraper timeout (10s)
+         ↓
+   [Partial Results: 2/3 agents]
+         ↓
+   [Aggregate Available Results]
+         ↓
+   ✅ Return with degraded quality flag
+\`\`\`
+
+**Impact**:
+- Web scraper workflows: Degraded (no external data)
+- Other agents: Unaffected
+- Result quality: 90% vs 100%
+- User experience: Warning shown, partial results
+
+**Mitigation**:
+- Timeout per agent: 10s (configurable)
+- Retry failed agents: 2 retries with exponential backoff
+- Fallback: Return partial results if 2+ agents succeed
+
+---
+
+## Circuit Breaker Configuration
+
+### Provider-Level Circuit Breakers
+\`\`\`typescript
+{
+  provider: 'openai',
+  failureThreshold: 5,        // Open after 5 failures
+  successThreshold: 1,        // Close after 1 success in HALF_OPEN
+  timeout: 30000,             // 30s before HALF_OPEN
+  halfOpenMaxCalls: 3,        // Test 3 requests in HALF_OPEN
+  
+  fallback: [
+    'anthropic',              // Primary fallback
+    'google',                 // Secondary fallback
+    'aws-bedrock'             // Tertiary fallback
+  ],
+  
+  blastRadius: 'provider',    // Isolated to this provider
+  escalation: {
+    at5Failures: 'log_warning',
+    at10Failures: 'send_slack_alert',
+    at50Failures: 'page_on_call'
+  }
+}
+\`\`\`
+
+---
+
+### Service-Level Circuit Breakers
+\`\`\`typescript
+{
+  service: 'analytics',
+  tier: 'important',
+  failureThreshold: 10,       // More tolerant for non-critical
+  timeout: 60000,             // 60s recovery time
+  
+  degradation: {
+    atLightLoad: 'full_service',
+    atModerateLoad: 'cache_only',
+    atHeavyLoad: 'disabled',
+    atSevereLoad: 'disabled'
+  },
+  
+  blastRadius: 'service',     // Only analytics affected
+  dependencies: ['mongodb', 'redis'],
+  
+  // If MongoDB fails, analytics degrades, but doesn't fail
+  gracefulDegradation: true
+}
+\`\`\`
+
+---
+
+## Dependency Graph
+
+### Critical Path Dependencies
+\`\`\`
+User Request
+    ↓
+Gateway (no dependencies)
+    ↓
+─────┬─────────────────────────────
+     ↓                             ↓
+AI Provider               Authentication
+(external)                (MongoDB)
+     ↓                             ↓
+Usage Tracking ←──────────────────┘
+(MongoDB + Redis)
+     ↓
+Analytics (eventual consistency)
+\`\`\`
+
+**Critical Path**:
+1. Gateway → AI Provider → Response (synchronous)
+2. Usage Tracking (asynchronous, queued)
+
+**Non-Critical Path**:
+- Analytics computation (batch)
+- Report generation (on-demand)
+- Recommendations (cacheable)
+
+---
+
+## Blast Radius Mitigation Strategies
+
+### 1. **Tenant Isolation**
+Every user request is isolated:
+- Separate MongoDB collections per tenant
+- Redis namespace per user
+- Rate limits per user (prevents one user DOSing others)
+
+### 2. **Provider Failover Chains**
+Never depend on a single provider:
+\`\`\`typescript
+const fallbackChain = [
+  'openai',      // Primary (best price/quality)
+  'anthropic',   // Fallback 1 (best quality)
+  'google',      // Fallback 2 (best speed)
+  'aws-bedrock'  // Fallback 3 (always available)
+];
+\`\`\`
+
+### 3. **Read/Write Segregation**
+Writes more fragile than reads:
+- Writes: Queued in Redis, batched, retried
+- Reads: Served from replicas, cached aggressively
+
+### 4. **Graceful Degradation Tiers**
+Not all features are equal:
+- **Critical**: Never degrade (auth, billing)
+- **Essential**: Degrade last (usage tracking)
+- **Important**: Degrade under load (analytics)
+- **Standard**: Throttle early (reporting)
+- **Optional**: Disable first (recommendations)
+
+---
+
+## Monitoring Blast Radius
+
+### Metrics to Track
+\`\`\`typescript
+{
+  // Per-provider metrics
+  'circuit_breaker.openai.state': 'CLOSED|OPEN|HALF_OPEN',
+  'circuit_breaker.openai.failures_last_minute': 0,
+  'failover.openai_to_anthropic.count': 42,
+  
+  // Per-service metrics
+  'service.analytics.tier': 'important',
+  'service.analytics.degradation_level': 'cache_only',
+  'service.analytics.blast_radius': 'service',
+  
+  // System-wide metrics
+  'system.overload_level': 'moderate',
+  'system.degraded_services': ['analytics', 'reporting'],
+  'system.failed_providers': ['google']
+}
+\`\`\`
+
+---
+
+## Testing Failure Scenarios
+
+### Chaos Engineering Tests
+\`\`\`bash
+# Simulate provider failure
+npm run chaos:kill-provider --provider=openai --duration=5m
+
+# Simulate database failure
+npm run chaos:kill-mongodb-primary --duration=30s
+
+# Simulate cache failure
+npm run chaos:kill-redis --duration=1m
+
+# Simulate overload
+npm run chaos:load-spike --rps=10000 --duration=2m
+\`\`\`
+
+### Expected Outcomes
+- Provider failure: 100% failover success
+- DB failure: 0 data loss, writes queued
+- Cache failure: Hit rate degrades, no failures
+- Overload: Graceful degradation by tier
+
+---
+
+## Next Steps
+
+- **[Strategic Metrics](/architecture/metrics)** - Monitor failure domain health
+- **[Observability](/observability/opentelemetry)** - Trace failures across domains
+- **[Alerts](/features/alerts)** - Configure failure alerts
+
+---
+
+*Failures are inevitable. Isolate them. Make blast radius explicit. Test chaos scenarios.*`} />);
+
+export const ArchitectureMetricsPage = () => (<DocumentationPage title="Strategic Metrics" description="Architectural health monitoring and decision quality metrics" prevPage={{ path: '/architecture/failure-domains', label: 'Previous: Failure Domains' }} fallbackContent={`# Strategic Architectural Metrics
+
+## Strategy > Syntax Metrics
+
+Traditional metrics focus on **implementation** (latency, throughput, errors). Strategic metrics focus on **architectural health** (decision quality, tradeoff effectiveness, failure domain isolation).
+
+## Metric Categories
+
+### 1. Architectural Decision Quality
+
+#### ADR Coverage
+**What**: Percentage of strategic decisions documented with ADRs
+
+\`\`\`typescript
+{
+  metric: 'adr_coverage',
+  formula: 'documented_decisions / total_strategic_decisions',
+  target: 0.90,        // 90% coverage
+  current: 0.73,       // 73% coverage
+  status: '🟡 Below target',
+  
+  breakdown: {
+    infrastructure: 0.85,    // 85% documented
+    cost_optimization: 0.80,
+    failure_resilience: 0.90,
+    intelligence_layer: 0.45  // ⚠️ Needs work
+  }
+}
+\`\`\`
+
+**Improvement Actions**:
+- Document intelligence layer decisions
+- Conduct quarterly ADR audit
+- Block PRs without ADR for architecture changes
+
+---
+
+#### Tradeoff Explicitness Score
+**What**: How clearly tradeoffs are documented in configuration
+
+\`\`\`typescript
+{
+  metric: 'tradeoff_explicitness',
+  formula: 'explicit_tradeoffs / total_configuration_decisions',
+  target: 0.95,
+  current: 0.68,
+  status: '🟡 Below target',
+  
+  examples: {
+    explicit: [
+      'costWeight: 0.60  // 60% priority on cost reduction',
+      'fallbackStrategy: "cost"  // Sacrifice latency for cost',
+      'similarityThreshold: 0.85  // Balance hit rate vs quality'
+    ],
+    implicit: [
+      'operation: "answer"',      // ❌ Hardcoded, no rationale
+      'provider: "openai"',        // ❌ No fallback documented
+      'maxTokens: 2000'            // ❌ No tradeoff explained
+    ]
+  }
+}
+\`\`\`
+
+**Improvement Actions**:
+- Add inline comments for all strategic config
+- Extract hardcoded values to explicit policies
+- Document alternatives considered
+
+---
+
+### 2. Cost-Performance Effectiveness
+
+#### Token Reduction Achievement
+**What**: Actual token reduction vs target (40-75% with Cortex)
+
+\`\`\`typescript
+{
+  metric: 'token_reduction_achievement',
+  target: { min: 0.40, max: 0.75 },
+  
+  by_model: {
+    'claude-3.5-sonnet': {
+      actual: 0.492,         // 49.2% reduction
+      target: 0.50,
+      status: '✅ On target',
+      technique: 'cortex_lisp'
+    },
+    'claude-opus-4': {
+      actual: 0.499,         // 49.9% reduction
+      target: 0.50,
+      status: '✅ On target',
+      compression_ratio: 0.761
+    },
+    'gemini-2.5-flash': {
+      actual: 0.737,         // 73.7% reduction
+      target: 0.65,
+      status: '✅ Exceeds target',
+      best_in_class: true
+    }
+  },
+  
+  overall: {
+    weighted_average: 0.58,  // 58% reduction
+    status: '✅ Within target range'
+  }
+}
+\`\`\`
+
+---
+
+#### Net Cost Savings After Overhead
+**What**: Cost savings minus optimization overhead
+
+\`\`\`typescript
+{
+  metric: 'net_cost_savings',
+  
+  baseline: {
+    monthly_requests: 1000000,
+    avg_cost_per_request: 0.01,
+    total_baseline_cost: 10000    // $10K/month
+  },
+  
+  optimized: {
+    cortex_overhead: 0.0002,      // $0.0002 per request
+    cache_embedding: 0.0001,      // $0.0001 per request
+    total_overhead: 300,          // $300/month
+    
+    cortex_savings: 5000,         // $5K saved (50% reduction)
+    cache_savings: 7400,          // $7.4K saved (74% hit rate)
+    total_savings: 12400,         // $12.4K saved
+    
+    net_savings: 12100,           // $12.1K net (after overhead)
+    roi: 40.33                    // 40x return on optimization cost
+  },
+  
+  status: '✅ Highly effective'
+}
+\`\`\`
+
+---
+
+#### SLA Compliance Rate
+**What**: Percentage of requests meeting tier-specific SLAs
+
+\`\`\`typescript
+{
+  metric: 'sla_compliance',
+  
+  by_tier: {
+    free: {
+      sla_latency: 5000,          // 5s max
+      sla_availability: 0.95,     // 95%
+      actual_latency_p95: 4200,   // 4.2s
+      actual_availability: 0.964,  // 96.4%
+      compliance: 1.00,           // ✅ 100%
+      status: '✅ Compliant'
+    },
+    pro: {
+      sla_latency: 2000,          // 2s max
+      sla_availability: 0.99,     // 99%
+      actual_latency_p95: 1850,   // 1.85s
+      actual_availability: 0.993,  // 99.3%
+      compliance: 1.00,           // ✅ 100%
+      status: '✅ Compliant'
+    },
+    enterprise: {
+      sla_latency: 1000,          // 1s max
+      sla_availability: 0.999,    // 99.9%
+      actual_latency_p95: 880,    // 880ms
+      actual_availability: 0.9995, // 99.95%
+      compliance: 1.00,           // ✅ 100%
+      status: '✅ Compliant'
+    }
+  },
+  
+  overall_compliance: 1.00        // ✅ All tiers compliant
+}
+\`\`\`
+
+---
+
+### 3. Failure Domain Health
+
+#### Circuit Breaker Distribution
+**What**: How many circuit breakers are open/closed/half-open
+
+\`\`\`typescript
+{
+  metric: 'circuit_breaker_health',
+  
+  by_domain: {
+    providers: {
+      total: 12,
+      closed: 10,        // ✅ Healthy
+      half_open: 1,      // 🟡 Recovering
+      open: 1,           // ❌ Failing
+      health_score: 0.917 // 91.7%
+    },
+    services: {
+      total: 25,
+      closed: 24,        // ✅ Healthy
+      half_open: 1,      // 🟡 Recovering
+      open: 0,
+      health_score: 0.980 // 98%
+    },
+    database: {
+      total: 4,
+      closed: 4,         // ✅ All healthy
+      half_open: 0,
+      open: 0,
+      health_score: 1.00  // 100%
+    }
+  },
+  
+  overall_health: 0.965,  // 96.5% healthy
+  status: '✅ System healthy'
+}
+\`\`\`
+
+---
+
+#### Blast Radius Containment
+**What**: Percentage of failures that didn't cascade
+
+\`\`\`typescript
+{
+  metric: 'blast_radius_containment',
+  
+  incidents_last_30d: {
+    total_failures: 147,
+    contained_failures: 143,     // 97.3% contained
+    cascading_failures: 4,       // 2.7% cascaded
+    containment_rate: 0.973,
+    
+    by_severity: {
+      critical: {
+        total: 5,
+        contained: 5,            // ✅ 100% contained
+        cascaded: 0
+      },
+      high: {
+        total: 28,
+        contained: 27,           // ✅ 96.4% contained
+        cascaded: 1
+      },
+      medium: {
+        total: 114,
+        contained: 111,          // ✅ 97.4% contained
+        cascaded: 3
+      }
+    }
+  },
+  
+  target: 0.95,                   // 95% containment
+  status: '✅ Exceeds target'
+}
+\`\`\`
+
+---
+
+#### Mean Time to Detect (MTTD)
+**What**: How quickly failures are detected
+
+\`\`\`typescript
+{
+  metric: 'mttd',
+  
+  by_domain: {
+    provider_failure: {
+      detection_method: 'circuit_breaker',
+      mttd_seconds: 12,          // 12s average
+      target: 30,
+      status: '✅ 2.5x better than target'
+    },
+    service_degradation: {
+      detection_method: 'health_check',
+      mttd_seconds: 45,          // 45s average
+      target: 60,
+      status: '✅ Ahead of target'
+    },
+    database_failure: {
+      detection_method: 'connection_timeout',
+      mttd_seconds: 5,           // 5s average
+      target: 10,
+      status: '✅ 2x better than target'
+    }
+  },
+  
+  overall_mttd: 21,               // 21s average
+  target: 40,
+  status: '✅ System performs well'
+}
+\`\`\`
+
+---
+
+### 4. Orchestration Quality
+
+#### Multi-Agent Success Rate
+**What**: Percentage of multi-agent workflows that complete successfully
+
+\`\`\`typescript
+{
+  metric: 'multi_agent_success',
+  
+  by_workflow: {
+    'cost_optimization': {
+      total_executions: 5284,
+      successful: 5127,          // 97.0%
+      partial: 142,              // 2.7% (some agents failed)
+      failed: 15,                // 0.3%
+      success_rate: 0.970,
+      status: '✅ Excellent'
+    },
+    'quality_analysis': {
+      total_executions: 3891,
+      successful: 3812,          // 98.0%
+      partial: 67,               // 1.7%
+      failed: 12,                // 0.3%
+      success_rate: 0.980,
+      status: '✅ Excellent'
+    },
+    'web_research': {
+      total_executions: 2156,
+      successful: 1945,          // 90.2%
+      partial: 189,              // 8.8% (scraper failures)
+      failed: 22,                // 1.0%
+      success_rate: 0.902,
+      status: '🟡 Needs improvement'
+    }
+  },
+  
+  overall_success_rate: 0.952,   // 95.2%
+  target: 0.95,
+  status: '✅ On target'
+}
+\`\`\`
+
+---
+
+#### Workflow Parallelism Efficiency
+**What**: How well we utilize parallel execution
+
+\`\`\`typescript
+{
+  metric: 'parallelism_efficiency',
+  
+  calculation: {
+    total_workflow_time: 1000,   // Sum of all steps if sequential
+    actual_workflow_time: 350,   // Actual time with parallelism
+    parallelism_gain: 2.86,      // 2.86x speedup
+    efficiency: 0.65,            // 65% of theoretical max (4 cores)
+    
+    bottlenecks: [
+      'web_scraper (30% of time)',  // Sequential bottleneck
+      'quality_analyst (25% of time)'
+    ]
+  },
+  
+  target_efficiency: 0.70,       // 70% of theoretical max
+  status: '🟡 Close to target',
+  
+  improvement_potential: {
+    optimize_web_scraper: '+15% efficiency',
+    increase_parallelism: '+10% efficiency'
+  }
+}
+\`\`\`
+
+---
+
+## Strategic Dashboards
+
+### Dashboard 1: Architectural Health
+\`\`\`
+┌─────────────────────────────────────────────────────────┐
+│  Architectural Health Score: 87/100  🟢 Healthy        │
+├─────────────────────────────────────────────────────────┤
+│  ADR Coverage:              73%  🟡 Below target (90%)  │
+│  Tradeoff Explicitness:     68%  🟡 Below target (95%)  │
+│  Circuit Breaker Health:    96.5% ✅ Excellent          │
+│  Blast Radius Containment:  97.3% ✅ Excellent          │
+│  SLA Compliance:            100%  ✅ Perfect            │
+└─────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+### Dashboard 2: Cost-Performance Effectiveness
+\`\`\`
+┌─────────────────────────────────────────────────────────┐
+│  Cost Optimization ROI: 40x  🟢 Highly Effective       │
+├─────────────────────────────────────────────────────────┤
+│  Token Reduction:          58%  ✅ Within target range  │
+│  Net Monthly Savings:      $12.1K  ✅ Strong ROI        │
+│  Cache Hit Rate:           74%  ✅ Excellent            │
+│  Cortex Success Rate:      98%  ✅ Excellent            │
+│  Quality Score:            97.2%  ✅ High quality       │
+└─────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+### Dashboard 3: Failure Isolation
+\`\`\`
+┌─────────────────────────────────────────────────────────┐
+│  Failure Isolation Score: 94/100  🟢 Excellent         │
+├─────────────────────────────────────────────────────────┤
+│  Cascading Failures:       2.7%  ✅ Contained           │
+│  MTTD (Mean Time Detect):  21s  ✅ Fast detection      │
+│  Provider Circuit Breakers: 10/12 ✅ 2 recovering       │
+│  Service Circuit Breakers: 24/25 ✅ 1 recovering        │
+│  Failover Success Rate:    99.8%  ✅ Excellent          │
+└─────────────────────────────────────────────────────────┘
+\`\`\`
+
+---
+
+## Metric Collection
+
+### OpenTelemetry Integration
+\`\`\`typescript
+import { metrics } from '@opentelemetry/api';
+
+const meter = metrics.getMeter('cost-katana-architecture');
+
+// Strategic metrics
+const adrCoverage = meter.createGauge('architecture.adr_coverage', {
+  description: 'Percentage of strategic decisions documented',
+  unit: 'percent'
+});
+
+const blastRadiusContainment = meter.createGauge(
+  'architecture.blast_radius_containment',
+  {
+    description: 'Percentage of failures contained to single domain',
+    unit: 'percent'
+  }
+);
+
+// Cost-performance metrics
+const netCostSavings = meter.createGauge('architecture.net_cost_savings', {
+  description: 'Net cost savings after optimization overhead',
+  unit: 'USD'
+});
+\`\`\`
+
+---
+
+## Alerting Rules
+
+### Critical Alerts
+\`\`\`yaml
+- name: blast_radius_containment_low
+  condition: blast_radius_containment < 0.90
+  severity: P1
+  notification: pagerduty
+  message: "Cascading failures detected (containment: {value})"
+
+- name: sla_compliance_breach
+  condition: sla_compliance < 0.95
+  severity: P1
+  notification: pagerduty
+  message: "SLA compliance breach: {tier} tier at {value}"
+\`\`\`
+
+### Warning Alerts
+\`\`\`yaml
+- name: adr_coverage_low
+  condition: adr_coverage < 0.80
+  severity: P2
+  notification: slack
+  message: "ADR coverage below 80%: {value}"
+
+- name: tradeoff_explicitness_low
+  condition: tradeoff_explicitness < 0.70
+  severity: P2
+  notification: slack
+  message: "Implicit decisions detected: {value}"
+\`\`\`
+
+---
+
+## Next Steps
+
+- **[Architecture Overview](/architecture)** - Back to architecture home
+- **[Observability](/observability/opentelemetry)** - Set up metric collection
+- **[Alerts](/features/alerts)** - Configure architectural alerts
+
+---
+
+*Measure what matters. Strategy over syntax. Decisions over code. Tradeoffs over assumptions.*`} />);
 
 export default OpenTelemetryVendorsPage;
