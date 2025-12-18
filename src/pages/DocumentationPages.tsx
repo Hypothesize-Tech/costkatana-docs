@@ -731,7 +731,7 @@ export default config[process.env.NODE_ENV || 'development'];
 
 ### 2. Error Handling
 \`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Robust error handling with automatic fallback to cheaper models"}
-const ck = new CostKatana({ apiKey: process.env.API_KEY, retries: 3, timeout: 30000
+const ck = new CostKatana({ apiKey: process.env.COST_KATANA_API_KEY, retries: 3, timeout: 30000
 });
 
 try { const response = await ck.chat.completions.create({ model: 'gpt-4', messages: messages }); return response;
@@ -742,7 +742,7 @@ try { const response = await ck.chat.completions.create({ model: 'gpt-4', messag
 ### 3. Cost Optimization
 \`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Smart caching implementation to reduce API calls and costs"}
 // Implement smart caching
-const ck = new CostKatana({ apiKey: process.env.API_KEY });
+const ck = new CostKatana({ apiKey: process.env.COST_KATANA_API_KEY });
 const cache = new Map();
 
 async function chatWithCaching(messages) { const cacheKey = JSON.stringify(messages); if (cache.has(cacheKey)) { return cache.get(cacheKey); } const response = await ck.chat.completions.create({ model: 'gpt-3.5-turbo', messages }); cache.set(cacheKey, response); return response;
@@ -4974,7 +4974,7 @@ const traceService = new LocalTraceService({
 import { TraceClient } from 'cost-katana/trace';
 
 const traceService = new TraceClient({
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.COST_KATANA_API_KEY,
   projectId: process.env.PROJECT_ID
 });
 \`\`\`
