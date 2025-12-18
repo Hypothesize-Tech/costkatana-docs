@@ -1,6 +1,8 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneDark, oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import {
     Search,
     Cpu,
@@ -46,6 +48,7 @@ import {
     List,
     Table2,
     Rows3,
+    GitCompare,
     type LucideIcon
 } from 'lucide-react';
 
@@ -330,6 +333,57 @@ const SupportedModelsPage: React.FC = () => {
     const [viewMode, setViewMode] = useState<ViewMode>('cards');
     const [expandedProviders, setExpandedProviders] = useState<Set<string>>(new Set());
 
+    // Comparison state management
+    const [selectedModelsForComparison, setSelectedModelsForComparison] = useState<Model[]>([]);
+    const [showComparison, setShowComparison] = useState(false);
+
+    // Integration examples state
+    const [activeIntegrationTab, setActiveIntegrationTab] = useState<'typescript' | 'python' | 'curl'>('typescript');
+
+    // Advanced filters
+    const [priceRange, setPriceRange] = useState<[number, number]>([0, 200]);
+    const [contextSize, setContextSize] = useState<number>(0);
+    const [selectedCapabilities, setSelectedCapabilities] = useState<string[]>([]);
+    const [selectedInputModalities, setSelectedInputModalities] = useState<string[]>([]);
+    const [selectedOutputModalities, setSelectedOutputModalities] = useState<string[]>([]);
+
+    // Theme detection with reactive updates
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return document.documentElement.classList.contains('dark') ||
+                window.matchMedia('(prefers-color-scheme: dark)').matches;
+        }
+        return false;
+    });
+
+    useEffect(() => {
+        const checkTheme = () => {
+            setIsDarkMode(
+                document.documentElement.classList.contains('dark') ||
+                window.matchMedia('(prefers-color-scheme: dark)').matches
+            );
+        };
+
+        // Check on mount
+        checkTheme();
+
+        // Watch for theme changes
+        const observer = new MutationObserver(checkTheme);
+        observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+
+        // Watch for system theme changes
+        const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        mediaQuery.addEventListener('change', checkTheme);
+
+        return () => {
+            observer.disconnect();
+            mediaQuery.removeEventListener('change', checkTheme);
+        };
+    }, []);
+
     const viewModes: { id: ViewMode; name: string; icon: LucideIcon }[] = [
         { id: 'cards', name: 'Cards', icon: LayoutGrid },
         { id: 'table', name: 'Table', icon: Table2 },
@@ -427,6 +481,85 @@ const SupportedModelsPage: React.FC = () => {
             case 4: return { label: 'Enterprise', color: 'bg-rose-500', textColor: 'text-rose-500' };
             default: return { label: 'Unknown', color: 'bg-gray-500', textColor: 'text-gray-500' };
         }
+    };
+
+    // Enhanced pricing with optimization potential
+    const getEnhancedModelPricing = (modelId: string) => {
+        const basePricing = getModelPricing(modelId);
+        if (!basePricing) return null;
+
+        // Calculate optimization potential based on Cost Katana features
+        const inputPrice = parseFloat(basePricing.input.replace('$', ''));
+        const outputPrice = parseFloat(basePricing.output.replace('$', ''));
+
+        // Cortex optimization: 40-75% savings (average 57.5%)
+        const cortexSavings = 0.575;
+        const optimizedInput = inputPrice * (1 - cortexSavings);
+        const optimizedOutput = outputPrice * (1 - cortexSavings);
+
+        // Caching: Up to 100% on repeated requests (average 70% hit rate)
+        const cachingPotential = 0.70;
+
+        return {
+            ...basePricing,
+            optimized: {
+                input: `$${optimizedInput.toFixed(3)}`,
+                output: `$${optimizedOutput.toFixed(3)}`,
+                cortexSavings: `${(cortexSavings * 100).toFixed(0)}%`,
+                cachingSavings: `${(cachingPotential * 100).toFixed(0)}%`,
+                totalPotentialSavings: `${((cortexSavings + cachingPotential * (1 - cortexSavings)) * 100).toFixed(0)}%`
+            },
+            contextLength: getModelContextLength(modelId),
+            maxOutput: getModelMaxOutput(modelId),
+            latency: getModelLatency(modelId)
+        };
+    };
+
+    const getModelContextLength = (modelId: string): string => {
+        const contextLengths: Record<string, string> = {
+            // OpenAI
+            'gpt-5.1': '400K', 'gpt-5': '400K', 'gpt-5-mini': '400K', 'gpt-5-nano': '400K',
+            'gpt-4.1': '1M', 'gpt-4.1-mini': '1M', 'gpt-4.1-nano': '1M',
+            'gpt-4o': '128K', 'gpt-4o-mini': '128K',
+            'o1': '200K', 'o1-mini': '128K', 'o3': '200K', 'o3-mini': '200K',
+
+            // Anthropic
+            'claude-sonnet-4-5': '200K', 'claude-haiku-4-5': '200K', 'claude-opus-4-5': '200K',
+            'claude-3-7-sonnet': '200K', 'claude-3-5-haiku': '200K',
+
+            // Google
+            'gemini-3-pro-preview': '1M', 'gemini-2-5-pro': '1M', 'gemini-2-5-flash': '1M',
+            'gemini-2-0-flash': '1M', 'gemini-1-5-pro': '1M', 'gemini-1-5-flash': '1M',
+
+            // xAI
+            'grok-4-1-fast-reasoning': '2M', 'grok-4-fast-reasoning': '2M', 'grok-3': '131K',
+
+            // Others
+            'deepseek-chat': '128K', 'deepseek-reasoner': '128K',
+            'llama-4-maverick': '131K', 'llama-3-3-70b-alt': '128K',
+        };
+        return contextLengths[modelId] || '128K';
+    };
+
+    const getModelMaxOutput = (modelId: string): string => {
+        const maxOutputs: Record<string, string> = {
+            // Most models default to 4K-8K output
+            'gpt-5.1': '32K', 'gpt-5': '32K', 'gpt-4.1': '32K',
+            'claude-sonnet-4-5': '8K', 'claude-opus-4-5': '8K', 'claude-3-7-sonnet': '8K',
+            'gemini-3-pro-preview': '66K', 'gemini-2-5-pro': '66K', 'gemini-2-5-flash': '66K',
+            'o1': '32K', 'o3': '32K',
+        };
+        return maxOutputs[modelId] || '4K';
+    };
+
+    const getModelLatency = (modelId: string): string => {
+        // Approximate latency categories based on model size and type
+        const fastModels = ['gpt-4o-mini', 'claude-3-5-haiku', 'gemini-2-5-flash', 'grok-4-1-fast', 'deepseek-chat'];
+        const slowModels = ['o1', 'o3', 'claude-opus-4-5', 'gpt-5'];
+
+        if (fastModels.some(m => modelId.includes(m))) return 'Fast (~1-2s)';
+        if (slowModels.some(m => modelId.includes(m))) return 'Slow (~10-30s)';
+        return 'Medium (~3-8s)';
     };
 
     const getModelPricing = (modelId: string): { input: string; output: string; cached?: string; notes?: string } | null => {
@@ -612,6 +745,136 @@ const SupportedModelsPage: React.FC = () => {
         setTimeout(() => setCopiedId(null), 2000);
     };
 
+
+    // Comparison logic functions
+    const toggleModelForComparison = (model: Model) => {
+        setSelectedModelsForComparison(prev => {
+            const isSelected = prev.some(m => m.id === model.id);
+            if (isSelected) {
+                return prev.filter(m => m.id !== model.id);
+            } else if (prev.length < 3) { // Max 3 models for comparison
+                return [...prev, model];
+            }
+            return prev; // Don't add if already at max
+        });
+    };
+
+    const clearComparison = () => {
+        setSelectedModelsForComparison([]);
+        setShowComparison(false);
+    };
+
+    const startComparison = () => {
+        if (selectedModelsForComparison.length >= 2) {
+            setShowComparison(true);
+        }
+    };
+
+    const isModelSelectedForComparison = (model: Model) => {
+        return selectedModelsForComparison.some(m => m.id === model.id);
+    };
+
+    const selectAllInProvider = (providerId: string) => {
+        const provider = providers.find(p => p.id === providerId);
+        if (!provider) return;
+
+        const availableSlots = 3 - selectedModelsForComparison.length;
+        const modelsToAdd = provider.models.slice(0, availableSlots);
+
+        setSelectedModelsForComparison(prev => [
+            ...prev,
+            ...modelsToAdd.filter(model => !prev.some(m => m.id === model.id))
+        ]);
+    };
+
+    // Generate integration examples for a model
+    const getIntegrationExample = (model: Model, language: 'typescript' | 'python' | 'curl') => {
+        const provider = providers.find(p => p.models.some(m => m.id === model.id));
+        const providerName = provider?.name.toLowerCase().replace(/\s+/g, '-') || 'openai';
+
+        switch (language) {
+            case 'typescript':
+                return `import { AICostTracker } from 'cost-katana';
+
+// Initialize Cost Katana Gateway
+const tracker = new AICostTracker({
+  apiKey: 'dak_your_key_here',
+  defaultModel: '${model.id}',
+  gateway: {
+    cache: true,      // Enable semantic caching (70-80% savings)
+    retry: true,      // Auto-retry on failures
+    cortex: true      // Enable Cortex optimization (40-75% savings)
+  }
+});
+
+// Make AI request with automatic optimization
+const response = await tracker.generateContent(
+  'Hello, how can you help me today?',
+  {
+    model: '${model.id}',
+    maxTokens: 1000,
+    temperature: 0.7
+  }
+);
+
+console.log('Response:', response.content);
+console.log('Cost:', response.cost);
+console.log('Cached:', response.cached);
+console.log('Optimized:', response.optimized);`;
+
+            case 'python':
+                return `from costkatana import AICostTracker
+
+# Initialize Cost Katana Gateway
+tracker = AICostTracker(
+    api_key="dak_your_key_here",
+    default_model="${model.id}",
+    gateway_config={
+        "cache": True,      # Enable semantic caching
+        "retry": True,      # Auto-retry on failures
+        "cortex": True      # Enable Cortex optimization
+    }
+)
+
+# Make AI request with automatic optimization
+response = tracker.generate_content(
+    message="Hello, how can you help me today?",
+    model="${model.id}",
+    max_tokens=1000,
+    temperature=0.7
+)
+
+print(f"Response: {response.content}")
+print(f"Cost: {response.cost}")
+print(f"Cached: {response.cached}")
+print(f"Optimized: {response.optimized}")`;
+
+            case 'curl':
+                return `# Using Cost Katana Gateway with HTTP headers
+curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
+  -H "CostKatana-Auth: Bearer YOUR_COSTKATANA_KEY" \\
+  -H "CostKatana-Target-Url: https://api.${providerName}.com" \\
+  -H "CostKatana-Cache-Enabled: true" \\
+  -H "CostKatana-Retry-Enabled: true" \\
+  -H "CostKatana-Cortex-Enabled: true" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "model": "${model.id}",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, how can you help me today?"
+      }
+    ],
+    "max_tokens": 1000,
+    "temperature": 0.7
+  }'`;
+
+            default:
+                return '';
+        }
+    };
+
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -696,7 +959,7 @@ const SupportedModelsPage: React.FC = () => {
                                 >
                                     <Filter size={18} />
                                     <span className="font-medium">Filters</span>
-                                    {(selectedProvider !== 'all' || selectedUseCase !== 'all') && (
+                                    {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
                                         <span className="w-2 h-2 rounded-full bg-primary-400" />
                                     )}
                                 </button>
@@ -720,6 +983,7 @@ const SupportedModelsPage: React.FC = () => {
                                         );
                                     })}
                                 </div>
+
                             </div>
 
                             {/* Filter Panel */}
@@ -732,45 +996,267 @@ const SupportedModelsPage: React.FC = () => {
                                         transition={{ duration: 0.3 }}
                                         className="overflow-hidden"
                                     >
-                                        <div className="mt-4 p-5 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm">
-                                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                                <div>
-                                                    <label className="block text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-2">Provider</label>
-                                                    <select
-                                                        value={selectedProvider}
-                                                        onChange={(e) => setSelectedProvider(e.target.value)}
-                                                        className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
-                                                    >
-                                                        <option value="all">All Providers</option>
-                                                        {providers.map(provider => (
-                                                            <option key={provider.id} value={provider.id}>{provider.name}</option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-                                                <div>
-                                                    <label className="block text-sm font-medium text-light-text-secondary dark:text-dark-text-secondary mb-2">Capability</label>
-                                                    <select
-                                                        value={selectedUseCase}
-                                                        onChange={(e) => setSelectedUseCase(e.target.value)}
-                                                        className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
-                                                    >
-                                                        <option value="all">All Capabilities</option>
-                                                        {allUseCases.map(useCase => (
-                                                            <option key={useCase} value={useCase}>
-                                                                {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                        <div className="mt-4 p-6 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm space-y-6">
+                                            {/* Providers Filter */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Providers</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <select
+                                                    value={selectedProvider}
+                                                    onChange={(e) => setSelectedProvider(e.target.value)}
+                                                    className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
+                                                >
+                                                    <option value="all">All Providers</option>
+                                                    {providers.map(provider => (
+                                                        <option key={provider.id} value={provider.id}>{provider.name}</option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            {/* Price Range Filter */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Price Range</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <div className="space-y-2">
+                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted">
+                                                        ${priceRange[0].toFixed(2)} - ${priceRange[1].toFixed(2)}/M tokens
+                                                    </div>
+                                                    <input
+                                                        type="range"
+                                                        min="0"
+                                                        max="200"
+                                                        step="1"
+                                                        value={priceRange[1]}
+                                                        onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+                                                        className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500"
+                                                    />
+                                                    <div className="flex justify-between text-xs text-light-text-muted dark:text-dark-text-muted">
+                                                        <span>$0.00</span>
+                                                        <span>$200</span>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            {(selectedProvider !== 'all' || selectedUseCase !== 'all') && (
+
+                                            {/* Context Size Filter */}
+                                            <div>
                                                 <button
-                                                    onClick={() => { setSelectedProvider('all'); setSelectedUseCase('all'); }}
-                                                    className="mt-4 text-sm text-primary-600 dark:text-primary-400 hover:underline"
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Context Size</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <div className="space-y-2">
+                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted">
+                                                        Minimum: {contextSize === 0 ? '0' : contextSize >= 1000000 ? `${(contextSize / 1000000).toFixed(1)}M` : `${(contextSize / 1000).toFixed(0)}K`} tokens
+                                                    </div>
+                                                    <input
+                                                        type="range"
+                                                        min="0"
+                                                        max="1000000"
+                                                        step="10000"
+                                                        value={contextSize}
+                                                        onChange={(e) => setContextSize(parseInt(e.target.value))}
+                                                        className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500"
+                                                    />
+                                                    <div className="flex justify-between text-xs text-light-text-muted dark:text-dark-text-muted">
+                                                        <span>0</span>
+                                                        <span>1.0M</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Special Capabilities Filter */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Special Capabilities</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <div className="space-y-2">
+                                                    {['Caching', 'Web Search'].map((capability) => (
+                                                        <label key={capability} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedCapabilities.includes(capability)}
+                                                                onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        setSelectedCapabilities([...selectedCapabilities, capability]);
+                                                                    } else {
+                                                                        setSelectedCapabilities(selectedCapabilities.filter(c => c !== capability));
+                                                                    }
+                                                                }}
+                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+                                                            />
+                                                            {capability}
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Input Modalities Filter */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Input Modalities</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <div className="space-y-2">
+                                                    {['Text', 'Image', 'Audio', 'Video'].map((modality) => (
+                                                        <label key={modality} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedInputModalities.includes(modality)}
+                                                                onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        setSelectedInputModalities([...selectedInputModalities, modality]);
+                                                                    } else {
+                                                                        setSelectedInputModalities(selectedInputModalities.filter(m => m !== modality));
+                                                                    }
+                                                                }}
+                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+                                                            />
+                                                            {modality}
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Output Modalities Filter */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Output Modalities</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <div className="space-y-2">
+                                                    {['Text', 'Image', 'Audio', 'Video'].map((modality) => (
+                                                        <label key={modality} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={selectedOutputModalities.includes(modality)}
+                                                                onChange={(e) => {
+                                                                    if (e.target.checked) {
+                                                                        setSelectedOutputModalities([...selectedOutputModalities, modality]);
+                                                                    } else {
+                                                                        setSelectedOutputModalities(selectedOutputModalities.filter(m => m !== modality));
+                                                                    }
+                                                                }}
+                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
+                                                            />
+                                                            {modality}
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            {/* Capability Filter (existing) */}
+                                            <div>
+                                                <button
+                                                    onClick={() => {/* Toggle collapse */ }}
+                                                    className="flex items-center justify-between w-full text-left mb-3"
+                                                >
+                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Capabilities</span>
+                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
+                                                </button>
+                                                <select
+                                                    value={selectedUseCase}
+                                                    onChange={(e) => setSelectedUseCase(e.target.value)}
+                                                    className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
+                                                >
+                                                    <option value="all">All Capabilities</option>
+                                                    {allUseCases.map(useCase => (
+                                                        <option key={useCase} value={useCase}>
+                                                            {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
+                                                        </option>
+                                                    ))}
+                                                </select>
+                                            </div>
+
+                                            {/* Clear Filters Button */}
+                                            {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
+                                                <button
+                                                    onClick={() => {
+                                                        setSelectedProvider('all');
+                                                        setSelectedUseCase('all');
+                                                        setPriceRange([0, 200]);
+                                                        setContextSize(0);
+                                                        setSelectedCapabilities([]);
+                                                        setSelectedInputModalities([]);
+                                                        setSelectedOutputModalities([]);
+                                                    }}
+                                                    className="w-full px-4 py-2 text-sm text-primary-600 dark:text-primary-400 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 rounded-lg transition-colors font-medium"
                                                 >
                                                     Clear all filters
                                                 </button>
                                             )}
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+
+                            {/* Comparison Controls */}
+                            <AnimatePresence>
+                                {selectedModelsForComparison.length > 0 && (
+                                    <motion.div
+                                        initial={{ opacity: 0, y: -10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        exit={{ opacity: 0, y: -10 }}
+                                        className="mt-4 p-4 bg-gradient-to-r from-primary-500/10 via-primary-600/10 to-primary-500/10 border border-primary-500/20 rounded-xl"
+                                    >
+                                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
+                                            <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap-2">
+                                                    <div className="p-1.5 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white">
+                                                        <GitCompare size={16} />
+                                                    </div>
+                                                    <span className="font-medium text-light-text-primary dark:text-dark-text-primary">
+                                                        {selectedModelsForComparison.length} model{selectedModelsForComparison.length !== 1 ? 's' : ''} selected
+                                                    </span>
+                                                </div>
+                                                <div className="flex -space-x-1">
+                                                    {selectedModelsForComparison.slice(0, 3).map((model, index) => (
+                                                        <div
+                                                            key={model.id}
+                                                            className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-xs font-bold flex items-center justify-center border-2 border-white dark:border-dark-panel shadow-sm"
+                                                            style={{ zIndex: 10 - index }}
+                                                        >
+                                                            {model.name.charAt(0)}
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <div className="flex items-center gap-2 w-full sm:w-auto">
+                                                <button
+                                                    onClick={clearComparison}
+                                                    className="px-3 py-1.5 text-sm text-light-text-muted dark:text-dark-text-muted hover:text-light-text-primary dark:hover:text-dark-text-primary transition-colors"
+                                                >
+                                                    Clear
+                                                </button>
+                                                <button
+                                                    onClick={startComparison}
+                                                    disabled={selectedModelsForComparison.length < 2}
+                                                    className="flex-1 sm:flex-none px-4 py-1.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium transition-all shadow-lg shadow-primary-500/25"
+                                                >
+                                                    Compare {selectedModelsForComparison.length} Models
+                                                </button>
+                                            </div>
                                         </div>
                                     </motion.div>
                                 )}
@@ -833,10 +1319,18 @@ const SupportedModelsPage: React.FC = () => {
                                                     {provider.description}
                                                 </p>
                                             </div>
-                                            <div className="hidden sm:flex items-center gap-2">
+                                            <div className="flex items-center gap-2">
                                                 <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-500/20">
                                                     {provider.models.length} models
                                                 </span>
+                                                {selectedModelsForComparison.length < 3 && (
+                                                    <button
+                                                        onClick={() => selectAllInProvider(provider.id)}
+                                                        className="px-3 py-1.5 text-sm font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-500/10 dark:hover:bg-primary-500/10 rounded-lg transition-colors"
+                                                    >
+                                                        Select All
+                                                    </button>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -848,14 +1342,35 @@ const SupportedModelsPage: React.FC = () => {
                                                 const pricingInfo = getPricingTierInfo(model.pricingTier);
                                                 const pricing = getModelPricing(model.id);
 
+                                                const isSelected = isModelSelectedForComparison(model);
+
                                                 return (
-                                                    <motion.button
+                                                    <motion.div
                                                         key={model.id}
-                                                        onClick={() => setSelectedModel(model)}
                                                         whileHover={{ scale: 1.02, y: -2 }}
                                                         whileTap={{ scale: 0.98 }}
-                                                        className="group relative p-4 bg-light-panel dark:bg-dark-bg-300 border border-gray-100 dark:border-gray-700/50 rounded-xl text-left hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10 transition-all"
+                                                        className={`group relative p-4 bg-light-panel dark:bg-dark-bg-300 border rounded-xl text-left transition-all ${isSelected
+                                                            ? 'border-highlight-500 shadow-lg shadow-highlight-500/20 bg-highlight-500/5'
+                                                            : 'border-gray-100 dark:border-gray-700/50 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10'
+                                                            }`}
                                                     >
+                                                        {/* Comparison Checkbox */}
+                                                        <div className="absolute -top-2 -left-2 z-10">
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    toggleModelForComparison(model);
+                                                                }}
+                                                                className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all shadow-sm ${isSelected
+                                                                    ? 'bg-gradient-to-br from-primary-500 to-primary-600 border-transparent text-white shadow-lg shadow-primary-500/30'
+                                                                    : 'bg-white dark:bg-dark-panel border-gray-300 dark:border-gray-600 hover:border-primary-500 hover:bg-primary-500/5 dark:hover:bg-primary-500/10'
+                                                                    }`}
+                                                                disabled={!isSelected && selectedModelsForComparison.length >= 3}
+                                                            >
+                                                                {isSelected && <Check size={14} className="text-white" />}
+                                                            </button>
+                                                        </div>
+
                                                         {/* Status Badge */}
                                                         {(model.isLatest || model.isRecommended) && (
                                                             <div className="absolute -top-2 -right-2">
@@ -876,10 +1391,18 @@ const SupportedModelsPage: React.FC = () => {
 
                                                         {/* Model Name */}
                                                         <div className="flex items-start justify-between mb-2">
-                                                            <h3 className={`font-semibold text-light-text-primary dark:text-dark-text-primary group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors ${model.isDeprecated ? 'line-through opacity-60' : ''}`}>
+                                                            <button
+                                                                onClick={() => setSelectedModel(model)}
+                                                                className={`font-semibold text-light-text-primary dark:text-dark-text-primary hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-left ${model.isDeprecated ? 'line-through opacity-60' : ''}`}
+                                                            >
                                                                 {model.name}
-                                                            </h3>
-                                                            <ChevronRight size={16} className="text-light-text-muted dark:text-dark-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => setSelectedModel(model)}
+                                                                className="text-light-text-muted dark:text-dark-text-muted opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary-500"
+                                                            >
+                                                                <ChevronRight size={16} />
+                                                            </button>
                                                         </div>
 
                                                         {/* Capabilities */}
@@ -927,7 +1450,7 @@ const SupportedModelsPage: React.FC = () => {
                                                         {model.isDeprecated && (
                                                             <div className="absolute inset-0 bg-gray-500/5 dark:bg-gray-500/10 rounded-xl" />
                                                         )}
-                                                    </motion.button>
+                                                    </motion.div>
                                                 );
                                             })}
                                         </div>
@@ -1037,6 +1560,7 @@ const SupportedModelsPage: React.FC = () => {
                                 <table className="w-full">
                                     <thead>
                                         <tr className="bg-gray-50 dark:bg-gray-900/50">
+                                            <th className="px-3 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Compare</th>
                                             <th className="px-4 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Provider</th>
                                             <th className="px-4 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Model</th>
                                             <th className="px-4 py-3 text-left text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">Capabilities</th>
@@ -1050,8 +1574,24 @@ const SupportedModelsPage: React.FC = () => {
                                             provider.models.map((model) => {
                                                 const pricing = getModelPricing(model.id);
                                                 const pricingInfo = getPricingTierInfo(model.pricingTier);
+                                                const isSelected = isModelSelectedForComparison(model);
                                                 return (
-                                                    <tr key={model.id} onClick={() => setSelectedModel(model)} className="hover:bg-primary-500/5 dark:hover:bg-primary-500/10 cursor-pointer transition-colors">
+                                                    <tr key={model.id} className={`transition-colors ${isSelected ? 'bg-highlight-500/5' : 'hover:bg-primary-500/5 dark:hover:bg-primary-500/10'}`}>
+                                                        <td className="px-3 py-3">
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    toggleModelForComparison(model);
+                                                                }}
+                                                                className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all shadow-sm ${isSelected
+                                                                    ? 'bg-gradient-to-br from-primary-500 to-primary-600 border-transparent text-white shadow-lg shadow-primary-500/30'
+                                                                    : 'bg-white dark:bg-dark-panel border-gray-300 dark:border-gray-600 hover:border-primary-500 hover:bg-primary-500/5 dark:hover:bg-primary-500/10'
+                                                                    }`}
+                                                                disabled={!isSelected && selectedModelsForComparison.length >= 3}
+                                                            >
+                                                                {isSelected && <Check size={12} className="text-white" />}
+                                                            </button>
+                                                        </td>
                                                         <td className="px-4 py-3">
                                                             <div className="flex items-center gap-2">
                                                                 <div className="w-6 h-6 rounded flex items-center justify-center" style={{ backgroundColor: `${provider.brandColor}15` }}>
@@ -1061,7 +1601,12 @@ const SupportedModelsPage: React.FC = () => {
                                                             </div>
                                                         </td>
                                                         <td className="px-4 py-3">
-                                                            <div className="font-medium text-light-text-primary dark:text-dark-text-primary text-sm">{model.name}</div>
+                                                            <button
+                                                                onClick={() => setSelectedModel(model)}
+                                                                className="font-medium text-light-text-primary dark:text-dark-text-primary text-sm hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-left"
+                                                            >
+                                                                {model.name}
+                                                            </button>
                                                         </td>
                                                         <td className="px-4 py-3">
                                                             <div className="flex flex-wrap gap-1">
@@ -1201,6 +1746,265 @@ const SupportedModelsPage: React.FC = () => {
                     </motion.div>
                 </div>
 
+                {/* Floating Compare Button (Mobile) */}
+                <AnimatePresence>
+                    {selectedModelsForComparison.length >= 2 && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 100 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 100 }}
+                            className="fixed bottom-6 right-6 z-40 sm:hidden"
+                        >
+                            <button
+                                onClick={startComparison}
+                                className="flex items-center gap-2 px-4 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full shadow-lg shadow-black/25 hover:shadow-xl transition-all font-medium"
+                            >
+                                <GitCompare size={20} />
+                                <span>Compare ({selectedModelsForComparison.length})</span>
+                            </button>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Model Comparison Modal */}
+                <AnimatePresence>
+                    {showComparison && selectedModelsForComparison.length >= 2 && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+                            onClick={() => setShowComparison(false)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Escape') {
+                                    setShowComparison(false);
+                                }
+                            }}
+                            tabIndex={-1}
+                        >
+                            <motion.div
+                                initial={{ scale: 0.9, opacity: 0, y: 20 }}
+                                animate={{ scale: 1, opacity: 1, y: 0 }}
+                                exit={{ scale: 0.9, opacity: 0, y: 20 }}
+                                transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="bg-white dark:bg-dark-panel rounded-2xl max-w-6xl w-full max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700/50 shadow-2xl"
+                                role="dialog"
+                                aria-modal="true"
+                                aria-labelledby="comparison-modal-title"
+                                aria-describedby="comparison-modal-description"
+                            >
+                                <div className="p-6">
+                                    {/* Modal Header */}
+                                    <div className="flex items-center justify-between mb-6 border-b border-gray-200 dark:border-gray-800 pb-4">
+                                        <div className="flex items-center gap-4">
+                                            <div className="p-2 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg">
+                                                <GitCompare size={24} />
+                                            </div>
+                                            <div>
+                                                <h2 id="comparison-modal-title" className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary font-display">
+                                                    Model Comparison
+                                                </h2>
+                                                <p id="comparison-modal-description" className="text-light-text-muted dark:text-dark-text-muted">
+                                                    Compare {selectedModelsForComparison.length} models side by side
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <button
+                                            onClick={() => setShowComparison(false)}
+                                            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                                        >
+                                            <X size={20} className="text-light-text-muted dark:text-dark-text-muted" />
+                                        </button>
+                                    </div>
+
+                                    {/* Models Grid */}
+                                    <div className={`grid gap-4 lg:gap-6 ${selectedModelsForComparison.length === 2
+                                        ? 'grid-cols-1 md:grid-cols-2'
+                                        : 'grid-cols-1 lg:grid-cols-3'
+                                        }`}>
+                                        {selectedModelsForComparison.map((model) => {
+                                            const provider = providers.find(p => p.models.some(m => m.id === model.id));
+                                            const enhancedPricing = getEnhancedModelPricing(model.id);
+                                            const pricingInfo = getPricingTierInfo(model.pricingTier);
+
+                                            return (
+                                                <div key={model.id} className="bg-light-panel dark:bg-dark-bg-300 rounded-xl p-5 border border-gray-200 dark:border-gray-700/50">
+                                                    {/* Model Header */}
+                                                    <div className="flex items-center gap-3 mb-4 pb-3 border-b border-gray-200 dark:border-gray-800">
+                                                        <div
+                                                            className="w-10 h-10 rounded-lg flex items-center justify-center"
+                                                            style={{ backgroundColor: `${provider?.brandColor}15` }}
+                                                        >
+                                                            {provider?.logo ? (
+                                                                <img src={provider.logo} alt="" className="w-6 h-6 object-contain" />
+                                                            ) : provider?.logoFallback && (
+                                                                <provider.logoFallback size={16} style={{ color: provider.brandColor }} />
+                                                            )}
+                                                        </div>
+                                                        <div className="flex-1 min-w-0">
+                                                            <h3 className="font-semibold text-light-text-primary dark:text-dark-text-primary truncate">
+                                                                {model.name}
+                                                            </h3>
+                                                            <p className="text-xs text-light-text-muted dark:text-dark-text-muted">
+                                                                {provider?.name}
+                                                            </p>
+                                                        </div>
+                                                        <button
+                                                            onClick={() => toggleModelForComparison(model)}
+                                                            className="p-1 text-light-text-muted hover:text-red-500 transition-colors"
+                                                        >
+                                                            <X size={16} />
+                                                        </button>
+                                                    </div>
+
+                                                    {/* Enhanced Pricing Stats */}
+                                                    <div className="space-y-4 mb-4">
+                                                        {/* Standard Pricing */}
+                                                        <div>
+                                                            <h4 className="text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2">
+                                                                Standard Pricing (per 1M tokens)
+                                                            </h4>
+                                                            {enhancedPricing ? (
+                                                                <div className="grid grid-cols-2 gap-2">
+                                                                    <div className="text-center p-2 bg-white dark:bg-dark-panel rounded-lg">
+                                                                        <div className="text-xs text-light-text-muted dark:text-dark-text-muted">Input</div>
+                                                                        <div className="font-semibold text-primary-600 dark:text-primary-400">{enhancedPricing.input}</div>
+                                                                    </div>
+                                                                    <div className="text-center p-2 bg-white dark:bg-dark-panel rounded-lg">
+                                                                        <div className="text-xs text-light-text-muted dark:text-dark-text-muted">Output</div>
+                                                                        <div className="font-semibold text-highlight-600 dark:text-highlight-400">{enhancedPricing.output}</div>
+                                                                    </div>
+                                                                </div>
+                                                            ) : (
+                                                                <div className="text-center p-3 bg-white dark:bg-dark-panel rounded-lg">
+                                                                    <span className={`font-semibold ${pricingInfo.textColor}`}>
+                                                                        {pricingInfo.label} Tier
+                                                                    </span>
+                                                                </div>
+                                                            )}
+                                                        </div>
+
+                                                        {/* Optimized Pricing */}
+                                                        {enhancedPricing?.optimized && (
+                                                            <div>
+                                                                <h4 className="text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2">
+                                                                    With Cost Katana Optimization
+                                                                </h4>
+                                                                <div className="p-3 bg-gradient-to-r from-primary-500/10 to-highlight-500/10 rounded-lg border border-primary-500/20">
+                                                                    <div className="grid grid-cols-2 gap-2 mb-2">
+                                                                        <div className="text-center">
+                                                                            <div className="text-xs text-light-text-muted dark:text-dark-text-muted">Optimized Input</div>
+                                                                            <div className="font-semibold text-primary-600 dark:text-primary-400">{enhancedPricing.optimized.input}</div>
+                                                                        </div>
+                                                                        <div className="text-center">
+                                                                            <div className="text-xs text-light-text-muted dark:text-dark-text-muted">Optimized Output</div>
+                                                                            <div className="font-semibold text-highlight-600 dark:text-highlight-400">{enhancedPricing.optimized.output}</div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="text-center">
+                                                                        <div className="text-xs text-light-text-muted dark:text-dark-text-muted">Total Potential Savings</div>
+                                                                        <div className="font-bold text-emerald-600 dark:text-emerald-400">{enhancedPricing.optimized.totalPotentialSavings}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )}
+
+                                                        {/* Context & Performance */}
+                                                        <div>
+                                                            <h4 className="text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2">
+                                                                Performance Specs
+                                                            </h4>
+                                                            <div className="space-y-2">
+                                                                <div className="flex justify-between items-center p-2 bg-white dark:bg-dark-panel rounded-lg">
+                                                                    <span className="text-xs text-light-text-muted dark:text-dark-text-muted">Context Length</span>
+                                                                    <span className="font-semibold text-light-text-primary dark:text-dark-text-primary">
+                                                                        {enhancedPricing?.contextLength || 'N/A'}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex justify-between items-center p-2 bg-white dark:bg-dark-panel rounded-lg">
+                                                                    <span className="text-xs text-light-text-muted dark:text-dark-text-muted">Max Output</span>
+                                                                    <span className="font-semibold text-light-text-primary dark:text-dark-text-primary">
+                                                                        {enhancedPricing?.maxOutput || 'N/A'}
+                                                                    </span>
+                                                                </div>
+                                                                <div className="flex justify-between items-center p-2 bg-white dark:bg-dark-panel rounded-lg">
+                                                                    <span className="text-xs text-light-text-muted dark:text-dark-text-muted">Latency</span>
+                                                                    <span className="font-semibold text-light-text-primary dark:text-dark-text-primary">
+                                                                        {enhancedPricing?.latency || 'N/A'}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Capabilities */}
+                                                        <div>
+                                                            <h4 className="text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2">
+                                                                Capabilities
+                                                            </h4>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {model.useCases.map(useCase => {
+                                                                    const { icon: Icon, color } = getUseCaseIcon(useCase);
+                                                                    return (
+                                                                        <span
+                                                                            key={useCase}
+                                                                            className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium bg-white dark:bg-dark-panel text-light-text-secondary dark:text-dark-text-secondary"
+                                                                        >
+                                                                            <Icon size={10} className={color} />
+                                                                            <span className="capitalize">{useCase}</span>
+                                                                        </span>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Status & Badges */}
+                                                        <div>
+                                                            <h4 className="text-xs font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider mb-2">
+                                                                Status
+                                                            </h4>
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {model.isLatest && (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold bg-primary-500/10 text-primary-600 dark:text-primary-400">
+                                                                        <Sparkles size={10} /> New
+                                                                    </span>
+                                                                )}
+                                                                {model.isRecommended && (
+                                                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400">
+                                                                        <Star size={10} /> Top
+                                                                    </span>
+                                                                )}
+                                                                {model.isDeprecated && (
+                                                                    <span className="inline-flex items-center px-2 py-1 rounded text-xs font-semibold bg-gray-500/10 text-gray-600 dark:text-gray-400">
+                                                                        Deprecated
+                                                                    </span>
+                                                                )}
+                                                                {!model.isLatest && !model.isRecommended && !model.isDeprecated && (
+                                                                    <span className="px-2 py-1 rounded text-xs font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary">
+                                                                        Active
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+
+                                                        {/* Integration Button */}
+                                                        <button
+                                                            onClick={() => setSelectedModel(model)}
+                                                            className="w-full px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all font-medium text-sm shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30"
+                                                        >
+                                                            View Integration Guide
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
                 {/* Model Details Modal */}
                 <AnimatePresence>
                     {selectedModel && (
@@ -1323,24 +2127,129 @@ const SupportedModelsPage: React.FC = () => {
                                     </div>
 
                                     {/* Model ID */}
-                                    <div>
+                                    <div className="mb-6">
                                         <h3 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary mb-3 uppercase tracking-wider">
                                             Model ID
                                         </h3>
-                                        <div className="flex items-center gap-2">
-                                            <code className="flex-1 px-4 py-3 bg-gray-900 dark:bg-gray-950 rounded-lg text-sm font-mono text-primary-400 overflow-x-auto">
-                                                {selectedModel.id}
-                                            </code>
-                                            <button
-                                                onClick={() => copyModelId(selectedModel.id)}
-                                                className="p-3 bg-gray-900 dark:bg-gray-950 rounded-lg hover:bg-gray-800 dark:hover:bg-gray-900 transition-colors"
+                                        <div className="relative">
+                                            <div className="flex items-center gap-2 p-4 bg-gradient-to-r from-gray-900 to-gray-800 dark:from-gray-950 dark:to-gray-900 rounded-xl border border-gray-700/50 dark:border-gray-600/50">
+                                                <code className="flex-1 text-sm font-mono text-primary-400 dark:text-primary-300 font-medium tracking-wide overflow-x-auto">
+                                                    {selectedModel.id}
+                                                </code>
+                                                <button
+                                                    onClick={() => copyModelId(selectedModel.id)}
+                                                    className="p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-black/30 rounded-lg transition-all border border-white/20 dark:border-gray-600/20"
+                                                >
+                                                    {copiedId === selectedModel.id ? (
+                                                        <Check size={16} className="text-emerald-400" />
+                                                    ) : (
+                                                        <Copy size={16} className="text-gray-300 dark:text-gray-400" />
+                                                    )}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Integration Examples */}
+                                    <div>
+                                        <h3 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary mb-3 uppercase tracking-wider">
+                                            Cost Katana Gateway Integration
+                                        </h3>
+
+                                        {/* Language Tabs */}
+                                        <div className="flex items-center gap-1 p-1 bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-lg mb-4 border border-gray-200 dark:border-gray-700/50">
+                                            {(['typescript', 'python', 'curl'] as const).map((lang) => (
+                                                <button
+                                                    key={lang}
+                                                    onClick={() => setActiveIntegrationTab(lang)}
+                                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all capitalize relative ${activeIntegrationTab === lang
+                                                        ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25'
+                                                        : 'text-light-text-muted dark:text-dark-text-muted hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-500/5 dark:hover:bg-primary-500/10'
+                                                        }`}
+                                                >
+                                                    {lang === 'typescript' ? 'TypeScript' : lang === 'python' ? 'Python' : 'cURL'}
+                                                </button>
+                                            ))}
+                                        </div>
+
+                                        {/* Enhanced Code Example with Syntax Highlighting */}
+                                        <div className="relative overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700/50 shadow-lg">
+                                            <SyntaxHighlighter
+                                                language={activeIntegrationTab === 'curl' ? 'bash' : activeIntegrationTab}
+                                                style={isDarkMode ? oneDark : oneLight}
+                                                customStyle={{
+                                                    margin: 0,
+                                                    borderRadius: '0.75rem',
+                                                    fontSize: '0.875rem',
+                                                    lineHeight: '1.75',
+                                                    padding: '1.25rem',
+                                                    background: isDarkMode
+                                                        ? 'linear-gradient(135deg, #0d1117 0%, #161b22 100%)'
+                                                        : 'linear-gradient(135deg, #f6f8fa 0%, #ffffff 100%)',
+                                                    border: 'none',
+                                                }}
+                                                wrapLines={true}
+                                                wrapLongLines={true}
+                                                showLineNumbers={false}
+                                                codeTagProps={{
+                                                    style: {
+                                                        fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
+                                                        color: isDarkMode ? '#c9d1d9' : '#24292f',
+                                                    }
+                                                }}
+                                                lineProps={{
+                                                    style: {
+                                                        padding: '0.125rem 0',
+                                                    }
+                                                }}
                                             >
-                                                {copiedId === selectedModel.id ? (
-                                                    <Check size={18} className="text-primary-400" />
+                                                {getIntegrationExample(selectedModel, activeIntegrationTab)}
+                                            </SyntaxHighlighter>
+                                            <button
+                                                onClick={() => {
+                                                    navigator.clipboard.writeText(getIntegrationExample(selectedModel, activeIntegrationTab));
+                                                    setCopiedId(`integration-${activeIntegrationTab}`);
+                                                    setTimeout(() => setCopiedId(null), 2000);
+                                                }}
+                                                className="absolute top-3 right-3 p-2 bg-white/10 dark:bg-black/20 backdrop-blur-sm hover:bg-white/20 dark:hover:bg-black/30 rounded-lg transition-all border border-white/20 dark:border-gray-600/20"
+                                            >
+                                                {copiedId === `integration-${activeIntegrationTab}` ? (
+                                                    <Check size={16} className="text-emerald-500" />
                                                 ) : (
-                                                    <Copy size={18} className="text-gray-400" />
+                                                    <Copy size={16} className="text-gray-600 dark:text-gray-300" />
                                                 )}
                                             </button>
+                                        </div>
+
+                                        {/* Features List */}
+                                        <div className="mt-4 grid grid-cols-2 gap-3">
+                                            <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                                <div className="w-2 h-2 rounded-full bg-primary-500"></div>
+                                                <span>Semantic Caching (70-80% savings)</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                                <div className="w-2 h-2 rounded-full bg-highlight-500"></div>
+                                                <span>Cortex Optimization (40-75% savings)</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                                <div className="w-2 h-2 rounded-full bg-amber-500"></div>
+                                                <span>Automatic Retries & Failover</span>
+                                            </div>
+                                            <div className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary">
+                                                <div className="w-2 h-2 rounded-full bg-emerald-500"></div>
+                                                <span>Cost Tracking & Analytics</span>
+                                            </div>
+                                        </div>
+
+                                        {/* Get Started Button */}
+                                        <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+                                            <a
+                                                href="/getting-started/quick-start"
+                                                className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 transition-all font-medium text-sm shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30"
+                                            >
+                                                <span>Get Started with Cost Katana</span>
+                                                <ExternalLink size={14} />
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
