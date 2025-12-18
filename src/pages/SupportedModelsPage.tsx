@@ -38,7 +38,6 @@ import {
     AudioLines,
     Network,
     Wand2,
-    Filter,
     ChevronRight,
     ChevronDown,
     ExternalLink,
@@ -49,6 +48,7 @@ import {
     Table2,
     Rows3,
     GitCompare,
+    SlidersHorizontal,
     type LucideIcon
 } from 'lucide-react';
 
@@ -323,6 +323,46 @@ const providers: Provider[] = [
 
 type ViewMode = 'cards' | 'table' | 'list' | 'accordion';
 
+interface FilterSectionProps {
+    id: string;
+    title: string;
+    isExpanded: boolean;
+    onToggle: () => void;
+    children: React.ReactNode;
+}
+
+const FilterSection: React.FC<FilterSectionProps> = ({ title, isExpanded, onToggle, children }) => (
+    <div className="border border-slate-200 dark:border-gray-600 rounded-lg overflow-hidden">
+        <button
+            onClick={onToggle}
+            className="w-full px-4 py-3 bg-slate-50 dark:bg-dark-bg-200 hover:bg-slate-100 dark:hover:bg-dark-bg-300 transition-colors flex items-center justify-between text-left"
+        >
+            <span className="text-sm font-medium text-slate-900 dark:text-slate-100">{title}</span>
+            <motion.div
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                transition={{ duration: 0.2 }}
+            >
+                <ChevronDown size={16} className="text-slate-500 dark:text-slate-400" />
+            </motion.div>
+        </button>
+        <AnimatePresence>
+            {isExpanded && (
+                <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="overflow-hidden"
+                >
+                    <div className="p-4 bg-white dark:bg-dark-panel">
+                        {children}
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    </div>
+);
+
 const SupportedModelsPage: React.FC = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [selectedProvider, setSelectedProvider] = useState<string>('all');
@@ -346,6 +386,7 @@ const SupportedModelsPage: React.FC = () => {
     const [selectedCapabilities, setSelectedCapabilities] = useState<string[]>([]);
     const [selectedInputModalities, setSelectedInputModalities] = useState<string[]>([]);
     const [selectedOutputModalities, setSelectedOutputModalities] = useState<string[]>([]);
+    const [expandedFilterSections, setExpandedFilterSections] = useState<Set<string>>(new Set(['providers', 'capabilities']));
 
     // Theme detection with reactive updates
     const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -398,6 +439,18 @@ const SupportedModelsPage: React.FC = () => {
                 newSet.delete(providerId);
             } else {
                 newSet.add(providerId);
+            }
+            return newSet;
+        });
+    };
+
+    const toggleFilterSection = (sectionId: string) => {
+        setExpandedFilterSections(prev => {
+            const newSet = new Set(prev);
+            if (newSet.has(sectionId)) {
+                newSet.delete(sectionId);
+            } else {
+                newSet.add(sectionId);
             }
             return newSet;
         });
@@ -895,385 +948,411 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                 <meta name="description" content="Complete list of 400+ supported AI models across OpenAI, Anthropic, Google AI, AWS Bedrock, xAI, DeepSeek, Mistral, Cohere, and Meta." />
             </Helmet>
 
-            <div className="min-h-screen bg-gradient-to-br from-light-bg via-light-bg to-primary-500/5 dark:from-dark-bg-100 dark:via-dark-bg-200 dark:to-primary-900/20">
+            <div className="min-h-screen bg-white dark:bg-dark-bg-100">
+                {/* Hero Section */}
+                <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/20 dark:from-dark-bg-100 dark:via-dark-bg-200 dark:to-primary-900/10">
+                    <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-700/25 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] dark:[mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]"></div>
+                    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+                        <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                            className="text-center"
+                        >
+                            <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white/80 dark:bg-dark-panel/80 backdrop-blur-sm border border-slate-200/60 dark:border-gray-700/60 shadow-sm mb-8">
+                                <Database size={18} className="text-primary-600 dark:text-primary-400" />
+                                <span className="text-slate-700 dark:text-slate-300 font-medium">
+                                    {totalModels}+ Models across {providers.length} Providers
+                                </span>
+                            </div>
+
+                            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 font-display">
+                                <span className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 dark:from-white dark:via-slate-100 dark:to-white bg-clip-text text-transparent">
+                                    AI Models
+                                </span>
+                                <br />
+                                <span className="bg-gradient-to-r from-primary-600 via-primary-500 to-primary-600 bg-clip-text text-transparent">
+                                    Directory
+                                </span>
+                            </h1>
+
+                            <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
+                                Discover, compare, and integrate with 400+ AI models from leading providers.
+                                Get detailed pricing, capabilities, and ready-to-use code examples.
+                            </p>
+                        </motion.div>
+                    </div>
+                </div>
+
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    {/* Header */}
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5 }}
-                        className="text-center mb-10"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-primary-500/10 to-primary-500/5 dark:from-primary-500/20 dark:to-primary-500/10 border border-primary-500/20 text-primary-600 dark:text-primary-400 text-sm font-medium mb-6">
-                            <Database size={16} className="animate-pulse" />
-                            <span>{totalModels} Models • {providers.length} Providers</span>
-                        </div>
-
-                        <h1 className="text-4xl md:text-5xl font-bold mb-4 font-display">
-                            <span className="bg-gradient-to-r from-primary-500 via-primary-400 to-highlight-500 bg-clip-text text-transparent">
-                                Supported Models
-                            </span>
-                        </h1>
-
-                        <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
-                            Explore and compare AI models across all major providers. Click any model for details.
-                        </p>
-                    </motion.div>
-
-                    {/* Search & Filters */}
+                    {/* Search & Controls Bar */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2, duration: 0.5 }}
-                        className="mb-8"
+                        className="sticky top-4 z-30 mb-8"
                     >
-                        <div className="max-w-4xl mx-auto">
-                            <div className="flex flex-col sm:flex-row gap-3">
-                                {/* Search */}
-                                <div className="relative flex-1">
-                                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-light-text-muted dark:text-dark-text-muted w-5 h-5" />
-                                    <input
-                                        type="text"
-                                        placeholder="Search models, providers, or capabilities..."
-                                        value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full pl-12 pr-4 py-3.5 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl text-light-text-primary dark:text-dark-text-primary placeholder-light-text-muted dark:placeholder-dark-text-muted focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 transition-all shadow-sm"
-                                    />
-                                    {searchQuery && (
-                                        <button
-                                            onClick={() => setSearchQuery('')}
-                                            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-light-text-muted hover:text-light-text-primary dark:text-dark-text-muted dark:hover:text-dark-text-primary"
-                                        >
-                                            <X size={16} />
-                                        </button>
-                                    )}
-                                </div>
-
-                                {/* Filter Toggle */}
-                                <button
-                                    onClick={() => setShowFilters(!showFilters)}
-                                    className={`flex items-center gap-2 px-5 py-3.5 rounded-xl border transition-all shadow-sm ${showFilters
-                                        ? 'bg-primary-500 text-white border-primary-500'
-                                        : 'bg-white dark:bg-dark-panel border-gray-200 dark:border-gray-700/50 text-light-text-primary dark:text-dark-text-primary hover:border-primary-500'
-                                        }`}
-                                >
-                                    <Filter size={18} />
-                                    <span className="font-medium">Filters</span>
-                                    {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
-                                        <span className="w-2 h-2 rounded-full bg-primary-400" />
-                                    )}
-                                </button>
-
-                                {/* View Mode Toggle */}
-                                <div className="flex items-center gap-1 p-1 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm">
-                                    {viewModes.map((mode) => {
-                                        const IconComponent = mode.icon;
-                                        return (
+                        <div className="bg-white dark:bg-dark-panel rounded-2xl border border-slate-200 dark:border-gray-700/50 shadow-lg shadow-slate-900/5 dark:shadow-black/20 backdrop-blur-xl">
+                            <div className="p-4 sm:p-6">
+                                {/* Top Row - Search and View Controls */}
+                                <div className="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+                                    {/* Search Input */}
+                                    <div className="relative flex-1 max-w-2xl">
+                                        <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400 dark:text-slate-500 w-5 h-5" />
+                                        <input
+                                            type="text"
+                                            placeholder="Search models by name, provider, or capability..."
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                            className="w-full pl-12 pr-12 py-3.5 bg-slate-50 dark:bg-dark-bg-300 border border-slate-200 dark:border-gray-600 rounded-xl text-slate-900 dark:text-slate-100 placeholder-slate-500 dark:placeholder-slate-400 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all text-sm font-medium"
+                                        />
+                                        {searchQuery && (
                                             <button
-                                                key={mode.id}
-                                                onClick={() => setViewMode(mode.id)}
-                                                title={mode.name}
-                                                className={`p-2.5 rounded-lg transition-all ${viewMode === mode.id
-                                                    ? 'bg-primary-500 text-white shadow-lg shadow-primary-500/25'
-                                                    : 'text-light-text-muted dark:text-dark-text-muted hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-primary-600 dark:hover:text-primary-400'
-                                                    }`}
+                                                onClick={() => setSearchQuery('')}
+                                                className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
                                             >
-                                                <IconComponent size={18} />
+                                                <X size={16} />
                                             </button>
-                                        );
-                                    })}
+                                        )}
+                                    </div>
+
+                                    {/* Controls */}
+                                    <div className="flex items-center gap-3 w-full lg:w-auto">
+                                        {/* Filter Button */}
+                                        <button
+                                            onClick={() => setShowFilters(!showFilters)}
+                                            className={`flex items-center gap-2 px-4 py-3 rounded-xl border font-medium text-sm transition-all relative ${showFilters
+                                                ? 'bg-primary-500 text-white border-primary-500 shadow-lg shadow-primary-500/25'
+                                                : 'bg-white dark:bg-dark-bg-300 border-slate-200 dark:border-gray-600 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-dark-bg-200 hover:border-primary-500/50'
+                                                }`}
+                                        >
+                                            <SlidersHorizontal size={16} />
+                                            <span>Filters</span>
+                                            {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
+                                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-amber-500 rounded-full border-2 border-white dark:border-dark-panel"></div>
+                                            )}
+                                        </button>
+
+                                        {/* View Mode Toggle */}
+                                        <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-dark-bg-300 rounded-xl border border-slate-200 dark:border-gray-600">
+                                            {viewModes.map((mode) => {
+                                                const IconComponent = mode.icon;
+                                                return (
+                                                    <button
+                                                        key={mode.id}
+                                                        onClick={() => setViewMode(mode.id)}
+                                                        title={mode.name}
+                                                        className={`p-2.5 rounded-lg transition-all ${viewMode === mode.id
+                                                            ? 'bg-white dark:bg-dark-panel text-primary-600 dark:text-primary-400 shadow-sm border border-slate-200 dark:border-gray-600'
+                                                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 hover:bg-white/50 dark:hover:bg-dark-panel/50'
+                                                            }`}
+                                                    >
+                                                        <IconComponent size={16} />
+                                                    </button>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
                                 </div>
 
-                            </div>
+                                {/* Advanced Filters Panel */}
+                                <AnimatePresence>
+                                    {showFilters && (
+                                        <motion.div
+                                            initial={{ opacity: 0, height: 0, y: -10 }}
+                                            animate={{ opacity: 1, height: 'auto', y: 0 }}
+                                            exit={{ opacity: 0, height: 0, y: -10 }}
+                                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                                            className="overflow-hidden border-t border-slate-200 dark:border-gray-700"
+                                        >
+                                            <div className="pt-6">
+                                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                                                    {/* Primary Filters */}
+                                                    <div className="space-y-4">
+                                                        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                                                            Primary Filters
+                                                        </h3>
 
-                            {/* Filter Panel */}
-                            <AnimatePresence>
-                                {showFilters && (
-                                    <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="overflow-hidden"
-                                    >
-                                        <div className="mt-4 p-6 bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-xl shadow-sm space-y-6">
-                                            {/* Providers Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Providers</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <select
-                                                    value={selectedProvider}
-                                                    onChange={(e) => setSelectedProvider(e.target.value)}
-                                                    className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
-                                                >
-                                                    <option value="all">All Providers</option>
-                                                    {providers.map(provider => (
-                                                        <option key={provider.id} value={provider.id}>{provider.name}</option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            {/* Price Range Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Price Range</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <div className="space-y-2">
-                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted">
-                                                        ${priceRange[0].toFixed(2)} - ${priceRange[1].toFixed(2)}/M tokens
-                                                    </div>
-                                                    <input
-                                                        type="range"
-                                                        min="0"
-                                                        max="200"
-                                                        step="1"
-                                                        value={priceRange[1]}
-                                                        onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                                                        className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500"
-                                                    />
-                                                    <div className="flex justify-between text-xs text-light-text-muted dark:text-dark-text-muted">
-                                                        <span>$0.00</span>
-                                                        <span>$200</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* Context Size Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Context Size</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <div className="space-y-2">
-                                                    <div className="text-xs text-light-text-muted dark:text-dark-text-muted">
-                                                        Minimum: {contextSize === 0 ? '0' : contextSize >= 1000000 ? `${(contextSize / 1000000).toFixed(1)}M` : `${(contextSize / 1000).toFixed(0)}K`} tokens
-                                                    </div>
-                                                    <input
-                                                        type="range"
-                                                        min="0"
-                                                        max="1000000"
-                                                        step="10000"
-                                                        value={contextSize}
-                                                        onChange={(e) => setContextSize(parseInt(e.target.value))}
-                                                        className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-lg appearance-none cursor-pointer accent-primary-500"
-                                                    />
-                                                    <div className="flex justify-between text-xs text-light-text-muted dark:text-dark-text-muted">
-                                                        <span>0</span>
-                                                        <span>1.0M</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* Special Capabilities Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Special Capabilities</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <div className="space-y-2">
-                                                    {['Caching', 'Web Search'].map((capability) => (
-                                                        <label key={capability} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={selectedCapabilities.includes(capability)}
-                                                                onChange={(e) => {
-                                                                    if (e.target.checked) {
-                                                                        setSelectedCapabilities([...selectedCapabilities, capability]);
-                                                                    } else {
-                                                                        setSelectedCapabilities(selectedCapabilities.filter(c => c !== capability));
-                                                                    }
-                                                                }}
-                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
-                                                            />
-                                                            {capability}
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            {/* Input Modalities Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Input Modalities</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <div className="space-y-2">
-                                                    {['Text', 'Image', 'Audio', 'Video'].map((modality) => (
-                                                        <label key={modality} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={selectedInputModalities.includes(modality)}
-                                                                onChange={(e) => {
-                                                                    if (e.target.checked) {
-                                                                        setSelectedInputModalities([...selectedInputModalities, modality]);
-                                                                    } else {
-                                                                        setSelectedInputModalities(selectedInputModalities.filter(m => m !== modality));
-                                                                    }
-                                                                }}
-                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
-                                                            />
-                                                            {modality}
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            {/* Output Modalities Filter */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Output Modalities</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <div className="space-y-2">
-                                                    {['Text', 'Image', 'Audio', 'Video'].map((modality) => (
-                                                        <label key={modality} className="flex items-center gap-2 text-sm text-light-text-secondary dark:text-dark-text-secondary cursor-pointer hover:text-light-text-primary dark:hover:text-dark-text-primary">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={selectedOutputModalities.includes(modality)}
-                                                                onChange={(e) => {
-                                                                    if (e.target.checked) {
-                                                                        setSelectedOutputModalities([...selectedOutputModalities, modality]);
-                                                                    } else {
-                                                                        setSelectedOutputModalities(selectedOutputModalities.filter(m => m !== modality));
-                                                                    }
-                                                                }}
-                                                                className="w-4 h-4 rounded border-gray-300 dark:border-gray-600 text-primary-500 focus:ring-primary-500"
-                                                            />
-                                                            {modality}
-                                                        </label>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            {/* Capability Filter (existing) */}
-                                            <div>
-                                                <button
-                                                    onClick={() => {/* Toggle collapse */ }}
-                                                    className="flex items-center justify-between w-full text-left mb-3"
-                                                >
-                                                    <span className="text-sm font-semibold text-light-text-primary dark:text-dark-text-primary">Capabilities</span>
-                                                    <ChevronDown size={16} className="text-light-text-muted dark:text-dark-text-muted" />
-                                                </button>
-                                                <select
-                                                    value={selectedUseCase}
-                                                    onChange={(e) => setSelectedUseCase(e.target.value)}
-                                                    className="w-full px-4 py-2.5 bg-light-panel dark:bg-dark-bg-300 border border-gray-200 dark:border-gray-700 rounded-lg text-light-text-primary dark:text-dark-text-primary text-sm focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500"
-                                                >
-                                                    <option value="all">All Capabilities</option>
-                                                    {allUseCases.map(useCase => (
-                                                        <option key={useCase} value={useCase}>
-                                                            {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
-                                                        </option>
-                                                    ))}
-                                                </select>
-                                            </div>
-
-                                            {/* Clear Filters Button */}
-                                            {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
-                                                <button
-                                                    onClick={() => {
-                                                        setSelectedProvider('all');
-                                                        setSelectedUseCase('all');
-                                                        setPriceRange([0, 200]);
-                                                        setContextSize(0);
-                                                        setSelectedCapabilities([]);
-                                                        setSelectedInputModalities([]);
-                                                        setSelectedOutputModalities([]);
-                                                    }}
-                                                    className="w-full px-4 py-2 text-sm text-primary-600 dark:text-primary-400 hover:bg-primary-500/5 dark:hover:bg-primary-500/10 rounded-lg transition-colors font-medium"
-                                                >
-                                                    Clear all filters
-                                                </button>
-                                            )}
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                            {/* Comparison Controls */}
-                            <AnimatePresence>
-                                {selectedModelsForComparison.length > 0 && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="mt-4 p-4 bg-gradient-to-r from-primary-500/10 via-primary-600/10 to-primary-500/10 border border-primary-500/20 rounded-xl"
-                                    >
-                                        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-0">
-                                            <div className="flex items-center gap-3">
-                                                <div className="flex items-center gap-2">
-                                                    <div className="p-1.5 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white">
-                                                        <GitCompare size={16} />
-                                                    </div>
-                                                    <span className="font-medium text-light-text-primary dark:text-dark-text-primary">
-                                                        {selectedModelsForComparison.length} model{selectedModelsForComparison.length !== 1 ? 's' : ''} selected
-                                                    </span>
-                                                </div>
-                                                <div className="flex -space-x-1">
-                                                    {selectedModelsForComparison.slice(0, 3).map((model, index) => (
-                                                        <div
-                                                            key={model.id}
-                                                            className="w-6 h-6 rounded-full bg-gradient-to-br from-primary-500 to-primary-600 text-white text-xs font-bold flex items-center justify-center border-2 border-white dark:border-dark-panel shadow-sm"
-                                                            style={{ zIndex: 10 - index }}
+                                                        {/* Providers Filter */}
+                                                        <FilterSection
+                                                            id="providers"
+                                                            title="Providers"
+                                                            isExpanded={expandedFilterSections.has('providers')}
+                                                            onToggle={() => toggleFilterSection('providers')}
                                                         >
-                                                            {model.name.charAt(0)}
+                                                            <select
+                                                                value={selectedProvider}
+                                                                onChange={(e) => setSelectedProvider(e.target.value)}
+                                                                className="w-full px-3 py-2.5 bg-slate-50 dark:bg-dark-bg-300 border border-slate-200 dark:border-gray-600 rounded-lg text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all"
+                                                            >
+                                                                <option value="all">All Providers</option>
+                                                                {providers.map(provider => (
+                                                                    <option key={provider.id} value={provider.id}>{provider.name}</option>
+                                                                ))}
+                                                            </select>
+                                                        </FilterSection>
+
+                                                        {/* Capabilities Filter */}
+                                                        <FilterSection
+                                                            id="capabilities"
+                                                            title="Capabilities"
+                                                            isExpanded={expandedFilterSections.has('capabilities')}
+                                                            onToggle={() => toggleFilterSection('capabilities')}
+                                                        >
+                                                            <select
+                                                                value={selectedUseCase}
+                                                                onChange={(e) => setSelectedUseCase(e.target.value)}
+                                                                className="w-full px-3 py-2.5 bg-slate-50 dark:bg-dark-bg-300 border border-slate-200 dark:border-gray-600 rounded-lg text-slate-900 dark:text-slate-100 text-sm focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500 transition-all"
+                                                            >
+                                                                <option value="all">All Capabilities</option>
+                                                                {allUseCases.map(useCase => (
+                                                                    <option key={useCase} value={useCase}>
+                                                                        {useCase.charAt(0).toUpperCase() + useCase.slice(1)}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </FilterSection>
+                                                    </div>
+
+                                                    {/* Advanced Filters */}
+                                                    <div className="space-y-4">
+                                                        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                                                            Advanced Filters
+                                                        </h3>
+
+                                                        {/* Price Range Filter */}
+                                                        <FilterSection
+                                                            id="pricing"
+                                                            title="Price Range"
+                                                            isExpanded={expandedFilterSections.has('pricing')}
+                                                            onToggle={() => toggleFilterSection('pricing')}
+                                                        >
+                                                            <div className="space-y-3">
+                                                                <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400">
+                                                                    <span>${priceRange[0].toFixed(2)}</span>
+                                                                    <span>${priceRange[1].toFixed(2)} per 1M tokens</span>
+                                                                </div>
+                                                                <input
+                                                                    type="range"
+                                                                    min="0"
+                                                                    max="200"
+                                                                    step="1"
+                                                                    value={priceRange[1]}
+                                                                    onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
+                                                                    className="w-full h-2 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer slider-thumb"
+                                                                />
+                                                            </div>
+                                                        </FilterSection>
+
+                                                        {/* Context Size Filter */}
+                                                        <FilterSection
+                                                            id="context"
+                                                            title="Context Length"
+                                                            isExpanded={expandedFilterSections.has('context')}
+                                                            onToggle={() => toggleFilterSection('context')}
+                                                        >
+                                                            <div className="space-y-3">
+                                                                <div className="flex justify-between text-xs text-slate-600 dark:text-slate-400">
+                                                                    <span>Minimum</span>
+                                                                    <span>
+                                                                        {contextSize === 0 ? '0' : contextSize >= 1000000 ? `${(contextSize / 1000000).toFixed(1)}M` : `${(contextSize / 1000).toFixed(0)}K`} tokens
+                                                                    </span>
+                                                                </div>
+                                                                <input
+                                                                    type="range"
+                                                                    min="0"
+                                                                    max="1000000"
+                                                                    step="10000"
+                                                                    value={contextSize}
+                                                                    onChange={(e) => setContextSize(parseInt(e.target.value))}
+                                                                    className="w-full h-2 bg-slate-200 dark:bg-slate-600 rounded-lg appearance-none cursor-pointer slider-thumb"
+                                                                />
+                                                            </div>
+                                                        </FilterSection>
+                                                    </div>
+
+                                                    {/* Modality Filters */}
+                                                    <div className="space-y-4">
+                                                        <h3 className="text-sm font-semibold text-slate-900 dark:text-slate-100 uppercase tracking-wider">
+                                                            Modalities & Features
+                                                        </h3>
+
+                                                        {/* Input Modalities */}
+                                                        <FilterSection
+                                                            id="input-modalities"
+                                                            title="Input Types"
+                                                            isExpanded={expandedFilterSections.has('input-modalities')}
+                                                            onToggle={() => toggleFilterSection('input-modalities')}
+                                                        >
+                                                            <div className="grid grid-cols-2 gap-2">
+                                                                {['Text', 'Image', 'Audio', 'Video'].map((modality) => (
+                                                                    <label key={modality} className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            checked={selectedInputModalities.includes(modality)}
+                                                                            onChange={(e) => {
+                                                                                if (e.target.checked) {
+                                                                                    setSelectedInputModalities([...selectedInputModalities, modality]);
+                                                                                } else {
+                                                                                    setSelectedInputModalities(selectedInputModalities.filter(m => m !== modality));
+                                                                                }
+                                                                            }}
+                                                                            className="w-4 h-4 rounded border-slate-300 dark:border-slate-500 text-primary-500 focus:ring-primary-500/20"
+                                                                        />
+                                                                        <span className="font-medium">{modality}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </FilterSection>
+
+                                                        {/* Special Features */}
+                                                        <FilterSection
+                                                            id="features"
+                                                            title="Special Features"
+                                                            isExpanded={expandedFilterSections.has('features')}
+                                                            onToggle={() => toggleFilterSection('features')}
+                                                        >
+                                                            <div className="space-y-2">
+                                                                {['Caching', 'Web Search'].map((capability) => (
+                                                                    <label key={capability} className="flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300 cursor-pointer hover:text-slate-900 dark:hover:text-slate-100 transition-colors">
+                                                                        <input
+                                                                            type="checkbox"
+                                                                            checked={selectedCapabilities.includes(capability)}
+                                                                            onChange={(e) => {
+                                                                                if (e.target.checked) {
+                                                                                    setSelectedCapabilities([...selectedCapabilities, capability]);
+                                                                                } else {
+                                                                                    setSelectedCapabilities(selectedCapabilities.filter(c => c !== capability));
+                                                                                }
+                                                                            }}
+                                                                            className="w-4 h-4 rounded border-slate-300 dark:border-slate-500 text-primary-500 focus:ring-primary-500/20"
+                                                                        />
+                                                                        <span className="font-medium">{capability}</span>
+                                                                    </label>
+                                                                ))}
+                                                            </div>
+                                                        </FilterSection>
+                                                    </div>
+                                                </div>
+
+                                                {/* Clear Filters Button */}
+                                                {(selectedProvider !== 'all' || selectedUseCase !== 'all' || priceRange[1] !== 200 || contextSize !== 0 || selectedCapabilities.length > 0 || selectedInputModalities.length > 0 || selectedOutputModalities.length > 0) && (
+                                                    <div className="flex justify-center pt-6 border-t border-slate-200 dark:border-gray-700 mt-6">
+                                                        <button
+                                                            onClick={() => {
+                                                                setSelectedProvider('all');
+                                                                setSelectedUseCase('all');
+                                                                setPriceRange([0, 200]);
+                                                                setContextSize(0);
+                                                                setSelectedCapabilities([]);
+                                                                setSelectedInputModalities([]);
+                                                                setSelectedOutputModalities([]);
+                                                            }}
+                                                            className="px-6 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 rounded-lg transition-all border border-slate-200 dark:border-gray-600 hover:border-primary-200 dark:hover:border-primary-500/30"
+                                                        >
+                                                            Clear All Filters
+                                                        </button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* Comparison Controls */}
+                                <AnimatePresence>
+                                    {selectedModelsForComparison.length > 0 && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: -10 }}
+                                            className="mt-6 p-4 bg-gradient-to-r from-primary-50 via-blue-50 to-indigo-50 dark:from-primary-500/10 dark:via-primary-600/10 dark:to-primary-500/10 border border-primary-200 dark:border-primary-500/20 rounded-xl"
+                                        >
+                                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="p-2 rounded-lg bg-gradient-to-br from-primary-500 to-primary-600 text-white shadow-lg shadow-primary-500/25">
+                                                            <GitCompare size={18} />
                                                         </div>
-                                                    ))}
+                                                        <div>
+                                                            <span className="font-semibold text-slate-900 dark:text-slate-100 text-sm">
+                                                                {selectedModelsForComparison.length} Model{selectedModelsForComparison.length !== 1 ? 's' : ''} Selected
+                                                            </span>
+                                                            <div className="text-xs text-slate-600 dark:text-slate-400">
+                                                                Ready for comparison
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="flex -space-x-2">
+                                                        {selectedModelsForComparison.slice(0, 3).map((model, index) => (
+                                                            <div
+                                                                key={model.id}
+                                                                className="w-8 h-8 rounded-full bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-700 dark:to-slate-800 text-slate-700 dark:text-slate-300 text-xs font-bold flex items-center justify-center border-2 border-white dark:border-dark-panel shadow-sm"
+                                                                style={{ zIndex: 10 - index }}
+                                                                title={model.name}
+                                                            >
+                                                                {model.name.charAt(0)}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                                <div className="flex items-center gap-3 w-full sm:w-auto">
+                                                    <button
+                                                        onClick={clearComparison}
+                                                        className="px-4 py-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-lg transition-all border border-slate-200 dark:border-slate-600"
+                                                    >
+                                                        Clear
+                                                    </button>
+                                                    <button
+                                                        onClick={startComparison}
+                                                        disabled={selectedModelsForComparison.length < 2}
+                                                        className="flex-1 sm:flex-none px-6 py-2 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-semibold transition-all shadow-lg shadow-primary-500/25 hover:shadow-xl"
+                                                    >
+                                                        Compare Models
+                                                    </button>
                                                 </div>
                                             </div>
-                                            <div className="flex items-center gap-2 w-full sm:w-auto">
-                                                <button
-                                                    onClick={clearComparison}
-                                                    className="px-3 py-1.5 text-sm text-light-text-muted dark:text-dark-text-muted hover:text-light-text-primary dark:hover:text-dark-text-primary transition-colors"
-                                                >
-                                                    Clear
-                                                </button>
-                                                <button
-                                                    onClick={startComparison}
-                                                    disabled={selectedModelsForComparison.length < 2}
-                                                    className="flex-1 sm:flex-none px-4 py-1.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium transition-all shadow-lg shadow-primary-500/25"
-                                                >
-                                                    Compare {selectedModelsForComparison.length} Models
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                            {/* Results count */}
-                            {(searchQuery || selectedProvider !== 'all' || selectedUseCase !== 'all') && (
-                                <motion.div
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="mt-3 text-sm text-light-text-muted dark:text-dark-text-muted"
-                                >
-                                    Showing {filteredCount} of {totalModels} models
-                                </motion.div>
-                            )}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
+                            </div>
                         </div>
                     </motion.div>
+
+                    {/* Results Summary */}
+                    {(searchQuery || selectedProvider !== 'all' || selectedUseCase !== 'all' || selectedCapabilities.length > 0) && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            className="mb-6 flex items-center justify-between bg-slate-50 dark:bg-dark-bg-200 rounded-xl px-4 py-3 border border-slate-200 dark:border-gray-600"
+                        >
+                            <div className="flex items-center gap-3">
+                                <div className="text-sm font-medium text-slate-900 dark:text-slate-100">
+                                    Showing {filteredCount} of {totalModels} models
+                                </div>
+                                {searchQuery && (
+                                    <div className="text-xs text-slate-600 dark:text-slate-400 bg-white dark:bg-dark-panel px-2 py-1 rounded-md">
+                                        for "{searchQuery}"
+                                    </div>
+                                )}
+                            </div>
+                            <button
+                                onClick={() => {
+                                    setSearchQuery('');
+                                    setSelectedProvider('all');
+                                    setSelectedUseCase('all');
+                                    setSelectedCapabilities([]);
+                                    setSelectedInputModalities([]);
+                                    setSelectedOutputModalities([]);
+                                    setPriceRange([0, 200]);
+                                    setContextSize(0);
+                                }}
+                                className="text-xs text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 font-medium"
+                            >
+                                Clear filters
+                            </button>
+                        </motion.div>
+                    )}
 
                     {/* Cards View */}
                     {viewMode === 'cards' && (
@@ -1281,52 +1360,59 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                             variants={containerVariants}
                             initial="hidden"
                             animate="visible"
-                            className="space-y-6"
+                            className="space-y-8"
                         >
                             {filteredProviders.map((provider) => (
                                 <motion.div
                                     key={provider.id}
                                     variants={itemVariants}
-                                    className="bg-white dark:bg-dark-panel border border-gray-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+                                    className="bg-white dark:bg-dark-panel border border-slate-200 dark:border-gray-700/50 rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
                                 >
                                     {/* Provider Header */}
-                                    <div className="p-5 border-b border-gray-100 dark:border-gray-800">
-                                        <div className="flex items-center gap-4">
-                                            <div
-                                                className="w-12 h-12 rounded-xl flex items-center justify-center overflow-hidden shadow-sm"
-                                                style={{ backgroundColor: `${provider.brandColor}15` }}
-                                            >
-                                                {provider.logo ? (
-                                                    <img
-                                                        src={provider.logo}
-                                                        alt={`${provider.name} logo`}
-                                                        className="w-7 h-7 object-contain"
-                                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
-                                                    />
-                                                ) : null}
-                                                {provider.logoFallback && (
-                                                    <provider.logoFallback
-                                                        size={24}
-                                                        style={{ color: provider.brandColor, display: provider.logo ? 'none' : 'block' }}
-                                                    />
-                                                )}
+                                    <div className="p-6 bg-gradient-to-r from-slate-50/50 to-white dark:from-dark-bg-200/50 dark:to-dark-panel border-b border-slate-100 dark:border-gray-800">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <div
+                                                    className="w-14 h-14 rounded-2xl flex items-center justify-center overflow-hidden shadow-sm border border-slate-200/50 dark:border-gray-700/50"
+                                                    style={{ backgroundColor: `${provider.brandColor}10` }}
+                                                >
+                                                    {provider.logo ? (
+                                                        <img
+                                                            src={provider.logo}
+                                                            alt={`${provider.name} logo`}
+                                                            className="w-8 h-8 object-contain"
+                                                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                                                        />
+                                                    ) : null}
+                                                    {provider.logoFallback && (
+                                                        <provider.logoFallback
+                                                            size={28}
+                                                            style={{ color: provider.brandColor, display: provider.logo ? 'none' : 'block' }}
+                                                        />
+                                                    )}
+                                                </div>
+                                                <div className="flex-1">
+                                                    <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100 font-display mb-1">
+                                                        {provider.name}
+                                                    </h2>
+                                                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed">
+                                                        {provider.description}
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div className="flex-1">
-                                                <h2 className="text-xl font-semibold text-light-text-primary dark:text-dark-text-primary font-display">
-                                                    {provider.name}
-                                                </h2>
-                                                <p className="text-sm text-light-text-muted dark:text-dark-text-muted">
-                                                    {provider.description}
-                                                </p>
-                                            </div>
-                                            <div className="flex items-center gap-2">
-                                                <span className="px-3 py-1.5 rounded-full text-sm font-medium bg-primary-500/10 text-primary-600 dark:text-primary-400 border border-primary-500/20">
-                                                    {provider.models.length} models
-                                                </span>
+                                            <div className="flex items-center gap-3">
+                                                <div className="text-right">
+                                                    <div className="text-2xl font-bold text-slate-900 dark:text-slate-100">
+                                                        {provider.models.length}
+                                                    </div>
+                                                    <div className="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider">
+                                                        Models
+                                                    </div>
+                                                </div>
                                                 {selectedModelsForComparison.length < 3 && (
                                                     <button
                                                         onClick={() => selectAllInProvider(provider.id)}
-                                                        className="px-3 py-1.5 text-sm font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-500/10 dark:hover:bg-primary-500/10 rounded-lg transition-colors"
+                                                        className="px-4 py-2 text-sm font-medium text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-500/10 rounded-lg transition-all border border-primary-200 dark:border-primary-500/30 hover:border-primary-300 dark:hover:border-primary-500/50"
                                                     >
                                                         Select All
                                                     </button>
@@ -1336,25 +1422,27 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                                     </div>
 
                                     {/* Models Grid */}
-                                    <div className="p-5">
-                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                    <div className="p-6">
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                                             {provider.models.map((model) => {
                                                 const pricingInfo = getPricingTierInfo(model.pricingTier);
                                                 const pricing = getModelPricing(model.id);
-
                                                 const isSelected = isModelSelectedForComparison(model);
 
                                                 return (
                                                     <motion.div
                                                         key={model.id}
-                                                        whileHover={{ scale: 1.02, y: -2 }}
+                                                        whileHover={{ scale: 1.02 }}
                                                         whileTap={{ scale: 0.98 }}
-                                                        className={`group relative p-4 bg-light-panel dark:bg-dark-bg-300 border rounded-xl text-left transition-all ${isSelected
-                                                            ? 'border-highlight-500 shadow-lg shadow-highlight-500/20 bg-highlight-500/5'
-                                                            : 'border-gray-100 dark:border-gray-700/50 hover:border-primary-500/50 hover:shadow-lg hover:shadow-primary-500/10'
+                                                        className={`group relative p-4 border rounded-xl text-left transition-all duration-200 cursor-pointer ${isSelected
+                                                            ? 'border-primary-300 dark:border-primary-500/50 bg-primary-50 dark:bg-primary-500/10 shadow-lg shadow-primary-500/10'
+                                                            : model.isDeprecated
+                                                                ? 'border-slate-200 dark:border-gray-700/50 bg-slate-50 dark:bg-dark-bg-300 opacity-60'
+                                                                : 'border-slate-200 dark:border-gray-700/50 bg-slate-50 dark:bg-dark-bg-300 hover:border-primary-200 dark:hover:border-primary-500/30 hover:bg-white dark:hover:bg-dark-panel hover:shadow-md'
                                                             }`}
+                                                        onClick={() => setSelectedModel(model)}
                                                     >
-                                                        {/* Comparison Checkbox */}
+                                                        {/* Selection Checkbox */}
                                                         <div className="absolute -top-2 -left-2 z-10">
                                                             <button
                                                                 onClick={(e) => {
@@ -1363,56 +1451,54 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                                                                 }}
                                                                 className={`w-6 h-6 rounded-lg border-2 flex items-center justify-center transition-all shadow-sm ${isSelected
                                                                     ? 'bg-gradient-to-br from-primary-500 to-primary-600 border-transparent text-white shadow-lg shadow-primary-500/30'
-                                                                    : 'bg-white dark:bg-dark-panel border-gray-300 dark:border-gray-600 hover:border-primary-500 hover:bg-primary-500/5 dark:hover:bg-primary-500/10'
+                                                                    : 'bg-white dark:bg-dark-panel border-slate-300 dark:border-gray-600 hover:border-primary-500 hover:bg-primary-50 dark:hover:bg-primary-500/10'
                                                                     }`}
                                                                 disabled={!isSelected && selectedModelsForComparison.length >= 3}
                                                             >
-                                                                {isSelected && <Check size={14} className="text-white" />}
+                                                                {isSelected && <Check size={14} className="text-white font-bold" />}
                                                             </button>
                                                         </div>
 
-                                                        {/* Status Badge */}
-                                                        {(model.isLatest || model.isRecommended) && (
-                                                            <div className="absolute -top-2 -right-2">
-                                                                {model.isLatest && (
-                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-primary-500 text-white shadow-lg shadow-primary-500/30">
-                                                                        <Sparkles size={10} />
-                                                                        NEW
-                                                                    </span>
-                                                                )}
-                                                                {model.isRecommended && !model.isLatest && (
-                                                                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500 text-white shadow-lg shadow-amber-500/30">
-                                                                        <Star size={10} />
-                                                                        TOP
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        )}
+                                                        {/* Status Badges */}
+                                                        <div className="absolute -top-2 -right-2 flex gap-1">
+                                                            {model.isLatest && (
+                                                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30 border border-emerald-400/20">
+                                                                    <Sparkles size={10} />
+                                                                    NEW
+                                                                </span>
+                                                            )}
+                                                            {model.isRecommended && !model.isLatest && (
+                                                                <span className="inline-flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-bold bg-gradient-to-r from-amber-500 to-amber-600 text-white shadow-lg shadow-amber-500/30 border border-amber-400/20">
+                                                                    <Star size={10} />
+                                                                    TOP
+                                                                </span>
+                                                            )}
+                                                            {model.isDeprecated && (
+                                                                <span className="inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-bold bg-slate-500 text-white">
+                                                                    DEPRECATED
+                                                                </span>
+                                                            )}
+                                                        </div>
 
                                                         {/* Model Name */}
-                                                        <div className="flex items-start justify-between mb-2">
-                                                            <button
-                                                                onClick={() => setSelectedModel(model)}
-                                                                className={`font-semibold text-light-text-primary dark:text-dark-text-primary hover:text-primary-600 dark:hover:text-primary-400 transition-colors text-left ${model.isDeprecated ? 'line-through opacity-60' : ''}`}
-                                                            >
+                                                        <div className="mb-3">
+                                                            <h3 className={`font-semibold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors ${model.isDeprecated ? 'line-through' : ''
+                                                                }`}>
                                                                 {model.name}
-                                                            </button>
-                                                            <button
-                                                                onClick={() => setSelectedModel(model)}
-                                                                className="text-light-text-muted dark:text-dark-text-muted opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary-500"
-                                                            >
-                                                                <ChevronRight size={16} />
-                                                            </button>
+                                                            </h3>
+                                                            <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">
+                                                                {model.series}
+                                                            </p>
                                                         </div>
 
                                                         {/* Capabilities */}
-                                                        <div className="flex flex-wrap gap-1 mb-3">
+                                                        <div className="flex flex-wrap gap-1 mb-4">
                                                             {model.useCases.slice(0, 3).map(uc => {
                                                                 const { icon: Icon, color } = getUseCaseIcon(uc);
                                                                 return (
                                                                     <span
                                                                         key={uc}
-                                                                        className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-medium bg-gray-100 dark:bg-gray-800 text-light-text-secondary dark:text-dark-text-secondary"
+                                                                        className="inline-flex items-center gap-1 px-2 py-1 rounded-md text-[10px] font-semibold bg-white dark:bg-dark-panel text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-gray-600"
                                                                     >
                                                                         <Icon size={10} className={color} />
                                                                         <span className="capitalize">{uc}</span>
@@ -1420,36 +1506,50 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                                                                 );
                                                             })}
                                                             {model.useCases.length > 3 && (
-                                                                <span className="text-[10px] text-light-text-muted dark:text-dark-text-muted px-1">
-                                                                    +{model.useCases.length - 3}
+                                                                <span className="text-[10px] text-slate-500 dark:text-slate-400 px-2 py-1 font-medium">
+                                                                    +{model.useCases.length - 3} more
                                                                 </span>
                                                             )}
                                                         </div>
 
-                                                        {/* Pricing */}
-                                                        <div className="flex items-center justify-between">
+                                                        {/* Pricing & Tier */}
+                                                        <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-gray-700">
                                                             {pricing ? (
-                                                                <span className="text-xs font-medium text-primary-600 dark:text-primary-400">
-                                                                    {pricing.input} / {pricing.output}
-                                                                </span>
+                                                                <div className="text-xs">
+                                                                    <div className="font-semibold text-slate-900 dark:text-slate-100">
+                                                                        {pricing.input} / {pricing.output}
+                                                                    </div>
+                                                                    <div className="text-slate-500 dark:text-slate-400">
+                                                                        per 1M tokens
+                                                                    </div>
+                                                                </div>
                                                             ) : (
-                                                                <span className={`text-xs font-medium ${pricingInfo.textColor}`}>
-                                                                    {pricingInfo.label}
-                                                                </span>
+                                                                <div className="text-xs">
+                                                                    <div className={`font-semibold ${pricingInfo.textColor}`}>
+                                                                        {pricingInfo.label}
+                                                                    </div>
+                                                                    <div className="text-slate-500 dark:text-slate-400">
+                                                                        tier
+                                                                    </div>
+                                                                </div>
                                                             )}
-                                                            <div className="flex gap-0.5">
+                                                            <div className="flex items-center gap-1">
                                                                 {Array.from({ length: 4 }, (_, i) => (
                                                                     <div
                                                                         key={i}
-                                                                        className={`w-1.5 h-1.5 rounded-full transition-colors ${i < model.pricingTier ? pricingInfo.color : 'bg-gray-200 dark:bg-gray-700'}`}
+                                                                        className={`w-2 h-2 rounded-full transition-all ${i < model.pricingTier
+                                                                            ? pricingInfo.color.replace('bg-', 'bg-')
+                                                                            : 'bg-slate-300 dark:bg-slate-600'
+                                                                            }`}
                                                                     />
                                                                 ))}
                                                             </div>
                                                         </div>
 
-                                                        {model.isDeprecated && (
-                                                            <div className="absolute inset-0 bg-gray-500/5 dark:bg-gray-500/10 rounded-xl" />
-                                                        )}
+                                                        {/* Hover Arrow */}
+                                                        <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <ChevronRight size={16} className="text-slate-400 dark:text-slate-500" />
+                                                        </div>
                                                     </motion.div>
                                                 );
                                             })}
@@ -1700,26 +1800,31 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="text-center py-20"
+                            className="text-center py-24"
                         >
-                            <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary-500/20 to-primary-500/5 flex items-center justify-center">
-                                <Search className="w-10 h-10 text-primary-500" />
+                            <div className="w-24 h-24 mx-auto mb-8 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center border border-slate-200 dark:border-slate-700">
+                                <Search className="w-12 h-12 text-slate-400 dark:text-slate-500" />
                             </div>
-                            <h3 className="text-xl font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
+                            <h3 className="text-2xl font-bold text-slate-900 dark:text-slate-100 mb-3">
                                 No models found
                             </h3>
-                            <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6 max-w-md mx-auto">
-                                Try adjusting your search or filters to find what you're looking for.
+                            <p className="text-slate-600 dark:text-slate-400 mb-8 max-w-md mx-auto text-lg">
+                                We couldn't find any models matching your criteria. Try adjusting your filters or search terms.
                             </p>
                             <button
                                 onClick={() => {
                                     setSearchQuery('');
                                     setSelectedProvider('all');
                                     setSelectedUseCase('all');
+                                    setSelectedCapabilities([]);
+                                    setSelectedInputModalities([]);
+                                    setSelectedOutputModalities([]);
+                                    setPriceRange([0, 200]);
+                                    setContextSize(0);
                                 }}
-                                className="px-6 py-3 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-colors font-medium shadow-lg shadow-primary-500/25"
+                                className="px-8 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all font-semibold shadow-lg shadow-primary-500/25 hover:shadow-xl"
                             >
-                                Clear all filters
+                                Reset All Filters
                             </button>
                         </motion.div>
                     )}
@@ -1729,19 +1834,38 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.6 }}
-                        className="mt-16 text-center"
+                        className="mt-20 text-center"
                     >
-                        <div className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-gradient-to-r from-primary-500/10 to-highlight-500/10 border border-primary-500/20">
-                            <Sparkles size={16} className="text-primary-500" />
-                            <span className="text-sm text-light-text-secondary dark:text-dark-text-secondary">
-                                Cost Katana optimizes costs across all {totalModels}+ models
-                            </span>
-                            <a
-                                href="/getting-started/quick-start"
-                                className="text-sm font-medium text-primary-600 dark:text-primary-400 hover:underline flex items-center gap-1"
-                            >
-                                Get Started <ExternalLink size={12} />
-                            </a>
+                        <div className="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-dark-bg-200 dark:to-primary-900/20 rounded-2xl p-8 border border-slate-200 dark:border-gray-700">
+                            <div className="max-w-2xl mx-auto">
+                                <div className="flex justify-center items-center gap-3 mb-4">
+                                    <div className="p-2 rounded-xl bg-gradient-to-br from-primary-500 to-primary-600 text-white">
+                                        <Sparkles size={20} />
+                                    </div>
+                                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                                        Optimize Every Model
+                                    </h3>
+                                </div>
+                                <p className="text-slate-600 dark:text-slate-400 mb-6 text-lg leading-relaxed">
+                                    Cost Katana's intelligent optimization works across all {totalModels}+ models,
+                                    delivering up to 90% cost savings through advanced caching and compression.
+                                </p>
+                                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                                    <a
+                                        href="/getting-started/quick-start"
+                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-xl hover:from-primary-600 hover:to-primary-700 transition-all font-semibold shadow-lg shadow-primary-500/25 hover:shadow-xl"
+                                    >
+                                        Get Started Now
+                                        <ExternalLink size={16} />
+                                    </a>
+                                    <a
+                                        href="/features"
+                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white dark:bg-dark-panel text-slate-700 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-dark-bg-300 transition-all font-semibold border border-slate-200 dark:border-gray-600 hover:border-slate-300 dark:hover:border-gray-500"
+                                    >
+                                        Learn More
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </motion.div>
                 </div>
@@ -2021,7 +2145,7 @@ curl -X POST "https://api.costkatana.com/api/gateway/v1/chat/completions" \\
                                 exit={{ scale: 0.9, opacity: 0, y: 20 }}
                                 transition={{ type: 'spring', damping: 25, stiffness: 300 }}
                                 onClick={(e) => e.stopPropagation()}
-                                className="bg-white dark:bg-dark-panel rounded-2xl max-w-lg w-full max-h-[85vh] overflow-y-auto border border-gray-200 dark:border-gray-700/50 shadow-2xl"
+                                className="bg-white dark:bg-dark-panel rounded-2xl max-w-4xl w-full max-h-[85vh] overflow-y-auto border border-gray-200 dark:border-gray-700/50 shadow-2xl"
                             >
                                 <div className="p-6">
                                     {/* Modal Header */}
