@@ -15,7 +15,7 @@
   ],
   "headers": [
     {
-      "source": "/assets/.*\\.js$",
+      "source": "/assets/:path*.js",
       "headers": [
         {
           "key": "Content-Type",
@@ -28,7 +28,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.mjs$",
+      "source": "/assets/:path*.mjs",
       "headers": [
         {
           "key": "Content-Type",
@@ -41,7 +41,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.css$",
+      "source": "/assets/:path*.css",
       "headers": [
         {
           "key": "Content-Type",
@@ -54,7 +54,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.json$",
+      "source": "/assets/:path*.json",
       "headers": [
         {
           "key": "Content-Type",
@@ -67,7 +67,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.svg$",
+      "source": "/assets/:path*.svg",
       "headers": [
         {
           "key": "Content-Type",
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.png$",
+      "source": "/assets/:path*.png",
       "headers": [
         {
           "key": "Content-Type",
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.(jpg|jpeg)$",
+      "source": "/assets/:path*.jpg",
       "headers": [
         {
           "key": "Content-Type",
@@ -106,7 +106,20 @@
       ]
     },
     {
-      "source": "/assets/.*\\.gif$",
+      "source": "/assets/:path*.jpeg",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "image/jpeg"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/:path*.gif",
       "headers": [
         {
           "key": "Content-Type",
@@ -119,7 +132,7 @@
       ]
     },
     {
-      "source": "/assets/.*\\.webp$",
+      "source": "/assets/:path*.webp",
       "headers": [
         {
           "key": "Content-Type",
