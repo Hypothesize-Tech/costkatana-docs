@@ -25,10 +25,6 @@ const CLIPage = lazy(() => import('./pages/DocumentationPages').then(module => (
 const NodeJSPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.NodeJSPage })));
 const PythonPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.PythonPage })));
 const ChatGPTPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ChatGPTPage })));
-const AutomationToolsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AutomationToolsPage })));
-const ZapierIntegrationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ZapierIntegrationPage })));
-const MakeIntegrationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.MakeIntegrationPage })));
-const N8nIntegrationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.N8nIntegrationPage })));
 const FeaturesOverviewPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.FeaturesOverviewPage })));
 const DashboardPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.DashboardPage })));
 const UsageTrackingPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.UsageTrackingPage })));
@@ -127,10 +123,6 @@ const App: React.FC = () => {
                           <Route path="/integrations/nodejs" element={<NodeJSPage />} />
                           <Route path="/integrations/python" element={<PythonPage />} />
                           <Route path="/integrations/chatgpt" element={<ChatGPTPage />} />
-                          <Route path="/integrations/automation-tools" element={<AutomationToolsPage />} />
-                          <Route path="/integrations/automation-tools/zapier" element={<ZapierIntegrationPage />} />
-                          <Route path="/integrations/automation-tools/make" element={<MakeIntegrationPage />} />
-                          <Route path="/integrations/automation-tools/n8n" element={<N8nIntegrationPage />} />
                           <Route path="/integrations/wizard" element={<IntegrationWizardPage />} />
                           <Route path="/integrations/sdk-generator" element={<SDKGeneratorPage />} />
 
