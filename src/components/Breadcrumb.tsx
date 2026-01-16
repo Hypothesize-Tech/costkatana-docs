@@ -36,10 +36,6 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ className = '' }) => {
                 { path: '/integrations/python', label: 'Python SDK' },
                 { path: '/integrations/cli', label: 'CLI Tool' },
                 { path: '/integrations/chatgpt', label: 'ChatGPT Integration' },
-                { path: '/integrations/automation-tools', label: 'Automation Tools' },
-                { path: '/integrations/automation-tools/zapier', label: 'Zapier Integration' },
-                { path: '/integrations/automation-tools/make', label: 'Make Integration' },
-                { path: '/integrations/automation-tools/n8n', label: 'n8n Integration' },
             ],
         },
         {

@@ -1037,7 +1037,7 @@ def chat_with_caching(messages, model='gpt-3.5-turbo'): messages_str = json.dump
 Ready to optimize your Python AI costs? Get started today! `} />
 );
 
-export const ChatGPTPage = () => (<DocumentationPage title="ChatGPT Integration" description="Direct ChatGPT custom GPT integration for instant optimization" prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }} nextPage={{ path: '/integrations/automation-tools', label: 'Next: Automation Tools' }} fallbackContent={`# ChatGPT Integration
+export const ChatGPTPage = () => (<DocumentationPage title="ChatGPT Integration" description="Direct ChatGPT custom GPT integration for instant optimization" prevPage={{ path: '/integrations/cli', label: 'Previous: CLI Tool' }} fallbackContent={`# ChatGPT Integration
 
 Direct integration with ChatGPT through custom GPT for instant AI cost optimization and analysis.
 

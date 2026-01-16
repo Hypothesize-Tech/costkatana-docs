@@ -18,10 +18,6 @@ export const navigationOrder: string[] = [
     '/integrations/python',
     '/integrations/cli',
     '/integrations/chatgpt',
-    '/integrations/automation-tools',
-    '/integrations/automation-tools/zapier',
-    '/integrations/automation-tools/make',
-    '/integrations/automation-tools/n8n',
     
     // Features
     '/features',
