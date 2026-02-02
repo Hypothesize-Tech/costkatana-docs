@@ -1405,25 +1405,6 @@ console.log(response.metadata.cortex.tokenReduction);
 
 [Learn More About Cortex →](/features/cortex)
 
-### Cost Intelligence Stack (6-Layer System)
-Comprehensive real-time cost intelligence with continuous analysis and automated recommendations.
-
-**Intelligence Layers:**
-- **Layer 1: Telemetry** - Real-time data capture with streaming support and configurable sampling
-- **Layer 2: Intelligence** - Continuous analysis with anomaly detection and AI-powered recommendations
-- **Layer 3: Routing** - Telemetry-driven routing with plan-tier mapping and fallback strategies
-- **Layer 4: Enforcement** - Pre-flight checks, budget limits, and request blocking
-- **Layer 5: Caching** - Exact, semantic, and deduplication caching with auto-warming
-- **Layer 6: Simulation** - What-if scenarios, alternative model suggestions, and accuracy tracking
-
-**Key Benefits:**
-- Real-time insights and trend analysis
-- Automated anomaly detection and alerts
-- Continuous optimization recommendations
-- Configurable performance modes (low, medium, high)
-
-[Configure Intelligence Stack →](/features/cost-intelligence)
-
 ### Traditional AI Optimization Engine
 Intelligent optimization powered by machine learning to automatically reduce your costs.
 

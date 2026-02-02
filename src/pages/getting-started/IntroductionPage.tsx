@@ -40,7 +40,6 @@ Cost Katana transforms how you manage AI costs by providing:
 
 ### 📈 Advanced Analytics & Monitoring
 - **Real-Time Dashboards**: Live usage monitoring with AI insights
-- **Cost Intelligence Stack**: 6-layer system with telemetry, intelligence, routing, enforcement, caching, and simulation
 - **Predictive Analytics**: ML-powered forecasting and trend analysis
 - **Cost Breakdown**: Detailed analysis by project, model, and time period
 - **Usage Intelligence**: Deep insights into spending patterns and efficiency
