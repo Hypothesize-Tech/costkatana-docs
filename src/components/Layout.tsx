@@ -180,7 +180,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 { path: '/features/predictive-intelligence', label: 'Predictive Intelligence', icon: <LineChart size={16} /> },
                 { path: '/features/projects', label: 'Projects', icon: <Folder size={16} /> },
                 { path: '/features/templates', label: 'Prompt Templates', icon: <FileCode size={16} /> },
-                { path: '/features/workflows', label: 'Workflows', icon: <GitBranch size={16} /> },
+                { path: '/features/agent-trace', label: 'Agent Trace', icon: <GitBranch size={16} /> },
                 { path: '/features/gateway', label: 'Gateway & Proxy', icon: <Globe size={16} /> },
                 { path: '/features/key-vault', label: 'Key Vault', icon: <Key size={16} /> },
                 { path: '/features/alerts', label: 'Alerts', icon: <Bell size={16} /> },

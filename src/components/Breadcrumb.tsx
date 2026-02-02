@@ -51,7 +51,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({ className = '' }) => {
                 { path: '/features/predictive-intelligence', label: 'Predictive Intelligence' },
                 { path: '/features/projects', label: 'Projects' },
                 { path: '/features/templates', label: 'Prompt Templates' },
-                { path: '/features/workflows', label: 'Workflows' },
+                { path: '/features/agent-trace', label: 'Agent Trace' },
                 { path: '/features/gateway', label: 'Gateway & Proxy' },
                 { path: '/features/key-vault', label: 'Key Vault' },
                 { path: '/features/alerts', label: 'Alerts' },

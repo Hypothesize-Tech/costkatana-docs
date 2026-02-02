@@ -73,8 +73,8 @@ const AVAILABLE_FEATURES: Feature[] = [
         category: 'advanced'
     },
     {
-        id: 'workflows',
-        name: 'Workflows',
+        id: 'agent_trace',
+        name: 'Agent Trace',
         description: 'Multi-step operation monitoring',
         category: 'advanced'
     },

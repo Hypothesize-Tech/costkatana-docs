@@ -55,7 +55,7 @@ export const OptimizationPage = () => <PlaceholderPage title="AI Optimization" d
 export const PredictiveIntelligencePage = () => <PlaceholderPage title="Predictive Intelligence" description="AI-powered forecasting" />;
 export const ProjectsPage = () => <PlaceholderPage title="Projects" description="Organize and track projects" />;
 export const TemplatesPage = () => <PlaceholderPage title="Prompt Templates" description="Reusable optimized prompts" />;
-export const WorkflowsPage = () => <PlaceholderPage title="Workflows" description="Multi-step operation monitoring" />;
+export const WorkflowsPage = () => <PlaceholderPage title="Agent Trace" description="Monitor and optimize agent traces" />;
 export const GatewayPage = () => <PlaceholderPage title="Gateway & Proxy" description="Unified API gateway" />;
 export const KeyVaultPage = () => <PlaceholderPage title="Key Vault" description="Secure API key management" />;
 export const AlertsPage = () => <PlaceholderPage title="Alerts" description="Proactive monitoring alerts" />;

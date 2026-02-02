@@ -1475,18 +1475,18 @@ Pre-built and custom templates to standardize your AI interactions.
 
 [Browse Templates →](/features/templates)
 
-### Workflows
-Automate complex AI processes with visual workflow builder.
+### Agent Trace
+Monitor and optimize agent traces with the observability dashboard.
 
-**Workflow Capabilities:**
-- **Visual builder** with drag-and-drop interface
+**Agent Trace Capabilities:**
+- **Trace dashboard** with execution overview
 - **Multi-step processes** with conditional logic
 - **Cost optimization** at each step
 - **Error handling** and retry mechanisms
 
-[Build Workflows →](/features/workflows)
+[Agent Trace →](/features/agent-trace)
 
-![Workflow Builder](/assets/workflows_1.png)
+![Agent Trace](/assets/workflows_1.png)
 
 ## Infrastructure Features
 
@@ -2209,7 +2209,7 @@ const project = await ck.projects.create({ name: 'Customer Support Bot', budget:
 - Document best practices`} />
 );
 
-export const TemplatesPage = () => (<DocumentationPage title="Prompt Templates" description="Create and manage reusable optimized prompts" prevPage={{ path: '/features/projects', label: 'Previous: Projects' }} nextPage={{ path: '/features/workflows', label: 'Next: Workflows' }} fallbackContent={`# Prompt Templates
+export const TemplatesPage = () => (<DocumentationPage title="Prompt Templates" description="Create and manage reusable optimized prompts" prevPage={{ path: '/features/projects', label: 'Previous: Projects' }} nextPage={{ path: '/features/agent-trace', label: 'Next: Agent Trace' }} fallbackContent={`# Prompt Templates
 
 Create, manage, and share optimized prompt templates to reduce costs and improve consistency.
 
@@ -2339,21 +2339,21 @@ Tools for fine-tuning:
 - Optimize regularly`} />
 );
 
-export const WorkflowsPage = () => (<DocumentationPage title="Workflows" description="Multi-step AI operation monitoring and optimization" prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }} nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }} fallbackContent={`# Workflow Management
+export const WorkflowsPage = () => (<DocumentationPage title="Agent Trace" description="Monitor and optimize agent traces and multi-step AI operations" prevPage={{ path: '/features/templates', label: 'Previous: Prompt Templates' }} nextPage={{ path: '/features/gateway', label: 'Next: Gateway & Proxy' }} fallbackContent={`# Agent Trace
 
-Design, monitor, and optimize multi-step AI workflows for complex operations.
+Monitor, trace, and optimize multi-step AI agent executions.
 
-![Workflow Visual Designer](/assets/workflows_1.png)
+![Agent Trace Observatory](/assets/workflows_1.png)
 
-## Workflow Features
+## Agent Trace Features
 
 ### Visual Designer
-- **Drag-and-Drop Interface**: Build workflows visually
+- **Drag-and-Drop Interface**: Build traces visually
 - **Pre-built Components**: Ready-to-use blocks
 - **Conditional Logic**: If/then branches
 - **Loops & Iterations**: Process lists and data
 
-![Workflow Monitoring Dashboard](/assets/workflows_2.png)
+![Agent Trace Dashboard](/assets/workflows_2.png)
 
 ### Execution Engine
 - **Parallel Processing**: Run steps simultaneously
@@ -2362,15 +2362,15 @@ Design, monitor, and optimize multi-step AI workflows for complex operations.
 - **Queue System**: Handle high volumes
 
 ### Monitoring
-- **Real-time Tracking**: See workflows in action
+- **Real-time Tracking**: See traces in action
 - **Step Metrics**: Time and cost per step
 - **Bottleneck Detection**: Identify slow points
 - **Success Rates**: Track completion rates
 
-## Building Workflows
+## Building Agent Traces
 
 ### Visual Builder
-1. Open **Workflows** → **Create New**
+1. Open **Agent Trace** → **Create New**
 2. Drag components from the palette:
    - AI Model calls
    - Data transformations
@@ -2381,41 +2381,16 @@ Design, monitor, and optimize multi-step AI workflows for complex operations.
 5. Test and deploy
 
 ### Code-Based
-\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create multi-step AI workflows with dependencies and parallel processing"}
+\`\`\`smart:javascript:{"imports":["import { CostKatana } from 'cost-katana';"],"dependencies":["cost-katana"],"description":"Create agent traces with dependencies and parallel processing"}
 import { CostKatana } from 'cost-katana';
 
 const ck = new CostKatana({ apiKey: 'your-api-key' });
 
-const workflow = await ck.workflows.create({
-  name: 'Document Processing',
-  steps: [
-    {
-      id: 'extract',
-      type: 'ai_call',
-      model: 'gpt-4',
-      prompt: 'Extract key points from: {{document}}'
-    },
-    {
-      id: 'summarize',
-      type: 'ai_call',
-      model: 'gpt-3.5-turbo',
-      prompt: 'Summarize: {{extract.output}}',
-      depends_on: ['extract']
-    },
-    {
-      id: 'translate',
-      type: 'parallel',
-      steps: [
-        { model: 'gpt-3.5', prompt: 'Translate to Spanish' },
-        { model: 'gpt-3.5', prompt: 'Translate to French' }
-      ],
-      depends_on: ['summarize']
-    }
-  ]
-});
+const trace = await ck.getAgentTraces(); // List traces; use API to create/execute
+// Use /agent-trace API for templates and execution
 \`\`\`
 
-## Workflow Optimization
+## Trace Optimization
 
 ### Cost Optimization
 - **Model Selection**: Choose optimal models per step
@@ -2425,17 +2400,17 @@ const workflow = await ck.workflows.create({
 
 ### Performance Tuning
 - **Parallelization**: Run independent steps simultaneously
-- **Timeout Settings**: Prevent hanging workflows
+- **Timeout Settings**: Prevent hanging traces
 - **Resource Allocation**: Optimize compute resources
-- **Priority Queues**: Handle urgent workflows first
+- **Priority Queues**: Handle urgent traces first
 
 ## Monitoring & Analytics
 
 ### Dashboard
-- **Active Workflows**: Currently running
+- **Active Traces**: Currently running
 - **Completed**: Success/failure rates
 - **Performance Metrics**: Average duration
-- **Cost Analysis**: Spending per workflow
+- **Cost Analysis**: Spending per trace
 
 ### Alerts
 - **Failure Notifications**: Immediate alerts
@@ -2458,13 +2433,13 @@ const workflow = await ck.workflows.create({
 - **Rate Limiting**: Control execution rate
 
 ### Version Control
-- **Workflow Versions**: Track changes
+- **Trace Versions**: Track changes
 - **Rollback**: Revert to previous versions
-- **A/B Testing**: Test workflow variations
+- **A/B Testing**: Test trace variations
 - **Staging**: Test before production`} />
 );
 
-export const GatewayPage = () => (<DocumentationPage title="Gateway & Proxy" description="Unified API gateway for all AI providers" prevPage={{ path: '/features/workflows', label: 'Previous: Workflows' }} nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }} fallbackContent={`# Gateway & Proxy
+export const GatewayPage = () => (<DocumentationPage title="Gateway & Proxy" description="Unified API gateway for all AI providers" prevPage={{ path: '/features/agent-trace', label: 'Previous: Agent Trace' }} nextPage={{ path: '/features/key-vault', label: 'Next: Key Vault' }} fallbackContent={`# Gateway & Proxy
 
 Use Cost Katana as a unified gateway for all your AI providers with built-in optimization.
 

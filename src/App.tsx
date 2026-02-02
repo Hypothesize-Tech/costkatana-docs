@@ -133,7 +133,8 @@ const App: React.FC = () => {
                           <Route path="/features/predictive-intelligence" element={<PredictiveIntelligencePage />} />
                           <Route path="/features/projects" element={<ProjectsPage />} />
                           <Route path="/features/templates" element={<TemplatesPage />} />
-                          <Route path="/features/workflows" element={<WorkflowsPage />} />
+                          <Route path="/features/agent-trace" element={<WorkflowsPage />} />
+                          <Route path="/features/workflows" element={<Navigate to="/features/agent-trace" replace />} />
                           <Route path="/features/gateway" element={<GatewayPage />} />
                           <Route path="/features/key-vault" element={<KeyVaultPage />} />
                           <Route path="/features/alerts" element={<AlertsPage />} />

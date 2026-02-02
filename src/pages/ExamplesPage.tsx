@@ -211,8 +211,8 @@ const ExamplesPage: React.FC = () => {
                         </h3>
                         <div className="space-y-3">
                             <ExampleLink
-                                title="Workflows"
-                                description="Multi-step AI orchestration with parallel execution and error handling"
+                                title="Agent Trace"
+                                description="Monitor and optimize agent traces with parallel execution and error handling"
                                 href="https://github.com/Hypothesize-Tech/costkatana-examples/tree/master/13-workflows"
                             />
                             <ExampleLink
@@ -405,7 +405,7 @@ const features = [
     { number: "10", name: "Webhooks", folder: "10-webhooks" },
     { number: "11", name: "Observability", folder: "11-observability" },
     { number: "12", name: "Guardrails", folder: "12-guardrails" },
-    { number: "13", name: "Workflows", folder: "13-workflows" },
+    { number: "13", name: "Agent Trace", folder: "13-workflows" },
     { number: "14", name: "Cache", folder: "14-cache" },
     { number: "15", name: "Key Vault", folder: "15-key-vault" },
     { number: "16", name: "Security", folder: "16-security" },

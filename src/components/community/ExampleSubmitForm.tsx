@@ -13,7 +13,7 @@ const CATEGORIES = [
     { value: 'optimization', label: 'Optimization' },
     { value: 'analytics', label: 'Analytics' },
     { value: 'gateway', label: 'Gateway' },
-    { value: 'workflows', label: 'Workflows' },
+    { value: 'agent_trace', label: 'Agent Trace' },
     { value: 'other', label: 'Other' },
 ];
 

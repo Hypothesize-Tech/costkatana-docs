@@ -29,7 +29,7 @@ export const navigationOrder: string[] = [
     '/features/predictive-intelligence',
     '/features/projects',
     '/features/templates',
-    '/features/workflows',
+    '/features/agent-trace',
     '/features/gateway',
     '/features/key-vault',
     '/features/alerts',
