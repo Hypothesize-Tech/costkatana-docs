@@ -63,7 +63,6 @@ Cost Katana transforms how you manage AI costs by providing:
 - **Real-time Notifications**: Instant alerts via email, webhook, or dashboard
 
 ### 🛡️ AI Governance & Security
-- **Agent Governance**: Zero-trust architecture with RBAC and capability management
 - **Sandbox Execution**: Isolated agent execution with resource constraints
 - **Budget Controls**: Multi-level budget caps (per-request, daily, monthly)
 - **Comprehensive Auditing**: Forensic-level logging and decision tracking

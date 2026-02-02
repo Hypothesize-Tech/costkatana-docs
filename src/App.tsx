@@ -41,10 +41,8 @@ const TracingPage = lazy(() => import('./pages/DocumentationPages').then(module 
 const SastPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SastPage })));
 const TelemetryDashboardPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TelemetryDashboardPage })));
 const SessionsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SessionsPage })));
-const LogsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.LogsPage })));
 const CachePage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CachePage })));
 const AdvancedMonitoringPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.AdvancedMonitoringPage })));
-const UnexplainedCostsPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.UnexplainedCostsPage })));
 const ExperimentationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ExperimentationPage })));
 const ModerationPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.ModerationPage })));
 const SecurityPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SecurityPage })));
@@ -64,7 +62,6 @@ const AgentAPIPage = lazy(() => import('./pages/DocumentationPages').then(module
 const MemoryAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.MemoryAPIPage })));
 const CacheAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.CacheAPIPage })));
 const TelemetryAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TelemetryAPIPage })));
-const LogsAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.LogsAPIPage })));
 const BudgetAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.BudgetAPIPage })));
 const SessionReplayAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.SessionReplayAPIPage })));
 const TraceAPIPage = lazy(() => import('./pages/DocumentationPages').then(module => ({ default: module.TraceAPIPage })));
@@ -143,10 +140,8 @@ const App: React.FC = () => {
                           <Route path="/features/tracing" element={<TracingPage />} />
                           <Route path="/features/telemetry" element={<TelemetryDashboardPage />} />
                           <Route path="/features/sessions" element={<SessionsPage />} />
-                          <Route path="/features/logs" element={<LogsPage />} />
                           <Route path="/features/cache" element={<CachePage />} />
                           <Route path="/features/advanced-monitoring" element={<AdvancedMonitoringPage />} />
-                          <Route path="/features/unexplained-costs" element={<UnexplainedCostsPage />} />
                           <Route path="/features/experimentation" element={<ExperimentationPage />} />
                           <Route path="/features/moderation" element={<ModerationPage />} />
                           <Route path="/features/security" element={<SecurityPage />} />
@@ -179,7 +174,6 @@ const App: React.FC = () => {
                           <Route path="/api/memory" element={<MemoryAPIPage />} />
                           <Route path="/api/cache" element={<CacheAPIPage />} />
                           <Route path="/api/telemetry" element={<TelemetryAPIPage />} />
-                          <Route path="/api/logs" element={<LogsAPIPage />} />
                           <Route path="/api/budget" element={<BudgetAPIPage />} />
                           <Route path="/api/session-replay" element={<SessionReplayAPIPage />} />
                           <Route path="/api/trace" element={<TraceAPIPage />} />

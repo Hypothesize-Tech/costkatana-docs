@@ -1381,22 +1381,6 @@ Deep dive into your AI spending with advanced analytics and optimization recomme
 
 ## Advanced Features
 
-### Closed-Loop Cost Brain (Autonomous)
-Real-time AI cost optimization that automatically optimizes requests before they reach AI providers.
-
-**Brain Features:**
-- **Autonomous Interventions** - Automatic model downgrade, provider switching, and prompt compression
-- **In-Flight Optimization** - Intercept and optimize requests in real-time without code changes
-- **Active Flow Management** - Track and manage concurrent AI operations with resource allocation
-- **Budget Protection** - Automatically block requests when budgets are exhausted
-- **Shadow Mode** - Test interventions without modifying actual requests
-- **Real-time Metrics** - Live tracking of interventions, cost savings, and active flows
-
-**How It Works:**
-The Cost Brain monitors all AI requests in real-time and applies intelligent interventions based on budget constraints, provider availability, and cost-effectiveness. It learns from your usage patterns to make optimal decisions automatically.
-
-[Explore Cost Brain →](/features/cost-brain)
-
 ### Cortex Meta-Language (Revolutionary)
 The world's first AI meta-language achieving **40-75% token reduction** through LISP-based answer generation.
 
@@ -1535,27 +1519,6 @@ Centralized gateway for all your AI API calls with built-in optimization.
 - **Rate limiting** and quota management
 
 [Setup Gateway →](/features/gateway)
-
-### AI Governance & Security
-Comprehensive agent governance with zero-trust architecture and defense-in-depth security.
-
-**Governance Features:**
-- **Identity & RBAC** - Zero-trust agent authentication with role-based access control
-- **Sandbox Execution** - Isolated agent execution with resource constraints (CPU, memory, disk)
-- **Budget Controls** - Per-request, daily, and monthly budget caps with automatic enforcement
-- **Rate Limiting** - Hierarchical rate limits (per-minute, per-hour, concurrent executions)
-- **Capability Management** - Fine-grained permissions for models, providers, and actions
-- **Audit & Compliance** - Comprehensive decision auditing with forensic-level logging
-
-**Security Layers:**
-- Layer 1: Identity verification (Zero Trust)
-- Layer 2: Permission checks (RBAC)
-- Layer 3: Rate limit enforcement
-- Layer 4: Budget validation
-- Layer 5: Sandbox isolation
-- Layer 6: Comprehensive audit trails
-
-[Configure Governance →](/features/agent-governance)
 
 ### Key Vault
 Secure management of all your AI provider API keys.
@@ -5932,7 +5895,7 @@ curl -X POST https://api.costkatana.com/api/telemetry/query \\
 );
 
 // Sessions & Session Replay Feature Page
-export const SessionsPage = () => (<DocumentationPage title="Sessions & Session Replay" description="Record and replay AI interactions with complete context for debugging and analysis" prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }} nextPage={{ path: '/features/logs', label: 'Next: Logs Management' }} fallbackContent={`# Sessions & Session Replay
+export const SessionsPage = () => (<DocumentationPage title="Sessions & Session Replay" description="Record and replay AI interactions with complete context for debugging and analysis" prevPage={{ path: '/features/telemetry', label: 'Previous: Telemetry Dashboard' }} nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }} fallbackContent={`# Sessions & Session Replay
 
 Record and replay AI interactions with complete context, including prompts, responses, costs, and user actions for comprehensive debugging and analysis.
 
@@ -6147,254 +6110,8 @@ curl -X GET https://api.costkatana.com/api/v1/traces/TRACE_ID \\
 
 - [Distributed Tracing](/features/tracing) - Trace collection and analysis
 - [Telemetry Dashboard](/features/telemetry) - Telemetry insights
-- [Logs Management](/features/logs) - Log analysis
+- [Cache Management](/features/cache) - Cache dashboard
 - [Session Replay API](/api/session-replay) - API reference`} />
-);
-
-// Logs Management Feature Page
-export const LogsPage = () => (<DocumentationPage title="Logs Management" description="Comprehensive log management with AI-powered querying, filtering, and analysis" prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }} nextPage={{ path: '/features/cache', label: 'Next: Cache Management' }} fallbackContent={`# Logs Management
-
-Comprehensive log management system with AI-powered querying, real-time streaming, advanced filtering, and intelligent analysis for all your AI operations.
-
-![Logs Dashboard](/assets/logs_1.png)
-
-## Overview
-
-The Logs Management system provides a unified interface for viewing, searching, and analyzing logs from all your AI operations with powerful filtering, real-time streaming, and AI-powered insights.
-
-### Key Features
-
-- **Real-time Log Streaming** - Live log updates as they happen
-- **AI-Powered Querying** - Natural language log queries
-- **Advanced Filtering** - Filter by service, model, status, time range, and more
-- **Multiple View Modes** - Table, timeline, JSON, and dashboard views
-- **Export Capabilities** - Export logs in JSON, CSV, or JSONL formats
-- **Log Statistics** - Real-time statistics and analytics
-- **Log Details** - Full context for each log entry
-- **Chat Widget** - Interactive AI assistant for log analysis
-
-## Dashboard View
-
-The dashboard view provides an overview of your logs with:
-
-- **Log Statistics** - Total logs, error rate, success rate
-- **Time Series Charts** - Log volume over time
-- **Error Distribution** - Errors by type and service
-- **Top Services** - Most active services
-- **Recent Logs** - Latest log entries
-
-## Table View
-
-The table view displays logs in a structured format:
-
-- **Sortable Columns** - Sort by timestamp, service, model, status, cost
-- **Search** - Quick search across all log fields
-- **Filters** - Advanced filtering options
-- **Pagination** - Navigate through large log sets
-- **Row Selection** - Select logs for bulk operations
-
-## Timeline View
-
-Visual timeline of log events:
-
-- **Chronological Order** - Events displayed in time order
-- **Event Types** - Color-coded by log level
-- **Zoom Controls** - Zoom in/out on timeline
-- **Event Details** - Click to view full event details
-- **Grouping** - Group events by service or type
-
-## JSON View
-
-Raw JSON view for developers:
-
-- **Formatted JSON** - Pretty-printed JSON
-- **Syntax Highlighting** - Color-coded JSON syntax
-- **Expandable Objects** - Expand/collapse nested objects
-- **Copy to Clipboard** - Quick copy functionality
-- **Search in JSON** - Search within JSON content
-
-## Real-time Streaming
-
-Enable real-time log streaming for live monitoring:
-
-\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Enable real-time log streaming with custom filters and event handlers\\"}
-// Enable real-time streaming
-const logStream = client.logs.stream({
-  filters: { level: 'error', service: 'api' },
-  onLog: (log) => {
-    console.log('New log:', log);
-  }
-});
-
-// Stop streaming
-logStream.stop();
-\`\`\`
-
-## AI-Powered Querying
-
-Query logs using natural language:
-
-\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Query logs using natural language with AI-powered search and insights\\"}
-// Natural language query
-const results = await client.logs.query(
-  "Show me all errors from the last hour related to GPT-4"
-);
-
-// Results include:
-// - Matching logs
-// - AI-generated insights
-// - Suggested filters
-// - Related logs
-\`\`\`
-
-### Example Queries
-
-- "Show me all errors from the last hour"
-- "Find logs with costs over $0.10"
-- "What are the slowest API calls?"
-- "Show me all GPT-4 failures"
-- "Find logs from the chat service"
-
-## Advanced Filtering
-
-Filter logs by multiple criteria:
-
-### Filter Options
-
-- **Service** - Filter by service name
-- **Model** - Filter by AI model
-- **Status** - Success, error, pending
-- **Log Level** - Debug, info, warning, error
-- **Time Range** - Custom date/time ranges
-- **Cost Range** - Filter by cost thresholds
-- **Token Range** - Filter by token usage
-- **User** - Filter by user ID
-- **Project** - Filter by project ID
-- **Custom Fields** - Filter by any log field
-
-### Filter Examples
-
-\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Filter logs by service, level, time range, and cost thresholds\\"}
-// Filter by service and error level
-const logs = await client.logs.list({
-  filters: {
-    service: 'api',
-    level: 'error',
-    timeRange: '1h'
-  }
-});
-
-// Filter by cost threshold
-const expensiveLogs = await client.logs.list({
-  filters: {
-    minCost: 0.10,
-    timeRange: '24h'
-  }
-});
-\`\`\`
-
-## Log Statistics
-
-Get real-time statistics about your logs:
-
-\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Get real-time log statistics with grouping and time range filters\\"}
-const stats = await client.logs.getStats({
-  timeRange: '24h',
-  groupBy: ['service', 'model']
-});
-
-console.log('Total logs:', stats.total);
-console.log('Error rate:', stats.errorRate);
-console.log('Average cost:', stats.avgCost);
-\`\`\`
-
-## Export Logs
-
-Export logs in multiple formats:
-
-\`\`\`smart:javascript:{\\"imports\\":[\\"import { AICostTracker } from 'cost-katana';\\",\\"const client = await AICostTracker.create({ providers: [] });\\"],\\"dependencies\\":[\\"cost-katana\\"],\\"description\\":\\"Export logs in JSON, CSV, or JSONL formats with custom filters\\"}
-// Export as JSON
-const jsonBlob = await client.logs.export({
-  format: 'json',
-  filters: { service: 'api' }
-});
-
-// Export as CSV
-const csvBlob = await client.logs.export({
-  format: 'csv',
-  filters: { timeRange: '7d' }
-});
-
-// Export as JSONL
-const jsonlBlob = await client.logs.export({
-  format: 'jsonl',
-  filters: { level: 'error' }
-});
-\`\`\`
-
-## Log Details
-
-View full details for any log entry:
-
-- **Full Context** - Complete log data
-- **Request/Response** - Full API request and response
-- **Cost Breakdown** - Detailed cost analysis
-- **Performance Metrics** - Latency and timing
-- **Related Logs** - Logs from the same trace
-- **User Context** - User information and session
-
-## API Integration
-
-### List Logs
-
-\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"List logs with filters for service, level, and limit\\"}
-curl -X GET https://api.costkatana.com/api/logs/ai \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "service=api&level=error&limit=100"
-\`\`\`
-
-### Get Log by ID
-
-\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Retrieve a specific log entry by log ID\\"}
-curl -X GET https://api.costkatana.com/api/logs/ai/LOG_ID \\
-  -H "Authorization: Bearer YOUR_API_KEY"
-\`\`\`
-
-### Natural Language Query
-
-\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Query logs using natural language with AI-powered search\\"}
-curl -X POST https://api.costkatana.com/api/logs/ai/chat \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "query": "Show me all errors from the last hour",
-    "context": { "timeRange": "1h" }
-  }'
-\`\`\`
-
-### Export Logs
-
-\`\`\`smart:bash:{\\"dependencies\\":[\\"curl\\"],\\"description\\":\\"Export logs in various formats (JSON, CSV, JSONL) with filters\\"}
-curl -X GET https://api.costkatana.com/api/logs/ai/export \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "format=json&service=api&timeRange=24h" \\
-  --output logs.json
-\`\`\`
-
-## Best Practices
-
-1. **Use Filters** - Leverage filters to focus on relevant logs
-2. **Set Up Alerts** - Configure alerts for error thresholds
-3. **Regular Review** - Review logs regularly for issues
-4. **Export Important Logs** - Save critical logs for analysis
-5. **Use AI Queries** - Leverage natural language queries for complex searches
-6. **Monitor Real-time** - Enable streaming for critical services
-
-## Related Documentation
-
-- [Sessions & Session Replay](/features/sessions) - Session recording
-- [Telemetry Dashboard](/features/telemetry) - Telemetry insights
-- [Logs API](/api/logs) - API reference`} />
 );
 
 // Cache Management Feature Page
@@ -6402,7 +6119,7 @@ export const CachePage = () => (
   <DocumentationPage
     title="Cache Management"
     description="Redis cache dashboard and management for optimizing AI costs through intelligent caching"
-    prevPage={{ path: '/features/logs', label: 'Previous: Logs Management' }}
+    prevPage={{ path: '/features/sessions', label: 'Previous: Sessions & Session Replay' }}
     nextPage={{ path: '/features/advanced-monitoring', label: 'Next: Advanced Monitoring' }}
     fallbackContent={`# Cache Management
 
@@ -6655,7 +6372,7 @@ curl -X POST https://api.costkatana.com/api/cache/clear \\
 );
 
 // Advanced Monitoring Feature Page
-export const AdvancedMonitoringPage = () => (<DocumentationPage title="Advanced Monitoring" description="Advanced monitoring tools for comprehensive AI operation tracking and analysis" prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }} nextPage={{ path: '/features/unexplained-costs', label: 'Next: Unexplained Costs' }} fallbackContent={`# Advanced Monitoring
+export const AdvancedMonitoringPage = () => (<DocumentationPage title="Advanced Monitoring" description="Advanced monitoring tools for comprehensive AI operation tracking and analysis" prevPage={{ path: '/features/cache', label: 'Previous: Cache Management' }} nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }} fallbackContent={`# Advanced Monitoring
 
 Advanced monitoring tools for comprehensive tracking, analysis, and optimization of AI operations with real-time insights and intelligent alerts.
 
@@ -6744,91 +6461,12 @@ curl -X POST https://api.costkatana.com/api/monitoring/alerts \\
 ## Related Documentation
 
 - [Telemetry Dashboard](/features/telemetry) - Telemetry insights
-- [Logs Management](/features/logs) - Log analysis
+- [Cache Management](/features/cache) - Cache dashboard
 - [Monitoring API](/api/monitoring) - API reference`} />
 );
 
-// Unexplained Costs Feature Page
-export const UnexplainedCostsPage = () => (<DocumentationPage title="Unexplained Costs" description="Cost attribution analysis to identify and explain unexpected AI costs" prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }} nextPage={{ path: '/features/experimentation', label: 'Next: Experimentation' }} fallbackContent={`# Unexplained Costs
-
-Cost attribution analysis system to identify, explain, and optimize unexpected AI costs with intelligent root cause analysis.
-
-![Unexplained Costs](/assets/unexplained-costs_1.png)
-
-## Overview
-
-Unexplained Costs helps you identify and understand costs that don't have clear attribution, providing insights into hidden expenses and optimization opportunities.
-
-### Key Features
-
-- **Cost Attribution** - Automatically attribute costs to sources
-- **Anomaly Detection** - Identify unusual cost patterns
-- **Root Cause Analysis** - AI-powered root cause identification
-- **Cost Breakdown** - Detailed cost breakdowns by dimension
-- **Optimization Recommendations** - Suggestions to reduce costs
-- **Trend Analysis** - Historical cost trend analysis
-- **Alerting** - Alerts for unexplained cost spikes
-
-## Cost Attribution
-
-Automatically attribute costs to:
-
-- **Projects** - Costs by project
-- **Users** - Costs by user
-- **Services** - Costs by service
-- **Models** - Costs by AI model
-- **Operations** - Costs by operation type
-- **Time Periods** - Costs by time period
-
-## Anomaly Detection
-
-Identify unusual cost patterns:
-
-- **Cost Spikes** - Sudden cost increases
-- **Unusual Patterns** - Deviations from normal patterns
-- **Hidden Costs** - Costs without clear attribution
-- **Inefficient Usage** - Inefficient resource usage
-
-## Root Cause Analysis
-
-AI-powered analysis to identify:
-
-- **Cost Drivers** - What's driving costs
-- **Inefficiencies** - Inefficient operations
-- **Optimization Opportunities** - Areas for improvement
-- **Best Practices** - Recommended practices
-
-## API Integration
-
-### Get Unexplained Costs
-
-\`\`\`smart:bash:{"description":"Retrieve unexplained costs with time range and threshold filters"}
-curl -X GET https://api.costkatana.com/api/unexplained-costs \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -G -d "timeRange=7d&threshold=0.10"
-\`\`\`
-
-### Analyze Cost
-
-\`\`\`smart:bash:{"description":"Perform AI-powered root cause analysis on specific cost with optimization recommendations"}
-curl -X POST https://api.costkatana.com/api/unexplained-costs/analyze \\
-  -H "Authorization: Bearer YOUR_API_KEY" \\
-  -H "Content-Type: application/json" \\
-  -d '{
-    "costId": "cost_123",
-    "includeRecommendations": true
-  }'
-\`\`\`
-
-## Related Documentation
-
-- [Cost Analytics](/features/analytics) - Cost analysis
-- [Optimization](/features/optimization) - Cost optimization
-- [Unexplained Costs API](/api/unexplained-costs) - API reference`} />
-);
-
 // Experimentation Feature Page
-export const ExperimentationPage = () => (<DocumentationPage title="Experimentation" description="A/B testing and experimentation platform for optimizing AI model selection and costs" prevPage={{ path: '/features/unexplained-costs', label: 'Previous: Unexplained Costs' }} nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }} fallbackContent={`# Experimentation
+export const ExperimentationPage = () => (<DocumentationPage title="Experimentation" description="A/B testing and experimentation platform for optimizing AI model selection and costs" prevPage={{ path: '/features/advanced-monitoring', label: 'Previous: Advanced Monitoring' }} nextPage={{ path: '/features/moderation', label: 'Next: Moderation' }} fallbackContent={`# Experimentation
 
 A/B testing and experimentation platform for optimizing AI model selection, prompt strategies, and costs through systematic testing and comparison.
 
@@ -8014,7 +7652,7 @@ Content-Type: application/json
 );
 
 // Telemetry API Page
-export const TelemetryAPIPage = () => (<DocumentationPage title="Telemetry API" description="Complete API reference for telemetry data endpoints" prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }} nextPage={{ path: '/api/logs', label: 'Next: Logs API' }} fallbackContent={`# Telemetry API
+export const TelemetryAPIPage = () => (<DocumentationPage title="Telemetry API" description="Complete API reference for telemetry data endpoints" prevPage={{ path: '/api/cache', label: 'Previous: Cache API' }} nextPage={{ path: '/api/budget', label: 'Next: Budget API' }} fallbackContent={`# Telemetry API
 
 Complete API reference for telemetry data endpoints including dashboard data, querying, and analytics.
 
@@ -8090,97 +7728,8 @@ Content-Type: application/json
 - [Distributed Tracing](/features/tracing) - Trace collection`} />
 );
 
-// Logs API Page
-export const LogsAPIPage = () => (<DocumentationPage title="Logs API" description="Complete API reference for logs query endpoints" prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }} nextPage={{ path: '/api/budget', label: 'Next: Budget API' }} fallbackContent={`# Logs API
-
-Complete API reference for logs query endpoints including listing, filtering, natural language queries, and export.
-
-## Base URL
-
-\`https://api.costkatana.com/api/logs\`
-
-## Authentication
-
-All endpoints require authentication:
-
-\`\`\`http
-Authorization: Bearer YOUR_API_KEY
-\`\`\`
-
-## Endpoints
-
-### List AI Logs
-
-Get list of AI logs with filtering.
-
-\`\`\`http
-GET /api/logs/ai
-\`\`\`
-
-**Query Parameters:**
-- \`service\` (optional): Filter by service
-- \`model\` (optional): Filter by model
-- \`level\` (optional): Filter by log level (debug, info, warning, error)
-- \`status\` (optional): Filter by status (success, error, pending)
-- \`timeRange\` (optional): Time range filter
-- \`minCost\` (optional): Minimum cost filter
-- \`maxCost\` (optional): Maximum cost filter
-- \`limit\` (optional): Number of logs to return (default: 100)
-- \`page\` (optional): Page number (default: 1)
-
-### Get Log by ID
-
-Get a specific log by ID.
-
-\`\`\`http
-GET /api/logs/ai/:logId
-\`\`\`
-
-**Path Parameters:**
-- \`logId\`: Log ID
-
-### Natural Language Query
-
-Query logs using natural language.
-
-\`\`\`http
-POST /api/logs/ai/chat
-Content-Type: application/json
-\`\`\`
-
-**Request Body:**
-\`\`\`json
-{
-  "query": "Show me all errors from the last hour",
-  "context": {
-    "timeRange": "1h"
-  }
-}
-\`\`\`
-
-**Rate Limit:** 30 requests per minute
-
-### Export Logs
-
-Export logs in various formats.
-
-\`\`\`http
-GET /api/logs/ai/export
-\`\`\`
-
-**Query Parameters:**
-- \`format\` (optional): Export format (json, csv, jsonl, default: json)
-- \`service\` (optional): Filter by service
-- \`timeRange\` (optional): Time range filter
-
-## Related Documentation
-
-- [Logs Feature](/features/logs) - Logs management
-- [Telemetry API](/api/telemetry) - Telemetry endpoints`} />
-);
-
 // Budget API Page
-export const BudgetAPIPage = () => (<DocumentationPage title="Budget API" description="Complete API reference for budget management endpoints" prevPage={{ path: '/api/logs', label: 'Previous: Logs API' }} nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }} fallbackContent={`# Budget API
+export const BudgetAPIPage = () => (<DocumentationPage title="Budget API" description="Complete API reference for budget management endpoints" prevPage={{ path: '/api/telemetry', label: 'Previous: Telemetry API' }} nextPage={{ path: '/api/session-replay', label: 'Next: Session Replay API' }} fallbackContent={`# Budget API
 
 Complete API reference for budget management endpoints.
 
@@ -8560,11 +8109,6 @@ The Intelligence Layer represents the core of our AI-native architecture, where 
   - ** Purpose **: Forecast costs and recommend alternatives
     - ** Strategy **: Track accuracy with 70 % confidence threshold
       - ** Tradeoff **: Simulation overhead vs decision quality
-
-### Layer 7: Closed - Loop Cost Brain
-  - ** Purpose **: Autonomous real - time request optimization and intervention
-    - ** Strategy **: In - flight request interception with model downgrade, provider switching, and prompt compression
-      - ** Tradeoff **: Intervention latency vs cost savings(configurable shadow mode for testing)
 
 ## Key Design Patterns
 
