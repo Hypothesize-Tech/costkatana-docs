@@ -219,8 +219,10 @@ const providers: Provider[] = [
             { id: 'claude-sonnet-4-5', name: 'Claude Sonnet 4.5', series: 'Claude Sonnet 4.5', useCases: ['text', 'vision', 'reasoning', 'coding', 'agents'], pricingTier: 3, isLatest: true, isRecommended: true },
             { id: 'claude-haiku-4-5-20251001', name: 'Claude Haiku 4.5', series: 'Claude Haiku 4.5', useCases: ['text', 'vision', 'fast'], pricingTier: 1, isLatest: true },
             { id: 'claude-haiku-4-5', name: 'Claude Haiku 4.5', series: 'Claude Haiku 4.5', useCases: ['text', 'vision', 'fast'], pricingTier: 1, isLatest: true },
-            { id: 'claude-opus-4-5-20251101', name: 'Claude Opus 4.5', series: 'Claude Opus 4.5', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: true },
-            { id: 'claude-opus-4-5', name: 'Claude Opus 4.5', series: 'Claude Opus 4.5', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: true },
+            { id: 'claude-opus-4-6-v1', name: 'Claude Opus 4.6', series: 'Claude Opus 4.6', useCases: ['text', 'vision', 'reasoning', 'agents', 'coding', 'computer-use', 'premium'], pricingTier: 3, isLatest: true, isRecommended: true },
+            { id: 'claude-opus-4-6', name: 'Claude Opus 4.6', series: 'Claude Opus 4.6', useCases: ['text', 'vision', 'reasoning', 'agents', 'coding', 'computer-use', 'premium'], pricingTier: 3, isLatest: true, isRecommended: true },
+            { id: 'claude-opus-4-5-20251101', name: 'Claude Opus 4.5', series: 'Claude Opus 4.5', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: false },
+            { id: 'claude-opus-4-5', name: 'Claude Opus 4.5', series: 'Claude Opus 4.5', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: false },
 
             // Claude 4 Series (Legacy)
             { id: 'claude-opus-4-1-20250805', name: 'Claude Opus 4.1', series: 'Claude Opus 4.1', useCases: ['text', 'vision', 'reasoning'], pricingTier: 3 },
@@ -400,7 +402,8 @@ const providers: Provider[] = [
             { id: 'global.anthropic.claude-sonnet-4-5-20250929-v1:0', name: 'Claude Sonnet 4.5 (Global)', series: 'Claude Sonnet', useCases: ['text', 'vision', 'reasoning'], pricingTier: 3, isLatest: true },
             { id: 'anthropic.claude-haiku-4-5-v1:0', name: 'Claude Haiku 4.5', series: 'Claude Haiku', useCases: ['text', 'vision', 'fast'], pricingTier: 1, isLatest: true },
             { id: 'global.anthropic.claude-haiku-4-5-20251001-v1:0', name: 'Claude Haiku 4.5 (Global)', series: 'Claude Haiku', useCases: ['text', 'vision', 'fast'], pricingTier: 1, isLatest: true },
-            { id: 'global.anthropic.claude-opus-4-5-20250514-v1:0', name: 'Claude Opus 4.5 (Global)', series: 'Claude Opus', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: true },
+            { id: 'anthropic.claude-opus-4-6-v1', name: 'Claude Opus 4.6', series: 'Claude Opus', useCases: ['text', 'vision', 'reasoning', 'agents', 'coding', 'computer-use', 'premium'], pricingTier: 3, isLatest: true, isRecommended: true },
+            { id: 'global.anthropic.claude-opus-4-5-20250514-v1:0', name: 'Claude Opus 4.5 (Global)', series: 'Claude Opus', useCases: ['text', 'vision', 'reasoning', 'premium'], pricingTier: 3, isLatest: false },
             { id: 'anthropic.claude-opus-4-1-20250805-v1:0', name: 'Claude Opus 4.1', series: 'Claude Opus', useCases: ['text', 'vision', 'reasoning'], pricingTier: 3 },
             { id: 'anthropic.claude-opus-4-20250514-v1:0', name: 'Claude Opus 4', series: 'Claude Opus', useCases: ['text', 'vision', 'reasoning'], pricingTier: 3 },
             { id: 'global.anthropic.claude-sonnet-4-20250514-v1:0', name: 'Claude Sonnet 4 (Global)', series: 'Claude Sonnet', useCases: ['text', 'vision', 'reasoning'], pricingTier: 3 },
@@ -1012,6 +1015,9 @@ const SupportedModelsPage: React.FC = () => {
             'gpt-3.5-turbo-instruct': '16K', 'gpt-3.5-turbo': '16K', 'babbage-002': '16K', 'davinci-002': '16K',
             'text-moderation-latest': '32K', 'text-moderation-stable': '32K',
 
+            // Anthropic Claude 4.6 Series
+            'claude-opus-4-6-v1': '1M', 'claude-opus-4-6': '1M',
+
             // Anthropic Claude 4.5 Series
             'claude-sonnet-4-5-20250929': '200K', 'claude-sonnet-4-5': '200K',
             'claude-haiku-4-5-20251001': '200K', 'claude-haiku-4-5': '200K',
@@ -1093,7 +1099,7 @@ const SupportedModelsPage: React.FC = () => {
             // AWS Bedrock - Anthropic Models
             'anthropic.claude-sonnet-4-5-v1:0': '200K', 'global.anthropic.claude-sonnet-4-5-20250929-v1:0': '1M',
             'anthropic.claude-haiku-4-5-v1:0': '200K', 'global.anthropic.claude-haiku-4-5-20251001-v1:0': '200K',
-            'global.anthropic.claude-opus-4-5-20250514-v1:0': '200K', 'anthropic.claude-opus-4-1-20250805-v1:0': '200K',
+            'anthropic.claude-opus-4-6-v1': '1M', 'global.anthropic.claude-opus-4-5-20250514-v1:0': '200K', 'anthropic.claude-opus-4-1-20250805-v1:0': '200K',
             'anthropic.claude-opus-4-20250514-v1:0': '200K', 'global.anthropic.claude-sonnet-4-20250514-v1:0': '200K',
             'anthropic.claude-sonnet-4-20250514-v1:0': '200K', 'anthropic.claude-3-7-sonnet-20250219-v1:0': '200K',
             'anthropic.claude-3-5-sonnet-20241022-v1:0': '200K', 'anthropic.claude-3-5-sonnet-20240620-v1:0': '200K',
@@ -1217,6 +1223,9 @@ const SupportedModelsPage: React.FC = () => {
             'o1': '32K', 'o1-pro': '32K', 'o3': '32K', 'o3-pro': '32K', 'o3-deep-research': '32K',
             'o4-mini': '32K', 'o4-mini-deep-research': '32K',
 
+            // Anthropic Claude 4.6 Series
+            'claude-opus-4-6-v1': '64K', 'claude-opus-4-6': '64K',
+
             // Anthropic Claude 4.5 Series
             'claude-sonnet-4-5-20250929': '64K', 'claude-sonnet-4-5': '64K',
             'claude-haiku-4-5-20251001': '64K', 'claude-haiku-4-5': '64K',
@@ -1257,7 +1266,7 @@ const SupportedModelsPage: React.FC = () => {
             // AWS Bedrock - Anthropic Models
             'anthropic.claude-sonnet-4-5-v1:0': '64K', 'global.anthropic.claude-sonnet-4-5-20250929-v1:0': '64K',
             'anthropic.claude-haiku-4-5-v1:0': '64K', 'global.anthropic.claude-haiku-4-5-20251001-v1:0': '64K',
-            'global.anthropic.claude-opus-4-5-20250514-v1:0': '64K', 'anthropic.claude-opus-4-1-20250805-v1:0': '32K',
+            'anthropic.claude-opus-4-6-v1': '64K', 'global.anthropic.claude-opus-4-5-20250514-v1:0': '64K', 'anthropic.claude-opus-4-1-20250805-v1:0': '32K',
             'anthropic.claude-opus-4-20250514-v1:0': '32K', 'global.anthropic.claude-sonnet-4-20250514-v1:0': '64K',
             'anthropic.claude-sonnet-4-20250514-v1:0': '64K', 'anthropic.claude-3-7-sonnet-20250219-v1:0': '64K',
             'anthropic.claude-3-5-sonnet-20241022-v1:0': '64K', 'anthropic.claude-3-5-sonnet-20240620-v1:0': '64K',
@@ -1282,13 +1291,13 @@ const SupportedModelsPage: React.FC = () => {
             'mistral.ministral', 'mistral.voxtral-mini', 'mistral.magistral-small',
             'openai.gpt-oss-20b', 'deepseek.v3-1', 'google.gemma-3-4b',
             'minimax.m2', 'nvidia.nemotron-nano-2', 'writer.palmyra-x5', 'qwen.qwen3-32b'];
-        const slowModels = ['o1', 'o1-pro', 'o3', 'o3-pro', 'o3-deep-research', 'claude-opus-4-5', 'claude-opus-4-1', 'claude-opus-4',
+        const slowModels = ['o1', 'o1-pro', 'o3', 'o3-pro', 'o3-deep-research', 'claude-opus-4-6', 'claude-opus-4-5', 'claude-opus-4-1', 'claude-opus-4',
             'gpt-5', 'gpt-5.1', 'gpt-5.2', 'gpt-5-pro', 'gpt-5.2-pro',
             'gemini-3-pro-preview', 'gemini-2.5-pro', 'gemini-1-5-pro',
             'grok-4-0709', 'grok-4', 'grok-4-latest', 'grok-3',
             // AWS Bedrock slow models
             'ai21.j2-ultra', 'amazon.nova-premier', 'amazon.nova-2-pro',
-            'anthropic.claude-opus-4-5', 'anthropic.claude-opus-4-1', 'anthropic.claude-opus-4',
+            'anthropic.claude-opus-4-6', 'anthropic.claude-opus-4-5', 'anthropic.claude-opus-4-1', 'anthropic.claude-opus-4',
             'anthropic.claude-sonnet-4-5', 'cohere.command-r-plus', 'meta.llama3-1-405b',
             'mistral.pixtral-large', 'mistral.mistral-large-2402', 'writer.palmyra-x4',
             'qwen.qwen3-coder-480b', 'qwen.qwen3-235b'];
@@ -1421,7 +1430,11 @@ const SupportedModelsPage: React.FC = () => {
             'text-moderation-latest': { input: '$0.10', output: '$0.10', notes: 'Deprecated' },
             'text-moderation-stable': { input: '$0.10', output: '$0.10', notes: 'Deprecated' },
 
-            // Anthropic Claude 4.5 Series (Latest)
+            // Anthropic Claude 4.6 Series (Latest)
+            'claude-opus-4-6-v1': { input: '$5.00', output: '$25.00', cached: '$0.50', notes: 'Max output: 64K, 1M context (beta). Verify on Bedrock.' },
+            'claude-opus-4-6': { input: '$5.00', output: '$25.00', cached: '$0.50', notes: 'Max output: 64K, 1M context (beta). Verify on Bedrock.' },
+
+            // Anthropic Claude 4.5 Series
             'claude-sonnet-4-5-20250929': { input: '$3.00', output: '$15.00', cached: '$0.30', notes: 'Batch: $1.50/$7.50, Max output: 64K tokens, 1M context (beta)' },
             'claude-sonnet-4-5': { input: '$3.00', output: '$15.00', cached: '$0.30', notes: 'Batch: $1.50/$7.50, Max output: 64K tokens, 1M context (beta)' },
             'claude-haiku-4-5-20251001': { input: '$1.00', output: '$5.00', cached: '$0.10', notes: 'Batch: $0.50/$2.50, Max output: 64K tokens' },
@@ -1756,6 +1769,7 @@ const SupportedModelsPage: React.FC = () => {
             'global.anthropic.claude-sonnet-4-5-20250929-v1:0': { input: '$3.00', output: '$15.00', notes: 'Global Inference Profile. Batch: $1.50/$7.50. Cache read: $0.30' },
             'anthropic.claude-haiku-4-5-v1:0': { input: '$1.10', output: '$5.50', notes: 'Geo/In-region. Batch: $0.55/$2.75. Cache read: $0.11. Global: $1/$5' },
             'global.anthropic.claude-haiku-4-5-20251001-v1:0': { input: '$1.00', output: '$5.00', notes: 'Global Inference Profile. Batch: $0.50/$2.50. Cache read: $0.10' },
+            'anthropic.claude-opus-4-6-v1': { input: '$5.00', output: '$25.00', notes: 'Next-gen flagship. 1M context (beta). Verify on Bedrock.' },
             'global.anthropic.claude-opus-4-5-20250514-v1:0': { input: '$5.00', output: '$25.00', notes: 'Global Inference Profile. Batch: $2.50/$12.50. Cache read: $0.50' },
             'anthropic.claude-opus-4-1-20250805-v1:0': { input: '$15.00', output: '$75.00', notes: 'Cache read: $1.50' },
             'anthropic.claude-opus-4-20250514-v1:0': { input: '$15.00', output: '$75.00', notes: 'Batch: $7.50/$37.50. Cache read: $1.50' },
